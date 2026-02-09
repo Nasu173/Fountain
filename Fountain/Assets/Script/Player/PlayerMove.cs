@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using UnityEngine;
 
 namespace Foutain.Player
@@ -21,21 +22,46 @@ namespace Foutain.Player
         [SerializeField]
         private float crouchMultiplier;
 
-        //这三个表示移动状态
+        //这两个表示蹲伏,跑步
         [SerializeField]
         private bool crouching;
-        [SerializeField]
-        private bool moving;
         [SerializeField]
         private bool running;
 
         private CharacterController characterController;
+        [Header("下蹲设置")]
+        [Tooltip("站立高度")]
+        [SerializeField]
+        private float standingHeight = 2f;
+        [Tooltip("蹲伏高度")]
+        [SerializeField]
+        private float crouchingHeight = 1f;
+        [Tooltip("下蹲过渡平滑速度")]
+        [SerializeField]
+        private float crouchTransitionSpeed = 10f;
+        [Tooltip("头顶检测距离 (防止在障碍物下站起)")]
+        [SerializeField]
+        private float headCheckDistance = 0.5f;
+        [Tooltip("头顶检测层级")]
+        [SerializeField]
+        private LayerMask obstacleLayer;
+        //下蹲&起立要到的高度
+        private float targetHeight;
+        //由于震动和下蹲要配合运动状态,简单起见就直接调用了,后期复杂起来最好用事件重构
+        private PlayerSight sight;
+        
 
         private void Start()
         {
-            characterController = GetComponent<CharacterController>();
+            characterController = this.GetComponent<CharacterController>();
+            sight = this.GetComponentInChildren<PlayerSight>();
+            targetHeight = standingHeight;
         }
-
+        private void Update()
+        {
+            //TODO: 优化一下
+            CrouchLerp();    
+        }
         /// <summary>
         /// 移动 
         /// </summary>
@@ -44,14 +70,20 @@ namespace Foutain.Player
         {
             if (inputDirection==Vector3.zero)
             {
-                moving = false;
+                sight.CancelShake();
                 return;
             }
-            else
+            else//应用相机震动
             {
-                moving = true;
+                if (crouching||!running)
+                {
+                    sight.ApplyWalkShake();
+                } 
+                else
+                {
+                    sight.ApplyRunShake();
+                }
             }
-
             Vector3 direction =
                 this.transform.forward * inputDirection.z +
                 this.transform.right * inputDirection.x;
@@ -60,7 +92,6 @@ namespace Foutain.Player
             //给一点向下的速度(Vector3.down)保持贴在地面的状态
             Vector3 finalMove =
                 (direction + Vector3.down) * currentSpeed * Time.deltaTime;
-            Debug.Log(finalMove); 
             characterController.Move(finalMove);
         }
         /// <summary>
@@ -88,12 +119,17 @@ namespace Foutain.Player
         {
             if (crouching)
             {
-                //TODO:检测头上是否有东西
-                crouching = false;
+                //头顶上没有东西才能站起来
+                if (!HeadDetect())
+                {
+                    crouching = false;
+                    targetHeight = standingHeight; 
+                }
             }
             else
             {
                 crouching = true;
+                targetHeight = crouchingHeight;
             }
         }
         /// <summary>
@@ -130,6 +166,35 @@ namespace Foutain.Player
                 return walkSpeed;
             }
     
+        }
+        /// <summary>
+        /// 实现下蹲时的高度的平滑过渡
+        /// </summary>
+        private void CrouchLerp()
+        {
+            characterController.height =
+                Mathf.Lerp(characterController.height, targetHeight,
+                crouchTransitionSpeed * Time.deltaTime);
+        
+            // 修正中心点，防止穿地
+            Vector3 center = characterController.center;
+            center.y = characterController.height / 2f;
+            characterController.center = center;
+            //暂时这里直接操控相机,让相机的位置跟着下降
+            //假定让相机在CharacterController的顶部
+            Vector3 sightPos = sight.transform.localPosition;
+            sightPos.y = characterController.height;
+            sight.transform.localPosition = sightPos;
+        }
+        /// <summary>
+        /// 检测头顶是否有东西
+        /// </summary>
+        /// <returns>头顶有东西则返回true</returns>
+        private bool HeadDetect()
+        {
+            return Physics.BoxCast(this.transform.position, this.transform.localScale * 0.5f,
+                    this.transform.up, Quaternion.identity,
+                    headCheckDistance + standingHeight);
         }
     }
 }

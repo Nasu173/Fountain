@@ -12,11 +12,8 @@ namespace Foutain.Player
         public static GameInputManager Instance { get; private set; }
         private PlayerInputActions inputActions;
         
-        //[Range(0.1f,10f)]灵敏度
         [SerializeField]
         private float sensitivity = 1;
-            //Look的绑定里有个Processor把Vector2的大小缩小10倍,不然太过敏感
-            //Vector2 delta = inputActions.TestInput.Look.ReadValue<Vector2>();
 
         private PlayerMove playerMove;
         private PlayerSight playerSight;
@@ -31,11 +28,11 @@ namespace Foutain.Player
             EnableMoveInput();
             HideCursor();
 
-            inputActions.Player.Run.performed += (callback) =>
+            inputActions.Player.Run.started += (callback) =>
             { playerMove.SwitchToRun(); };
             inputActions.Player.Run.canceled += (callback) =>
             { playerMove.SwitchToWalk(); };
-            inputActions.Player.Crouch.performed += (callback) =>
+            inputActions.Player.Crouch.started += (callback) =>
             { playerMove.SwitchCrouch(); };
         }
         private void Update()
@@ -51,20 +48,6 @@ namespace Foutain.Player
         {
             inputActions.Dispose();
             inputActions = null;
-        }
-        private void OnGUI()
-        {
-            /*
-
-            if (GUILayout.Button("Enable"))
-            {
-                EnableMoveInput();
-            }
-            if (GUILayout.Button("Disable"))
-            {
-                DisableMoveInput();
-            }
-             */
         }
 
         /// <summary>
