@@ -11,7 +11,7 @@ namespace Foutain.Player
     public class PlayerSight : MonoBehaviour
     {
         private CinemachineVirtualCamera sightCamera;
-        [Header("相机视野相关设置")]
+        [Header("相机旋转相关设置")]
         [Tooltip("相机最小旋转角度")]
         [SerializeField]
         private float sightAngleMax;
@@ -32,9 +32,10 @@ namespace Foutain.Player
         [Tooltip("跑步时的振幅")]
         [SerializeField]
         private float runAmplitude;
-        [Tooltip("可以启用抖动")]
+        [Tooltip("是否启用抖动")]
         public bool enableShake;
         private CinemachineBasicMultiChannelPerlin noise;
+
         private void Start()
         {
             sightCamera = this.GetComponentInChildren<CinemachineVirtualCamera>();

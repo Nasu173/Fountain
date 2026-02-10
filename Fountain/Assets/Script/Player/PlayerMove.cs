@@ -22,10 +22,8 @@ namespace Foutain.Player
         [SerializeField]
         private float crouchMultiplier;
 
-        //这两个表示蹲伏,跑步
-        [SerializeField]
+        //这两个表示蹲伏,跑步的状态
         private bool crouching;
-        [SerializeField]
         private bool running;
 
         private CharacterController characterController;
@@ -45,12 +43,13 @@ namespace Foutain.Player
         [Tooltip("头顶检测层级")]
         [SerializeField]
         private LayerMask obstacleLayer;
+        //蹲起是否在过渡中
+        private bool crouchTransitioning;
         //下蹲&起立要到的高度
         private float targetHeight;
         //由于震动和下蹲要配合运动状态,简单起见就直接调用了,后期复杂起来最好用事件重构
         private PlayerSight sight;
         
-
         private void Start()
         {
             characterController = this.GetComponent<CharacterController>();
@@ -59,9 +58,12 @@ namespace Foutain.Player
         }
         private void Update()
         {
-            //TODO: 优化一下
-            CrouchLerp();    
+            if (crouchTransitioning)
+            {
+                CrouchTransition();    
+            }
         }
+
         /// <summary>
         /// 移动 
         /// </summary>
@@ -122,12 +124,14 @@ namespace Foutain.Player
                 //头顶上没有东西才能站起来
                 if (!HeadDetect())
                 {
+                    crouchTransitioning = true;
                     crouching = false;
                     targetHeight = standingHeight; 
                 }
             }
             else
             {
+                crouchTransitioning = true;
                 crouching = true;
                 targetHeight = crouchingHeight;
             }
@@ -148,6 +152,8 @@ namespace Foutain.Player
             this.transform.Rotate(Vector3.up * playerRotationAngle); 
 
         }
+
+
         /// <summary>
         /// 计算移动速度
         /// </summary>
@@ -170,11 +176,17 @@ namespace Foutain.Player
         /// <summary>
         /// 实现下蹲时的高度的平滑过渡
         /// </summary>
-        private void CrouchLerp()
+        private void CrouchTransition()
         {
             characterController.height =
                 Mathf.Lerp(characterController.height, targetHeight,
                 crouchTransitionSpeed * Time.deltaTime);
+            //相等后就停止过渡
+            float acceptableDelta = 0.01f;
+            if (Mathf.Abs(characterController.height-targetHeight)<acceptableDelta)
+            {
+                crouchTransitioning = false;
+            }
         
             // 修正中心点，防止穿地
             Vector3 center = characterController.center;
