@@ -156,6 +156,34 @@ namespace Foutain.Player
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PausePanel"",
+            ""id"": ""be378622-f031-4f7b-ba3e-27f583cdfb66"",
+            ""actions"": [
+                {
+                    ""name"": ""Esc"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d5e6f0d-a67f-4e40-ad27-6f920a4132f4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f4afaa12-78f9-4995-acbb-0aad2d74364a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Esc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -166,11 +194,15 @@ namespace Foutain.Player
             m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
             m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+            // PausePanel
+            m_PausePanel = asset.FindActionMap("PausePanel", throwIfNotFound: true);
+            m_PausePanel_Esc = m_PausePanel.FindAction("Esc", throwIfNotFound: true);
         }
 
         ~@PlayerInputActions()
         {
             UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputActions.Player.Disable() has not been called.");
+            UnityEngine.Debug.Assert(!m_PausePanel.enabled, "This will cause a leak and performance issues, PlayerInputActions.PausePanel.Disable() has not been called.");
         }
 
         public void Dispose()
@@ -298,12 +330,62 @@ namespace Foutain.Player
             }
         }
         public PlayerActions @Player => new PlayerActions(this);
+
+        // PausePanel
+        private readonly InputActionMap m_PausePanel;
+        private List<IPausePanelActions> m_PausePanelActionsCallbackInterfaces = new List<IPausePanelActions>();
+        private readonly InputAction m_PausePanel_Esc;
+        public struct PausePanelActions
+        {
+            private @PlayerInputActions m_Wrapper;
+            public PausePanelActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Esc => m_Wrapper.m_PausePanel_Esc;
+            public InputActionMap Get() { return m_Wrapper.m_PausePanel; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(PausePanelActions set) { return set.Get(); }
+            public void AddCallbacks(IPausePanelActions instance)
+            {
+                if (instance == null || m_Wrapper.m_PausePanelActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_PausePanelActionsCallbackInterfaces.Add(instance);
+                @Esc.started += instance.OnEsc;
+                @Esc.performed += instance.OnEsc;
+                @Esc.canceled += instance.OnEsc;
+            }
+
+            private void UnregisterCallbacks(IPausePanelActions instance)
+            {
+                @Esc.started -= instance.OnEsc;
+                @Esc.performed -= instance.OnEsc;
+                @Esc.canceled -= instance.OnEsc;
+            }
+
+            public void RemoveCallbacks(IPausePanelActions instance)
+            {
+                if (m_Wrapper.m_PausePanelActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IPausePanelActions instance)
+            {
+                foreach (var item in m_Wrapper.m_PausePanelActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_PausePanelActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public PausePanelActions @PausePanel => new PausePanelActions(this);
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
             void OnRun(InputAction.CallbackContext context);
             void OnCrouch(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
+        }
+        public interface IPausePanelActions
+        {
+            void OnEsc(InputAction.CallbackContext context);
         }
     }
 }

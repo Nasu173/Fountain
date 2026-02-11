@@ -132,6 +132,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "PausePanel",
+            "id": "be378622-f031-4f7b-ba3e-27f583cdfb66",
+            "actions": [
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "5d5e6f0d-a67f-4e40-ad27-6f920a4132f4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f4afaa12-78f9-4995-acbb-0aad2d74364a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Esc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
