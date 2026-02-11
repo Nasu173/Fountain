@@ -162,7 +162,7 @@ namespace Foutain.Player
             ""id"": ""be378622-f031-4f7b-ba3e-27f583cdfb66"",
             ""actions"": [
                 {
-                    ""name"": ""Esc"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""5d5e6f0d-a67f-4e40-ad27-6f920a4132f4"",
                     ""expectedControlType"": """",
@@ -179,7 +179,7 @@ namespace Foutain.Player
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Esc"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -196,7 +196,7 @@ namespace Foutain.Player
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             // PausePanel
             m_PausePanel = asset.FindActionMap("PausePanel", throwIfNotFound: true);
-            m_PausePanel_Esc = m_PausePanel.FindAction("Esc", throwIfNotFound: true);
+            m_PausePanel_Pause = m_PausePanel.FindAction("Pause", throwIfNotFound: true);
         }
 
         ~@PlayerInputActions()
@@ -334,12 +334,12 @@ namespace Foutain.Player
         // PausePanel
         private readonly InputActionMap m_PausePanel;
         private List<IPausePanelActions> m_PausePanelActionsCallbackInterfaces = new List<IPausePanelActions>();
-        private readonly InputAction m_PausePanel_Esc;
+        private readonly InputAction m_PausePanel_Pause;
         public struct PausePanelActions
         {
             private @PlayerInputActions m_Wrapper;
             public PausePanelActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Esc => m_Wrapper.m_PausePanel_Esc;
+            public InputAction @Pause => m_Wrapper.m_PausePanel_Pause;
             public InputActionMap Get() { return m_Wrapper.m_PausePanel; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -349,16 +349,16 @@ namespace Foutain.Player
             {
                 if (instance == null || m_Wrapper.m_PausePanelActionsCallbackInterfaces.Contains(instance)) return;
                 m_Wrapper.m_PausePanelActionsCallbackInterfaces.Add(instance);
-                @Esc.started += instance.OnEsc;
-                @Esc.performed += instance.OnEsc;
-                @Esc.canceled += instance.OnEsc;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
 
             private void UnregisterCallbacks(IPausePanelActions instance)
             {
-                @Esc.started -= instance.OnEsc;
-                @Esc.performed -= instance.OnEsc;
-                @Esc.canceled -= instance.OnEsc;
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
             }
 
             public void RemoveCallbacks(IPausePanelActions instance)
@@ -385,7 +385,7 @@ namespace Foutain.Player
         }
         public interface IPausePanelActions
         {
-            void OnEsc(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
         }
     }
 }

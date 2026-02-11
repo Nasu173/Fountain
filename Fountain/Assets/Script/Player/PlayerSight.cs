@@ -89,6 +89,7 @@ namespace Foutain.Player
         {
             if (enableShake)
             {
+                noise.m_NoiseProfile = shakeNoise;
                 noise.m_AmplitudeGain = runAmplitude;
                 noise.m_FrequencyGain = runFrequency;
             }

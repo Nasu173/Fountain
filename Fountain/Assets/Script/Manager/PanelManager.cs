@@ -6,26 +6,19 @@ public class PanelManager : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject settingPanel;
-    private PlayerInputActions inputActions;
 
     private bool isPaused = false;
 
-    private void Awake()
-    {
-        inputActions = new PlayerInputActions();
-    }
-
     private void OnEnable()
     {
-        // Ö»ÆôÓÃPausePanelÏà¹ØÊäÈë
-        inputActions.PausePanel.Enable();
-        inputActions.PausePanel.Esc.started += OnEscClicked;
+        //è®¢é˜…æ¸¸æˆæš‚åœäº‹ä»¶
+        GameEventBus.Subscribe<GamePauseEvent>(OnPauseClicked);
 
-        // ¶©ÔÄÊÂ¼ş
+        // è®¢é˜…äº‹ä»¶
         GameEventBus.Subscribe<ContinueEvent>(GameContinue);
         GameEventBus.Subscribe<SettingEvent>(OpenSettingPanel);
 
-        // È·±£ÓÎÏ·¿ªÊ¼Ê±ÊÇÔËĞĞ×´Ì¬
+        // ç¡®ä¿æ¸¸æˆå¼€å§‹æ—¶æ˜¯è¿è¡ŒçŠ¶æ€
         if (!isPaused)
         {
             Time.timeScale = 1.0f;
@@ -35,22 +28,21 @@ public class PanelManager : MonoBehaviour
 
     private void OnDisable()
     {
-        // È¡Ïû¶©ÔÄÊÂ¼ş
-        inputActions.PausePanel.Esc.started -= OnEscClicked;
-        inputActions.PausePanel.Disable();
+        // å–æ¶ˆè®¢é˜…äº‹ä»¶
+        GameEventBus.Unsubscribe<GamePauseEvent>(OnPauseClicked);
 
-        // È¡Ïû¶©ÔÄÊÂ¼ş
+        // å–æ¶ˆè®¢é˜…äº‹ä»¶
         GameEventBus.Unsubscribe<ContinueEvent>(GameContinue);
         GameEventBus.Unsubscribe<SettingEvent>(OpenSettingPanel);
     }
 
-    private void OnEscClicked(InputAction.CallbackContext obj)
+    private void OnPauseClicked(GamePauseEvent gamePauseEvent)
     {
         Pause();
     }
 
     /// <summary>
-    /// ÔİÍ£ÓÎÏ·
+    /// æš‚åœæ¸¸æˆ
     /// </summary>
     private void Pause()
     {
@@ -58,25 +50,25 @@ public class PanelManager : MonoBehaviour
 
         if (isPaused)
         {
-            // ÔİÍ£ÓÎÏ·
+            // æš‚åœæ¸¸æˆ
             Time.timeScale = 0f;
             pausePanel.SetActive(true);
 
-            // ½ûÓÃÍæ¼ÒÊäÈë
-            inputActions.Player.Disable();
-
-            //ÏÔÊ¾Êó±ê
+            // ç¦ç”¨ç©å®¶è¾“å…¥
+            GameInputManager.Instance.DisableMoveInput();
+            GameInputManager.Instance.DisableSightInput();
+            //æ˜¾ç¤ºé¼ æ ‡
             GameInputManager.Instance.ShowCursor();
         }
         else
         {
-            // ¼ÌĞøÓÎÏ·
+            // ç»§ç»­æ¸¸æˆ
             ResumeGame();
         }
     }
 
     /// <summary>
-    /// ÔİÍ£Ãæ°åÖĞµã»÷Ö÷²Ëµ¥°´Å¥ºó¹ã²¥MenuEventÊÂ¼ş
+    /// æš‚åœé¢æ¿ä¸­ç‚¹å‡»ä¸»èœå•æŒ‰é’®åå¹¿æ’­MenuEventäº‹ä»¶
     /// </summary>
     public void OnMenuClicked()
     {
@@ -85,7 +77,7 @@ public class PanelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÔİÍ£Ãæ°åÖĞµã»÷ÉèÖÃ°´Å¥ºó¹ã²¥SettingEventÊÂ¼ş
+    /// æš‚åœé¢æ¿ä¸­ç‚¹å‡»è®¾ç½®æŒ‰é’®åå¹¿æ’­SettingEventäº‹ä»¶
     /// </summary>
     public void OnSettingClicked()
     {
@@ -96,7 +88,7 @@ public class PanelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÔİÍ£Ãæ°åÖĞµã»÷¼ÌĞø°´Å¥ºó¹ã²¥ContinueEventÊÂ¼ş
+    /// æš‚åœé¢æ¿ä¸­ç‚¹å‡»ç»§ç»­æŒ‰é’®åå¹¿æ’­ContinueEventäº‹ä»¶
     /// </summary>
     public void OnContinueClicked()
     {
@@ -110,7 +102,7 @@ public class PanelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÍË³öÔİÍ£×´Ì¬²¢¼ÌĞøÓÎÏ·
+    /// é€€å‡ºæš‚åœçŠ¶æ€å¹¶ç»§ç»­æ¸¸æˆ
     /// </summary>
     private void ResumeGame()
     {
@@ -118,10 +110,10 @@ public class PanelManager : MonoBehaviour
         pausePanel.SetActive(false);
         Time.timeScale = 1.0f;
 
-        // ÖØĞÂÆôÓÃÍæ¼ÒÊäÈë
-        inputActions.Player.Enable();
-
-        //Òş²ØÊó±ê
+        // é‡æ–°å¯ç”¨ç©å®¶è¾“å…¥
+        GameInputManager.Instance.EnableMoveInput();
+        GameInputManager.Instance.EnableSightInput();
+        //éšè—é¼ æ ‡
         GameInputManager.Instance.HideCursor();
     }
 

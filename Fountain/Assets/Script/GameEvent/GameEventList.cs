@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ÊÂ¼þ½Ó¿Ú£¨ËùÓÐÊÂ¼þ¶¼ÒªÊµÏÖÕâ¸ö£©
+// äº‹ä»¶æŽ¥å£ï¼ˆæ‰€æœ‰äº‹ä»¶éƒ½è¦å®žçŽ°è¿™ä¸ªï¼‰
 public interface IGameEvent { }
-// ==================== ÈçºÎÐÂÔöÊÂ¼þ ====================
+// ==================== å¦‚ä½•æ–°å¢žäº‹ä»¶ ====================
 //[System.Serializable]
-//public class ÊÂ¼þÀàµÄÃû×Ö : IGameEvent
+//public class äº‹ä»¶ç±»çš„åå­— : IGameEvent
 //{
-//    public string CustomerName;      // ´«µÝ²ÎÊýÒ»
-//    public string Order;            // ´«µÝ²ÎÊý¶þ
-//    public int PatienceTime;        // ´«µÝ²ÎÊýÈý
+//    public string CustomerName;      // ä¼ é€’å‚æ•°ä¸€
+//    public string Order;            // ä¼ é€’å‚æ•°äºŒ
+//    public int PatienceTime;        // ä¼ é€’å‚æ•°ä¸‰
 //}
 
-// ==================== ÓÎÏ·ÔÝÍ£Ãæ°åÊÂ¼þ ====================
+// ==================== æ¸¸æˆæš‚åœé¢æ¿äº‹ä»¶ ====================
 [System.Serializable]
 public class MenuEvent : IGameEvent
 {
@@ -30,4 +30,10 @@ public class SettingEvent : IGameEvent
 public class ContinueEvent : IGameEvent
 {
     
+}
+
+[System.Serializable]
+public class GamePauseEvent:IGameEvent
+{
+
 }

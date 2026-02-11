@@ -138,7 +138,7 @@
             "id": "be378622-f031-4f7b-ba3e-27f583cdfb66",
             "actions": [
                 {
-                    "name": "Esc",
+                    "name": "Pause",
                     "type": "Button",
                     "id": "5d5e6f0d-a67f-4e40-ad27-6f920a4132f4",
                     "expectedControlType": "",
@@ -155,7 +155,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Esc",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

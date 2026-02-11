@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Foutain.Player
@@ -19,12 +20,13 @@ namespace Foutain.Player
         private PlayerSight playerSight;
         private void Start()
         {
-            //进行相关初始化,注册输入事件来调用移动相关方法
+            //进行相关初始化,注册输入事件来调用移动等相关方法
             GameInputManager.Instance = this;
             inputActions = new PlayerInputActions();
             playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
             playerSight = playerMove.GetComponentInChildren<PlayerSight>();
             inputActions.Player.Enable();
+            inputActions.PausePanel.Enable();
             EnableMoveInput();
             HideCursor();
 
@@ -34,6 +36,11 @@ namespace Foutain.Player
             { playerMove.SwitchToWalk(); };
             inputActions.Player.Crouch.started += (callback) =>
             { playerMove.SwitchCrouch(); };
+
+            inputActions.PausePanel.Pause.started += (callback) =>
+            {
+                GameEventBus.Publish<GamePauseEvent>(new GamePauseEvent());
+            };
         }
         private void Update()
         {
@@ -67,6 +74,20 @@ namespace Foutain.Player
             inputActions.Player.Move.Enable();
             inputActions.Player.Run.Enable();
             inputActions.Player.Crouch.Enable();
+        }
+        /// <summary>
+        /// 禁止旋转相机视野的输入
+        /// </summary>
+        public void DisableSightInput()
+        {
+            inputActions.Player.Look.Disable();    
+        }
+        /// <summary>
+        /// 启动旋转相机视野的输入
+        /// </summary>
+        public void EnableSightInput()
+        {
+            inputActions.Player.Look.Enable();    
         }
         /// <summary>
         /// 隐藏鼠标
