@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Foutain.Player
@@ -24,6 +25,7 @@ namespace Foutain.Player
 
         //这两个表示蹲伏,跑步的状态
         private bool crouching;
+        private bool moving;
         private bool running;
 
         private CharacterController characterController;
