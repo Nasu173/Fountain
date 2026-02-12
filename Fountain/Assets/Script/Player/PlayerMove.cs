@@ -72,22 +72,11 @@ namespace Foutain.Player
         /// <param name="inputDirection">玩家输入的方向</param>
         public void Move(Vector3 inputDirection)
         {
-            Vector3 direction = inputDirection;
-            //如果只有奔跑的输入,就默认向前跑,而非静止不动
-            if (running&&!crouching&&direction==Vector3.zero)
-            {
-                direction = this.transform.forward; 
-            }
-            else
-            {
-                direction =
-                   this.transform.forward * inputDirection.z +
-                   this.transform.right * inputDirection.x;
-            }
             //应用相机震动
-            if (direction==Vector3.zero)
+            if (inputDirection==Vector3.zero)
             {
                 sight.CancelShake();
+                moving = false;
                 return;
             }
             else
@@ -102,6 +91,11 @@ namespace Foutain.Player
                 }
             }
 
+            moving = true;
+            //计算方向和速度
+            Vector3 direction =
+                this.transform.forward * inputDirection.z +
+                this.transform.right * inputDirection.x;
             direction.Normalize();
             float currentSpeed = CalculateSpeed();
             //给一点向下的速度(Vector3.down)保持贴在地面的状态
@@ -115,7 +109,8 @@ namespace Foutain.Player
         public void SwitchToRun()
         {
             //下蹲的时候不能跑
-            if (!crouching)
+            Debug.LogFormat("moving = {0}", moving);
+            if (!crouching && moving) 
             {
                 this.running = true;
             }
@@ -147,6 +142,7 @@ namespace Foutain.Player
                 crouchTransitioning = true;
                 crouching = true;
                 targetHeight = crouchingHeight;
+                running = false;
             }
         }
         /// <summary>

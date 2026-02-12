@@ -40,12 +40,12 @@ namespace Foutain.Player
                 },
                 {
                     ""name"": ""Run"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""dc1044f3-6e1c-4182-b1b4-880c49807f3c"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Digital"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Crouch"",

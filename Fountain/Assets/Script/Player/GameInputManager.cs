@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -30,8 +31,6 @@ namespace Foutain.Player
             EnableMoveInput();
             HideCursor();
 
-            inputActions.Player.Run.started += (callback) =>
-            { playerMove.SwitchToRun(); };
             inputActions.Player.Run.canceled += (callback) =>
             { playerMove.SwitchToWalk(); };
             inputActions.Player.Crouch.started += (callback) =>
@@ -44,6 +43,11 @@ namespace Foutain.Player
         }
         private void Update()
         {
+            //不知为何,不能直接读取为bool,只能转换下
+            if (Convert.ToBoolean(inputActions.Player.Run.ReadValue<float>()))
+            {
+                playerMove.SwitchToRun();
+            }
             Vector2 moveVal = inputActions.Player.Move.ReadValue<Vector2>();
             playerMove.Move(new Vector3(moveVal.x, 0, moveVal.y));
             Vector2 sightMove = inputActions.Player.Look.ReadValue<Vector2>();
