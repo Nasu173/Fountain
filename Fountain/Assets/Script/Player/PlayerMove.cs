@@ -161,8 +161,6 @@ namespace Foutain.Player
             this.transform.Rotate(Vector3.up * playerRotationAngle); 
 
         }
-
-
         /// <summary>
         /// 计算移动速度
         /// </summary>

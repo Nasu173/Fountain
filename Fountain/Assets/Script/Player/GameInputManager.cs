@@ -19,6 +19,7 @@ namespace Foutain.Player
 
         private PlayerMove playerMove;
         private PlayerSight playerSight;
+        private PlayerInteractor playerInteractor;
         private void Start()
         {
             //进行相关初始化,注册输入事件来调用移动等相关方法
@@ -26,6 +27,8 @@ namespace Foutain.Player
             inputActions = new PlayerInputActions();
             playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
             playerSight = playerMove.GetComponentInChildren<PlayerSight>();
+            playerInteractor = playerMove.GetComponent<PlayerInteractor>();
+
             inputActions.Player.Enable();
             inputActions.PausePanel.Enable();
             EnableMoveInput();
@@ -35,10 +38,13 @@ namespace Foutain.Player
             { playerMove.SwitchToWalk(); };
             inputActions.Player.Crouch.started += (callback) =>
             { playerMove.SwitchCrouch(); };
-
             inputActions.PausePanel.Pause.started += (callback) =>
             {
                 GameEventBus.Publish<GamePauseEvent>(new GamePauseEvent());
+            };
+            inputActions.Player.Interact.performed += (callback) =>
+            {
+                playerInteractor.Interact();
             };
         }
         private void Update()

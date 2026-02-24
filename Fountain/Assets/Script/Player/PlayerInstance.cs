@@ -8,6 +8,7 @@ namespace Foutain.Player
     /// 玩家单例,仅是提供一个方便找玩家的单例,可以通过这个GetComponent来找玩家的相关脚本
     /// </summary>
     [RequireComponent(typeof(PlayerMove))]
+    [RequireComponent(typeof(PlayerInteractor))]
     public class PlayerInstance : MonoBehaviour
     {
         public static PlayerInstance Instance { get; private set; }
