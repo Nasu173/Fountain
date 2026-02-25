@@ -13,7 +13,10 @@ namespace Foutain.Player
     {
         public static GameInputManager Instance { get; private set; }
         private PlayerInputActions inputActions;
-        
+
+        // 添加公共静态属性
+        public static float MouseSensitivity { get; set; } = 1f;
+
         [SerializeField]
         private float sensitivity = 1;
 
@@ -30,7 +33,7 @@ namespace Foutain.Player
             playerInteractor = playerMove.GetComponent<PlayerInteractor>();
 
             inputActions.Player.Enable();
-            inputActions.PausePanel.Enable();
+            EnablePausePanel();
             EnableMoveInput();
             HideCursor();
 
@@ -46,6 +49,9 @@ namespace Foutain.Player
             {
                 playerInteractor.Interact();
             };
+
+            // 初始化时将静态值同步到字段
+            sensitivity = MouseSensitivity;
         }
         private void Update()
         {
@@ -58,8 +64,18 @@ namespace Foutain.Player
             playerMove.Move(new Vector3(moveVal.x, 0, moveVal.y));
             Vector2 sightMove = inputActions.Player.Look.ReadValue<Vector2>();
             playerMove.Rotate(sightMove, sensitivity);
-            playerSight.Rotate(sightMove, sensitivity);
+            if (playerSight != null)
+            {
+                playerSight.Rotate(sightMove, sensitivity); // 确保传入sensitivity
+            }
 
+            // 使用静态值
+            _ = inputActions.Player.Look.ReadValue<Vector2>();
+            playerMove.Rotate(sightMove, MouseSensitivity);
+            if (playerSight != null)
+            {
+                playerSight.Rotate(sightMove, MouseSensitivity);
+            }
         }
         private void OnDestroy()
         {
@@ -114,6 +130,15 @@ namespace Foutain.Player
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+        }
+
+        public void DisablePausePanel()
+        {
+            inputActions.PausePanel.Disable();
+        }
+        public void EnablePausePanel()
+        {
+            inputActions.PausePanel.Enable();
         }
     }
 }

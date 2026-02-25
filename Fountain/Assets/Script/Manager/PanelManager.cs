@@ -85,6 +85,8 @@ public class PanelManager : MonoBehaviour
         GameEventBus.Publish(settingEvent);
 
         pausePanel.SetActive(false);
+
+        GameInputManager.Instance.DisablePausePanel();
     }
 
     /// <summary>
@@ -124,6 +126,8 @@ public class PanelManager : MonoBehaviour
 
     public void OnBackClicked()
     {
+        GameInputManager.Instance.EnablePausePanel();
+
         settingPanel.SetActive(false);
 
         if (isPaused)

@@ -82,20 +82,14 @@ namespace Foutain.Player
         /// </summary>
         /// <param name="moveDelta">视线移动的方向</param>
         /// <param name="sensitivity">灵敏度</param>
-        public void Rotate(Vector2 moveDelta,float sensitivity)
+        public void Rotate(Vector2 moveDelta, float sensitivity)
         {
-            if (moveDelta==Vector2.zero)
-            {
-                return;
-            }
-            float playerRotationAngle = moveDelta.x * sensitivity * Time.deltaTime;
-            //向上看是绕x轴负的方向旋转,所以是减号,
+            if (moveDelta == Vector2.zero) return;
+            _ = moveDelta.x * sensitivity * Time.deltaTime;
             cameraRotationAngle -= moveDelta.y * sensitivity * Time.deltaTime;
-            cameraRotationAngle = Mathf.Clamp
-                (cameraRotationAngle,sightAngleMin,sightAngleMax);
-            //这里已经叠加好了,不用*过去了
-            this.transform.localRotation = Quaternion.Euler
-                (new Vector3(cameraRotationAngle, 0, 0));
+            cameraRotationAngle = Mathf.Clamp(cameraRotationAngle, sightAngleMin, sightAngleMax);
+
+            this.transform.localRotation = Quaternion.Euler(new Vector3(cameraRotationAngle, 0, 0));
         }
 
         /// <summary>
@@ -169,13 +163,12 @@ namespace Foutain.Player
         /// <param name="targetRotation"></param>
         private void LerpPosAndRot(Vector3 targetPosition,Quaternion targetRotation)
         {
-            sightCamera.transform.localPosition =
-                Vector3.Lerp(sightCamera.transform.localPosition,
-                targetPosition, Time.deltaTime * smoothSpeedPosition);
-
-            sightCamera.transform.localRotation =
-                Quaternion.Slerp(sightCamera.transform.localRotation,
-                targetRotation, Time.deltaTime * smoothSpeedRotation);
+            
+            sightCamera.transform.SetLocalPositionAndRotation(
+Vector3.Lerp(sightCamera.transform.localPosition,
+                targetPosition, Time.deltaTime * smoothSpeedPosition),
+Quaternion.Slerp(sightCamera.transform.localRotation,
+                targetRotation, Time.deltaTime * smoothSpeedRotation));
         }
     }
 }
