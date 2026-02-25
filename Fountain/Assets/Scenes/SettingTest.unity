@@ -2976,6 +2976,8 @@ Transform:
   - {fileID: 1154705830}
   - {fileID: 262359754}
   - {fileID: 1508708890}
+  - {fileID: 694430627}
+  - {fileID: 849001386}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &475577250
@@ -4253,6 +4255,57 @@ RectTransform:
   m_AnchoredPosition: {x: -647, y: -287}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &694430626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 694430627}
+  - component: {fileID: 694430628}
+  m_Layer: 0
+  m_Name: VHSGammaController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &694430627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694430626}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 470690985}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &694430628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694430626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 928961f0a115b314c8fa94a4fc620356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vhsRetroFeature: {fileID: 1627307062}
+  gammaSlider: {fileID: 2088115612}
+  valueDisplayText: {fileID: 1397411574}
+  minGamma: 0.8
+  maxGamma: 1.2
+  defaultGamma: 1.05
+  saveSettings: 1
 --- !u!1 &707411786
 GameObject:
   m_ObjectHideFlags: 0
@@ -5180,6 +5233,55 @@ RectTransform:
   m_AnchoredPosition: {x: -206, y: -30}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &849001385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 849001386}
+  - component: {fileID: 849001387}
+  m_Layer: 0
+  m_Name: VHSRetroFeatureManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &849001386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849001385}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 470690985}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &849001387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849001385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aceee60594856074c8b943b9b22082db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VHSRetroFeatureDropdown: {fileID: 1039418596}
+  VHSRetroFeatureDisplayText: {fileID: 545030769}
+  VHS: {fileID: 1627307062}
+  VHSRetroFeatureOptions: 0000000001000000
+  saveSettings: 1
 --- !u!1 &858496793
 GameObject:
   m_ObjectHideFlags: 0
@@ -8727,7 +8829,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1522743709}
   m_Layer: 5
-  m_Name: Filter
+  m_Name: VHSRetroFeature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9607,7 +9709,7 @@ GameObject:
   - component: {fileID: 1627307058}
   - component: {fileID: 1627307061}
   - component: {fileID: 1627307060}
-  - component: {fileID: 1627307059}
+  - component: {fileID: 1627307062}
   m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9630,20 +9732,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1995058887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1627307059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627307057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48501d3b42803b6458c2cfd6a3426c5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gammaMaterial: {fileID: 2100000, guid: d43243d8f1d2f374fbb19577af0e1098, type: 2}
-  gammaValue: 1
 --- !u!81 &1627307060
 AudioListener:
   m_ObjectHideFlags: 0
@@ -9703,6 +9791,58 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1627307062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627307057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 675e8398337d71042b1caf48368fc89a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vhsShader: {fileID: 4800000, guid: 97a59226afe6da84888f794f0ebe90b2, type: 3}
+  rgbShiftAmount: 0.008
+  rgbShiftSpeed: 1.2
+  rgbShiftCurve: 1.2
+  pixelSize: 3
+  pixelScanlines: 0.6
+  grainAmount: 0.1
+  grainSize: 1.2
+  noiseIntensity: 0.08
+  scanlineIntensity: 0.35
+  scanlineSpeed: 0.8
+  scanlineCount: 480
+  scanlineSharpness: 1.2
+  vignetteIntensity: 0.6
+  vignetteSoftness: 0.8
+  vignetteRoundness: 1.5
+  glitchIntensity: 0.15
+  glitchSpeed: 3
+  glitchBlockSize: 0.015
+  contrast: 1.05
+  saturation: 1.08
+  brightness: 0.02
+  gamma: 1.035
+  tapeNoise: 0.04
+  tapeSpeed: 0.5
+  tapeWobble: 0
+  trackingNoise: 0.03
+  trackingSpeed: 1.2
+  dropoutIntensity: 0.02
+  dropoutSpeed: 4
+  timeSpeed: 1
+  enablePixel: 1
+  enableGlitch: 1
+  enableRGB: 1
+  enableGrain: 1
+  enableScan: 1
+  enableTape: 0
+  enableTracking: 1
+  enableDropout: 1
+  enableInEditMode: 1
 --- !u!1 &1635297381
 GameObject:
   m_ObjectHideFlags: 0
@@ -12945,19 +13085,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1627307059}
-        m_TargetAssemblyTypeName: GammaController, Assembly-CSharp
-        m_MethodName: SetGamma
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &2112025358
 GameObject:
   m_ObjectHideFlags: 0
