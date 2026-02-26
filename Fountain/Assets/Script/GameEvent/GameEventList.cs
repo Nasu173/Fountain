@@ -1,3 +1,4 @@
+using Foutain.Localization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,4 +37,9 @@ public class ContinueEvent : IGameEvent
 public class GamePauseEvent:IGameEvent
 {
 
+}
+
+public class LocaleChangeEvent:IGameEvent
+{
+    public LocalizationManager.LocaleID locale;
 }

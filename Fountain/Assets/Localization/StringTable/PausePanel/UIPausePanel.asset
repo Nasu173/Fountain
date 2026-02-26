@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: UIPausePanel
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: 5ecf70250f9e9d54cac95e9044c82c44, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: e4882f308014e404782a3290a5645702, type: 2}
+  - {fileID: 11400000, guid: 377fdf41a930b714cb2d7e337d5a3d55, type: 2}
+  m_Extensions: []
+  m_Group: UIString
+  references:
+    version: 2
+    RefIds: []
