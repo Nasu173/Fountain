@@ -50,8 +50,7 @@ namespace Foutain.Player
         private void DetectInteractable()
         {
             //检测物体
-            RaycastHit hit;
-            bool detected = Physics.Raycast(sight.transform.position, sight.transform.forward, out hit, interactDistance, detectLayer);
+            bool detected = Physics.Raycast(sight.transform.position, sight.transform.forward, out RaycastHit hit, interactDistance, detectLayer);
             if (!detected)
             {
                 currentTarget?.Deselect();
@@ -60,9 +59,7 @@ namespace Foutain.Player
                 return;
             }
 
-            IInteractable detectedInteractable =
-                hit.collider.GetComponent<IInteractable>();
-            if (detectedInteractable == null)
+            if (!hit.collider.TryGetComponent<IInteractable>(out var detectedInteractable))
             {
                 currentTarget?.Deselect();
                 DeselectInteractable();
@@ -89,8 +86,31 @@ namespace Foutain.Player
         /// </summary>
         public void Interact()
         {
-            Debug.Log("Interact??"); 
-            currentTarget?.InteractWith(this); 
+            Debug.Log("Interact??");
+
+            if (currentTarget != null)
+            {
+                // 原来的交互逻辑
+                currentTarget.InteractWith(this);
+
+                // 添加：触发交互监听器
+                if (currentTarget is MonoBehaviour mono)
+                {
+                    if (mono.TryGetComponent<InteractionListener>(out var listener))
+                    {
+                        listener.OnInteracted(this);
+                    }
+                    else
+                    {
+                        // 如果没有监听器，直接通知所有触发器
+                        InteractTaskTrigger[] triggers = FindObjectsOfType<InteractTaskTrigger>();
+                        foreach (InteractTaskTrigger trigger in triggers)
+                        {
+                            trigger.OnObjectInteracted(mono.gameObject);
+                        }
+                    }
+                }
+            }
         }
 
     }
