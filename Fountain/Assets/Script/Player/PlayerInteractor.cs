@@ -33,6 +33,10 @@ namespace Foutain.Player
         /// </summary>
         private IInteractable currentTarget;
         private PlayerSight sight;
+        /// <summary>
+        /// 是否允许交互
+        /// </summary>
+        private bool enableInteract;
 
         private void Start()
         {
@@ -41,44 +45,11 @@ namespace Foutain.Player
 
         private void Update()
         {
+            if (!enableInteract)
+            {
+                return;
+            }
             DetectInteractable();
-        }
-
-        /// <summary>
-        /// 检测可交互物体
-        /// </summary>
-        private void DetectInteractable()
-        {
-            //检测物体
-            bool detected = Physics.Raycast(sight.transform.position, sight.transform.forward, out RaycastHit hit, interactDistance, detectLayer);
-            if (!detected)
-            {
-                currentTarget?.Deselect();
-                DeselectInteractable();
-                currentTarget = null;
-                return;
-            }
-
-            if (!hit.collider.TryGetComponent<IInteractable>(out var detectedInteractable))
-            {
-                currentTarget?.Deselect();
-                DeselectInteractable();
-
-                currentTarget = null;
-                return;
-            }
-            // 检测到不同的可交互物体
-            if (currentTarget != detectedInteractable)
-            {
-                currentTarget?.Deselect();
-                DeselectInteractable();
-
-                currentTarget = detectedInteractable;
-
-                currentTarget.Select();
-                SelectInteractable();
-            }
-
         }
 
         /// <summary>
@@ -103,6 +74,70 @@ namespace Foutain.Player
                 }
             }
         }
+        /// <summary>
+        /// 禁止交互
+        /// </summary>
+        public void Disable()
+        {
+            this.enableInteract = false;
+            if (currentTarget != null) 
+            {
+                currentTarget.Deselect();
+                DeselectInteractable();
+                currentTarget = null;
+            }
+        }
+        /// <summary>
+        /// 允许交互
+        /// </summary>
+        public void Enable()
+        {
+            this.enableInteract = true;        
+        }
 
+        /// <summary>
+        /// 检测可交互物体
+        /// </summary>
+        private void DetectInteractable()
+        {
+            //检测物体
+            bool detected = Physics.Raycast(sight.transform.position, sight.transform.forward, out RaycastHit hit, interactDistance, detectLayer);
+            if (!detected)
+            {
+                if (currentTarget!=null)
+                {
+                    currentTarget.Deselect();
+                    DeselectInteractable();
+                }
+                currentTarget = null;
+                return;
+            }
+
+            if (!hit.collider.TryGetComponent<IInteractable>(out var detectedInteractable))
+            {
+                if (currentTarget!=null)
+                {
+                    currentTarget.Deselect();
+                    DeselectInteractable();
+                }
+
+                currentTarget = null;
+                return;
+            }
+            // 检测到不同的可交互物体
+            if (currentTarget != detectedInteractable)
+            {
+                if (currentTarget!=null)
+                {
+                    currentTarget.Deselect();
+                    DeselectInteractable();
+                }
+
+                currentTarget = detectedInteractable;
+                currentTarget.Select();
+                SelectInteractable();
+            }
+
+        }
     }
 }

@@ -6,19 +6,19 @@ using TMPro;
 namespace Foutain.Player
 {
     /// <summary>
-    /// Êó±êÁéÃô¶È¹ÜÀí½Å±¾
-    /// ¶ÀÁ¢¿ØÖÆPlayerSightµÄÊó±êÁéÃô¶È£¬Ö§³ÖUI Sliderµ÷½Ú
+    /// é¼ æ ‡çµæ•åº¦ç®¡ç†è„šæœ¬
+    /// ç‹¬ç«‹æ§åˆ¶PlayerSightçš„é¼ æ ‡çµæ•åº¦ï¼Œæ”¯æŒUI Sliderè°ƒèŠ‚
     /// </summary>
     public class MouseSensitivityManager : MonoBehaviour
     {
         [SerializeField]
         private TMP_Text valueDisplayText;
 
-        [Header("UI×é¼ş")]
+        [Header("UIç»„ä»¶")]
         [SerializeField]
         private Slider sensitivitySlider;
 
-        [Header("ÁéÃô¶È·¶Î§")]
+        [Header("çµæ•åº¦èŒƒå›´")]
         [SerializeField]
         private float minSensitivity = 0.5f;
         [SerializeField]
@@ -26,7 +26,7 @@ namespace Foutain.Player
         [SerializeField]
         private float defaultSensitivity = 1f;
 
-        [Header("±£´æÉèÖÃ")]
+        [Header("ä¿å­˜è®¾ç½®")]
         [SerializeField]
         private bool saveSettings = true;
 
@@ -34,7 +34,7 @@ namespace Foutain.Player
 
         private void Start()
         {
-            // »ñÈ¡GameInputManager
+            // è·å–GameInputManager
             gameInputManager = GameInputManager.Instance;
             if (gameInputManager == null)
             {
@@ -43,17 +43,17 @@ namespace Foutain.Player
 
             if (gameInputManager == null)
             {
-                Debug.LogError("MouseSensitivitySlider: Î´ÕÒµ½GameInputManager£¡");
+                Debug.LogError("MouseSensitivitySlider: æœªæ‰¾åˆ°GameInputManagerï¼");
                 return;
             }
 
-            // ³õÊ¼»¯Slider
+            // åˆå§‹åŒ–Slider
             SetupSlider();
 
-            // ¼ÓÔØ±£´æµÄÁéÃô¶È
+            // åŠ è½½ä¿å­˜çš„çµæ•åº¦
             LoadSensitivity();
 
-            // Ìí¼Ó¼àÌı
+            // æ·»åŠ ç›‘å¬
             sensitivitySlider.onValueChanged.AddListener(OnSensitivityChanged);
         }
 
@@ -68,10 +68,10 @@ namespace Foutain.Player
 
         private void OnSensitivityChanged(float value)
         {
-            // Ö±½ÓÉèÖÃ¾²Ì¬±äÁ¿
-            GameInputManager.MouseSensitivity = value;
+            // ç›´æ¥è®¾ç½®é™æ€å˜é‡
+            GameInputManager.Instance.sensitivity = value;
 
-            Debug.Log($"ÁéÃô¶ÈÉèÖÃÎª: {value}");
+            Debug.Log($"çµæ•åº¦è®¾ç½®ä¸º: {value}");
 
             if (saveSettings)
             {
@@ -95,7 +95,7 @@ namespace Foutain.Player
             }
 
             sensitivitySlider.value = value;
-            GameInputManager.MouseSensitivity = value; // Í¬²½µ½¾²Ì¬±äÁ¿
+            GameInputManager.Instance.sensitivity = value; // åŒæ­¥åˆ°é™æ€å˜é‡
 
             if (valueDisplayText != null)
             {

@@ -57,6 +57,7 @@ public class PanelManager : MonoBehaviour
             // 禁用玩家输入
             GameInputManager.Instance.DisableMoveInput();
             GameInputManager.Instance.DisableSightInput();
+            GameInputManager.Instance.DisableInteractInput();
             //显示鼠标
             GameInputManager.Instance.ShowCursor();
         }
@@ -114,6 +115,7 @@ public class PanelManager : MonoBehaviour
 
         // 重新启用玩家输入
         GameInputManager.Instance.EnableMoveInput();
+        GameInputManager.Instance.EnableInteractInput();
         GameInputManager.Instance.EnableSightInput();
         //隐藏鼠标
         GameInputManager.Instance.HideCursor();

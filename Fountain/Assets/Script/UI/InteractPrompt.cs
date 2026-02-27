@@ -20,11 +20,8 @@ namespace Foutain.UI
                 GetComponent<PlayerInteractor>();
             playerInteractor.SelectInteractable += Show;
             playerInteractor.DeselectInteractable += Hide;
-            Hide(); 
-        }
-        private void Update()
-        {
-            SetOffset();            
+            Hide();
+            SetOffset();
         }
         private void SetOffset()
         {

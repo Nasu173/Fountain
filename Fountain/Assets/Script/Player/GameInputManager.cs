@@ -14,19 +14,18 @@ namespace Foutain.Player
         public static GameInputManager Instance { get; private set; }
         private PlayerInputActions inputActions;
 
-        // 添加公共静态属性
-        public static float MouseSensitivity { get; set; } = 1f;
-
-        [SerializeField]
-        private float sensitivity = 1;
+        public float sensitivity = 1;
 
         private PlayerMove playerMove;
         private PlayerSight playerSight;
         private PlayerInteractor playerInteractor;
+        private void Awake()
+        {
+            GameInputManager.Instance = this;
+        }
         private void Start()
         {
             //进行相关初始化,注册输入事件来调用移动等相关方法
-            GameInputManager.Instance = this;
             inputActions = new PlayerInputActions();
             playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
             playerSight = playerMove.GetComponentInChildren<PlayerSight>();
@@ -34,7 +33,7 @@ namespace Foutain.Player
 
             inputActions.Player.Enable();
             EnablePausePanel();
-            EnableMoveInput();
+            EnableInteractInput();
             HideCursor();
 
             inputActions.Player.Run.canceled += (callback) =>
@@ -50,8 +49,6 @@ namespace Foutain.Player
                 playerInteractor.Interact();
             };
 
-            // 初始化时将静态值同步到字段
-            sensitivity = MouseSensitivity;
         }
         private void Update()
         {
@@ -71,10 +68,10 @@ namespace Foutain.Player
 
             // 使用静态值
             _ = inputActions.Player.Look.ReadValue<Vector2>();
-            playerMove.Rotate(sightMove, MouseSensitivity);
+            playerMove.Rotate(sightMove, sensitivity);
             if (playerSight != null)
             {
-                playerSight.Rotate(sightMove, MouseSensitivity);
+                playerSight.Rotate(sightMove, sensitivity);
             }
         }
         private void OnDestroy()
@@ -115,6 +112,20 @@ namespace Foutain.Player
         {
             inputActions.Player.Look.Enable();    
         }
+        /// <summary>
+        /// 禁止交互输入
+        /// </summary>
+        public void DisableInteractInput()
+        {
+            inputActions.Player.Disable();
+            playerInteractor.Disable();
+        }
+        public void EnableInteractInput()
+        {
+            inputActions.Player.Enable();
+            playerInteractor.Enable();
+        }
+
         /// <summary>
         /// 隐藏鼠标
         /// </summary>
