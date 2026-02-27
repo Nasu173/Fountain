@@ -4,13 +4,22 @@ public class CollectItemTrigger : BaseTaskTrigger
 {
     [Header("Collect Settings")]
     [SerializeField] private string itemTag = "Collectible";
+    [SerializeField] private bool destroyOnCollect = true;
 
     private int itemsCollected = 0;
     private int lastCollectedCount = 0;
+    private int currentProgress = 0;
+
+    // 重写CurrentProgress属性
+    protected override int CurrentProgress
+    {
+        get => currentProgress;
+        set => currentProgress = value;
+    }
 
     protected override bool CheckTriggerCondition()
     {
-        return false;
+        return false; // 由OnTriggerEnter驱动
     }
 
     protected override int GetProgressAmount()
@@ -23,6 +32,11 @@ public class CollectItemTrigger : BaseTaskTrigger
         return collected;
     }
 
+    protected override void IncrementProgress()
+    {
+        currentProgress++;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other != null && other.CompareTag(itemTag))
@@ -33,19 +47,21 @@ public class CollectItemTrigger : BaseTaskTrigger
             {
                 StartTask();
             }
-            else if (!taskCompleted)
+
+            if (!taskCompleted)
             {
                 UpdateTaskProgress();
-
-                if (itemsCollected >= targetCount)
-                {
-                    OnTaskCompleted();
-                }
             }
 
-            if (other.gameObject != null)
+            if (destroyOnCollect && other.gameObject != null)
             {
                 Destroy(other.gameObject);
+            }
+
+            // 检查任务是否完成
+            if (currentProgress >= TargetCount)
+            {
+                OnTaskCompleted();
             }
         }
     }

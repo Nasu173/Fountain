@@ -1,5 +1,6 @@
 using UnityEngine;
 using Foutain.Player;
+using System;
 
 public class InteractionListener : MonoBehaviour
 {
@@ -13,11 +14,37 @@ public class InteractionListener : MonoBehaviour
     [Tooltip("手动指定的触发器")]
     [SerializeField] private InteractTaskTrigger specificTrigger;
 
+    [Header("交互配置")]
+    [Tooltip("是否能多次交互")]
+    [SerializeField] private bool canInteractMultipleTimes = false;
+
+    [Tooltip("是否仅首次交互增加进度")]
+    [SerializeField] private bool progressOnlyFirstTime = true;
+
+    [Tooltip("交互后是否销毁物体")]
+    [SerializeField] private bool destroyOnInteract = false;
+
+    [Tooltip("每次交互增加的进度值")]
+    [SerializeField] private int progressPerInteract = 1;
+
     [Header("Debug")]
     [SerializeField] private bool debugMode = true;
 
-    // 不再强制要求IInteractable接口
     private InteractTaskTrigger taskTrigger;
+    private InteractConfig config;
+    private bool hasInteracted = false;
+
+    private void Awake()
+    {
+        // 创建交互配置
+        config = new InteractConfig
+        {
+            canInteractMultipleTimes = canInteractMultipleTimes,
+            progressOnlyFirstTime = progressOnlyFirstTime,
+            destroyOnInteract = destroyOnInteract,
+            progressPerInteract = progressPerInteract
+        };
+    }
 
     private void Start()
     {
@@ -35,11 +62,9 @@ public class InteractionListener : MonoBehaviour
 
         if (autoFindTrigger && !string.IsNullOrEmpty(taskTriggerId))
         {
-            // 查找所有InteractTaskTrigger
             InteractTaskTrigger[] triggers = FindObjectsOfType<InteractTaskTrigger>();
             foreach (InteractTaskTrigger trigger in triggers)
             {
-                // 可以通过ID或其他方式匹配
                 if (trigger.TaskId == taskTriggerId)
                 {
                     taskTrigger = trigger;
@@ -60,12 +85,27 @@ public class InteractionListener : MonoBehaviour
     /// </summary>
     public void OnInteracted(PlayerInteractor player)
     {
+        if (player == null)
+        {
+            throw new ArgumentNullException(nameof(player));
+        }
+
         if (debugMode) Debug.Log($"物体 {gameObject.name} 被交互");
 
-        // 通知关联的触发器
+        // 检查交互限制
+        if (!canInteractMultipleTimes && hasInteracted)
+        {
+            if (debugMode) Debug.Log($"[{gameObject.name}] 已经交互过，无法再次交互");
+            return;
+        }
+
+        // 通知关联的触发器 - 传递 config 参数
         if (taskTrigger != null)
         {
-            taskTrigger.OnObjectInteracted(gameObject);
+            taskTrigger.OnObjectInteracted(gameObject, config);
+            hasInteracted = true;
+
+            if (debugMode) Debug.Log($"[{gameObject.name}] 触发任务: {taskTrigger.TaskName}");
         }
         else
         {
@@ -75,8 +115,15 @@ public class InteractionListener : MonoBehaviour
 
             foreach (InteractTaskTrigger trigger in triggers)
             {
-                trigger.OnObjectInteracted(gameObject);
+                trigger.OnObjectInteracted(gameObject, config);
             }
+            hasInteracted = true;
+        }
+
+        // 交互后销毁物体
+        if (destroyOnInteract)
+        {
+            Destroy(gameObject);
         }
     }
 }

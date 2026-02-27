@@ -12,7 +12,8 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
     [Header("Debug")]
     [SerializeField] protected bool debugMode = true;
 
-    public string TaskId
+    // 使用virtual允许子类重写
+    public virtual string TaskId
     {
         get
         {
@@ -21,17 +22,18 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
             return taskId;
         }
     }
-    public string TaskName => taskName;
-    public string TaskNumber => taskNumber;
-    public int TargetCount => targetCount;
-    public string Description => description;
+
+    public virtual string TaskName => taskName;
+    public virtual string TaskNumber => taskNumber;
+    public virtual int TargetCount => targetCount;
+    public virtual string Description => description;
+    protected virtual int CurrentProgress { get; set; }
 
     protected bool taskStarted = false;
     protected bool taskCompleted = false;
 
     protected virtual void Start()
     {
-        // 确保taskId不为空
         if (string.IsNullOrEmpty(taskId))
         {
             taskId = System.Guid.NewGuid().ToString();
@@ -42,6 +44,7 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
 
     protected abstract bool CheckTriggerCondition();
     protected abstract int GetProgressAmount();
+    protected abstract void IncrementProgress();
 
     protected virtual void Update()
     {
@@ -79,6 +82,11 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
             int amount = GetProgressAmount();
             if (amount > 0)
             {
+                for (int i = 0; i < amount; i++)
+                {
+                    IncrementProgress();
+                }
+
                 if (TaskManager.Instance != null)
                 {
                     TaskManager.Instance.UpdateTaskProgress(TaskId, amount);

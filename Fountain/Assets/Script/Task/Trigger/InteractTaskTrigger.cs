@@ -1,141 +1,81 @@
 using UnityEngine;
-using Foutain.Player;
+using System.Collections.Generic;
 
 public class InteractTaskTrigger : BaseTaskTrigger
 {
-    [Header("交互任务设置")]
-    [Tooltip("需要交互的物体标签")]
-    [SerializeField] private string targetTag = "Interactable";
+    [Header("交互任务特定设置")]
+    // 移除 debugMode 字段，直接使用基类的
 
-    [Tooltip("是否需要特定物体名称（可选）")]
-    [SerializeField] private string targetObjectName;
+    private HashSet<GameObject> interactedObjects = new HashSet<GameObject>();
+    private int currentProgress = 0;
 
-    [Tooltip("是否只触发一次")]
-    [SerializeField] private bool triggerOnce = true;
-
-    [Tooltip("每次交互增加的进度")]
-    [SerializeField] private int progressPerInteraction = 1;
-
-    private int interactionCount = 0;
-    private bool hasTriggered = false;
-
-    // 缓存所有需要监听的交互物体
-    private GameObject[] targetObjects;
-
-    protected override void Start()
+    // 重写CurrentProgress属性
+    protected override int CurrentProgress
     {
-        base.Start();
-
-        // 查找所有目标物体
-        FindTargetObjects();
+        get => currentProgress;
+        set => currentProgress = value;
     }
 
-    private void FindTargetObjects()
-    {
-        if (!string.IsNullOrEmpty(targetObjectName))
-        {
-            // 按名称查找特定物体
-            GameObject obj = GameObject.Find(targetObjectName);
-            if (obj != null)
-            {
-                targetObjects = new GameObject[] { obj };
-                if (debugMode) Debug.Log($"[{GetType().Name}] 找到目标物体: {targetObjectName}");
-            }
-        }
-        else if (!string.IsNullOrEmpty(targetTag))
-        {
-            // 按标签查找物体
-            targetObjects = GameObject.FindGameObjectsWithTag(targetTag);
-            if (debugMode) Debug.Log($"[{GetType().Name}] 找到 {targetObjects.Length} 个标签为 {targetTag} 的物体");
-        }
-    }
+    protected override bool CheckTriggerCondition() => false;
 
-    protected override bool CheckTriggerCondition()
-    {
-        // 这个触发器由事件驱动，所以这里返回false
-        return false;
-    }
+    protected override int GetProgressAmount() => 1;
 
-    protected override int GetProgressAmount()
+    protected override void IncrementProgress()
     {
-        return progressPerInteraction;
+        currentProgress++;
     }
 
     /// <summary>
-    /// 当玩家与物体交互时调用这个方法
+    /// 当物体被交互时调用
     /// </summary>
-    public void OnObjectInteracted(GameObject interactedObject)
+    public void OnObjectInteracted(GameObject obj, InteractConfig config)
     {
         if (taskCompleted)
         {
-            if (debugMode) Debug.Log($"[{GetType().Name}] 任务已完成，忽略交互");
+            if (debugMode) Debug.Log($"[{TaskName}] 任务已完成，忽略交互");
             return;
         }
 
-        if (triggerOnce && hasTriggered)
+        // 检查是否可以交互
+        if (!CanInteract(obj, config))
         {
-            if (debugMode) Debug.Log($"[{GetType().Name}] 已触发过，忽略本次交互");
+            if (debugMode) Debug.Log($"[{TaskName}] 无法交互（已超过限制）");
             return;
         }
 
-        // 检查是否是目标物体
-        if (IsTargetObject(interactedObject))
+        // 记录交互
+        if (config.progressOnlyFirstTime)
         {
-            interactionCount++;
-            hasTriggered = true;
-
-            if (debugMode) Debug.Log($"[{GetType().Name}] 与目标物体交互: {interactedObject.name}, 次数: {interactionCount}/{targetCount}");
-
-            if (!taskStarted)
-            {
-                StartTask();
-            }
-            else
-            {
-                UpdateTaskProgress();
-            }
-
-            // 检查任务是否完成
-            if (interactionCount >= targetCount && !taskCompleted)
-            {
-                OnTaskCompleted();
-            }
+            interactedObjects.Add(obj);
         }
-        else
+
+        if (debugMode) Debug.Log($"[{TaskName}] 物体被交互: {obj.name}");
+
+        // 启动任务或更新进度
+        if (!taskStarted)
         {
-            if (debugMode) Debug.Log($"[{GetType().Name}] 交互物体不是目标: {interactedObject.name}");
+            StartTask();
+        }
+
+        // 更新进度（多次）
+        for (int i = 0; i < config.progressPerInteract; i++)
+        {
+            UpdateTaskProgress();
+        }
+
+        // 检查任务是否完成
+        if (currentProgress >= TargetCount)
+        {
+            OnTaskCompleted();
         }
     }
 
-    private bool IsTargetObject(GameObject obj)
+    private bool CanInteract(GameObject obj, InteractConfig config)
     {
-        if (obj == null) return false;
+        // 如果能多次交互，总是可以
+        if (config.canInteractMultipleTimes) return true;
 
-        // 检查名称匹配
-        if (!string.IsNullOrEmpty(targetObjectName))
-        {
-            if (obj.name == targetObjectName || obj.name.Contains(targetObjectName))
-                return true;
-        }
-
-        // 检查标签匹配
-        if (!string.IsNullOrEmpty(targetTag))
-        {
-            if (obj.CompareTag(targetTag))
-                return true;
-        }
-
-        return false;
-    }
-
-    // 在编辑器中修改参数时重新查找物体
-    private void OnValidate()
-    {
-#if UNITY_EDITOR
-        if (Application.isPlaying)
-        {
-            FindTargetObjects();
-        }
-#endif
+        // 如果只能交互一次，检查是否已交互过
+        return !interactedObjects.Contains(obj);
     }
 }

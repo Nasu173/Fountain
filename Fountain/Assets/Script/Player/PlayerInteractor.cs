@@ -86,28 +86,19 @@ namespace Foutain.Player
         /// </summary>
         public void Interact()
         {
-            Debug.Log("Interact??");
+            Debug.Log("Interact!!");
 
             if (currentTarget != null)
             {
-                // 原来的交互逻辑
+                // 原有的交互逻辑
                 currentTarget.InteractWith(this);
 
-                // 添加：触发交互监听器
+                // 检查是否有 SimpleTaskInteractable
                 if (currentTarget is MonoBehaviour mono)
                 {
-                    if (mono.TryGetComponent<InteractionListener>(out var listener))
+                    if (mono.TryGetComponent<SimpleTaskInteractable>(out var simpleInteractable))
                     {
-                        listener.OnInteracted(this);
-                    }
-                    else
-                    {
-                        // 如果没有监听器，直接通知所有触发器
-                        InteractTaskTrigger[] triggers = FindObjectsOfType<InteractTaskTrigger>();
-                        foreach (InteractTaskTrigger trigger in triggers)
-                        {
-                            trigger.OnObjectInteracted(mono.gameObject);
-                        }
+                        simpleInteractable.OnPlayerInteract();
                     }
                 }
             }
