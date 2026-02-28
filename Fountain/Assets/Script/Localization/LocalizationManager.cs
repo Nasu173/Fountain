@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
@@ -28,6 +29,20 @@ namespace Foutain.Localization
             Instance = this;
             LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
         }
+        /*测试代码,记得删除
+        private void Update()
+        {
+            var keyboard = Keyboard.current;
+            if (keyboard.aKey.wasPressedThisFrame)
+            {
+                SetLocale(LocaleID.zh);
+            }
+            else if (keyboard.bKey.wasPressedThisFrame)
+            {
+                SetLocale(LocaleID.en);
+            }
+        }
+         */
         public void SetLocale(LocaleID id)
         {
             //修改本地化设置并发布事件
@@ -51,5 +66,6 @@ namespace Foutain.Localization
             GameEventBus.Publish<LocaleChangeEvent>
                 (new LocaleChangeEvent { locale = this.currentLocale });
         }
+
     }
 }

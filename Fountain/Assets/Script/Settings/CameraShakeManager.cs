@@ -1,22 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Foutain.Localization;
 using Foutain.Player;
 using TMPro;
 using UnityEngine;
 
 public class CameraShakeManager : MonoBehaviour
 {
-    [Header("UI×é¼ş")]
-    public TMP_Dropdown cameraShakeDropdown; // ¾µÍ·¶¶¶¯Ñ¡ÔñÏÂÀ­²Ëµ¥
-    public TMP_Text cameraShakeDisplayText; // ÏÔÊ¾ÊÇ·ñÆôÓÃ¾µÍ·¶¶¶¯µÄÎÄ±¾×é¼ş
+    [Header("UIç»„ä»¶")]
+    public TMP_Dropdown cameraShakeDropdown; // é•œå¤´æŠ–åŠ¨é€‰æ‹©ä¸‹æ‹‰èœå•
+    [Tooltip("æœ¬åœ°åŒ–dropdownçš„è„šæœ¬")]
+    [SerializeField] private LocalizeDropdown dropdownLocalize;
+    public TMP_Text cameraShakeDisplayText; // æ˜¾ç¤ºæ˜¯å¦å¯ç”¨é•œå¤´æŠ–åŠ¨çš„æ–‡æœ¬ç»„ä»¶
 
     [SerializeField] private PlayerSight sight;
 
-    public List<int> cameraShakeOptions = new() { 0, 1 };//1´ú±íÆôÓÃÊÓ½Ç¶¶¶¯£¬0´ú±í½ûÓÃ
+    public List<int> cameraShakeOptions = new() { 0, 1 };//1ä»£è¡¨å¯ç”¨è§†è§’æŠ–åŠ¨ï¼Œ0ä»£è¡¨ç¦ç”¨
 
-    [Header("±£´æÉèÖÃ")]
-    public bool saveSettings = true; // ÊÇ·ñ±£´æÉèÖÃ
+    [Header("ä¿å­˜è®¾ç½®")]
+    public bool saveSettings = true; // æ˜¯å¦ä¿å­˜è®¾ç½®
 
     private const string CAMERA_SHAKE_KEY = "CameraShake";
 
@@ -24,29 +27,30 @@ public class CameraShakeManager : MonoBehaviour
     {
         if (cameraShakeDropdown == null)
         {
-            Debug.LogError("ÇëÔÚInspectorÖĞ½«CameraShakeDropdownÍÏ×§µ½½Å±¾ÉÏ£¡");
+            Debug.LogError("è¯·åœ¨Inspectorä¸­å°†CameraShakeDropdownæ‹–æ‹½åˆ°è„šæœ¬ä¸Šï¼");
             return;
         }
 
-        // ³õÊ¼»¯Dropdown
+        // åˆå§‹åŒ–Dropdown
         InitializeDropdown();
 
-        // ¼ÓÔØ±£´æµÄÉèÖÃ
+        // åŠ è½½ä¿å­˜çš„è®¾ç½®
         LoadSettings();
 
-        // Ìí¼ÓÊÂ¼ş¼àÌı - ÇĞ»»Ñ¡ÏîÁ¢¼´Ó¦ÓÃÖ¡ÂÊ
+        // æ·»åŠ äº‹ä»¶ç›‘å¬ - åˆ‡æ¢é€‰é¡¹ç«‹å³åº”ç”¨å¸§ç‡
         cameraShakeDropdown.onValueChanged.AddListener(OnCameraShakeChanged);
     }
 
     /// <summary>
-    /// ³õÊ¼»¯DropdownÑ¡Ïî
+    /// åˆå§‹åŒ–Dropdowné€‰é¡¹
     /// </summary>
     void InitializeDropdown()
     {
-        // Çå³ıÏÖÓĞÑ¡Ïî
+        /*
+        // æ¸…é™¤ç°æœ‰é€‰é¡¹
         cameraShakeDropdown.ClearOptions();
 
-        // ´´½¨Ñ¡ÏîÁĞ±í
+        // åˆ›å»ºé€‰é¡¹åˆ—è¡¨
         List<string> options = new();
 
         foreach (int cameraShake in cameraShakeOptions)
@@ -64,28 +68,31 @@ public class CameraShakeManager : MonoBehaviour
             options.Add(optionText);
         }
 
-        // Ìí¼ÓÑ¡Ïîµ½Dropdown
+        // æ·»åŠ é€‰é¡¹åˆ°Dropdown
         cameraShakeDropdown.AddOptions(options);
 
-        Debug.Log("Ö¡ÂÊÑ¡Ïî³õÊ¼»¯Íê³É£¬¹² " + options.Count + " ¸öÑ¡Ïî");
+        Debug.Log("å¸§ç‡é€‰é¡¹åˆå§‹åŒ–å®Œæˆï¼Œå…± " + options.Count + " ä¸ªé€‰é¡¹");
+         
+         */
+        dropdownLocalize.SetOptionText();
     }
 
     /// <summary>
-    /// µ±Ö¡ÂÊÑ¡Ïî¸Ä±äÊ±µ÷ÓÃ
+    /// å½“å¸§ç‡é€‰é¡¹æ”¹å˜æ—¶è°ƒç”¨
     /// </summary>
     public void OnCameraShakeChanged(int index)
     {
-        // È·±£Ë÷ÒıÓĞĞ§
+        // ç¡®ä¿ç´¢å¼•æœ‰æ•ˆ
         if (index < 0 || index >= cameraShakeOptions.Count)
         {
-            Debug.LogError("ÎŞĞ§µÄÖ¡ÂÊË÷Òı: " + index);
+            Debug.LogError("æ— æ•ˆçš„å¸§ç‡ç´¢å¼•: " + index);
             return;
         }
 
-        // »ñÈ¡Ñ¡ÖĞµÄÖ¡ÂÊ
+        // è·å–é€‰ä¸­çš„å¸§ç‡
         int targetCameraShake = cameraShakeOptions[index];
 
-        // Ó¦ÓÃÖ¡ÂÊ
+        // åº”ç”¨å¸§ç‡
         SetFrameRate(targetCameraShake);
     }
 
@@ -100,7 +107,7 @@ public class CameraShakeManager : MonoBehaviour
             sight.enableShake = false;
         }
 
-        // ±£´æÉèÖÃ
+        // ä¿å­˜è®¾ç½®
         if (saveSettings)
         {
             PlayerPrefs.SetInt(CAMERA_SHAKE_KEY, targetCameraShake);
@@ -109,7 +116,7 @@ public class CameraShakeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼ÓÔØ±£´æµÄÉèÖÃ
+    /// åŠ è½½ä¿å­˜çš„è®¾ç½®
     /// </summary>
     void LoadSettings()
     {
@@ -117,24 +124,24 @@ public class CameraShakeManager : MonoBehaviour
         {
             int savedCameraShake = PlayerPrefs.GetInt(CAMERA_SHAKE_KEY);
 
-            // ²éÕÒ±£´æµÄÉèÖÃÔÚÑ¡ÏîÖĞµÄË÷Òı
+            // æŸ¥æ‰¾ä¿å­˜çš„è®¾ç½®åœ¨é€‰é¡¹ä¸­çš„ç´¢å¼•
             int savedIndex = cameraShakeOptions.IndexOf(savedCameraShake);
 
             if (savedIndex >= 0)
             {
-                // ÉèÖÃDropdownÖµ
+                // è®¾ç½®Dropdownå€¼
                 cameraShakeDropdown.value = savedIndex;
                 cameraShakeDropdown.RefreshShownValue();
 
-                // Ó¦ÓÃ±£´æµÄÉèÖÃ
+                // åº”ç”¨ä¿å­˜çš„è®¾ç½®
                 SetFrameRate(savedCameraShake);
 
-                Debug.Log("ÒÑ¼ÓÔØ±£´æµÄ¾µÍ·¶¶¶¯ÉèÖÃ: " + (savedCameraShake == 0 ? "½ûÓÃ" : "ÆôÓÃ"));
+                Debug.Log("å·²åŠ è½½ä¿å­˜çš„é•œå¤´æŠ–åŠ¨è®¾ç½®: " + (savedCameraShake == 0 ? "ç¦ç”¨" : "å¯ç”¨"));
             }
         }
         else
         {
-            // Èç¹ûÃ»ÓĞ±£´æµÄÉèÖÃ£¬ÉèÖÃÎªÆôÓÃ
+            // å¦‚æœæ²¡æœ‰ä¿å­˜çš„è®¾ç½®ï¼Œè®¾ç½®ä¸ºå¯ç”¨
             int defaultIndex = cameraShakeOptions.IndexOf(1);
             if (defaultIndex >= 0)
             {

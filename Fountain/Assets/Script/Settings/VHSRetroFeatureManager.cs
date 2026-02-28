@@ -1,22 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Foutain.Localization;
 using Foutain.Player;
 using TMPro;
 using UnityEngine;
 
 public class VHSRetroFeatureManager : MonoBehaviour
 {
-    [Header("UI×é¼ş")]
-    public TMP_Dropdown VHSRetroFeatureDropdown; // VHSÂË¾µÑ¡ÔñÏÂÀ­²Ëµ¥
-    public TMP_Text VHSRetroFeatureDisplayText; // ÏÔÊ¾ÊÇ·ñÆôÓÃVHSÂË¾µµÄÎÄ±¾×é¼ş
+    [Header("UIç»„ä»¶")]
+    public TMP_Dropdown VHSRetroFeatureDropdown; // VHSæ»¤é•œé€‰æ‹©ä¸‹æ‹‰èœå•
+    [Tooltip("æœ¬åœ°åŒ–dropdownçš„è„šæœ¬")]
+    [SerializeField] private LocalizeDropdown dropdownLocalize;
+    public TMP_Text VHSRetroFeatureDisplayText; // æ˜¾ç¤ºæ˜¯å¦å¯ç”¨VHSæ»¤é•œçš„æ–‡æœ¬ç»„ä»¶
 
     [SerializeField] private VHSRetroFeature VHS;
 
-    public List<int> VHSRetroFeatureOptions = new() { 0, 1 };//1´ú±íÆôÓÃVHSÂË¾µ£¬0´ú±í½ûÓÃ
+    public List<int> VHSRetroFeatureOptions = new() { 0, 1 };//1ä»£è¡¨å¯ç”¨VHSæ»¤é•œï¼Œ0ä»£è¡¨ç¦ç”¨
 
-    [Header("±£´æÉèÖÃ")]
-    public bool saveSettings = true; // ÊÇ·ñ±£´æÉèÖÃ
+    [Header("ä¿å­˜è®¾ç½®")]
+    public bool saveSettings = true; // æ˜¯å¦ä¿å­˜è®¾ç½®
 
     private const string VHS_RETRO_FEATURE_KEY = "VHSRetroFeature";
 
@@ -24,29 +27,31 @@ public class VHSRetroFeatureManager : MonoBehaviour
     {
         if (VHSRetroFeatureDropdown == null)
         {
-            Debug.LogError("ÇëÔÚInspectorÖĞ½«VHSRetroFeatureDropdownÍÏ×§µ½½Å±¾ÉÏ£¡");
+            Debug.LogError("è¯·åœ¨Inspectorä¸­å°†VHSRetroFeatureDropdownæ‹–æ‹½åˆ°è„šæœ¬ä¸Šï¼");
             return;
         }
 
-        // ³õÊ¼»¯Dropdown
+        // åˆå§‹åŒ–Dropdown
         InitializeDropdown();
 
-        // ¼ÓÔØ±£´æµÄÉèÖÃ
+        // åŠ è½½ä¿å­˜çš„è®¾ç½®
         LoadSettings();
 
-        // Ìí¼ÓÊÂ¼ş¼àÌı - ÇĞ»»Ñ¡ÏîÁ¢¼´Ó¦ÓÃ
+        // æ·»åŠ äº‹ä»¶ç›‘å¬ - åˆ‡æ¢é€‰é¡¹ç«‹å³åº”ç”¨
         VHSRetroFeatureDropdown.onValueChanged.AddListener(OnVHSRetroFeatureChanged);
     }
 
     /// <summary>
-    /// ³õÊ¼»¯DropdownÑ¡Ïî
+    /// åˆå§‹åŒ–Dropdowné€‰é¡¹
     /// </summary>
     void InitializeDropdown()
     {
-        // Çå³ıÏÖÓĞÑ¡Ïî
+        /*
+         
+        // æ¸…é™¤ç°æœ‰é€‰é¡¹
         VHSRetroFeatureDropdown.ClearOptions();
 
-        // ´´½¨Ñ¡ÏîÁĞ±í
+        // åˆ›å»ºé€‰é¡¹åˆ—è¡¨
         List<string> options = new();
 
         foreach (int cameraShake in VHSRetroFeatureOptions)
@@ -64,28 +69,30 @@ public class VHSRetroFeatureManager : MonoBehaviour
             options.Add(optionText);
         }
 
-        // Ìí¼ÓÑ¡Ïîµ½Dropdown
+        // æ·»åŠ é€‰é¡¹åˆ°Dropdown
         VHSRetroFeatureDropdown.AddOptions(options);
 
-        Debug.Log("VHSÂË¾µÑ¡Ïî³õÊ¼»¯Íê³É£¬¹² " + options.Count + " ¸öÑ¡Ïî");
+        Debug.Log("VHSæ»¤é•œé€‰é¡¹åˆå§‹åŒ–å®Œæˆï¼Œå…± " + options.Count + " ä¸ªé€‰é¡¹");
+         */
+        dropdownLocalize.SetOptionText();   
     }
 
     /// <summary>
-    /// µ±VHSÂË¾µÑ¡Ïî¸Ä±äÊ±µ÷ÓÃ
+    /// å½“VHSæ»¤é•œé€‰é¡¹æ”¹å˜æ—¶è°ƒç”¨
     /// </summary>
     public void OnVHSRetroFeatureChanged(int index)
     {
-        // È·±£Ë÷ÒıÓĞĞ§
+        // ç¡®ä¿ç´¢å¼•æœ‰æ•ˆ
         if (index < 0 || index >= VHSRetroFeatureOptions.Count)
         {
-            Debug.LogError("ÎŞĞ§µÄÖ¡ÂÊË÷Òı: " + index);
+            Debug.LogError("æ— æ•ˆçš„å¸§ç‡ç´¢å¼•: " + index);
             return;
         }
 
-        // »ñÈ¡Ñ¡ÖĞµÄÖ¡ÂÊ
+        // è·å–é€‰ä¸­çš„å¸§ç‡
         int targetVHSRetroFeature = VHSRetroFeatureOptions[index];
 
-        // Ó¦ÓÃÖ¡ÂÊ
+        // åº”ç”¨å¸§ç‡
         SetVHSRetroFeature(targetVHSRetroFeature);
     }
 
@@ -100,7 +107,7 @@ public class VHSRetroFeatureManager : MonoBehaviour
             VHS.enabled = false;
         }
 
-        // ±£´æÉèÖÃ
+        // ä¿å­˜è®¾ç½®
         if (saveSettings)
         {
             PlayerPrefs.SetInt(VHS_RETRO_FEATURE_KEY, targetVHSRetroFeature);
@@ -109,7 +116,7 @@ public class VHSRetroFeatureManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼ÓÔØ±£´æµÄÉèÖÃ
+    /// åŠ è½½ä¿å­˜çš„è®¾ç½®
     /// </summary>
     void LoadSettings()
     {
@@ -117,24 +124,24 @@ public class VHSRetroFeatureManager : MonoBehaviour
         {
             int savedVHSRetroFeature = PlayerPrefs.GetInt(VHS_RETRO_FEATURE_KEY);
 
-            // ²éÕÒ±£´æµÄÉèÖÃÔÚÑ¡ÏîÖĞµÄË÷Òı
+            // æŸ¥æ‰¾ä¿å­˜çš„è®¾ç½®åœ¨é€‰é¡¹ä¸­çš„ç´¢å¼•
             int savedIndex = VHSRetroFeatureOptions.IndexOf(savedVHSRetroFeature);
 
             if (savedIndex >= 0)
             {
-                // ÉèÖÃDropdownÖµ
+                // è®¾ç½®Dropdownå€¼
                 VHSRetroFeatureDropdown.value = savedIndex;
                 VHSRetroFeatureDropdown.RefreshShownValue();
 
-                // Ó¦ÓÃ±£´æµÄÉèÖÃ
+                // åº”ç”¨ä¿å­˜çš„è®¾ç½®
                 SetVHSRetroFeature(savedVHSRetroFeature);
 
-                Debug.Log("ÒÑ¼ÓÔØ±£´æµÄVHSÂË¾µÉèÖÃ: " + (savedVHSRetroFeature == 0 ? "½ûÓÃ" : "ÆôÓÃ"));
+                Debug.Log("å·²åŠ è½½ä¿å­˜çš„VHSæ»¤é•œè®¾ç½®: " + (savedVHSRetroFeature == 0 ? "ç¦ç”¨" : "å¯ç”¨"));
             }
         }
         else
         {
-            // Èç¹ûÃ»ÓĞ±£´æµÄÉèÖÃ£¬ÉèÖÃÎªÆôÓÃ
+            // å¦‚æœæ²¡æœ‰ä¿å­˜çš„è®¾ç½®ï¼Œè®¾ç½®ä¸ºå¯ç”¨
             int defaultIndex = VHSRetroFeatureOptions.IndexOf(1);
             if (defaultIndex >= 0)
             {

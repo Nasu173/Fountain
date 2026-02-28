@@ -68,7 +68,6 @@ namespace Foutain.Player
 
         private void OnSensitivityChanged(float value)
         {
-            // 直接设置静态变量
             GameInputManager.Instance.sensitivity = value;
 
             Debug.Log($"灵敏度设置为: {value}");
@@ -81,7 +80,7 @@ namespace Foutain.Player
 
             if (valueDisplayText != null)
             {
-                valueDisplayText.text = $"Mouse Sensitivity: {value:F1}";
+                valueDisplayText.text = $"{value:F1}";
             }
         }
 
@@ -99,7 +98,7 @@ namespace Foutain.Player
 
             if (valueDisplayText != null)
             {
-                valueDisplayText.text = $"Mouse Sensitivity: {value:F1}";
+                valueDisplayText.text = $"{value:F1}";
             }
         }
 

@@ -1,57 +1,63 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Foutain.Localization;
 
 public class WindowModeController : MonoBehaviour
 {
-    [SerializeField] private TMP_Dropdown windowModeDropdown; // Ê¹ÓÃTMP_Dropdown
-                                                              // Èç¹ûÊ¹ÓÃÆÕÍ¨Dropdown: [SerializeField] private Dropdown windowModeDropdown;
-
+    [SerializeField] private TMP_Dropdown windowModeDropdown; // ä½¿ç”¨TMP_Dropdown
+                                                              // å¦‚æœä½¿ç”¨æ™®é€šDropdown: [SerializeField] private Dropdown windowModeDropdown;
+    [Tooltip("æœ¬åœ°åŒ–dropdownçš„è„šæœ¬")]
+    [SerializeField] private LocalizeDropdown dropdownLocalize;
     [SerializeField] private bool saveSettings = true;
 
     private void Start()
     {
         if (windowModeDropdown == null) return;
 
-        // ÉèÖÃÏÂÀ­Ñ¡Ïî
+        // è®¾ç½®ä¸‹æ‹‰é€‰é¡¹
         SetupDropdownOptions();
 
-        // ¼ÓÔØ±£´æµÄÉèÖÃ
+        // åŠ è½½ä¿å­˜çš„è®¾ç½®
         LoadWindowMode();
 
-        // Ìí¼Ó¼àÌı
+        // æ·»åŠ ç›‘å¬
         windowModeDropdown.onValueChanged.AddListener(OnWindowModeChanged);
     }
 
     private void SetupDropdownOptions()
     {
+        dropdownLocalize.SetOptionText();
+        /*
+         
         windowModeDropdown.ClearOptions();
         windowModeDropdown.AddOptions(new System.Collections.Generic.List<string>
         {
-            "Fullscreen (Exclusive)",  // ¶ÀÕ¼È«ÆÁ
-            "Windowed",                 // ´°¿ÚÄ£Ê½
-            "Fullscreen (Borderless)"  // ÎŞ±ß¿òÈ«ÆÁ
+            "Fullscreen (Exclusive)",  // ç‹¬å å…¨å±
+            "Windowed",                 // çª—å£æ¨¡å¼
+            "Fullscreen (Borderless)"  // æ— è¾¹æ¡†å…¨å±
         });
+         */
     }
 
     private void OnWindowModeChanged(int index)
     {
         switch (index)
         {
-            case 0: // È«ÆÁÄ£Ê½
+            case 0: // å…¨å±æ¨¡å¼
                 Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
                 break;
-            case 1: // ´°¿ÚÄ£Ê½
+            case 1: // çª—å£æ¨¡å¼
                 Screen.fullScreenMode = FullScreenMode.Windowed;
                 break;
-            case 2: // È«ÆÁ´°¿ÚÄ£Ê½
+            case 2: // å…¨å±çª—å£æ¨¡å¼
                 Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
                 break;
         }
 
-        Screen.fullScreen = (index != 1); // ´°¿ÚÄ£Ê½Ê±ÉèÎªfalse
+        Screen.fullScreen = (index != 1); // çª—å£æ¨¡å¼æ—¶è®¾ä¸ºfalse
 
-        Debug.Log($"´°¿ÚÄ£Ê½: {windowModeDropdown.options[index].text}");
+        Debug.Log($"çª—å£æ¨¡å¼: {windowModeDropdown.options[index].text}");
 
         if (saveSettings)
         {
@@ -66,11 +72,11 @@ public class WindowModeController : MonoBehaviour
         {
             int savedMode = PlayerPrefs.GetInt("WindowMode");
             windowModeDropdown.value = savedMode;
-            OnWindowModeChanged(savedMode); // Á¢¼´Ó¦ÓÃ
+            OnWindowModeChanged(savedMode); // ç«‹å³åº”ç”¨
         }
         else
         {
-            // ÉèÖÃÎªµ±Ç°Ä£Ê½
+            // è®¾ç½®ä¸ºå½“å‰æ¨¡å¼
             if (Screen.fullScreen)
             {
                 windowModeDropdown.value = Screen.fullScreenMode == FullScreenMode.ExclusiveFullScreen ? 0 : 2;

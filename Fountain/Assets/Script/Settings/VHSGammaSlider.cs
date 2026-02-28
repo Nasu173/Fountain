@@ -4,41 +4,41 @@ using TMPro;
 
 public class VHSGammaSlider : MonoBehaviour
 {
-    [Header("VHS Retro FeatureÒıÓÃ")]
+    [Header("VHS Retro Featureå¼•ç”¨")]
     [SerializeField] private VHSRetroFeature vhsRetroFeature;
 
-    [Header("UI×é¼ş")]
+    [Header("UIç»„ä»¶")]
     [SerializeField] private Slider gammaSlider;
-    [SerializeField] private TMP_Text valueDisplayText; // ¿ÉÑ¡
+    [SerializeField] private TMP_Text valueDisplayText; // å¯é€‰
 
-    [Header("Gamma·¶Î§")]
+    [Header("GammaèŒƒå›´")]
     [SerializeField] private float minGamma = 0.8f;
     [SerializeField] private float maxGamma = 1.2f;
     [SerializeField] private float defaultGamma = 1.05f;
 
-    [Header("±£´æÉèÖÃ")]
+    [Header("ä¿å­˜è®¾ç½®")]
     [SerializeField] private bool saveSettings = true;
 
     private void Start()
     {
-        // ×Ô¶¯²éÕÒVHSRetroFeature
+        // è‡ªåŠ¨æŸ¥æ‰¾VHSRetroFeature
         if (vhsRetroFeature == null)
         {
             vhsRetroFeature = FindObjectOfType<VHSRetroFeature>();
             if (vhsRetroFeature == null)
             {
-                Debug.LogError("VHSGammaSlider: Î´ÕÒµ½VHSRetroFeature×é¼ş£¡");
+                Debug.LogError("VHSGammaSlider: æœªæ‰¾åˆ°VHSRetroFeatureç»„ä»¶ï¼");
                 return;
             }
         }
 
-        // ³õÊ¼»¯Slider
+        // åˆå§‹åŒ–Slider
         SetupSlider();
 
-        // ¼ÓÔØ±£´æµÄÖµ
+        // åŠ è½½ä¿å­˜çš„å€¼
         LoadGamma();
 
-        // Ìí¼Ó¼àÌı
+        // æ·»åŠ ç›‘å¬
         gammaSlider.onValueChanged.AddListener(OnGammaChanged);
     }
 
@@ -50,16 +50,16 @@ public class VHSGammaSlider : MonoBehaviour
 
     private void OnGammaChanged(float value)
     {
-        // ÉèÖÃGammaÖµ
+        // è®¾ç½®Gammaå€¼
         vhsRetroFeature.gamma = value;
 
-        // ¸üĞÂÏÔÊ¾ÎÄ±¾
+        // æ›´æ–°æ˜¾ç¤ºæ–‡æœ¬
         if (valueDisplayText != null)
         {
-            valueDisplayText.text = $"Gamma: {value:F2}";
+            valueDisplayText.text = $"{value:F2}";
         }
 
-        // ±£´æÉèÖÃ
+        // ä¿å­˜è®¾ç½®
         if (saveSettings)
         {
             PlayerPrefs.SetFloat("VHSGamma", value);
@@ -81,7 +81,8 @@ public class VHSGammaSlider : MonoBehaviour
 
         if (valueDisplayText != null)
         {
-            valueDisplayText.text = $"Gamma: {value:F2}";
+            //valueDisplayText.text = $"Gamma: {value:F2}";
+            valueDisplayText.text = $"{value:F2}";
         }
     }
 

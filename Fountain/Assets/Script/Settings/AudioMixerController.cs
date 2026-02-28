@@ -6,9 +6,9 @@ using TMPro;
 public class AudioMixerController : MonoBehaviour
 {
     [Header("Audio Mixer")]
-    public AudioMixer audioMixer;  // ÒôÆµ»ìºÏÆ÷
+    public AudioMixer audioMixer;  // éŸ³é¢‘æ··åˆå™¨
 
-    [Header("UI×é¼ş")]
+    [Header("UIç»„ä»¶")]
     public Slider musicSlider;
     public Slider masterSlider;
     public Slider sfxSlider;
@@ -16,24 +16,24 @@ public class AudioMixerController : MonoBehaviour
     public TMP_Text musicText;
     public TMP_Text sfxText;
 
-    [Header("ÒôÁ¿²ÎÊıÃû³Æ")]
+    [Header("éŸ³é‡å‚æ•°åç§°")]
     public string masterVolumeParam = "MasterVolume";
     public string musicVolumeParam = "BGMVolume";
     public string sfxVolumeParam = "SFXVolume";
 
-    [Header("ÒôÁ¿·¶Î§")]
-    public float minVolumeDB = -80f;  // ×îĞ¡ÒôÁ¿£¨·Ö±´£©
-    public float maxVolumeDB = 20f;   // ×î´óÒôÁ¿£¨·Ö±´£©
+    [Header("éŸ³é‡èŒƒå›´")]
+    public float minVolumeDB = -80f;  // æœ€å°éŸ³é‡ï¼ˆåˆ†è´ï¼‰
+    public float maxVolumeDB = 20f;   // æœ€å¤§éŸ³é‡ï¼ˆåˆ†è´ï¼‰
 
     void Start()
     {
-        // ³õÊ¼»¯Slider
+        // åˆå§‹åŒ–Slider
         InitializeSliders();
 
-        // ¼ÓÔØ±£´æµÄÉèÖÃ
+        // åŠ è½½ä¿å­˜çš„è®¾ç½®
         LoadAllVolumes();
 
-        // Ìí¼Ó¼àÌı
+        // æ·»åŠ ç›‘å¬
         if (masterSlider != null)
             masterSlider.onValueChanged.AddListener(SetMasterVolume);
 
@@ -45,14 +45,14 @@ public class AudioMixerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ³õÊ¼»¯Slider£¨½«ÏßĞÔ0-1×ª»»Îª¶ÔÊı·Ö±´£©
+    /// åˆå§‹åŒ–Sliderï¼ˆå°†çº¿æ€§0-1è½¬æ¢ä¸ºå¯¹æ•°åˆ†è´ï¼‰
     /// </summary>
     void InitializeSliders()
     {
-        // ÉèÖÃSlider·¶Î§
+        // è®¾ç½®SliderèŒƒå›´
         if (masterSlider != null)
         {
-            masterSlider.minValue = 0.0001f; // ±ÜÃâlog(0)
+            masterSlider.minValue = 0.0001f; // é¿å…log(0)
             masterSlider.maxValue = 1f;
         }
 
@@ -70,26 +70,26 @@ public class AudioMixerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÉèÖÃÖ÷ÒôÁ¿
+    /// è®¾ç½®ä¸»éŸ³é‡
     /// </summary>
     public void SetMasterVolume(float sliderValue)
     {
-        // ½«ÏßĞÔÖµ×ª»»Îª·Ö±´
+        // å°†çº¿æ€§å€¼è½¬æ¢ä¸ºåˆ†è´
         float volumeDB = Mathf.Log10(sliderValue) * 20;
 
-        // ÏŞÖÆÔÚ·¶Î§ÄÚ
+        // é™åˆ¶åœ¨èŒƒå›´å†…
         volumeDB = Mathf.Clamp(volumeDB, minVolumeDB, maxVolumeDB);
 
-        // ÉèÖÃAudioMixer²ÎÊı
+        // è®¾ç½®AudioMixerå‚æ•°
         audioMixer.SetFloat(masterVolumeParam, volumeDB);
 
-        // ¸üĞÂÏÔÊ¾ÎÄ±¾
+        // æ›´æ–°æ˜¾ç¤ºæ–‡æœ¬
         if (masterText != null)
         {
-            masterText.text = $"Master Volume: {Mathf.RoundToInt(sliderValue * 100)}%";
+            masterText.text = $"{Mathf.RoundToInt(sliderValue * 100)}%";
         }
 
-        // ±£´æÉèÖÃ
+        // ä¿å­˜è®¾ç½®
         PlayerPrefs.SetFloat("MasterVolume", sliderValue);
         PlayerPrefs.Save();
 
@@ -97,7 +97,7 @@ public class AudioMixerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÉèÖÃÒôÀÖÒôÁ¿
+    /// è®¾ç½®éŸ³ä¹éŸ³é‡
     /// </summary>
     public void SetMusicVolume(float sliderValue)
     {
@@ -108,7 +108,7 @@ public class AudioMixerController : MonoBehaviour
 
         if (musicText != null)
         {
-            musicText.text = $"BGM Volume: {Mathf.RoundToInt(sliderValue * 100)}%";
+            musicText.text = $"{Mathf.RoundToInt(sliderValue * 100)}%";
         }
 
         PlayerPrefs.SetFloat("MusicVolume", sliderValue);
@@ -116,7 +116,7 @@ public class AudioMixerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÉèÖÃÒôĞ§ÒôÁ¿
+    /// è®¾ç½®éŸ³æ•ˆéŸ³é‡
     /// </summary>
     public void SetSFXVolume(float sliderValue)
     {
@@ -127,7 +127,7 @@ public class AudioMixerController : MonoBehaviour
 
         if (sfxText != null)
         {
-            sfxText.text = $"SFX Volume: {Mathf.RoundToInt(sliderValue * 100)}%";
+            sfxText.text = $"{Mathf.RoundToInt(sliderValue * 100)}%";
         }
 
         PlayerPrefs.SetFloat("SFXVolume", sliderValue);
@@ -135,11 +135,11 @@ public class AudioMixerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼ÓÔØËùÓĞ±£´æµÄÒôÁ¿
+    /// åŠ è½½æ‰€æœ‰ä¿å­˜çš„éŸ³é‡
     /// </summary>
     void LoadAllVolumes()
     {
-        // ¼ÓÔØÖ÷ÒôÁ¿
+        // åŠ è½½ä¸»éŸ³é‡
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
             float savedMaster = PlayerPrefs.GetFloat("MasterVolume");
@@ -151,10 +151,10 @@ public class AudioMixerController : MonoBehaviour
         else
         {
             if (masterSlider != null)
-                masterSlider.value = 0.8f; // Ä¬ÈÏ80%
+                masterSlider.value = 0.8f; // é»˜è®¤80%
         }
 
-        // ¼ÓÔØÒôÀÖÒôÁ¿
+        // åŠ è½½éŸ³ä¹éŸ³é‡
         if (PlayerPrefs.HasKey("MusicVolume"))
         {
             float savedMusic = PlayerPrefs.GetFloat("MusicVolume");
@@ -169,7 +169,7 @@ public class AudioMixerController : MonoBehaviour
                 musicSlider.value = 0.8f;
         }
 
-        // ¼ÓÔØÒôĞ§ÒôÁ¿
+        // åŠ è½½éŸ³æ•ˆéŸ³é‡
         if (PlayerPrefs.HasKey("SFXVolume"))
         {
             float savedSFX = PlayerPrefs.GetFloat("SFXVolume");
@@ -186,7 +186,7 @@ public class AudioMixerController : MonoBehaviour
     }
 
     /// <summary>
-    /// »ñÈ¡µ±Ç°ÒôÁ¿£¨·Ö±´£©
+    /// è·å–å½“å‰éŸ³é‡ï¼ˆåˆ†è´ï¼‰
     /// </summary>
     public float GetCurrentVolumeDB(string parameterName)
     {
@@ -198,7 +198,7 @@ public class AudioMixerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ·Ö±´×ªÏßĞÔÖµ
+    /// åˆ†è´è½¬çº¿æ€§å€¼
     /// </summary>
     float DBToLinear(float db)
     {
@@ -206,7 +206,7 @@ public class AudioMixerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÏßĞÔÖµ×ª·Ö±´
+    /// çº¿æ€§å€¼è½¬åˆ†è´
     /// </summary>
     float LinearToDB(float linear)
     {

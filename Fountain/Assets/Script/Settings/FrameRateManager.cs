@@ -2,23 +2,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using Foutain.Localization;
 
 public class FrameRateManager : MonoBehaviour
 {
-    [Header("UI×é¼ş")]
-    public TMP_Dropdown frameRateDropdown; // Ö¡ÂÊÑ¡ÔñÏÂÀ­²Ëµ¥
-    public TMP_Text fpsDisplayText; // ÏÔÊ¾FPSµÄÎÄ±¾×é¼ş
+    [Header("UIç»„ä»¶")]
+    public TMP_Dropdown frameRateDropdown; // å¸§ç‡é€‰æ‹©ä¸‹æ‹‰èœå•
+    [Tooltip("æœ¬åœ°åŒ–dropdownçš„è„šæœ¬")]
+    [SerializeField] private LocalizeDropdown dropdownLocalize;
+    public TMP_Text fpsLableText;//æ˜¾ç¤º"å¸§æ•°"é‚£ä¸ªæ ‡é¢˜çš„æ–‡æœ¬
+    public TMP_Text fpsDisplayText; // æ˜¾ç¤ºFPSçš„æ–‡æœ¬ç»„ä»¶
+    public TMP_Text fpsPauseText; //æš‚åœæ—¶æ˜¾ç¤ºçš„æ–‡æœ¬
 
-    [Header("Ö¡ÂÊÑ¡Ïî")]
-    public List<int> frameRateOptions = new() { 30, 60, 90, 120, 144, 0 }; // 0±íÊ¾²»ÏŞÖÆ
+    [Header("å¸§ç‡é€‰é¡¹")]
+    public List<int> frameRateOptions = new() { 30, 60, 90, 120, 144, 0 }; // 0è¡¨ç¤ºä¸é™åˆ¶
 
-    [Header("ÏÔÊ¾ÉèÖÃ")]
-    public bool showCurrentFPS = true; // ÊÇ·ñÏÔÊ¾µ±Ç°FPS
+    [Header("æ˜¾ç¤ºè®¾ç½®")]
+    public bool showCurrentFPS = true; // æ˜¯å¦æ˜¾ç¤ºå½“å‰FPS
 
-    [Header("±£´æÉèÖÃ")]
-    public bool saveSettings = true; // ÊÇ·ñ±£´æÉèÖÃ
+    [Header("ä¿å­˜è®¾ç½®")]
+    public bool saveSettings = true; // æ˜¯å¦ä¿å­˜è®¾ç½®
 
-    // ±äÁ¿
+    // å˜é‡
     private float deltaTime = 0.0f;
     private const string FRAME_RATE_KEY = "TargetFrameRate";
     private float fps = 0f;
@@ -27,26 +32,26 @@ public class FrameRateManager : MonoBehaviour
 
     void Start()
     {
-        // ¼ì²éÊÇ·ñ¹ØÁªÁËDropdown
+        // æ£€æŸ¥æ˜¯å¦å…³è”äº†Dropdown
         if (frameRateDropdown == null)
         {
-            Debug.LogError("ÇëÔÚInspectorÖĞ½«FrameRateDropdownÍÏ×§µ½½Å±¾ÉÏ£¡");
+            Debug.LogError("è¯·åœ¨Inspectorä¸­å°†FrameRateDropdownæ‹–æ‹½åˆ°è„šæœ¬ä¸Šï¼");
             return;
         }
 
-        // ³õÊ¼»¯Dropdown
+        // åˆå§‹åŒ–Dropdown
         InitializeDropdown();
 
-        // ¼ÓÔØ±£´æµÄÉèÖÃ
+        // åŠ è½½ä¿å­˜çš„è®¾ç½®
         LoadSettings();
 
-        // Ìí¼ÓÊÂ¼ş¼àÌı - ÇĞ»»Ñ¡ÏîÁ¢¼´Ó¦ÓÃÖ¡ÂÊ
+        // æ·»åŠ äº‹ä»¶ç›‘å¬ - åˆ‡æ¢é€‰é¡¹ç«‹å³åº”ç”¨å¸§ç‡
         frameRateDropdown.onValueChanged.AddListener(OnFrameRateChanged);
     }
 
     void Update()
     {
-        // ºËĞÄĞŞ¸´£ºÊ¹ÓÃunscaledDeltaTime¶ø²»ÊÇdeltaTime
+        // æ ¸å¿ƒä¿®å¤ï¼šä½¿ç”¨unscaledDeltaTimeè€Œä¸æ˜¯deltaTime
         deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
 
         updateTimer += Time.unscaledDeltaTime;
@@ -54,7 +59,7 @@ public class FrameRateManager : MonoBehaviour
         {
             updateTimer = 0f;
 
-            // °²È«¼ì²é£ºÈ·±£deltaTime²»Îª0
+            // å®‰å…¨æ£€æŸ¥ï¼šç¡®ä¿deltaTimeä¸ä¸º0
             if (deltaTime > 0f)
             {
                 fps = 1f / deltaTime;
@@ -71,40 +76,50 @@ public class FrameRateManager : MonoBehaviour
     void UpdateDisplay()
     {
         if (fpsDisplayText == null) return;
-
+        
         bool isPaused = Time.timeScale == 0f;
-
+        Color displayColor = Color.white;
         if (isPaused)
         {
-            fpsDisplayText.text = "FPS: Paused";
-            fpsDisplayText.color = Color.yellow;
+            //fpsDisplayText.text = "FPS: Paused";
+            //fpsDisplayText.color = Color.yellow;
+            displayColor = Color.yellow;
+            //ç”±äºæš‚åœæ—¶çš„æ–‡æœ¬å’Œæ˜¾ç¤ºæ—¶çš„æ–‡æœ¬å¯¹è±¡ä¸åŒ,è¿™é‡Œé‡‡ç”¨ç®€å•ç¦ç”¨çš„æ–¹å¼
+            fpsPauseText.gameObject.SetActive(true);
+            fpsDisplayText.gameObject.SetActive(false);
         }
         else
         {
-            // ÏŞÖÆÏÔÊ¾·¶Î§
+            // é™åˆ¶æ˜¾ç¤ºèŒƒå›´
             float displayFPS = Mathf.Clamp(fps, 0, 999);
 
-            // ÑÕÉ«±àÂë
+            // é¢œè‰²ç¼–ç 
             if (displayFPS >= 55)
-                fpsDisplayText.color = Color.green;
+                displayColor = Color.green;
             else if (displayFPS >= 30)
-                fpsDisplayText.color = Color.yellow;
+                displayColor = Color.yellow;
             else
-                fpsDisplayText.color = Color.red;
+                displayColor = Color.red;
 
-            fpsDisplayText.text = $"FPS: {displayFPS:F1}";
+            fpsDisplayText.text = $"{displayFPS:F1}";
+            fpsPauseText.gameObject.SetActive(false);
+            fpsDisplayText.gameObject.SetActive(true);
         }
+        fpsLableText.color = displayColor;
+        fpsPauseText.color = displayColor;
+        fpsDisplayText.color = displayColor;
     }
 
     /// <summary>
-    /// ³õÊ¼»¯DropdownÑ¡Ïî
+    /// åˆå§‹åŒ–Dropdowné€‰é¡¹
     /// </summary>
     void InitializeDropdown()
     {
-        // Çå³ıÏÖÓĞÑ¡Ïî
+        /*
+        // æ¸…é™¤ç°æœ‰é€‰é¡¹
         frameRateDropdown.ClearOptions();
 
-        // ´´½¨Ñ¡ÏîÁĞ±í
+        // åˆ›å»ºé€‰é¡¹åˆ—è¡¨
         List<string> options = new();
 
         foreach (int fps in frameRateOptions)
@@ -142,53 +157,56 @@ public class FrameRateManager : MonoBehaviour
             options.Add(optionText);
         }
 
-        // Ìí¼ÓÑ¡Ïîµ½Dropdown
+        // æ·»åŠ é€‰é¡¹åˆ°Dropdown
         frameRateDropdown.AddOptions(options);
 
-        Debug.Log("Ö¡ÂÊÑ¡Ïî³õÊ¼»¯Íê³É£¬¹² " + options.Count + " ¸öÑ¡Ïî");
+        Debug.Log("å¸§ç‡é€‰é¡¹åˆå§‹åŒ–å®Œæˆï¼Œå…± " + options.Count + " ä¸ªé€‰é¡¹");
+         */
+        //æš‚æ—¶å†³å®šè®©æœ¬åœ°åŒ–æ–‡æœ¬çš„ä¸æˆå‘˜å˜é‡frameRateOptionsé‡Œçš„ä¸€æ ·
+        dropdownLocalize.SetOptionText();
     }
 
     /// <summary>
-    /// µ±Ö¡ÂÊÑ¡Ïî¸Ä±äÊ±µ÷ÓÃ
+    /// å½“å¸§ç‡é€‰é¡¹æ”¹å˜æ—¶è°ƒç”¨
     /// </summary>
     public void OnFrameRateChanged(int index)
     {
-        // È·±£Ë÷ÒıÓĞĞ§
+        // ç¡®ä¿ç´¢å¼•æœ‰æ•ˆ
         if (index < 0 || index >= frameRateOptions.Count)
         {
-            Debug.LogError("ÎŞĞ§µÄÖ¡ÂÊË÷Òı: " + index);
+            Debug.LogError("æ— æ•ˆçš„å¸§ç‡ç´¢å¼•: " + index);
             return;
         }
 
-        // »ñÈ¡Ñ¡ÖĞµÄÖ¡ÂÊ
+        // è·å–é€‰ä¸­çš„å¸§ç‡
         int targetFPS = frameRateOptions[index];
 
-        // Ó¦ÓÃÖ¡ÂÊ
+        // åº”ç”¨å¸§ç‡
         SetFrameRate(targetFPS);
     }
 
     /// <summary>
-    /// ÉèÖÃÄ¿±êÖ¡ÂÊ
+    /// è®¾ç½®ç›®æ ‡å¸§ç‡
     /// </summary>
     void SetFrameRate(int targetFPS)
     {
-        // ¹Ø±Õ´¹Ö±Í¬²½£¨ÒòÎªVSync»á¸²¸ÇtargetFrameRateÉèÖÃ£©
+        // å…³é—­å‚ç›´åŒæ­¥ï¼ˆå› ä¸ºVSyncä¼šè¦†ç›–targetFrameRateè®¾ç½®ï¼‰
         QualitySettings.vSyncCount = 0;
 
         if (targetFPS == 0)
         {
-            // 0±íÊ¾²»ÏŞÖÆÖ¡ÂÊ
+            // 0è¡¨ç¤ºä¸é™åˆ¶å¸§ç‡
             Application.targetFrameRate = -1;
-            Debug.Log("Ö¡ÂÊÏŞÖÆÒÑ¹Ø±Õ");
+            Debug.Log("å¸§ç‡é™åˆ¶å·²å…³é—­");
         }
         else
         {
-            // ÉèÖÃÄ¿±êÖ¡ÂÊ
+            // è®¾ç½®ç›®æ ‡å¸§ç‡
             Application.targetFrameRate = targetFPS;
-            Debug.Log("Ö¡ÂÊÏŞÖÆÎª: " + targetFPS + " FPS");
+            Debug.Log("å¸§ç‡é™åˆ¶ä¸º: " + targetFPS + " FPS");
         }
 
-        // ±£´æÉèÖÃ
+        // ä¿å­˜è®¾ç½®
         if (saveSettings)
         {
             PlayerPrefs.SetInt(FRAME_RATE_KEY, targetFPS);
@@ -197,7 +215,7 @@ public class FrameRateManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¼ÓÔØ±£´æµÄÉèÖÃ
+    /// åŠ è½½ä¿å­˜çš„è®¾ç½®
     /// </summary>
     void LoadSettings()
     {
@@ -205,24 +223,24 @@ public class FrameRateManager : MonoBehaviour
         {
             int savedFPS = PlayerPrefs.GetInt(FRAME_RATE_KEY);
 
-            // ²éÕÒ±£´æµÄÖ¡ÂÊÔÚÑ¡ÏîÖĞµÄË÷Òı
+            // æŸ¥æ‰¾ä¿å­˜çš„å¸§ç‡åœ¨é€‰é¡¹ä¸­çš„ç´¢å¼•
             int savedIndex = frameRateOptions.IndexOf(savedFPS);
 
             if (savedIndex >= 0)
             {
-                // ÉèÖÃDropdownÖµ
+                // è®¾ç½®Dropdownå€¼
                 frameRateDropdown.value = savedIndex;
                 frameRateDropdown.RefreshShownValue();
 
-                // Ó¦ÓÃ±£´æµÄÖ¡ÂÊ
+                // åº”ç”¨ä¿å­˜çš„å¸§ç‡
                 SetFrameRate(savedFPS);
 
-                Debug.Log("ÒÑ¼ÓÔØ±£´æµÄÖ¡ÂÊÉèÖÃ: " + (savedFPS == 0 ? "²»ÏŞ" : savedFPS + " FPS"));
+                Debug.Log("å·²åŠ è½½ä¿å­˜çš„å¸§ç‡è®¾ç½®: " + (savedFPS == 0 ? "ä¸é™" : savedFPS + " FPS"));
             }
         }
         else
         {
-            // Èç¹ûÃ»ÓĞ±£´æµÄÉèÖÃ£¬ÉèÖÃÎª60FPS
+            // å¦‚æœæ²¡æœ‰ä¿å­˜çš„è®¾ç½®ï¼Œè®¾ç½®ä¸º60FPS
             int defaultIndex = frameRateOptions.IndexOf(60);
             if (defaultIndex >= 0)
             {
@@ -233,7 +251,7 @@ public class FrameRateManager : MonoBehaviour
     }
 
     /// <summary>
-    /// »ñÈ¡µ±Ç°Ö¡ÂÊÉèÖÃÃèÊö
+    /// è·å–å½“å‰å¸§ç‡è®¾ç½®æè¿°
     /// </summary>
     public string GetCurrentFrameRateDescription()
     {
