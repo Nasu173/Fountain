@@ -3,22 +3,33 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 
+/// <summary>
+/// 分辨率管理器
+/// 负责获取系统可用分辨率、提供UI选择和应用分辨率设置
+/// </summary>
 public class ResolutionManager : MonoBehaviour
 {
     [Header("UI组件")]
+    [Tooltip("关联的Dropdown组件，用于显示和选择分辨率")]
     public TMP_Dropdown resolutionDropdown; // 关联的Dropdown组件
 
     [Header("可选设置")]
+    [Tooltip("是否在选项中显示刷新率")]
     public bool showRefreshRate = false; // 是否显示刷新率
+
+    [Tooltip("是否将分辨率设置保存到PlayerPrefs")]
     public bool saveSettings = true; // 是否保存设置
 
-    // 存储唯一分辨率的列表
+    // 存储唯一分辨率的列表（去重后的）
     private readonly List<Resolution> uniqueResolutions = new();
 
-    // 保存用的键名
+    // PlayerPrefs保存用的键名
     private const string RESOLUTION_WIDTH_KEY = "ResolutionWidth";
     private const string RESOLUTION_HEIGHT_KEY = "ResolutionHeight";
 
+    /// <summary>
+    /// 初始化组件，获取分辨率列表并设置UI
+    /// </summary>
     void Start()
     {
         // 检查是否关联了Dropdown
@@ -28,7 +39,7 @@ public class ResolutionManager : MonoBehaviour
             return;
         }
 
-        // 初始化和填充分辨率列表
+        // 获取并过滤唯一分辨率
         InitializeResolutions();
 
         // 设置当前分辨率在Dropdown中的显示
@@ -42,6 +53,7 @@ public class ResolutionManager : MonoBehaviour
 
     /// <summary>
     /// 获取并过滤唯一分辨率
+    /// 去除相同尺寸不同刷新率的重复项
     /// </summary>
     void InitializeResolutions()
     {
@@ -63,10 +75,12 @@ public class ResolutionManager : MonoBehaviour
             string resolutionKey;
             if (showRefreshRate)
             {
+                // 包含刷新率的唯一键（例如：1920x1080@60Hz）
                 resolutionKey = res.width + "x" + res.height + "@" + res.refreshRateRatio + "Hz";
             }
             else
             {
+                // 不包含刷新率的唯一键（例如：1920x1080）
                 resolutionKey = res.width + "x" + res.height;
             }
 
@@ -149,7 +163,7 @@ public class ResolutionManager : MonoBehaviour
         {
             // 设置Dropdown显示当前分辨率
             resolutionDropdown.value = currentIndex;
-            resolutionDropdown.RefreshShownValue();
+            resolutionDropdown.RefreshShownValue(); // 刷新显示
 
             Debug.Log("当前分辨率已设置为Dropdown索引: " + currentIndex);
         }
@@ -162,6 +176,7 @@ public class ResolutionManager : MonoBehaviour
     /// <summary>
     /// 当Dropdown选项改变时调用 - 直接应用分辨率
     /// </summary>
+    /// <param name="index">选中的选项索引</param>
     public void OnResolutionChanged(int index)
     {
         // 确保索引有效
@@ -181,6 +196,7 @@ public class ResolutionManager : MonoBehaviour
     /// <summary>
     /// 应用指定的分辨率
     /// </summary>
+    /// <param name="resolution">要应用的分辨率</param>
     void ApplyResolution(Resolution resolution)
     {
         // 保持当前的全屏模式
@@ -201,11 +217,12 @@ public class ResolutionManager : MonoBehaviour
     /// <summary>
     /// 保存分辨率设置到PlayerPrefs
     /// </summary>
+    /// <param name="resolution">要保存的分辨率</param>
     void SaveResolutionSettings(Resolution resolution)
     {
         PlayerPrefs.SetInt(RESOLUTION_WIDTH_KEY, resolution.width);
         PlayerPrefs.SetInt(RESOLUTION_HEIGHT_KEY, resolution.height);
-        PlayerPrefs.Save();
+        PlayerPrefs.Save(); // 立即保存
 
         Debug.Log("分辨率设置已保存");
     }
@@ -215,6 +232,7 @@ public class ResolutionManager : MonoBehaviour
     /// </summary>
     public void LoadSavedResolution()
     {
+        // 检查是否有保存的设置
         if (saveSettings && PlayerPrefs.HasKey(RESOLUTION_WIDTH_KEY))
         {
             int savedWidth = PlayerPrefs.GetInt(RESOLUTION_WIDTH_KEY);
@@ -226,7 +244,7 @@ public class ResolutionManager : MonoBehaviour
                 Resolution res = uniqueResolutions[i];
                 if (res.width == savedWidth && res.height == savedHeight)
                 {
-                    // 设置Dropdown值
+                    // 设置Dropdown值为保存的索引
                     resolutionDropdown.value = i;
                     resolutionDropdown.RefreshShownValue();
 
@@ -243,6 +261,7 @@ public class ResolutionManager : MonoBehaviour
     /// <summary>
     /// 获取当前分辨率信息
     /// </summary>
+    /// <returns>当前分辨率的格式化字符串</returns>
     public string GetCurrentResolutionInfo()
     {
         Resolution current = Screen.currentResolution;
