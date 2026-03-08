@@ -24,6 +24,13 @@ MonoBehaviour:
     - Locale-zh
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d559754274163ed40a2da229825aad64
+    m_Address: DialogueTable_zh
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e4882f308014e404782a3290a5645702
     m_Address: UIPausePanel_zh
     m_ReadOnly: 1

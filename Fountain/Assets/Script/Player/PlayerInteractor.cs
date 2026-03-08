@@ -112,8 +112,12 @@ namespace Foutain.Player
                 currentTarget = null;
                 return;
             }
+            //注意,只在可交互物体的根物体查找
+            bool hasInteractable =
+                hit.collider.transform.root.TryGetComponent<IInteractable>
+                (out var detectedInteractable);
 
-            if (!hit.collider.TryGetComponent<IInteractable>(out var detectedInteractable))
+            if (!hasInteractable)
             {
                 if (currentTarget!=null)
                 {

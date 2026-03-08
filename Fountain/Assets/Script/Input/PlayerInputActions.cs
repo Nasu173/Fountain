@@ -73,6 +73,15 @@ namespace Foutain.Player
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ContinueDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea0b7ed7-a108-472d-a67f-bb681fc40951"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,6 +183,28 @@ namespace Foutain.Player
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""538daad9-6ca5-4e77-ac36-35a74ed945f3"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ContinueDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0db5a82c-4e69-4b2c-939c-372389bbde11"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ContinueDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -215,6 +246,7 @@ namespace Foutain.Player
             m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+            m_Player_ContinueDialogue = m_Player.FindAction("ContinueDialogue", throwIfNotFound: true);
             // PausePanel
             m_PausePanel = asset.FindActionMap("PausePanel", throwIfNotFound: true);
             m_PausePanel_Pause = m_PausePanel.FindAction("Pause", throwIfNotFound: true);
@@ -290,6 +322,7 @@ namespace Foutain.Player
         private readonly InputAction m_Player_Crouch;
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Interact;
+        private readonly InputAction m_Player_ContinueDialogue;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -299,6 +332,7 @@ namespace Foutain.Player
             public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
+            public InputAction @ContinueDialogue => m_Wrapper.m_Player_ContinueDialogue;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -323,6 +357,9 @@ namespace Foutain.Player
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @ContinueDialogue.started += instance.OnContinueDialogue;
+                @ContinueDialogue.performed += instance.OnContinueDialogue;
+                @ContinueDialogue.canceled += instance.OnContinueDialogue;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -342,6 +379,9 @@ namespace Foutain.Player
                 @Interact.started -= instance.OnInteract;
                 @Interact.performed -= instance.OnInteract;
                 @Interact.canceled -= instance.OnInteract;
+                @ContinueDialogue.started -= instance.OnContinueDialogue;
+                @ContinueDialogue.performed -= instance.OnContinueDialogue;
+                @ContinueDialogue.canceled -= instance.OnContinueDialogue;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -412,6 +452,7 @@ namespace Foutain.Player
             void OnCrouch(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
+            void OnContinueDialogue(InputAction.CallbackContext context);
         }
         public interface IPausePanelActions
         {

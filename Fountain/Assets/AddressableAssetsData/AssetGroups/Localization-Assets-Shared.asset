@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 7d6ef3120b1111749ba92f2678a036a6
   m_SerializeEntries:
+  - m_GUID: 187d76306b0ba34498b3b8b416406354
+    m_Address: Assets/Localization/StringTable/DialoguePanel/DialogueTable Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5ecf70250f9e9d54cac95e9044c82c44
     m_Address: Assets/Localization/StringTable/UIPausePanel Shared Data.asset
     m_ReadOnly: 1

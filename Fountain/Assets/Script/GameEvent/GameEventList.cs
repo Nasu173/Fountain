@@ -39,7 +39,19 @@ public class GamePauseEvent:IGameEvent
 
 }
 
+[System.Serializable]
 public class LocaleChangeEvent:IGameEvent
 {
     public LocalizationManager.LocaleID locale;
+}
+
+[System.Serializable]
+public class DialogueBeginEvent:IGameEvent
+{
+
+}
+[System.Serializable]
+public class DialogueEndEvent:IGameEvent
+{
+
 }

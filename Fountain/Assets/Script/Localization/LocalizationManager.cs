@@ -26,7 +26,13 @@ namespace Foutain.Localization
         private LocaleID currentLocale;
         private void Awake()
         {
+            if (Instance!=null)//要跨场景存在,如果做成普通的c#类也行
+            {
+                Destroy(this.gameObject);
+                return;
+            }
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
             LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
         }
         /*测试代码,记得删除

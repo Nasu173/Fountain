@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
@@ -49,8 +50,7 @@ namespace Foutain.Player
         private bool crouchTransitioning;
         //下蹲&起立要到的高度
         private float targetHeight;
-        //由于震动和下蹲要配合运动状态,简单起见就直接调用了,后期复杂起来最好用事件重构
-        private PlayerSight sight;
+        private PlayerSight sight;//视野和移动还是耦合的紧一些的,就直接用了
         
         private void Start()
         {
@@ -161,6 +161,58 @@ namespace Foutain.Player
             this.transform.Rotate(Vector3.up * playerRotationAngle); 
 
         }
+
+        /// <summary>
+        /// 强制朝向指定地点,只在禁止玩家输入的时候才调用这个方法!
+        /// </summary>
+        /// <param name="target">目标位置</param>
+        /// <param name="speed">转向速度</param>
+        public void LookAt(Vector3 target, float speed)
+        {
+            StartCoroutine(LookAtTransition(target, speed));
+        }
+        /// <summary>
+        /// 强制转向的协程
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator LookAtTransition(Vector3 target,float speed)
+        {
+
+            float t = 0;
+            Quaternion startBodyRot = this.transform.rotation;
+            Quaternion startCamRot = sight.transform.localRotation;
+
+            while (t < 1f)
+            {
+                t += Time.deltaTime * speed;
+                //要朝向的方向
+                Vector3 direction = (target - sight.transform.position).normalized;
+                
+                if (direction != Vector3.zero) 
+                {
+                    Quaternion lookRot = Quaternion.LookRotation(direction);
+                    Vector3 euler = lookRot.eulerAngles;
+                    
+                    //身体只转y轴
+                    Quaternion targetBodyRot = Quaternion.Euler(0, euler.y, 0);
+                        this.transform.rotation = Quaternion.Slerp
+                             (startBodyRot, targetBodyRot, t);
+
+                    //相机只转x轴
+                    float targetX = euler.x;
+                    Math.Clamp(targetX, sight.sightAngleMin, sight.sightAngleMax);
+                    Quaternion targetCamRot = Quaternion.Euler(targetX, 0, 0);
+                    Quaternion localRotation =
+                        Quaternion.Slerp(startCamRot, targetCamRot, t);
+                    //同步旋转
+                    sight.Rotate(localRotation.eulerAngles.x);
+                }
+
+                 yield return null;
+             }
+
+        }
+
         /// <summary>
         /// 计算移动速度
         /// </summary>

@@ -1,8 +1,10 @@
+using Foutain.Dialogue;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Foutain.Player
 {
@@ -25,17 +27,19 @@ namespace Foutain.Player
         }
         private void Start()
         {
-            //进行相关初始化,注册输入事件来调用移动等相关方法
+            //初始化组件
             inputActions = new PlayerInputActions();
             playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
             playerSight = playerMove.GetComponentInChildren<PlayerSight>();
             playerInteractor = playerMove.GetComponent<PlayerInteractor>();
 
+            //启用对应的ActionMap
             inputActions.Player.Enable();
             EnablePausePanel();
             EnableInteractInput();
             HideCursor();
 
+            //注册移动、交互相关事件
             inputActions.Player.Run.canceled += (callback) =>
             { playerMove.SwitchToWalk(); };
             inputActions.Player.Crouch.started += (callback) =>
@@ -49,6 +53,15 @@ namespace Foutain.Player
                 playerInteractor.Interact();
             };
 
+            //注册对话事件
+            GameEventBus.Subscribe<DialogueBeginEvent>((e) =>
+            {
+                inputActions.Player.ContinueDialogue.performed += ContinueDialogue;
+            });
+            GameEventBus.Subscribe<DialogueEndEvent>((e) =>
+            {
+                inputActions.Player.ContinueDialogue.performed -= ContinueDialogue;
+            });
         }
         private void Update()
         {
@@ -59,6 +72,7 @@ namespace Foutain.Player
             }
             Vector2 moveVal = inputActions.Player.Move.ReadValue<Vector2>();
             playerMove.Move(new Vector3(moveVal.x, 0, moveVal.y));
+
             Vector2 sightMove = inputActions.Player.Look.ReadValue<Vector2>();
             playerMove.Rotate(sightMove, sensitivity);
             if (playerSight != null)
@@ -66,6 +80,7 @@ namespace Foutain.Player
                 playerSight.Rotate(sightMove, sensitivity); // 确保传入sensitivity
             }
 
+            /*神秘的代码,不知到什么时候写的,先注释掉先
             // 使用静态值
             _ = inputActions.Player.Look.ReadValue<Vector2>();
             playerMove.Rotate(sightMove, sensitivity);
@@ -73,6 +88,8 @@ namespace Foutain.Player
             {
                 playerSight.Rotate(sightMove, sensitivity);
             }
+             
+             */
         }
         private void OnDestroy()
         {
@@ -117,12 +134,12 @@ namespace Foutain.Player
         /// </summary>
         public void DisableInteractInput()
         {
-            inputActions.Player.Disable();
+            inputActions.Player.Interact.Disable();
             playerInteractor.Disable();
         }
         public void EnableInteractInput()
         {
-            inputActions.Player.Enable();
+            inputActions.Player.Interact.Enable();
             playerInteractor.Enable();
         }
 
@@ -150,6 +167,11 @@ namespace Foutain.Player
         public void EnablePausePanel()
         {
             inputActions.PausePanel.Enable();
+        }
+
+        private void ContinueDialogue(InputAction.CallbackContext callback)
+        {
+            DialogueManager.Instance.ContinueDialogue();
         }
     }
 }

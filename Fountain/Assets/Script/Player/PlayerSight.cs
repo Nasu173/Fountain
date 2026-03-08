@@ -14,10 +14,10 @@ namespace Foutain.Player
         [Header("相机旋转相关设置")]
         [Tooltip("相机最小旋转角度")]
         [SerializeField]
-        private float sightAngleMax;
+        public float sightAngleMax;
         [Tooltip("相机最小旋转角度")]
         [SerializeField]
-        private float sightAngleMin;
+        public float sightAngleMin;
         /// <summary>
         /// 累计旋转的角度
         /// </summary>
@@ -85,11 +85,20 @@ namespace Foutain.Player
         public void Rotate(Vector2 moveDelta, float sensitivity)
         {
             if (moveDelta == Vector2.zero) return;
-            _ = moveDelta.x * sensitivity * Time.deltaTime;
             cameraRotationAngle -= moveDelta.y * sensitivity * Time.deltaTime;
             cameraRotationAngle = Mathf.Clamp(cameraRotationAngle, sightAngleMin, sightAngleMax);
 
             this.transform.localRotation = Quaternion.Euler(new Vector3(cameraRotationAngle, 0, 0));
+        }
+        /// <summary>
+        /// 让相机旋转至指定角度
+        /// </summary>
+        /// <param name="angle"></param>
+        public void Rotate(float angle)
+        {
+            cameraRotationAngle = angle;
+            this.transform.localRotation = Quaternion.Euler(new Vector3(cameraRotationAngle, 0, 0));
+            
         }
 
         /// <summary>

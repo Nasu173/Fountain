@@ -17,6 +17,13 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 009033ff765861045b3a4a6bd4be3935
   m_SerializeEntries:
+  - m_GUID: 1c1942c990588ac4fb52e0e540105a7f
+    m_Address: DialogueTable_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 377fdf41a930b714cb2d7e337d5a3d55
     m_Address: UIPausePanel_en
     m_ReadOnly: 1
