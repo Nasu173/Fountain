@@ -18,6 +18,7 @@ namespace Foutain.Player
 
         public float sensitivity = 1;
 
+        //一些需要玩家输入的脚本
         private PlayerMove playerMove;
         private PlayerSight playerSight;
         private PlayerInteractor playerInteractor;
@@ -79,17 +80,6 @@ namespace Foutain.Player
             {
                 playerSight.Rotate(sightMove, sensitivity); // 确保传入sensitivity
             }
-
-            /*神秘的代码,不知到什么时候写的,先注释掉先
-            // 使用静态值
-            _ = inputActions.Player.Look.ReadValue<Vector2>();
-            playerMove.Rotate(sightMove, sensitivity);
-            if (playerSight != null)
-            {
-                playerSight.Rotate(sightMove, sensitivity);
-            }
-             
-             */
         }
         private void OnDestroy()
         {

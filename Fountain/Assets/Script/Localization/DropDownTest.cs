@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace Foutain.UI
 {
+    /// <summary>
+    /// 测试多选框本地化的脚本,要删
+    /// </summary>
     public class DropDownTest : MonoBehaviour
     {
         public TMP_Dropdown dropdown;

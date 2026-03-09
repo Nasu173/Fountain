@@ -6,7 +6,8 @@ using Random = UnityEngine.Random;
 namespace Foutain.Player
 {
     /// <summary>
-    /// 玩家视野,实现相机相关的行为,挂到Player下的子物体CameraMountPoint,它是相机的父物体,不要直接挂到相机上
+    /// 玩家视野,实现相机相关的行为,挂到Player下的子物体CameraMountPoint,
+    /// 它是相机的父物体,不要直接挂到相机上
     /// </summary>
     public class PlayerSight : MonoBehaviour
     {
@@ -67,14 +68,6 @@ namespace Foutain.Player
         {
             sightCamera = this.GetComponentInChildren<Camera>();
             noiseSeed = Random.Range(0f, 1000f);//1000f只是随便一个数,只要范围适中即可
-            // noise =sightCamera.
-            //    GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        //    if (noise == null)
-            {
-            //    noise = sightCamera.
-            //            AddCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-            }
-
         }
 
         /// <summary>

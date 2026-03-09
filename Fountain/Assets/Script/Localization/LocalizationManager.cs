@@ -10,7 +10,7 @@ using UnityEngine.Localization.Settings;
 namespace Foutain.Localization
 {
     /// <summary>
-    /// 本地化管理器,提供更改语言的方法,做成单例方便访问
+    /// 本地化管理器(单例),提供更改语言的方法,其实感觉做成静态类也行
     /// </summary>
     public class LocalizationManager : MonoBehaviour
     {

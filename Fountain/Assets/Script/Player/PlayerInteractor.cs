@@ -57,8 +57,6 @@ namespace Foutain.Player
         /// </summary>
         public void Interact()
         {
-            Debug.Log("Interact!!");
-
             if (currentTarget != null)
             {
                 // 原有的交互逻辑

@@ -33,6 +33,7 @@ namespace Foutain.Dialogue
             {
                 return cache[name];
             }
+            //这个字符串与规定的命名规范一致
             object instance = Activator.CreateInstance(Type.GetType
                 ("Foutain.Dialogue." + name));
             if (instance == null)

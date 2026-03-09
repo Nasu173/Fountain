@@ -6,6 +6,15 @@ using UnityEngine;
 
 namespace Foutain.Dialogue
 {
+    /*对话系统框架示例图:
+
+     发起对话的对象(比如npc)--(传递数据)-->DialogueManager--->DialoguePanel(UI)显示对话
+         ↑                                               ↓
+         ↑                                               ↓
+ 挂有SO,以及IPerformDataProvider实现类,                获得DialoguePerform实现类对象,
+    提供数据供DialoguePerform实现类使用                    传递数据,调用接口来实现简单的演出
+     */    
+
     /// <summary>
     /// 对话管理器(单例),提供开启对话、继续对话的接口,并调用对话中的演出事件
     /// </summary>

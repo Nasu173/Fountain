@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Foutain.Dialogue
 {
     /// <summary>
-    /// 测试脚本,用完记得删除
+    /// 测试对话系统的测试脚本,用完记得删除
     /// </summary>
     public class DialogueInteractableTest : MonoBehaviour, IInteractable
     {

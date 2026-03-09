@@ -109,7 +109,6 @@ namespace Foutain.Player
         public void SwitchToRun()
         {
             //下蹲的时候不能跑
-            Debug.LogFormat("moving = {0}", moving);
             if (!crouching && moving) 
             {
                 this.running = true;
