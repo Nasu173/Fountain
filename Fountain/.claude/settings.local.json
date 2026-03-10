@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find Assets -name \"*.json\" -o -name \"*.txt\" -o -name \"*.csv\" 2>/dev/null | head -20)",
+      "Bash(cd \"D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets\\\\Script\\\\Task\\\\Trigger\" && ls -la *.cs)",
+      "Bash(cd \"D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets\\\\Script\\\\Task\" && file -i *.cs)",
+      "Bash(cd \"D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets\\\\Script\\\\Task\" && ls -la *.cs)",
+      "Bash(find \"D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets\\\\Script\\\\Task\" -name \"*.cs\" 2>/dev/null | wc -l)"
+    ]
+  }
+}
