@@ -1,0 +1,38 @@
+schema: spec-driven
+
+context: |
+  项目名称: Fountain
+  引擎: Unity (C#)
+  命名空间: Foutain (注意拼写，项目中统一使用 Foutain 而非 Fountain)
+  语言: C#，注释和文档使用中文
+
+  架构模式:
+  - 单例模式用于管理器类 (Manager)，通过 Instance 静态属性访问
+  - 事件总线: GameEventBus.Publish<T>() 发布事件，事件类实现 IGameEvent 接口，定义在 GameEventList.cs
+  - ScriptableObject (SO) 用于数据存储，如 DialogueSequence
+  - 工厂模式用于创建 DialoguePerform 实现类
+
+  核心系统:
+  - 玩家系统: Assets/Script/Player/ — 移动(PlayerMove)、视野(PlayerSight)、交互(PlayerInteractor)、输入(GameInputManager)
+  - 对话系统: Assets/Script/Dialogue/ — DialogueManager 管理对话流程，DialoguePanel 负责 UI 显示，支持演出效果(Perform)
+  - 任务系统: Assets/Script/Task/ — TaskManager 管理任务生命周期，支持多种触发器(Trigger)
+  - 设置系统: Assets/Script/Settings/ — 音频、分辨率、帧率、鼠标灵敏度、VHS 效果等
+  - 本地化系统: Assets/Script/Localization/ — LocalizationManager，支持多语言切换
+  - UI 系统: Assets/Script/UI/ — PanelManager 管理面板，使用 TextMeshPro
+
+  交互接口:
+  - IInteractable: 可交互对象接口
+  - ITaskTrigger / ITaskInteractable: 任务触发相关接口
+  - IPerformDataProvider: 对话演出数据提供接口
+
+  代码规范:
+  - 使用 [Header] 和 [Tooltip] 标注 Inspector 字段
+  - 私有字段用 [SerializeField] 暴露给 Inspector
+  - 方法使用 XML 文档注释 (<summary>)
+  - 输入系统使用 Unity Input System (PlayerInputActions)
+
+rules:
+  tasks:
+    - 每个任务聚焦单一职责，不超过一个系统
+    - 新增管理器类需实现单例模式
+    - 新增事件类需在 GameEventList.cs 中定义并实现 IGameEvent

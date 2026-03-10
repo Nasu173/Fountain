@@ -5,7 +5,10 @@
       "Bash(cd \"D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets\\\\Script\\\\Task\\\\Trigger\" && ls -la *.cs)",
       "Bash(cd \"D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets\\\\Script\\\\Task\" && file -i *.cs)",
       "Bash(cd \"D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets\\\\Script\\\\Task\" && ls -la *.cs)",
-      "Bash(find \"D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets\\\\Script\\\\Task\" -name \"*.cs\" 2>/dev/null | wc -l)"
+      "Bash(find \"D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets\\\\Script\\\\Task\" -name \"*.cs\" 2>/dev/null | wc -l)",
+      "Bash(dir \"D:\\\\GitHub\\\\Fountain\\\\Fountain\" 2>&1)",
+      "Bash(cmd /c \"dir D:\\\\GitHub\\\\Fountain\\\\Fountain\")",
+      "Bash(cmd /c dir \"D:\\\\GitHub\\\\Fountain\\\\Fountain\" 2>&1 || echo \"failed\")"
     ]
   }
 }
