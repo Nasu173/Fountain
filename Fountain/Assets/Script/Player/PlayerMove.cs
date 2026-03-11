@@ -23,6 +23,9 @@ namespace Foutain.Player
         [Tooltip("蹲伏速度倍率 (相对于行走速度)")]
         [SerializeField]
         private float crouchMultiplier;
+        [Tooltip("是否在不移动的时候也应用重力")]
+        [SerializeField]
+        private bool autoGravity;
 
         //这两个表示蹲伏,跑步的状态
         private bool crouching;
@@ -57,12 +60,19 @@ namespace Foutain.Player
             characterController = this.GetComponent<CharacterController>();
             sight = this.GetComponentInChildren<PlayerSight>();
             targetHeight = standingHeight;
+            InitHeight();
         }
         private void Update()
         {
             if (crouchTransitioning)
             {
                 CrouchTransition();    
+            }
+            
+            if (autoGravity)
+            {
+                //不用真的重力的数值,有向下的量即可
+                characterController.Move(Vector3.down);
             }
         }
 
@@ -264,7 +274,15 @@ namespace Foutain.Player
         {
             return Physics.BoxCast(this.transform.position, this.transform.localScale * 0.5f,
                     this.transform.up, Quaternion.identity,
-                    headCheckDistance + standingHeight);
+                    headCheckDistance + standingHeight,obstacleLayer);
+        }
+        private void InitHeight()
+        {
+            characterController.height = standingHeight;
+            //保证玩家物体在脚底
+            characterController.center = new Vector3(0, standingHeight / 2, 0);
+            //假设相机在头顶的位置
+            sight.transform.localPosition = new Vector3(0, standingHeight, 0);
         }
     }
 }

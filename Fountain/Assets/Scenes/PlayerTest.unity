@@ -1579,6 +1579,7 @@ MonoBehaviour:
   walkSpeed: 5
   runMultiplier: 1.3
   crouchMultiplier: 0.75
+  autoGravity: 1
   standingHeight: 2
   crouchingHeight: 1
   crouchTransitionSpeed: 10
