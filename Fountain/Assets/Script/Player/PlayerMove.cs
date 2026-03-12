@@ -272,6 +272,18 @@ namespace Foutain.Player
         /// <returns>头顶有东西则返回true</returns>
         private bool HeadDetect()
         {
+            /*测试代码,记得删
+             
+            RaycastHit hit;
+             bool has= Physics.BoxCast(this.transform.position, this.transform.localScale * 0.5f,
+                    this.transform.up,out hit ,Quaternion.identity,
+                    headCheckDistance + standingHeight,obstacleLayer);
+            if (has)
+            {
+                Debug.LogWarning("头上是"+hit.collider.transform.name);
+            }
+            return has;
+             */
             return Physics.BoxCast(this.transform.position, this.transform.localScale * 0.5f,
                     this.transform.up, Quaternion.identity,
                     headCheckDistance + standingHeight,obstacleLayer);
