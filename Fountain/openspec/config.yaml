@@ -20,6 +20,8 @@ context: |
   - 本地化系统: Assets/Script/Localization/ — LocalizationManager，支持多语言切换
   - UI 系统: Assets/Script/UI/ — PanelManager 管理面板，使用 TextMeshPro
 
+  - 喷泉系统: Assets/Script/Fountain/ — FountainController 控制时序，FountainSteamEffect 封装白汽粒子，FountainWaterEffect 封装水柱粒子，FountainTestInput 用于测试（O键开启/P键关闭）
+
   交互接口:
   - IInteractable: 可交互对象接口
   - ITaskTrigger / ITaskInteractable: 任务触发相关接口

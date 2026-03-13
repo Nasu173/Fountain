@@ -8,7 +8,17 @@
       "Bash(find \"D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets\\\\Script\\\\Task\" -name \"*.cs\" 2>/dev/null | wc -l)",
       "Bash(dir \"D:\\\\GitHub\\\\Fountain\\\\Fountain\" 2>&1)",
       "Bash(cmd /c \"dir D:\\\\GitHub\\\\Fountain\\\\Fountain\")",
-      "Bash(cmd /c dir \"D:\\\\GitHub\\\\Fountain\\\\Fountain\" 2>&1 || echo \"failed\")"
+      "Bash(cmd /c dir \"D:\\\\GitHub\\\\Fountain\\\\Fountain\" 2>&1 || echo \"failed\")",
+      "Bash(openspec new:*)",
+      "Bash(openspec status:*)",
+      "Bash(cd \"D:/GitHub/Fountain/Fountain\" && openspec status --change \"fountain-effect\" 2>&1; echo \"EXIT: $?\")",
+      "Bash(which openspec:*)",
+      "Bash(cd \"D:/GitHub/Fountain/Fountain\" && openspec instructions proposal --change \"fountain-effect\" 2>&1 | head -50)",
+      "Bash(cd \"D:/GitHub/Fountain/Fountain\" && openspec instructions proposal --change \"fountain-effect\" --json 2>&1)",
+      "Bash(openspec instructions:*)",
+      "Read(//tmp/**)",
+      "Bash(cmd /c \"openspec instructions proposal --change fountain-effect --json\" 2>&1)",
+      "Bash(cmd /c \"openspec instructions proposal --change fountain-effect --json > C:\\\\temp\\\\out.txt 2>&1\" && type \"C:\\\\temp\\\\out.txt\" 2>&1 || echo \"failed\")"
     ]
   }
 }
