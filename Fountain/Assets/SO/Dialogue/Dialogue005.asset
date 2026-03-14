@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e48ebe7b33625d4f88f53d3b19c0f4d, type: 3}
+  m_Name: Dialogue005
+  m_EditorClassIdentifier: 
+  id: 5
+  sequence:
+  - speakerEN: I
+    textEN: Why the hell is it all boarded up?
+    speakerZH: "\u6211"
+    textZH: "\u600E\u4E48\u6321\u5F97\u8FD9\u4E48\u4E25\u5B9E\uFF1F\uFF01"
+    performName: 
+  - speakerEN: I
+    textEN: Looks serious. I better hurry.
+    speakerZH: "\u6211"
+    textZH: "\u770B\u6765\u95EE\u9898\u771F\u662F\u6709\u70B9\u5927\uFF0C\u6211\u5F97\u8D70\u5FEB\u70B9\u4E86\u3002"
+    performName: LookAtPerform
+  - speakerEN: I
+    textEN: Looks like the door is over there.
+    speakerZH: "\u6211"
+    textZH: "\u95E8\u597D\u50CF\u5728\u90A3\u91CC\u3002"
+    performName: LookAtPerform
+  dialogueEndPerformName: 

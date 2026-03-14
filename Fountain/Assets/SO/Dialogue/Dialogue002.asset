@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e48ebe7b33625d4f88f53d3b19c0f4d, type: 3}
+  m_Name: Dialogue002
+  m_EditorClassIdentifier: 
+  id: 2
+  sequence:
+  - speakerEN: I
+    textEN: Crap... the console's busted.
+    speakerZH: "\u6211"
+    textZH: "\u574F\u4E86\u574F\u4E86\uFF0C\u63A7\u5236\u53F0\u7528\u4E0D\u4E86\u4E86\u3002"
+    performName: 
+  - speakerEN: I
+    textEN: Great. Guess I'll have to send the kid down to fix it manually.
+    speakerZH: "\u6211"
+    textZH: "\u4E8B\u5DF2\u81F3\u6B64\uFF0C\u5148\u8BA9\u5F92\u5F1F\u53BB\u73B0\u573A\u4FEE\u7406\u5427\u3002"
+    performName: 
+  dialogueEndPerformName: 

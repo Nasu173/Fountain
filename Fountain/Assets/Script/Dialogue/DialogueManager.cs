@@ -59,6 +59,10 @@ namespace Foutain.Dialogue
         /// <param name="dataProviders">提供演出数据的对象</param>
         public void StartDialogue(DialogueSequence dialogues, List<IPerformDataProvider> dataProviders)
         {
+            if (dialogues==null)
+            {
+                return;
+            }
             if (!dialogueCompleted)
             {
                 return;
@@ -109,11 +113,13 @@ namespace Foutain.Dialogue
         private void EndDialogue()
         {
             dialogueCompleted = true;
-            this.currentDialogues = null;
             dialoguePanel.SetVisible(false);
-            this.performDatas = null;
             GameEventBus.Publish<DialogueEndEvent>(null);
-            
+            //触发结束时的演出
+            TriggerPerform(IPerformDataProvider.END_INDEX, currentDialogues.dialogueEndPerformName); 
+            this.currentDialogues = null;
+            this.performDatas = null;
+
             //恢复输入
             GameInputManager.Instance.EnableInteractInput();
             GameInputManager.Instance.EnableMoveInput();

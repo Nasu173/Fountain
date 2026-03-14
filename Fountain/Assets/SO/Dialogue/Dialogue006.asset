@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e48ebe7b33625d4f88f53d3b19c0f4d, type: 3}
+  m_Name: Dialogue006
+  m_EditorClassIdentifier: 
+  id: 6
+  sequence:
+  - speakerEN: Apprentice
+    textEN: Boss, I've been messing with this for ages. Still can't figure it out.
+    speakerZH: "\u5F92\u5F1F"
+    textZH: "\u5E08\u5085\uFF0C\u8FD9\u4E1C\u897F\u6211\u9F13\u6363\u534A\u5929\u4E86\uFF0C\u8FD8\u662F\u6CA1\u5F04\u660E\u767D\u3002"
+    performName: PlayAnimationPerform
+  - speakerEN: I
+    textEN: Kid, you haven't learned a thing, have you? Can't even turn a valve right.
+    speakerZH: "\u6211"
+    textZH: "\u4F60\u5C0F\u5B50\uFF0C\u8DDF\u4E86\u6211\u8FD9\u4E48\u591A\u5E74\u90FD\u767D\u5B66\u4E86\uFF0C\u62E7\u4E2A\u9600\u95E8\u90FD\u62E7\u4E0D\u597D\u3002"
+    performName: 
+  - speakerEN: I
+    textEN: Move over. Let me do it.
+    speakerZH: "\u6211"
+    textZH: "\u8D77\u5F00\uFF0C\u8BA9\u6211\u6765\u3002"
+    performName: 
+  dialogueEndPerformName: WalkPerform

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e48ebe7b33625d4f88f53d3b19c0f4d, type: 3}
+  m_Name: Dialogue009
+  m_EditorClassIdentifier: 
+  id: 10
+  sequence:
+  - speakerEN: I
+    textEN: Jesus... what the hell was that?!
+    speakerZH: "\u6211"
+    textZH: "\u4E0D\u662F\u54E5\u4EEC\u513F\uFF0C\u521A\u624D\u90A3\u662F\u5565\uFF1F\uFF01"
+    performName: 
+  - speakerEN: I
+    textEN: Shit... Okay, stay calm. I need to call for help.
+    speakerZH: "\u6211"
+    textZH: "\u7B97\u4E86\u2026\u2026\u603B\u4E4B\uFF0C\u5148\u770B\u4E00\u4E0B\u8FD8\u80FD\u4E0D\u80FD\u8054\u7CFB\u5230\u5916\u9762\u5427\u3002"
+    performName: 
+  dialogueEndPerformName: 

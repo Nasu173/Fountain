@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e48ebe7b33625d4f88f53d3b19c0f4d, type: 3}
+  m_Name: Dialogue003
+  m_EditorClassIdentifier: 
+  id: 3
+  sequence:
+  - speakerEN: I
+    textEN: Hey kid, wake up. Got a job for you.
+    speakerZH: "\u6211"
+    textZH: "\u5582\uFF0C\u5C0F\u5B50\uFF0C\u6765\u6D3B\u4E86\uFF01"
+    performName: 
+  - speakerEN: Apprentice
+    textEN: Huh? Something wrong?
+    speakerZH: "\u5F92\u5F1F"
+    textZH: "\u51FA\u4EC0\u4E48\u4E8B\u4E86\u5417\uFF1F"
+    performName: 
+  - speakerEN: I
+    textEN: Yeah, fountain's acting up. Console's glitching too. Go check it out.
+    speakerZH: "\u6211"
+    textZH: "\u5BF9\uFF0C\u55B7\u6CC9\u51FA\u4E86\u70B9\u95EE\u9898\uFF0C\u63A7\u5236\u53F0\u4E5F\u51FA\u4E86\u70B9\u6BDB\u75C5\uFF0C\u4F60\u53BB\u73B0\u573A\u770B\u770B\u5427\u3002"
+    performName: 
+  - speakerEN: Apprentice
+    textEN: You got it. On my way.
+    speakerZH: "\u5F92\u5F1F"
+    textZH: "\u597D\u561E\uFF0C\u9A6C\u4E0A\u53BB\u3002"
+    performName: 
+  dialogueEndPerformName: WalkPerform

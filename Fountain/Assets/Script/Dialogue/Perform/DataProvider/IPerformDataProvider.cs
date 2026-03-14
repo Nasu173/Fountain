@@ -10,8 +10,9 @@ namespace Foutain.Dialogue
     /// </summary>
     public interface IPerformDataProvider 
     {
+        public const int END_INDEX = -1;
         /// <summary>
-        /// 返回的数字说明这份数据是用于哪个DialogueNode的演出
+        /// 返回的数字说明这份数据是用于哪个DialogueNode的演出,如果是-1,说明是结束时用的演出
         /// </summary>
         /// <returns></returns>
         public int GetTargetIndex();

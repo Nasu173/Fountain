@@ -1,0 +1,26 @@
+using Foutain.Player;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Foutain.Dialogue
+{
+    /// <summary>
+    /// 对话时移动的数据
+    /// </summary>
+    public class WalkData : MonoBehaviour, IPerformDataProvider
+    {
+        [Header("演出数据")]
+        [Tooltip("要演出的对话的节点在序列里的索引")]
+        public int dialogueNodeIndex;
+        [Tooltip("要移动到的位置")]
+        public Vector3 targetPosition;
+        [Tooltip("移动速度")]
+        public float speed;
+        public NPCMove npcMove;
+        public int GetTargetIndex()
+        {
+            return dialogueNodeIndex;
+        }
+    }
+}

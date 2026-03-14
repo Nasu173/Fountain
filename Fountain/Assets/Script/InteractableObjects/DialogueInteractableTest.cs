@@ -17,7 +17,7 @@ namespace Foutain.Dialogue
         private List<IPerformDataProvider> dataProviders;
         private void Start()
         {
-            outlineVisuals = this.GetComponentsInChildren<OutlineVisual>();
+            outlineVisuals = this.GetComponents<OutlineVisual>();
             dataProviders = this.GetComponents<IPerformDataProvider>().ToList();
         }
         public void Deselect()

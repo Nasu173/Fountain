@@ -10,7 +10,7 @@ namespace Foutain.Dialogue
     /// </summary>
     public class LookData : MonoBehaviour, IPerformDataProvider
     {
-        [Header("要手动配置的数据")]
+        [Header("演出数据")]
         [Tooltip("要看向的东西")] 
         public Transform target;
         [Tooltip("要演出的对话的节点在序列里的索引")]

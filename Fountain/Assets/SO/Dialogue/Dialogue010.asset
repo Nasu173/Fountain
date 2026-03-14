@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e48ebe7b33625d4f88f53d3b19c0f4d, type: 3}
+  m_Name: Dialogue010
+  m_EditorClassIdentifier: 
+  id: 11
+  sequence:
+  - speakerEN: Radio
+    textEN: ......
+    speakerZH: "\u5BF9\u8BB2\u673A"
+    textZH: "\u2026\u2026"
+    performName: 
+  - speakerEN: I
+    textEN: Unbelievable. Even this damn radio is dead..
+    speakerZH: "\u6211"
+    textZH: "6,\u8FD9\u7834\u5BF9\u8BB2\u673A\u4E5F\u8DDF\u6211\u4F5C\u5BF9\u2026\u2026"
+    performName: 
+  dialogueEndPerformName: 

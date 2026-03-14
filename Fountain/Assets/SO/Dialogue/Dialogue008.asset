@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e48ebe7b33625d4f88f53d3b19c0f4d, type: 3}
+  m_Name: Dialogue008
+  m_EditorClassIdentifier: 
+  id: 9
+  sequence:
+  - speakerEN: I
+    textEN: I've gotta call the cops. Now!
+    speakerZH: "\u6211"
+    textZH: "\u6211\u5F97\u8D76\u7D27\u62A5\u8B66"
+    performName: PlaySoundPerform
+  - speakerEN: Telephone
+    textEN: (Beep... beep... busy tone)
+    speakerZH: "\u7535\u8BDD\u90A3\u5934"
+    textZH: "\u561F\u561F\u561F\u2026\u2026\uFF08\u5FD9\u97F3\uFF09"
+    performName: 
+  - speakerEN: I
+    textEN: Dammit... Come on, pick up. Let me try the boss again.
+    speakerZH: "\u6211"
+    textZH: "\u518D\u7ED9\u8001\u677F\u6253\u7535\u8BDD\u8BD5\u8BD5"
+    performName: PlaySoundPerform
+  - speakerEN: Telephone
+    textEN: What is it this time?
+    speakerZH: "\u7535\u8BDD\u90A3\u5934"
+    textZH: "\u5565\u4E8B\uFF1F"
+    performName: 
+  - speakerEN: I
+    textEN: Boss! Boss! Something's wrong! The kid... he's dead! The fountain killed
+      him!!
+    speakerZH: "\u6211"
+    textZH: "\u4E0D\u597D\u4E86\u4E0D\u597D\u4E86\uFF0C\u8001\u677F\uFF0C\u90A3\u5C0F\u5B50\u6B7B\u4E86\uFF01\u88AB\u55B7\u6CC9\u6740\u6B7B\u7684\uFF01\uFF01"
+    performName: 
+  - speakerEN: Telephone
+    textEN: Quit bullshitting me. A fountain doesn't kill people, you moron.
+    speakerZH: "\u7535\u8BDD\u90A3\u5934"
+    textZH: "\u4F60\u9A97\u4E09\u5C81\u5C0F\u5B69\u5462\uFF0C\u55B7\u6CC9\u5C31\u6740\u4E0D\u4E86\u4EBA\u3002"
+    performName: 
+  - speakerEN: I
+    textEN: It's the truth! I saw it with my own eyes! Check the cameras if you don't
+      believe me!
+    speakerZH: "\u6211"
+    textZH: "\u771F\u7684\uFF01\u6211\u4EB2\u773C\u6240\u89C1\uFF01\u4E0D\u4FE1\u4F60\u53BB\u770B\u76D1\u63A7\u3002"
+    performName: 
+  - speakerEN: Telephone
+    textEN: "Still lying? I'm looking at the monitors right now, and you're the only
+      one out there. If the kid is really dead, then tell me\u2014where's the damn
+      body?"
+    speakerZH: "\u7535\u8BDD\u90A3\u5934"
+    textZH: "\u8FD8\u72E1\u8FA9\uFF0C\u6211\u73B0\u5728\u5C31\u5728\u770B\u76D1\u63A7\uFF0C\u55B7\u6CC9\u90A3\u91CC\u5C31\u4F60\u4E00\u4E2A\u4EBA\uFF0C\u8981\u662F\u90A3\u5C0F\u5B50\u771F\u6B7B\u4E86\uFF0C\u90A3\u4F60\u8BF4\u4ED6\u7684\u5C38\u4F53\u5728\u54EA\uFF1F"
+    performName: 
+  - speakerEN: I
+    textEN: But... but I...
+    speakerZH: "\u6211"
+    textZH: "\u4F46\u2026\u4F46\u662F\u2026\u2026\u6211\u2026\u2026"
+    performName: 
+  - speakerEN: Telephone
+    textEN: 'But nothing! You probably screwed up and now you''re looking for an
+      excuse to bolt. Listen up: I''ve already locked the exits. You aren''t leaving
+      until this is fixed! Now get your ass to the basement and get to work!'
+    speakerZH: "\u7535\u8BDD\u90A3\u5934"
+    textZH: "\u4F46\u662F\u4EC0\u4E48\u4F46\u662F\uFF0C\u6211\u770B\u4F60\u5C31\u662F\u574F\u4E8B\u4E86\u60F3\u8DD1\u8DEF\u3002\u6211\u544A\u8BC9\u4F60\uFF0C\u51FA\u53BB\u7684\u95E8\u5DF2\u7ECF\u88AB\u6211\u9501\u4E86\uFF0C\u4ECA\u5929\u4F60\u4E0D\u7ED9\u6211\u4FEE\u597D\u5C31\u522B\u60F3\u8D70\uFF01\u8FD8\u4E0D\u5FEB\u6EDA\u53BB\u5730\u4E0B\u5BA4\u7EF4\u4FEE\u3002\n"
+    performName: 
+  dialogueEndPerformName: 
