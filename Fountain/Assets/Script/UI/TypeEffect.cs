@@ -6,7 +6,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace Foutain.UI
+namespace Fountain.UI
 {
     /// <summary>
     /// 实现打字机效果的类,不支持富文本

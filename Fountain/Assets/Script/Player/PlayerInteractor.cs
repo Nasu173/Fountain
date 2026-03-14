@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.Player
+namespace Fountain.Player
 {
     /// <summary>
     /// 玩家交互类,负责检测可交互物体并提供交互方法

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
-using Foutain.Localization;
+using Fountain.Localization;
 
 /// <summary>
 /// 帧率管理器

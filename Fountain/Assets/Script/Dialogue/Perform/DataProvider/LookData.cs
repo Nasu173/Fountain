@@ -1,9 +1,9 @@
-using Foutain.Player;
+using Fountain.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.Dialogue
+namespace Fountain.Dialogue
 {
     /// <summary>
     /// 提供对话时看向某个物体的演出所需要的数据

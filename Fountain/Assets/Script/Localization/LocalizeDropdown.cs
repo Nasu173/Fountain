@@ -6,7 +6,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
 
-namespace Foutain.Localization
+namespace Fountain.Localization
 {
     /// <summary>
     /// 该类用于本地化多选框,由于UI里的多选框选项的文本内容时动态生成的,

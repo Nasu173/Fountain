@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.Dialogue
+namespace Fountain.Dialogue
 {
     /// <summary>
     /// 对话时播放声音的数据

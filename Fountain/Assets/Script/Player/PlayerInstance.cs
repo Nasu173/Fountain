@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.Player
+namespace Fountain.Player
 {
     /// <summary>
     /// 玩家单例,仅是提供一个方便找玩家的单例,可以通过这个GetComponent来找玩家的相关脚本

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 
-namespace Foutain.Dialogue
+namespace Fountain.Dialogue
 {
     /// <summary>
     /// 实现看向物体的演出,比如看向NPC

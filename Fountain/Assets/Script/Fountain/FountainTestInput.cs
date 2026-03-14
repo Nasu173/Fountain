@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Foutain.Fountain
+namespace Fountain.Fountain
 {
     public class FountainTestInput : MonoBehaviour
     {

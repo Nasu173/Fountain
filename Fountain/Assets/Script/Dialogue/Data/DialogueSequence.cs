@@ -1,11 +1,11 @@
-using Foutain.Localization;
+using Fountain.Localization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Foutain.Dialogue
+namespace Fountain.Dialogue
 {
     /// <summary>
     /// 对话序列SO,存储完整的对话

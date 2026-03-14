@@ -1,4 +1,4 @@
-using Foutain.Dialogue;
+using Fountain.Dialogue;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Foutain.Player
+namespace Fountain.Player
 {
     /// <summary>
     /// 输入管理器(单例),管理所有的输入,并调用所有需要玩家输入的方法,比如移动

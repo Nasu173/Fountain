@@ -1,6 +1,6 @@
 using UnityEngine;
-using Foutain.Player;
-using Foutain.Common;
+using Fountain.Player;
+using Fountain.Common;
 
 /// <summary>
 /// 可交互任务对象

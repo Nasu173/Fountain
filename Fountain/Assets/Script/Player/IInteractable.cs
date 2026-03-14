@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Foutain.Player
+namespace Fountain.Player
 {
     /// <summary>
     /// 可交互物体的接口,所有可交互物体必须实现这个接口,且实现类必须放在可交互物体的根物体

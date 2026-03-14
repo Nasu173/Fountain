@@ -1,4 +1,4 @@
-using Foutain.Localization;
+using Fountain.Localization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

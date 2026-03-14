@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Foutain.Fountain
+namespace Fountain.Fountain
 {
     public class FountainSteamEffect : MonoBehaviour
     {

@@ -1,9 +1,9 @@
-using Foutain.Player;
+using Fountain.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.UI
+namespace Fountain.UI
 {
     /// <summary>
     /// 玩家选中物体时显示的提示

@@ -1,11 +1,11 @@
-using Foutain.Common;
-using Foutain.Dialogue;
+using Fountain.Common;
+using Fountain.Dialogue;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace Foutain.UI
+namespace Fountain.UI
 {
     /// <summary>
     /// 对话窗口,仅负责显示对话文本,虽然不好,但出于某些原因,做成单例

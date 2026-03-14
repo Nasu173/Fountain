@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Foutain.Player
+namespace Fountain.Player
 {
     /// <summary>
     /// 玩家视野,实现相机相关的行为,挂到Player下的子物体CameraMountPoint,

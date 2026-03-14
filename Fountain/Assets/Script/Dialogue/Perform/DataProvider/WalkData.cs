@@ -1,9 +1,9 @@
-using Foutain.Player;
+using Fountain.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.Dialogue
+namespace Fountain.Dialogue
 {
     /// <summary>
     /// 对话时移动的数据

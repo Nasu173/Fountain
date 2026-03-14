@@ -1,10 +1,10 @@
-using Foutain.Player;
-using Foutain.UI;
+using Fountain.Player;
+using Fountain.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.Dialogue
+namespace Fountain.Dialogue
 {
     /*对话系统框架示例图:
 

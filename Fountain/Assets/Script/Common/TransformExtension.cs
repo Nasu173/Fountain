@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.Common
+namespace Fountain.Common
 {
     /// <summary>
     /// Transform扩展类,提供一些有用的方法

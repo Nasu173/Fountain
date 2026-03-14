@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.Dialogue
+namespace Fountain.Dialogue
 {
     /// <summary>
     /// 对话演出类基类,负责实现对话过程里要实现的简单演出,比如人物移动,播放动画/音效等等,

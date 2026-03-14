@@ -1,9 +1,9 @@
-using Foutain.Common;
+using Fountain.Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.Player
+namespace Fountain.Player
 {
     /// <summary>
     /// 交互测试脚本,测试完记得删除

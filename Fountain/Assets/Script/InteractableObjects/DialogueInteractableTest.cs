@@ -1,11 +1,11 @@
-using Foutain.Common;
-using Foutain.Player;
+using Fountain.Common;
+using Fountain.Player;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Foutain.Dialogue
+namespace Fountain.Dialogue
 {
     /// <summary>
     /// 测试对话系统的测试脚本,用完记得删除

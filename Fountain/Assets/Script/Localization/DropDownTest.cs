@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Foutain.UI
+namespace Fountain.UI
 {
     /// <summary>
     /// 测试多选框本地化的脚本,要删

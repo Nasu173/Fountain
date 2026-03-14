@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 
-namespace Foutain.Player
+namespace Fountain.Player
 {
     /// <summary>
     /// 鼠标灵敏度管理脚本

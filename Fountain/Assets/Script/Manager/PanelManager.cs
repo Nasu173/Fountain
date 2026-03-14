@@ -1,4 +1,4 @@
-using Foutain.Player;
+using Fountain.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

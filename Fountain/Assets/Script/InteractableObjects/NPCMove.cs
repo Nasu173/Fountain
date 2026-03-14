@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Foutain.Player
+namespace Fountain.Player
 {
     /// <summary>
     /// npc移动的脚本,似乎不用什么移动方式,就单纯的平移即可,否则要重构一下PlayerMove

@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Foutain.Localization;
-using Foutain.Player;
+using Fountain.Localization;
+using Fountain.Player;
 using TMPro;
 using UnityEngine;
 

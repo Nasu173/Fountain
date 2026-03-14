@@ -5,7 +5,7 @@ using System.Reflection.Emit;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Foutain.Player
+namespace Fountain.Player
 {
     /// <summary>
     /// 玩家移动类,只实现移动的功能,提供控制移动的方法供外部调用

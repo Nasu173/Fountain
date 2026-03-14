@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Foutain.Localization;
+using Fountain.Localization;
 
 /// <summary>
 /// 窗口模式控制器

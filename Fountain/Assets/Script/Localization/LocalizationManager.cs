@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
-namespace Foutain.Localization
+namespace Fountain.Localization
 {
     /// <summary>
     /// 本地化管理器(单例),提供更改语言的方法,其实感觉做成静态类也行
