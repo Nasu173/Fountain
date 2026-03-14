@@ -22,6 +22,10 @@ MonoBehaviour:
     m_Localized: space/LMB to continue
     m_Metadata:
       m_Items: []
+  - m_Id: 2660372644356096
+    m_Localized: quit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
