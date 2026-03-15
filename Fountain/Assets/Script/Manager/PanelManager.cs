@@ -42,9 +42,9 @@ public class PanelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 暂停游戏
+    /// 切换暂停状态
     /// </summary>
-    private void Pause()
+    public void Pause()
     {
         isPaused = !isPaused;
 
@@ -136,5 +136,10 @@ public class PanelManager : MonoBehaviour
         {
             pausePanel.SetActive(true);
         }
+    }
+
+    public bool IsPaused()
+    {
+        return isPaused;
     }
 }
