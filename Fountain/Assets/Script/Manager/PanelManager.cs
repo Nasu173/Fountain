@@ -1,4 +1,6 @@
+using System;
 using Fountain.Player;
+using Foutain.Scene;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,8 +8,11 @@ public class PanelManager : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject settingPanel;
+    [SerializeField] private string _menuSceneAddress;
+    [SerializeField] private string[] _scenesToKeep;
 
     private bool isPaused = false;
+    private bool isStarted = false;
 
     private void OnEnable()
     {
@@ -17,6 +22,7 @@ public class PanelManager : MonoBehaviour
         // 订阅事件
         GameEventBus.Subscribe<ContinueEvent>(GameContinue);
         GameEventBus.Subscribe<SettingEvent>(OpenSettingPanel);
+        GameEventBus.Subscribe<GameStartEvent>(OnGameStart);
 
         // 确保游戏开始时是运行状态
         if (!isPaused)
@@ -34,6 +40,12 @@ public class PanelManager : MonoBehaviour
         // 取消订阅事件
         GameEventBus.Unsubscribe<ContinueEvent>(GameContinue);
         GameEventBus.Unsubscribe<SettingEvent>(OpenSettingPanel);
+        GameEventBus.Unsubscribe<GameStartEvent>(OnGameStart);
+    }
+
+    private void OnGameStart(GameStartEvent @event)
+    {
+        isStarted = true;
     }
 
     private void OnPauseClicked(GamePauseEvent gamePauseEvent)
@@ -69,12 +81,26 @@ public class PanelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 暂停面板中点击主菜单按钮后广播MenuEvent事件
+    /// 暂停面板中点击主菜单按钮后切换至主菜单场景
     /// </summary>
     public void OnMenuClicked()
     {
-        var menuEvent = new MenuEvent();
-        GameEventBus.Publish(menuEvent);
+        Pause();
+        GameInputManager.Instance.ShowCursor();
+
+        pausePanel.SetActive(false);
+
+        GameInputManager.Instance.DisablePausePanel();
+
+        isStarted = false;
+
+        GameEventBus.Publish(new LoadSceneEvent
+        {
+            SceneAddress = _menuSceneAddress,
+            Additive = true,
+            UnloadAll = true,
+            ScenesToKeep = _scenesToKeep
+        });
     }
 
     /// <summary>
@@ -128,7 +154,10 @@ public class PanelManager : MonoBehaviour
 
     public void OnBackClicked()
     {
-        GameInputManager.Instance.EnablePausePanel();
+        if (isStarted)
+        {
+            GameInputManager.Instance.EnablePausePanel();
+        }
 
         settingPanel.SetActive(false);
 
@@ -136,6 +165,8 @@ public class PanelManager : MonoBehaviour
         {
             pausePanel.SetActive(true);
         }
+
+        GameEventBus.Publish(new SettingBackEvent());
     }
 
     public bool IsPaused()

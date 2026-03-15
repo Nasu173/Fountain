@@ -55,3 +55,9 @@ public class DialogueEndEvent:IGameEvent
 {
 
 }
+
+[System.Serializable]
+public class SettingBackEvent : IGameEvent { }
+
+[System.Serializable]
+public class GameStartEvent : IGameEvent { }

@@ -36,9 +36,9 @@ namespace Fountain.Player
 
             //启用对应的ActionMap
             inputActions.Player.Enable();
-            EnablePausePanel();
+            //EnablePausePanel();
             EnableInteractInput();
-            HideCursor();
+            //HideCursor();
 
             //注册移动、交互相关事件
             inputActions.Player.Run.canceled += (callback) =>

@@ -18,7 +18,8 @@ context: |
   - 任务系统: Assets/Script/Task/ — TaskManager 管理任务生命周期，支持多种触发器(Trigger)
   - 设置系统: Assets/Script/Settings/ — 音频、分辨率、帧率、鼠标灵敏度、VHS 效果等
   - 本地化系统: Assets/Script/Localization/ — LocalizationManager，支持多语言切换
-  - UI 系统: Assets/Script/UI/ — PanelManager 管理面板，使用 TextMeshPro
+  - UI 系统: Assets/Script/UI/ — PanelManager 管理面板，使用 TextMeshPro；MainMenuPanel 管理主菜单按钮（开始游戏/设置/退出）
+  - 场景系统: Assets/Script/Scene/ — GameSceneManager 单例管理场景切换，SceneLoader 封装 Addressable 异步加载，SceneAddress 集中定义场景地址常量；LoadSceneEvent 支持 Additive 加载、单场景卸载(SceneToUnload)、全场景卸载(UnloadAll+ScenesToKeep)
 
   - 喷泉系统: Assets/Script/Fountain/ — FountainController 控制时序，FountainSteamEffect 封装白汽粒子，FountainWaterEffect 封装水柱粒子，FountainTestInput 用于测试（O键开启/P键关闭）
 
