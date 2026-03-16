@@ -1,35 +1,88 @@
+using Fountain.Common;
 using Fountain.Dialogue;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Fountain.Player
+namespace Fountain.InputManagement
 {
-    /// <summary>
-    /// 输入管理器(单例),管理所有的输入,并调用所有需要玩家输入的方法,比如移动
-    /// </summary>
-    public class GameInputManager : MonoBehaviour
-    {
-        public static GameInputManager Instance { get; private set; }
-        private PlayerInputActions inputActions;
+    /*由于旧的输入管理器与别的模块耦合程度到了必须要重构的地步,对此重构
+     旧版:GameInputManager--调用-->其他模块
+     
+    重构版本:
+    GameInputManager<----------获得Provider-----其它模块
+            ↓                                       从Provider里获得输入,处理相关逻辑
+    管理所有的InputProvider                   
+     */
 
-        public float sensitivity = 1;
+    /// <summary>
+    /// 输入管理器(单例),管理所有的InputProvider,提供InputProvider需要的数据
+    /// 所有的InputProvider和manager挂在同一个物体上
+    /// </summary>
+    public class GameInputManager :MonoSingleton<GameInputManager> 
+    {
+        /// <summary>
+        /// 简单地放在这里先,虽然作为这样的管理器放这里并不合适
+        /// </summary>
+        private PlayerInputActions inputActions;
+        /// <summary>
+        /// 整个游戏的InputProviders
+        /// </summary>
+        private List<IInputProvider> inputProviders;
+
+        protected override void Init()
+        {
+            base.Init();
+            if (Instance!=this)
+            {
+                Destroy(this.gameObject);
+            }
+            DontDestroyOnLoad(this.gameObject);
+            inputActions = new PlayerInputActions();
+            inputProviders = this.GetComponents<IInputProvider>().ToList();
+            //inputActions.Enable();
+        }
+        private void OnDestroy()
+        {
+            inputActions.Dispose();
+            inputActions = null;
+        }
+
+        /// <summary>
+        /// 获得输入系统的引用,不要自行new一个新的实例
+        /// </summary>
+        /// <returns></returns>
+        public PlayerInputActions GetInputAction()
+        {
+            return this.inputActions;
+        }
+        public T GetProvider<T>()where T : IInputProvider
+        {
+            return 
+                (T)inputProviders.Find((arg) =>
+            {
+                return arg is T;
+            });
+        }
+    }
+}
+
+
+
+/*
+        //public float sensitivity = 1;
 
         //一些需要玩家输入的脚本
         private PlayerMove playerMove;
         private PlayerSight playerSight;
         private PlayerInteractor playerInteractor;
-        private void Awake()
-        {
-            GameInputManager.Instance = this;
-        }
         private void Start()
         {
             //初始化组件
-            inputActions = new PlayerInputActions();
             playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
             playerSight = playerMove.GetComponentInChildren<PlayerSight>();
             playerInteractor = playerMove.GetComponent<PlayerInteractor>();
@@ -45,6 +98,7 @@ namespace Fountain.Player
             { playerMove.SwitchToWalk(); };
             inputActions.Player.Crouch.started += (callback) =>
             { playerMove.SwitchCrouch(); };
+
             inputActions.PausePanel.Pause.started += (callback) =>
             {
                 GameEventBus.Publish<GamePauseEvent>(new GamePauseEvent());
@@ -81,12 +135,7 @@ namespace Fountain.Player
                 playerSight.Rotate(sightMove, sensitivity); // 确保传入sensitivity
             }
         }
-        private void OnDestroy()
-        {
-            inputActions.Dispose();
-            inputActions = null;
-        }
-
+ 
         /// <summary>
         /// 禁止移动输入
         /// </summary>
@@ -163,5 +212,7 @@ namespace Fountain.Player
         {
             DialogueManager.Instance.ContinueDialogue();
         }
-    }
-}
+ 
+ 
+ 
+ */

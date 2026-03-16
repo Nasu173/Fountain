@@ -1,3 +1,4 @@
+using Fountain.InputManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace Fountain.Player
     /// </summary>
     public class PlayerSight : MonoBehaviour
     {
+        //输入来源
+        private PlayerSightInputProvider sightInput;
+
         private Camera sightCamera;
         [Header("相机旋转相关设置")]
         [Tooltip("相机最小旋转角度")]
@@ -23,6 +27,7 @@ namespace Fountain.Player
         /// 累计旋转的角度
         /// </summary>
         private float cameraRotationAngle=0;
+        public float sensitivity;
 
         [Header("走路抖动的相关参数")]
         [Tooltip("是否启用抖动")]
@@ -48,7 +53,7 @@ namespace Fountain.Player
         [SerializeField]
         private Vector3 amplitudeRotationRun;
 
-        [Header("震动平滑速度设置")]
+        [Header("震动平滑过渡速度设置")]
         [Tooltip("位置变化速度")]
         public float smoothSpeedPosition;
         [Tooltip("旋转变化速度")]
@@ -66,8 +71,13 @@ namespace Fountain.Player
 
         private void Start()
         {
+            sightInput= GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
             sightCamera = this.GetComponentInChildren<Camera>();
             noiseSeed = Random.Range(0f, 1000f);//1000f只是随便一个数,只要范围适中即可
+        }
+        private void Update()
+        {
+            Rotate(sightInput.GetSightMove(), this.sensitivity);
         }
 
         /// <summary>

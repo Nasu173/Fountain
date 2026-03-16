@@ -1,3 +1,4 @@
+using Fountain.InputManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Fountain.Player
     /// </summary>
     public class PlayerInteractor : MonoBehaviour
     {
+        private CharacterInputProvider interactInput;
         //这两个事件目前用于显示交互的提示
         /// <summary>
         /// 选中可交互物体
@@ -36,11 +38,13 @@ namespace Fountain.Player
         /// <summary>
         /// 是否允许交互
         /// </summary>
-        private bool enableInteract;
+        private bool enableInteract = true;
 
         private void Start()
         {
             sight = this.GetComponentInChildren<PlayerSight>();
+            interactInput = GameInputManager.Instance.
+                GetProvider<CharacterInputProvider>();
         }
 
         private void Update()
@@ -49,7 +53,13 @@ namespace Fountain.Player
             {
                 return;
             }
+
             DetectInteractable();
+
+            if (interactInput.GetInteract())
+            {
+                Interact();
+            }
         }
 
         /// <summary>
@@ -57,6 +67,7 @@ namespace Fountain.Player
         /// </summary>
         public void Interact()
         {
+
             if (currentTarget != null)
             {
                 // 原有的交互逻辑

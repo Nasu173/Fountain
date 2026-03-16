@@ -1,3 +1,4 @@
+using Fountain.InputManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,11 +9,15 @@ using UnityEngine;
 namespace Fountain.Player
 {
     /// <summary>
-    /// 玩家移动类,只实现移动的功能,提供控制移动的方法供外部调用
+    /// 玩家移动类,实现移动的功能,虽然实现的并不怎样,各个移动的功能没有分的很好
     /// </summary>
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMove : MonoBehaviour
     {
+        //输入来源
+        private CharacterInputProvider moveInput;
+        private PlayerSightInputProvider sightInput;
+
         [Header("移动设置")]
         [Tooltip("行走速度")]
         [SerializeField]
@@ -53,10 +58,15 @@ namespace Fountain.Player
         private bool crouchTransitioning;
         //下蹲&起立要到的高度
         private float targetHeight;
-        private PlayerSight sight;//视野和移动还是耦合的紧一些的,就直接用了
+
+        private PlayerSight sight;//视野和移动还是耦合的紧一些的,就直接用了,最好用事件重构
+        [Tooltip("旋转灵敏度")]
+        public float sensitivity;
         
         private void Start()
         {
+            moveInput = GameInputManager.Instance.GetProvider<CharacterInputProvider>();
+            sightInput= GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
             characterController = this.GetComponent<CharacterController>();
             sight = this.GetComponentInChildren<PlayerSight>();
             targetHeight = standingHeight;
@@ -64,6 +74,22 @@ namespace Fountain.Player
         }
         private void Update()
         {
+            //移动和转向
+            Move(moveInput.GetMove());
+            if (moveInput.GetCrouch())
+            {
+                SwitchCrouch();
+            }
+            if (moveInput.GetRun())
+            {
+                SwitchToRun();    
+            }
+            else
+            {
+                SwitchToWalk();
+            }
+            Rotate(sightInput.GetSightMove(), this.sensitivity);    
+            
             if (crouchTransitioning)
             {
                 CrouchTransition();    

@@ -1,3 +1,4 @@
+using Fountain.InputManagement;
 using Fountain.Player;
 using Fountain.UI;
 using System.Collections;
@@ -40,7 +41,15 @@ namespace Fountain.Dialogue
         /// 演出数据
         /// </summary>
         private List<IPerformDataProvider> performDatas;
-        private DialoguePerformFactory performFactory; 
+        private DialoguePerformFactory performFactory;
+
+        //输入来源
+        private CharacterInputProvider dialogueInput;
+        private UIInputProvider uiInput;
+        //玩家相关脚本
+        private PlayerMove playerMove;
+        private PlayerSight playerSight;
+        private PlayerInteractor playerInteractor;
         
         private void Awake()
         {
@@ -50,8 +59,22 @@ namespace Fountain.Dialogue
         {
             dialoguePanel = DialoguePanel.Instance;
             performFactory = new DialoguePerformFactory();
+
+            uiInput = GameInputManager.Instance.GetProvider<UIInputProvider>();
+            dialogueInput = GameInputManager.Instance.GetProvider<CharacterInputProvider>();
+
+            playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
+            playerInteractor = PlayerInstance.Instance.GetComponent<PlayerInteractor>();
+            playerSight = PlayerInstance.Instance.GetComponentInChildren<PlayerSight>(); 
         }
 
+        private void Update()
+        {
+            if (dialogueInput.GetDialogueContinue())
+            {
+                ContinueDialogue();
+            }    
+        }
         /// <summary>
         /// 开始对话 
         /// </summary>
@@ -74,10 +97,14 @@ namespace Fountain.Dialogue
             this.performDatas = dataProviders;
 
             //禁用输入,注意对话时不允许打开设置面板,会有bug,要修有点麻烦
-            GameInputManager.Instance.DisableInteractInput();
-            GameInputManager.Instance.DisableMoveInput();
-            GameInputManager.Instance.DisableSightInput();
-            GameInputManager.Instance.DisablePausePanel();
+            playerInteractor.Disable();
+            playerMove.enabled = false;
+            playerSight.enabled = false;
+            uiInput.enabled = false;
+           // GameInputManager.Instance.DisableInteractInput();
+           // GameInputManager.Instance.DisableMoveInput();
+           // GameInputManager.Instance.DisableSightInput();
+           // GameInputManager.Instance.DisablePausePanel();
 
             //UI显示
             dialoguePanel.SetVisible(true);
@@ -89,6 +116,10 @@ namespace Fountain.Dialogue
         /// </summary>
         public void ContinueDialogue()
         {
+            if (this.currentDialogues==null)
+            {
+                return;
+            }
             //对话在显示中则跳过显示
             if (dialoguePanel.IsShowing())
             {
@@ -121,10 +152,14 @@ namespace Fountain.Dialogue
             this.performDatas = null;
 
             //恢复输入
-            GameInputManager.Instance.EnableInteractInput();
-            GameInputManager.Instance.EnableMoveInput();
-            GameInputManager.Instance.EnableSightInput();
-            GameInputManager.Instance.EnablePausePanel();
+            playerInteractor.Enable();
+            playerMove.enabled = true;
+            playerSight.enabled = true;
+            uiInput.enabled = true;
+           // GameInputManager.Instance.EnableInteractInput();
+           // GameInputManager.Instance.EnableMoveInput();
+           // GameInputManager.Instance.EnableSightInput();
+           // GameInputManager.Instance.EnablePausePanel();
         }
         /// <summary>
         /// 实现演出效果

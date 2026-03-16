@@ -1,4 +1,5 @@
 using Fountain.Common;
+using Fountain.InputManagement;
 using Fountain.Player;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,14 @@ namespace Fountain.UI
         private TextMeshProUGUI titleText;
         private TextMeshProUGUI noteContent;
 
+        //输入来源
+        private PlayerSightInputProvider sightInput;
+        private UIInputProvider uiInput;
+        //玩家相关脚本
+        private PlayerMove playerMove;
+        private PlayerSight playerSight;
+        private PlayerInteractor playerInteractor;
+
         /*
         [Tooltip("暂停用")]
         [SerializeField]
@@ -35,6 +44,15 @@ namespace Fountain.UI
                 GetComponent<Button>();
             quitButton.onClick.AddListener(Hide);
             this.gameObject.SetActive(false);
+        }
+        private void Start()
+        {
+            uiInput = GameInputManager.Instance.GetProvider<UIInputProvider>();
+            sightInput = GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
+
+            playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
+            playerInteractor = PlayerInstance.Instance.GetComponent<PlayerInteractor>();
+            playerSight = PlayerInstance.Instance.GetComponentInChildren<PlayerSight>(); 
         }
 
 
@@ -62,12 +80,17 @@ namespace Fountain.UI
             this.gameObject.SetActive(false);
             //其实最好不写在这里
             //启用输入
-            GameInputManager.Instance.EnableMoveInput();
-            GameInputManager.Instance.EnableSightInput();
-            GameInputManager.Instance.EnableInteractInput();
-            GameInputManager.Instance.EnablePausePanel();
-            //显示鼠标
-            GameInputManager.Instance.HideCursor();
+            playerInteractor.Enable();
+            playerMove.enabled = true;
+            playerSight.enabled = true;
+            uiInput.enabled = true;
+            // GameInputManager.Instance.EnableMoveInput();
+            // GameInputManager.Instance.EnableSightInput();
+            // GameInputManager.Instance.EnableInteractInput();
+            // GameInputManager.Instance.EnablePausePanel();
+            //隐藏鼠标
+            sightInput.HideCursor();
+           // GameInputManager.Instance.HideCursor();
 
         }
     }

@@ -477,6 +477,9 @@ GameObject:
   m_Component:
   - component: {fileID: 187670799}
   - component: {fileID: 187670798}
+  - component: {fileID: 187670802}
+  - component: {fileID: 187670801}
+  - component: {fileID: 187670800}
   m_Layer: 0
   m_Name: GameInputManager
   m_TagString: Untagged
@@ -496,7 +499,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266ff9ac0fb2153498ae96ddf0b92228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 3
 --- !u!4 &187670799
 Transform:
   m_ObjectHideFlags: 0
@@ -512,6 +514,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &187670800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187670797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e1dc1600c496c42bc92b316513148c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &187670801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187670797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18284f9abdd9ede4e8958bdab3b76787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &187670802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187670797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55823eca1a1fb154bb0a442aab883529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &213227774
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightAngleMax: 75
   sightAngleMin: -70
+  sensitivity: 1
   enableShake: 1
   frequencyWalk: 2
   amplitudePositionWalk: {x: 0.1, y: 0.1, z: 0}
@@ -752,8 +791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48501d3b42803b6458c2cfd6a3426c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gammaMaterial: {fileID: 2100000, guid: d43243d8f1d2f374fbb19577af0e1098, type: 2}
-  gammaValue: 1
 --- !u!1 &443211651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,6 +1624,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 192
+  sensitivity: 1
 --- !u!143 &2089411645
 CharacterController:
   m_ObjectHideFlags: 0

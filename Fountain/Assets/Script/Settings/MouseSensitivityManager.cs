@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using Fountain.InputManagement;
 
 namespace Fountain.Player
 {
@@ -38,7 +39,10 @@ namespace Fountain.Player
         [SerializeField]
         private bool saveSettings = true;
 
-        private GameInputManager gameInputManager; // 游戏输入管理器引用
+        //private GameInputManager gameInputManager; // 游戏输入管理器引用
+        //玩家相关脚本
+        private PlayerMove playerMove;
+        private PlayerSight playerSight;
 
         /// <summary>
         /// 初始化组件，设置Slider并加载保存的灵敏度
@@ -46,18 +50,24 @@ namespace Fountain.Player
         private void Start()
         {
             // 获取GameInputManager实例
-            gameInputManager = GameInputManager.Instance;
-            if (gameInputManager == null)
+            PlayerInstance player = PlayerInstance.Instance;
+            if (player!=null)
             {
-                // 如果单例实例为空，尝试在场景中查找
-                gameInputManager = FindObjectOfType<GameInputManager>();
+                playerMove = player.GetComponent<PlayerMove>();
+                playerSight = player.GetComponentInChildren<PlayerSight>();
             }
+           // gameInputManager = GameInputManager.Instance;
+           // if (gameInputManager == null)
+           // {
+           //     // 如果单例实例为空，尝试在场景中查找
+           //     gameInputManager = FindObjectOfType<GameInputManager>();
+           // }
 
-            if (gameInputManager == null)
-            {
-                Debug.LogError("MouseSensitivitySlider: 未找到GameInputManager！");
-                return;
-            }
+           // if (gameInputManager == null)
+           // {
+           //     Debug.LogError("MouseSensitivitySlider: 未找到GameInputManager！");
+           //     return;
+           // }
 
             // 初始化Slider的范围和属性
             SetupSlider();
@@ -91,8 +101,18 @@ namespace Fountain.Player
         /// <param name="value">新的灵敏度值</param>
         private void OnSensitivityChanged(float value)
         {
+            //更新玩家身上的灵敏度
+            if (playerSight!=null)
+            {
+                playerSight.sensitivity = value; 
+            }
+            if (playerMove!=null)
+            {
+                playerMove.sensitivity = value; 
+            }
+
             // 更新GameInputManager中的灵敏度值
-            GameInputManager.Instance.sensitivity = value;
+            //GameInputManager.Instance.sensitivity = value;
 
             Debug.Log($"灵敏度设置为: {value}");
 
@@ -128,7 +148,15 @@ namespace Fountain.Player
             sensitivitySlider.value = value;
 
             // 直接同步到静态变量（防止事件未触发的情况）
-            GameInputManager.Instance.sensitivity = value;
+            //GameInputManager.Instance.sensitivity = value;
+            if (playerSight!=null)
+            {
+                playerSight.sensitivity = value; 
+            }
+            if (playerMove!=null)
+            {
+                playerMove.sensitivity = value; 
+            }
 
             // 更新显示文本
             if (valueDisplayText != null)

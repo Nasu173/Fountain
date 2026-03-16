@@ -4193,7 +4193,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.75
+  m_fontSize: 42.35
   m_fontSizeBase: 33.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7154,6 +7154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausePanel: {fileID: 163236444}
   settingPanel: {fileID: 1635297381}
+  _menuSceneAddress: 
+  _scenesToKeep: []
 --- !u!1 &993702057
 GameObject:
   m_ObjectHideFlags: 0
@@ -9789,6 +9791,7 @@ MonoBehaviour:
   walkSpeed: 5
   runMultiplier: 1.3
   crouchMultiplier: 0.75
+  autoGravity: 0
   standingHeight: 2
   crouchingHeight: 1
   crouchTransitionSpeed: 10
@@ -9796,6 +9799,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 192
+  sensitivity: 0
 --- !u!143 &1371077194
 CharacterController:
   m_ObjectHideFlags: 0
@@ -14441,6 +14445,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1923640316}
   - component: {fileID: 1923640315}
+  - component: {fileID: 1923640319}
+  - component: {fileID: 1923640318}
+  - component: {fileID: 1923640317}
   m_Layer: 0
   m_Name: GameInputManager
   m_TagString: Untagged
@@ -14460,7 +14467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 266ff9ac0fb2153498ae96ddf0b92228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 3
 --- !u!4 &1923640316
 Transform:
   m_ObjectHideFlags: 0
@@ -14476,6 +14482,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 470690985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1923640317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923640314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e1dc1600c496c42bc92b316513148c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1923640318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923640314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55823eca1a1fb154bb0a442aab883529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1923640319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923640314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18284f9abdd9ede4e8958bdab3b76787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1925769095
 GameObject:
   m_ObjectHideFlags: 0
@@ -15364,6 +15406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightAngleMax: 75
   sightAngleMin: -70
+  sensitivity: 0
   enableShake: 1
   frequencyWalk: 2
   amplitudePositionWalk: {x: 0.1, y: 0.1, z: 0}

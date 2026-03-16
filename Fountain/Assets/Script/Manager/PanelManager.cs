@@ -1,4 +1,5 @@
 using System;
+using Fountain.InputManagement;
 using Fountain.Player;
 using Foutain.Scene;
 using UnityEngine;
@@ -11,8 +12,27 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private string _menuSceneAddress;
     [SerializeField] private string[] _scenesToKeep;
 
+    //输入来源
+    private PlayerSightInputProvider sightInput;
+    private UIInputProvider uiInput;
+    //玩家相关脚本
+    private PlayerMove playerMove;
+    private PlayerSight playerSight;
+    private PlayerInteractor playerInteractor;
+
     private bool isPaused = false;
     private bool isStarted = false;
+
+    private void Start()
+    {
+        uiInput = GameInputManager.Instance.GetProvider<UIInputProvider>();
+        sightInput = GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
+
+        playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>(); 
+        playerInteractor = PlayerInstance.Instance.GetComponent<PlayerInteractor>(); 
+        playerSight = PlayerInstance.Instance.GetComponentInChildren<PlayerSight>(); 
+
+    }
 
     private void OnEnable()
     {
@@ -43,6 +63,13 @@ public class PanelManager : MonoBehaviour
         GameEventBus.Unsubscribe<GameStartEvent>(OnGameStart);
     }
 
+    private void Update()
+    {
+        if (uiInput.GetPause())
+        {
+            Pause();
+        }
+    }
     private void OnGameStart(GameStartEvent @event)
     {
         isStarted = true;
@@ -66,12 +93,16 @@ public class PanelManager : MonoBehaviour
             Time.timeScale = 0f;
             pausePanel.SetActive(true);
 
-            // 禁用玩家输入
-            GameInputManager.Instance.DisableMoveInput();
-            GameInputManager.Instance.DisableSightInput();
-            GameInputManager.Instance.DisableInteractInput();
+            // 禁用玩家行为
+            playerInteractor.Disable();
+            playerMove.enabled = false;
+            playerSight.enabled = false;
+           // GameInputManager.Instance.DisableMoveInput();
+           // GameInputManager.Instance.DisableSightInput();
+           // GameInputManager.Instance.DisableInteractInput();
             //显示鼠标
-            GameInputManager.Instance.ShowCursor();
+            sightInput.ShowCursor();
+            //GameInputManager.Instance.ShowCursor();
         }
         else
         {
@@ -86,11 +117,13 @@ public class PanelManager : MonoBehaviour
     public void OnMenuClicked()
     {
         Pause();
-        GameInputManager.Instance.ShowCursor();
+        sightInput.ShowCursor(); 
+        //GameInputManager.Instance.ShowCursor();
 
         pausePanel.SetActive(false);
 
-        GameInputManager.Instance.DisablePausePanel();
+        uiInput.enabled = false;
+        //GameInputManager.Instance.DisablePausePanel();
 
         isStarted = false;
 
@@ -113,7 +146,8 @@ public class PanelManager : MonoBehaviour
 
         pausePanel.SetActive(false);
 
-        GameInputManager.Instance.DisablePausePanel();
+        uiInput.enabled = false;
+        //GameInputManager.Instance.DisablePausePanel();
     }
 
     /// <summary>
@@ -139,12 +173,19 @@ public class PanelManager : MonoBehaviour
         pausePanel.SetActive(false);
         Time.timeScale = 1.0f;
 
+        // 启用玩家行为
+        playerInteractor.Enable();
+        playerMove.enabled = true;
+        playerSight.enabled = true;
+        uiInput.enabled = true;
         // 重新启用玩家输入
-        GameInputManager.Instance.EnableMoveInput();
-        GameInputManager.Instance.EnableInteractInput();
-        GameInputManager.Instance.EnableSightInput();
+       // GameInputManager.Instance.EnableMoveInput();
+       // GameInputManager.Instance.EnableInteractInput();
+       // GameInputManager.Instance.EnableSightInput();
+
         //隐藏鼠标
-        GameInputManager.Instance.HideCursor();
+            sightInput.HideCursor();
+       // GameInputManager.Instance.HideCursor();
     }
 
     private void OpenSettingPanel(SettingEvent settingEvent)
@@ -156,8 +197,9 @@ public class PanelManager : MonoBehaviour
     {
         if (isStarted)
         {
-            GameInputManager.Instance.EnablePausePanel();
+            //GameInputManager.Instance.EnablePausePanel();
         }
+        uiInput.enabled = true;
 
         settingPanel.SetActive(false);
 

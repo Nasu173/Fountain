@@ -1,4 +1,5 @@
 using Fountain.Common;
+using Fountain.InputManagement;
 using Fountain.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,9 +25,22 @@ namespace Fountain.Player
         private Transform pauseUI;
         */
          
+        //输入来源
+        private PlayerSightInputProvider sightInput;
+        private UIInputProvider uiInput;
+        //玩家相关脚本
+        private PlayerMove playerMove;
+        private PlayerSight playerSight;
+        private PlayerInteractor playerInteractor;
         private void Start()
         {
             outlineVisuals = this.GetComponents<OutlineVisual>();
+            uiInput = GameInputManager.Instance.GetProvider<UIInputProvider>();
+            sightInput = GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
+
+            playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
+            playerInteractor = PlayerInstance.Instance.GetComponent<PlayerInteractor>();
+            playerSight = PlayerInstance.Instance.GetComponentInChildren<PlayerSight>(); 
         }
         public void Deselect()
         {
@@ -37,12 +51,17 @@ namespace Fountain.Player
         {
             NotePanel.Instance.ShowNote(note);
             //禁用输入
-            GameInputManager.Instance.DisableMoveInput();
-            GameInputManager.Instance.DisableSightInput();
-            GameInputManager.Instance.DisableInteractInput();
-            GameInputManager.Instance.DisablePausePanel();
+            playerInteractor.Disable();
+            playerMove.enabled = false;
+            playerSight.enabled = false;
+            uiInput.enabled = false;
+           // GameInputManager.Instance.DisableMoveInput();
+           // GameInputManager.Instance.DisableSightInput();
+           // GameInputManager.Instance.DisableInteractInput();
+           // GameInputManager.Instance.DisablePausePanel();
             //显示鼠标
-            GameInputManager.Instance.ShowCursor();
+            sightInput.ShowCursor();
+            //GameInputManager.Instance.ShowCursor();
         }
 
         public void Select()
