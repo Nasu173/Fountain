@@ -75,6 +75,7 @@ namespace Fountain.Player
         private void Update()
         {
             //移动和转向
+            if (moveInput == null || sightInput == null) return;
             Move(moveInput.GetMove());
             if (moveInput.GetCrouch())
             {
@@ -82,7 +83,7 @@ namespace Fountain.Player
             }
             if (moveInput.GetRun())
             {
-                SwitchToRun();    
+                SwitchToRun();
             }
             else
             {

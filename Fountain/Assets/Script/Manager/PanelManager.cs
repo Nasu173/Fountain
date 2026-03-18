@@ -65,7 +65,7 @@ public class PanelManager : MonoBehaviour
 
     private void Update()
     {
-        if (uiInput.GetPause())
+        if (uiInput != null && uiInput.GetPause())
         {
             Pause();
         }
@@ -101,8 +101,8 @@ public class PanelManager : MonoBehaviour
            // GameInputManager.Instance.DisableSightInput();
            // GameInputManager.Instance.DisableInteractInput();
             //显示鼠标
-            sightInput.ShowCursor();
-            //GameInputManager.Instance.ShowCursor();
+            if (sightInput != null) sightInput.ShowCursor();
+            else { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
         }
         else
         {
@@ -117,12 +117,12 @@ public class PanelManager : MonoBehaviour
     public void OnMenuClicked()
     {
         Pause();
-        sightInput.ShowCursor(); 
-        //GameInputManager.Instance.ShowCursor();
+        if (sightInput != null) sightInput.ShowCursor();
+        else { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
 
         pausePanel.SetActive(false);
 
-        uiInput.enabled = false;
+        if (uiInput != null) uiInput.enabled = false;
         //GameInputManager.Instance.DisablePausePanel();
 
         isStarted = false;
@@ -146,7 +146,7 @@ public class PanelManager : MonoBehaviour
 
         pausePanel.SetActive(false);
 
-        uiInput.enabled = false;
+        if (uiInput != null) uiInput.enabled = false;
         //GameInputManager.Instance.DisablePausePanel();
     }
 
@@ -177,15 +177,11 @@ public class PanelManager : MonoBehaviour
         playerInteractor.Enable();
         playerMove.enabled = true;
         playerSight.enabled = true;
-        uiInput.enabled = true;
-        // 重新启用玩家输入
-       // GameInputManager.Instance.EnableMoveInput();
-       // GameInputManager.Instance.EnableInteractInput();
-       // GameInputManager.Instance.EnableSightInput();
+        if (uiInput != null) uiInput.enabled = true;
 
         //隐藏鼠标
-            sightInput.HideCursor();
-       // GameInputManager.Instance.HideCursor();
+        if (sightInput != null) sightInput.HideCursor();
+        else { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
     }
 
     private void OpenSettingPanel(SettingEvent settingEvent)
@@ -199,7 +195,7 @@ public class PanelManager : MonoBehaviour
         {
             //GameInputManager.Instance.EnablePausePanel();
         }
-        uiInput.enabled = true;
+        if (uiInput != null) uiInput.enabled = true;
 
         settingPanel.SetActive(false);
 

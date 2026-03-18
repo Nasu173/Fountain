@@ -70,6 +70,8 @@ public class InteractForTaskSimple : MonoBehaviour, IInteractable
     /// </summary>
     private void Start()
     {
+        outlineVisual = this.GetComponent<OutlineVisual>();
+
         FindTargetTask();
     }
 
@@ -223,6 +225,10 @@ public class InteractForTaskSimple : MonoBehaviour, IInteractable
                 if (showDebug) Debug.Log($"[{gameObject.name}] 任务未开始，无法收集");
                 return false;
             }
+        }
+        else
+        {
+            Debug.Log("无法通过反射访问taskStarted字段，确保BaseTaskTrigger中存在该字段");
         }
 
         // 通过反射检查任务是否已完成

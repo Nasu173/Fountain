@@ -43,6 +43,15 @@ namespace Fountain.InputManagement
             }
             DontDestroyOnLoad(this.gameObject);
             inputActions = new PlayerInputActions();
+
+            // 自动添加缺失的 Provider 组件
+            if (GetComponent<CharacterInputProvider>() == null)
+                gameObject.AddComponent<CharacterInputProvider>();
+            if (GetComponent<PlayerSightInputProvider>() == null)
+                gameObject.AddComponent<PlayerSightInputProvider>();
+            if (GetComponent<UIInputProvider>() == null)
+                gameObject.AddComponent<UIInputProvider>();
+
             inputProviders = this.GetComponents<IInputProvider>().ToList();
             //inputActions.Enable();
         }

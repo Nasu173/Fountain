@@ -61,3 +61,10 @@ public class SettingBackEvent : IGameEvent { }
 
 [System.Serializable]
 public class GameStartEvent : IGameEvent { }
+
+// ==================== 脚本触发事件 ====================
+[System.Serializable]
+public class ScriptTriggerEvent : IGameEvent
+{
+    public string TriggerId; // 目标触发器标识符（留空则触发所有ScriptTrigger）
+}

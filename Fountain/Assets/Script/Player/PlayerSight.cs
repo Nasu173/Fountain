@@ -77,6 +77,7 @@ namespace Fountain.Player
         }
         private void Update()
         {
+            if (sightInput == null) return;
             Rotate(sightInput.GetSightMove(), this.sensitivity);
         }
 

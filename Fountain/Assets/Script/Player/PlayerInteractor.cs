@@ -56,7 +56,7 @@ namespace Fountain.Player
 
             DetectInteractable();
 
-            if (interactInput.GetInteract())
+            if (interactInput != null && interactInput.GetInteract())
             {
                 Interact();
             }
@@ -121,10 +121,10 @@ namespace Fountain.Player
                 currentTarget = null;
                 return;
             }
-            //注意,只在可交互物体的根物体查找
-            bool hasInteractable =
-                hit.collider.transform.root.TryGetComponent<IInteractable>
-                (out var detectedInteractable);
+            // 从命中物体向上查找 IInteractable（支持挂载在任意层级）
+            IInteractable detectedInteractable =
+                hit.collider.GetComponentInParent<IInteractable>();
+            bool hasInteractable = detectedInteractable != null;
 
             if (!hasInteractable)
             {

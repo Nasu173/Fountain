@@ -20,9 +20,15 @@ namespace Foutain.UI
 
         public void OnStartClicked()
         {
-            sightInput.HideCursor();
+            if (sightInput != null)
+                sightInput.HideCursor();
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
             //GameInputManager.Instance.HideCursor();
-            uiInput.enabled = true;
+            if (uiInput != null) uiInput.enabled = true;
             //GameInputManager.Instance.EnablePausePanel();
             
             GameEventBus.Publish(new GameStartEvent());
