@@ -23,6 +23,8 @@ namespace Foutain.UI
         {
             // 确保输入管理器已初始化，便于 CursorManager 正常工作
             _ = GameInputManager.Instance;
+            uiInput ??= GameInputManager.Instance.GetProvider<UIInputProvider>();
+            if (uiInput != null) uiInput.enabled = false;
             SetMainMenuState(true);
         }
 

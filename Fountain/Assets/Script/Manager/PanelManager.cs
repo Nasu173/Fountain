@@ -94,6 +94,11 @@ public class PanelManager : MonoBehaviour
     /// </summary>
     public void Pause()
     {
+        if (!isStarted)
+        {
+            return;
+        }
+
         isPaused = !isPaused;
 
         if (isPaused)
@@ -203,9 +208,12 @@ public class PanelManager : MonoBehaviour
     {
         if (isStarted)
         {
-            //GameInputManager.Instance.EnablePausePanel();
+            if (uiInput != null) uiInput.enabled = true;
         }
-        if (uiInput != null) uiInput.enabled = true;
+        else
+        {
+            if (uiInput != null) uiInput.enabled = false;
+        }
 
         settingPanel.SetActive(false);
         settingPanelEnabled = false;
