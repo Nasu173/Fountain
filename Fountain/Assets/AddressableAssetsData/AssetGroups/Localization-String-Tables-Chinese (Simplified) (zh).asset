@@ -38,6 +38,13 @@ MonoBehaviour:
     - Locale-zh
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eea0c3b51be3d4446add9e15a7085621
+    m_Address: MiniGameTable_zh
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 27f48968afd74dd45812bc737c24aab2, type: 2}
   m_SchemaSet:

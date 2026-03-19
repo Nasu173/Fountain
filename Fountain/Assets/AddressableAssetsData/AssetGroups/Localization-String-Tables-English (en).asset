@@ -31,6 +31,13 @@ MonoBehaviour:
     - Locale-en
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e8f9d1bbb64bbb49853f2301ba45e20
+    m_Address: MiniGameTable_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d1ca76a6d33816a48966a587ca974892
     m_Address: UISettingPanel_en
     m_ReadOnly: 1

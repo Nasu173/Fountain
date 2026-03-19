@@ -68,3 +68,25 @@ public class ScriptTriggerEvent : IGameEvent
 {
     public string TriggerId; // 目标触发器标识符（留空则触发所有ScriptTrigger）
 }
+
+//下面几个是控制喷泉玩法需要的事件
+[System.Serializable]
+public class ControlFountainReadyEvent:IGameEvent//开始前的倒计时事件
+{
+
+}
+[System.Serializable]
+public class ControlFountainStartEvent:IGameEvent
+{
+
+}
+[System.Serializable]
+public class ControlFountainEndEvent:IGameEvent
+{
+
+}
+[System.Serializable]
+public class ControlFountainHit:IGameEvent//行人受伤事件
+{
+
+}

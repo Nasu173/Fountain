@@ -235,6 +235,76 @@ namespace Fountain.InputManagement
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""FountainGun"",
+            ""id"": ""ce8745b4-150d-4377-8064-1c447ec6f816"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""46a9d9fe-5e0c-476d-adf7-60374a1f9ec0"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""c5ddabf5-9738-4041-950b-eb0cde025d8b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""72944991-89cf-4da3-8241-c7b829547ea3"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""eb690c58-c5d8-4faf-979a-a4bd5a0a1e89"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""471c59b9-69c7-47f7-b887-08b04ea6de99"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea18ab8d-dabf-4f57-8d51-0807272ba56a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -250,12 +320,17 @@ namespace Fountain.InputManagement
             // PausePanel
             m_PausePanel = asset.FindActionMap("PausePanel", throwIfNotFound: true);
             m_PausePanel_Pause = m_PausePanel.FindAction("Pause", throwIfNotFound: true);
+            // FountainGun
+            m_FountainGun = asset.FindActionMap("FountainGun", throwIfNotFound: true);
+            m_FountainGun_Move = m_FountainGun.FindAction("Move", throwIfNotFound: true);
+            m_FountainGun_Fire = m_FountainGun.FindAction("Fire", throwIfNotFound: true);
         }
 
         ~@PlayerInputActions()
         {
             UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputActions.Player.Disable() has not been called.");
             UnityEngine.Debug.Assert(!m_PausePanel.enabled, "This will cause a leak and performance issues, PlayerInputActions.PausePanel.Disable() has not been called.");
+            UnityEngine.Debug.Assert(!m_FountainGun.enabled, "This will cause a leak and performance issues, PlayerInputActions.FountainGun.Disable() has not been called.");
         }
 
         public void Dispose()
@@ -445,6 +520,60 @@ namespace Fountain.InputManagement
             }
         }
         public PausePanelActions @PausePanel => new PausePanelActions(this);
+
+        // FountainGun
+        private readonly InputActionMap m_FountainGun;
+        private List<IFountainGunActions> m_FountainGunActionsCallbackInterfaces = new List<IFountainGunActions>();
+        private readonly InputAction m_FountainGun_Move;
+        private readonly InputAction m_FountainGun_Fire;
+        public struct FountainGunActions
+        {
+            private @PlayerInputActions m_Wrapper;
+            public FountainGunActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_FountainGun_Move;
+            public InputAction @Fire => m_Wrapper.m_FountainGun_Fire;
+            public InputActionMap Get() { return m_Wrapper.m_FountainGun; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(FountainGunActions set) { return set.Get(); }
+            public void AddCallbacks(IFountainGunActions instance)
+            {
+                if (instance == null || m_Wrapper.m_FountainGunActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_FountainGunActionsCallbackInterfaces.Add(instance);
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+            }
+
+            private void UnregisterCallbacks(IFountainGunActions instance)
+            {
+                @Move.started -= instance.OnMove;
+                @Move.performed -= instance.OnMove;
+                @Move.canceled -= instance.OnMove;
+                @Fire.started -= instance.OnFire;
+                @Fire.performed -= instance.OnFire;
+                @Fire.canceled -= instance.OnFire;
+            }
+
+            public void RemoveCallbacks(IFountainGunActions instance)
+            {
+                if (m_Wrapper.m_FountainGunActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IFountainGunActions instance)
+            {
+                foreach (var item in m_Wrapper.m_FountainGunActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_FountainGunActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public FountainGunActions @FountainGun => new FountainGunActions(this);
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
@@ -457,6 +586,11 @@ namespace Fountain.InputManagement
         public interface IPausePanelActions
         {
             void OnPause(InputAction.CallbackContext context);
+        }
+        public interface IFountainGunActions
+        {
+            void OnMove(InputAction.CallbackContext context);
+            void OnFire(InputAction.CallbackContext context);
         }
     }
 }
