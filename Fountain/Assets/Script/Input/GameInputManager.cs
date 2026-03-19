@@ -51,6 +51,8 @@ namespace Fountain.InputManagement
                 gameObject.AddComponent<PlayerSightInputProvider>();
             if (GetComponent<UIInputProvider>() == null)
                 gameObject.AddComponent<UIInputProvider>();
+            if (GetComponent<CursorManager>() == null)
+                gameObject.AddComponent<CursorManager>();
 
             inputProviders = this.GetComponents<IInputProvider>().ToList();
             //inputActions.Enable();

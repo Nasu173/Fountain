@@ -8,6 +8,7 @@ namespace Foutain.UI
     public class MainMenuPanel : MonoBehaviour
     {
         [SerializeField] private string _gameSceneAddress;
+        private bool mainMenuEnabled;
         //输入来源
         private PlayerSightInputProvider sightInput;
         private UIInputProvider uiInput;
@@ -18,16 +19,21 @@ namespace Foutain.UI
             sightInput = GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
         }
 
+        private void OnEnable()
+        {
+            // 确保输入管理器已初始化，便于 CursorManager 正常工作
+            _ = GameInputManager.Instance;
+            SetMainMenuState(true);
+        }
+
+        private void OnDisable()
+        {
+            SetMainMenuState(false);
+        }
+
         public void OnStartClicked()
         {
-            if (sightInput != null)
-                sightInput.HideCursor();
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
-            //GameInputManager.Instance.HideCursor();
+            SetMainMenuState(false);
             if (uiInput != null) uiInput.enabled = true;
             //GameInputManager.Instance.EnablePausePanel();
             
@@ -43,6 +49,7 @@ namespace Foutain.UI
 
         public void OnSettingClicked()
         {
+            SetMainMenuState(false);
             GameEventBus.Publish(new SettingEvent());
             gameObject.SetActive(false);
         }
@@ -50,6 +57,13 @@ namespace Foutain.UI
         public void OnQuitClicked()
         {
             Application.Quit();
+        }
+
+        private void SetMainMenuState(bool enabled)
+        {
+            if (mainMenuEnabled == enabled) return;
+            mainMenuEnabled = enabled;
+            CursorManager.Instance?.SetMainMenuEnabled(enabled);
         }
     }
 }
