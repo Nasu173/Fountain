@@ -22,6 +22,8 @@ public class PanelManager : MonoBehaviour
 
     private bool isPaused = false;
     private bool isStarted = false;
+    private bool pausePanelEnabled = false;
+    private bool settingPanelEnabled = false;
 
     private void Start()
     {
@@ -31,6 +33,11 @@ public class PanelManager : MonoBehaviour
         playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>(); 
         playerInteractor = PlayerInstance.Instance.GetComponent<PlayerInteractor>(); 
         playerSight = PlayerInstance.Instance.GetComponentInChildren<PlayerSight>(); 
+        
+        pausePanelEnabled = pausePanel != null && pausePanel.activeSelf;
+        settingPanelEnabled = settingPanel != null && settingPanel.activeSelf;
+        CursorManager.Instance?.SetPausePanelEnabled(pausePanelEnabled);
+        CursorManager.Instance?.SetSettingPanelEnabled(settingPanelEnabled);
 
     }
 
@@ -49,6 +56,8 @@ public class PanelManager : MonoBehaviour
         {
             Time.timeScale = 1.0f;
             pausePanel.SetActive(false);
+            pausePanelEnabled = false;
+            CursorManager.Instance?.SetPausePanelEnabled(false);
         }
     }
 
@@ -100,9 +109,8 @@ public class PanelManager : MonoBehaviour
            // GameInputManager.Instance.DisableMoveInput();
            // GameInputManager.Instance.DisableSightInput();
            // GameInputManager.Instance.DisableInteractInput();
-            //显示鼠标
-            if (sightInput != null) sightInput.ShowCursor();
-            else { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
+            pausePanelEnabled = true;
+            CursorManager.Instance?.SetPausePanelEnabled(true);
         }
         else
         {
@@ -117,8 +125,6 @@ public class PanelManager : MonoBehaviour
     public void OnMenuClicked()
     {
         Pause();
-        if (sightInput != null) sightInput.ShowCursor();
-        else { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
 
         pausePanel.SetActive(false);
 
@@ -145,6 +151,8 @@ public class PanelManager : MonoBehaviour
         GameEventBus.Publish(settingEvent);
 
         pausePanel.SetActive(false);
+        pausePanelEnabled = false;
+        CursorManager.Instance?.SetPausePanelEnabled(false);
 
         if (uiInput != null) uiInput.enabled = false;
         //GameInputManager.Instance.DisablePausePanel();
@@ -180,13 +188,15 @@ public class PanelManager : MonoBehaviour
         if (uiInput != null) uiInput.enabled = true;
 
         //隐藏鼠标
-        if (sightInput != null) sightInput.HideCursor();
-        else { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
+        pausePanelEnabled = false;
+        CursorManager.Instance?.SetPausePanelEnabled(false);
     }
 
     private void OpenSettingPanel(SettingEvent settingEvent)
     {
         settingPanel.SetActive(true);
+        settingPanelEnabled = true;
+        CursorManager.Instance?.SetSettingPanelEnabled(true);
     }
 
     public void OnBackClicked()
@@ -198,10 +208,14 @@ public class PanelManager : MonoBehaviour
         if (uiInput != null) uiInput.enabled = true;
 
         settingPanel.SetActive(false);
+        settingPanelEnabled = false;
+        CursorManager.Instance?.SetSettingPanelEnabled(false);
 
         if (isPaused)
         {
             pausePanel.SetActive(true);
+            pausePanelEnabled = true;
+            CursorManager.Instance?.SetPausePanelEnabled(true);
         }
 
         GameEventBus.Publish(new SettingBackEvent());
