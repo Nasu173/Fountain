@@ -74,11 +74,6 @@ public class PanelManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isStarted)
-        {
-            return;
-        }
-
         if (uiInput != null && uiInput.GetPause())
         {
             Pause();
@@ -91,10 +86,6 @@ public class PanelManager : MonoBehaviour
 
     private void OnPauseClicked(GamePauseEvent gamePauseEvent)
     {
-        if (!isStarted)
-        {
-            return;
-        }
         Pause();
     }
 
