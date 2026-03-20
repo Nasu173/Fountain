@@ -22,6 +22,8 @@ context: |
   - 场景系统: Assets/Script/Scene/ — GameSceneManager 单例管理场景切换，SceneLoader 封装 Addressable 异步加载，SceneAddress 集中定义场景地址常量；LoadSceneEvent 支持 Additive 加载、单场景卸载(SceneToUnload)、全场景卸载(UnloadAll+ScenesToKeep)
 
   - 喷泉系统: Assets/Script/Fountain/ — FountainController 控制时序，FountainSteamEffect 封装白汽粒子，FountainWaterEffect 封装水柱粒子，FountainTestInput 用于测试（O键开启/P键关闭）
+  - 怪物系统: Assets/Script/Monster/ — MonsterChase 使用 NavMeshAgent 追逐玩家，到达 executionDistance 后触发处决动画并发布 MonsterCatchEvent；RevivePanel 监听 MonsterCatchEvent 显示复活面板，点击复活发布 ReviveEvent
+  - 光标管理: Assets/Script/Manager/CursorManager — MonoSingleton，统一管理鼠标显示/隐藏，通过 SetMainMenuEnabled/SetSettingPanelEnabled/SetPausePanelEnabled 控制各面板状态
 
   交互接口:
   - IInteractable: 可交互对象接口
@@ -39,3 +41,4 @@ rules:
     - 每个任务聚焦单一职责，不超过一个系统
     - 新增管理器类需实现单例模式
     - 新增事件类需在 GameEventList.cs 中定义并实现 IGameEvent
+  - 现有事件: MenuEvent, SettingEvent, ContinueEvent, GamePauseEvent, LocaleChangeEvent, DialogueBeginEvent, DialogueEndEvent, SettingBackEvent, GameStartEvent, ScriptTriggerEvent, MonsterCatchEvent, ReviveEvent
