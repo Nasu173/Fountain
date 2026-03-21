@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Interactions;
 
 namespace Fountain.InputManagement
 {
@@ -11,16 +12,34 @@ namespace Fountain.InputManagement
     public class CharacterInputProvider : MonoBehaviour,IInputProvider
     {
         private PlayerInputActions inputActions;
+        /// <summary>
+        /// 由于要支持长按的交互,因此用一个变量记录是否“按下交互键”
+        /// </summary>
+        private bool isInteracting;
         private void Awake()
         {
-            this.inputActions = GameInputManager.Instance.GetInputAction(); 
+            this.inputActions = GameInputManager.Instance.GetInputAction();
+            this.isInteracting = false;
+            //只要按下的时候认为是在交互
+            inputActions.Player.Interact.performed += (context) =>
+            {
+                this.isInteracting = true;
+            };
         }
         private void OnEnable()
         {
             this.inputActions.Player.Enable();
         }
+        private void Update()
+        {
+            if (inputActions.Player.Interact.WasReleasedThisFrame())
+            {
+                this.isInteracting = false;
+            }
+        }
         private void OnDisable()
         {
+            this.isInteracting = false;
             this.inputActions.Player.Disable();
         }
 
@@ -53,20 +72,19 @@ namespace Fountain.InputManagement
             return inputActions.Player.Crouch.WasPressedThisFrame();
         }
 
-
         /// <summary>
         /// 获得交互输入
         /// </summary>
         /// <returns>是否按下交互键</returns>
         public bool GetInteract()
         {
-            return inputActions.Player.Interact.WasPressedThisFrame();
+            return this.isInteracting;
         }
         
         /// <summary>
         /// 获得对话输入
         /// </summary>
-        /// <returns>是否按下交互键</returns>
+        /// <returns>是否按下对话键</returns>
         public bool GetDialogueContinue()
         {
             return inputActions.Player.ContinueDialogue.WasPressedThisFrame();

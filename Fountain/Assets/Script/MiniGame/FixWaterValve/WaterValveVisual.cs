@@ -1,0 +1,90 @@
+using Fountain.Common;
+using Fountain.UI;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Fountain.MiniGame.RepairWaterValve
+{
+    /// <summary>
+    /// 显示水阀的视觉效果:描边和进度条
+    /// </summary>
+    public class WaterValveVisual : MonoBehaviour
+    {
+        private OutlineVisual outline;
+        private ProgressBar bar;
+        private WaterValveController valve;
+        [Tooltip("阀杆旋转速度")]
+        [SerializeField]
+        private float rotateSpeed;
+        private Transform stem;//阀杆
+
+        private void Start()
+        {
+            bar = this.transform.FindChildByName(nameof(bar)).GetComponent<ProgressBar>();
+            outline = this.transform.GetComponent<OutlineVisual>();
+            valve = this.GetComponent<WaterValveController>();
+            valve.ProgressIncrease += () =>
+            {
+                float amount = valve.GetRepairedPercentage();
+                bar.SetFillAmount(amount);
+                RotateValve(1);
+                if (amount!=0)
+                {
+                    ShowBar();
+                }
+            };
+            valve.ProgressDecrease += () =>
+            {
+                float amount = valve.GetRepairedPercentage();
+                bar.SetFillAmount(amount);
+                RotateValve(-1);
+                if (amount<=0)
+                {
+                    HideBar();
+                }
+            };
+
+            HideBar();
+            stem = this.transform.FindChildByName(nameof(stem));
+        }
+
+        /// <summary>
+        /// 显示进度条
+        /// </summary>
+        public void ShowBar()
+        {
+            bar.gameObject.SetActive(true);
+        }
+        /// <summary>
+        /// 隐藏进度条
+        /// </summary>
+        public void HideBar()
+        {
+            bar.gameObject.SetActive(false);
+        }
+        /// <summary>
+        /// 隐藏描边 
+        /// </summary>
+        public void ShowOutline()
+        {
+            outline.SetOutline(true);
+        }
+        /// <summary>
+        /// 显示描边
+        /// </summary>
+        public void HideOutline()
+        {
+            outline.SetOutline(false);
+        }
+
+        /// <summary>
+        /// 旋转阀门
+        /// </summary>
+        /// <param name="direction">方向+-1</param>
+        private void RotateValve(int direction)
+        {
+            stem.Rotate(this.transform.up, direction*Time.deltaTime * rotateSpeed, Space.World);
+        }
+    }
+}
