@@ -25,6 +25,7 @@ namespace Foutain.UI
             _ = GameInputManager.Instance;
             uiInput ??= GameInputManager.Instance.GetProvider<UIInputProvider>();
             if (uiInput != null) uiInput.enabled = false;
+            
             SetMainMenuState(true);
         }
 
