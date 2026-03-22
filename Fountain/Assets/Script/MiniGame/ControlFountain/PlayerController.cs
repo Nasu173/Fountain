@@ -41,7 +41,7 @@ namespace Fountain.MiniGame.ControlFountain
             });
             GameEventBus.Subscribe<ControlFountainEndEvent>((e) =>
             {
-                sightInput.ShowCursor(); 
+                //sightInput.ShowCursor(); 
                 this.gunInput.enabled = false;
             });
         }

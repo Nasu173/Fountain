@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 4508735849831332588}
   m_Layer: 2
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,6 +230,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 192
+  sensitivity: 0
 --- !u!114 &6089890124395089070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightAngleMax: 75
   sightAngleMin: -70
+  sensitivity: 0
   enableShake: 1
   frequencyWalk: 2
   amplitudePositionWalk: {x: 0.1, y: 0.1, z: 0}

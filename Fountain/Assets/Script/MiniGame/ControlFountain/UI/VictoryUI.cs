@@ -1,7 +1,10 @@
+using Fountain.InputManagement;
 using Fountain.UI;
+using Foutain.Scene;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Fountain.MiniGame.ControlFountain
 {
@@ -10,7 +13,9 @@ namespace Fountain.MiniGame.ControlFountain
     /// </summary>
     public class VictoryUI : MonoBehaviour
     {
+        public string _gameSceneAddress;
         private FadeEffect fadeEffect;
+        public Button returnButton;
         private void Start()
         {
             fadeEffect = this.GetComponent<FadeEffect>();
@@ -18,6 +23,14 @@ namespace Fountain.MiniGame.ControlFountain
             {
                 fadeEffect.FadeIn();
             });
+            /*
+            returnButton.onClick.AddListener(() =>
+            {
+
+                GameInputManager.Instance.GetProvider<PlayerSightInputProvider>().HideCursor();
+            });
+             
+             */
         }
 
     }
