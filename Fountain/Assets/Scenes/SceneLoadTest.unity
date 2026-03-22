@@ -1204,6 +1204,150 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: contrast
+      value: 0.957
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: enableRGB
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: grainSize
+      value: 1.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: pixelSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: tapeNoise
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: tapeSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: timeSpeed
+      value: 1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: enableScan
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: enableTape
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: saturation
+      value: 1.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: enableGrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: enablePixel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: glitchSpeed
+      value: 4.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: grainAmount
+      value: 0.288
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: dropoutSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: enableGlitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: enableDropout
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: rgbShiftCurve
+      value: 1.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: rgbShiftSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: scanlineCount
+      value: 485
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: scanlineSpeed
+      value: 1.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: trackingNoise
+      value: 0.011
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: trackingSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: enableTracking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: noiseIntensity
+      value: 0.173
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: pixelScanlines
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: rgbShiftAmount
+      value: 0.0375
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: glitchBlockSize
+      value: 0.0274
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: glitchIntensity
+      value: 0.346
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: dropoutIntensity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: vignetteSoftness
+      value: 1.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: scanlineIntensity
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: scanlineSharpness
+      value: 0.992
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: vignetteIntensity
+      value: 1.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 909510801910577275, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
+      propertyPath: vignetteRoundness
+      value: 0.96
+      objectReference: {fileID: 0}
     - target: {fileID: 1566795312620269423, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1550,7 +1694,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1355142219}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.6876579
+  m_Size: 0.68765795
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4003,7 +4147,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.75
+  m_fontSize: 42.35
   m_fontSizeBase: 33.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
