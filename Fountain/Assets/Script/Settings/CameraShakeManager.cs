@@ -125,11 +125,15 @@ public class CameraShakeManager : MonoBehaviour
         // 根据选择启用或禁用镜头抖动
         if (targetCameraShake == 1)
         {
-            sight.enableShake = true;  // 启用镜头抖动
+            //sight.enableShake = true;  
+            // 启用镜头抖动
+            sight.EnableShake();
         }
         else
         {
-            sight.enableShake = false; // 禁用镜头抖动
+            // 禁用镜头抖动
+            sight.DisableShake();
+            //sight.enableShake = false; 
         }
 
         // 保存设置到PlayerPrefs

@@ -2,7 +2,6 @@ using Fountain.InputManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Fountain.Player
 {
@@ -12,10 +11,14 @@ namespace Fountain.Player
     /// </summary>
     public class PlayerSight : MonoBehaviour
     {
-        //输入来源
-        private PlayerSightInputProvider sightInput;
-
-        private Camera sightCamera;
+        /// <summary>
+        /// 相机抖动效果实现类
+        /// </summary>
+        private CameraShakeEffect shakeEffect;
+        /// <summary>
+        ///是否允许旋转 
+        /// </summary>
+        private bool enableShake=true;
         [Header("相机旋转相关设置")]
         [Tooltip("相机最小旋转角度")]
         [SerializeField]
@@ -23,64 +26,51 @@ namespace Fountain.Player
         [Tooltip("相机最小旋转角度")]
         [SerializeField]
         public float sightAngleMin;
+        [Tooltip("旋转灵敏度")]
+        public float sensitivity;
+
+        private PlayerSightInputProvider sightInput;
+
         /// <summary>
         /// 累计旋转的角度
         /// </summary>
         private float cameraRotationAngle=0;
-        public float sensitivity;
 
-        [Header("走路抖动的相关参数")]
-        [Tooltip("是否启用抖动")]
-        public bool enableShake;
-        [Tooltip("走路时的震动频率")]
+        [Header("震动效果相关设置")]
+        [Header("移动时的震动")]
+        [Tooltip("走路震动振幅")]
+        [SerializeField]
+        private float amplitudeWalk;
+        [Tooltip("走路震动频率")]
         [SerializeField]
         private float frequencyWalk;
-        [Tooltip("走路时相机位置各个方向上的振幅")]
+        [Header("跑步时的震动")]
+        [Tooltip("跑步震动振幅")]
         [SerializeField]
-        private Vector3 amplitudePositionWalk;
-        [Tooltip("走路时相机旋转各个方向上的振幅")]
-        [SerializeField]
-        private Vector3 amplitudeRotationWalk;
-
-        [Header("跑步抖动的相关参数")]
-        [Tooltip("跑步时的震动频率")]
+        private float amplitudeRun;
+        [Tooltip("跑步震动频率")]
         [SerializeField]
         private float frequencyRun;
-        [Tooltip("跑步时的相机位置各个方向上振幅")]
-        [SerializeField]
-        private Vector3 amplitudePositionRun;
-        [Tooltip("跑步时相机旋转各个方向上振幅")]
-        [SerializeField]
-        private Vector3 amplitudeRotationRun;
 
-        [Header("震动平滑过渡速度设置")]
-        [Tooltip("位置变化速度")]
-        public float smoothSpeedPosition;
-        [Tooltip("旋转变化速度")]
-        public float smoothSpeedRotation;
-
-        private float noiseSeed;
-        /// <summary>
-        /// 初始相机位置
-        /// </summary>
-        private Vector3 originCameraPosition=Vector3.zero;
-        /// <summary>
-        /// 初始相机旋转
-        /// </summary>
-        private Quaternion originCameraRotation = Quaternion.identity;
+        //由于移动脚本写的不好,反过来影响这个脚本,气笑了
+        private bool isRunningShake;
+        private bool isWalkingShake;
+        private bool hasShake;
 
         private void Start()
         {
+            isRunningShake = false;
+            isWalkingShake = false;
+            hasShake = false;
+            shakeEffect = this.GetComponentInChildren<CameraShakeEffect>();
+            shakeEffect.Mute(true);
             sightInput= GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
-            sightCamera = this.GetComponentInChildren<Camera>();
-            noiseSeed = Random.Range(0f, 1000f);//1000f只是随便一个数,只要范围适中即可
         }
         private void Update()
         {
             if (sightInput == null) return;
             Rotate(sightInput.GetSightMove(), this.sensitivity);
         }
-
         /// <summary>
         /// 相机随着视线旋转
         /// </summary>
@@ -105,83 +95,65 @@ namespace Fountain.Player
             
         }
 
+        //下面的这些震动方法在对应运动状态开始时调用一次即可,否则会出现一些问题
+
         /// <summary>
         ///应用走路时的震动 
         /// </summary>
         public void ApplyWalkShake()
         {
-            if (!enableShake)
+            if (!enableShake||isWalkingShake)
             {
                 return;
             }
-            Vector3 noisePosition =
-                CalculateNoise(frequencyWalk, amplitudePositionWalk, 0);
-            Vector3 noiseRotation =
-                CalculateNoise(frequencyWalk, amplitudeRotationWalk, 0);
-
-            LerpPosAndRot(originCameraPosition + noisePosition,
-                originCameraRotation * Quaternion.Euler(noiseRotation));
+            isWalkingShake = true;
+            isRunningShake = false;
+            hasShake = true;
+            shakeEffect.SetNoise(amplitudeWalk, frequencyWalk);
         }
         /// <summary>
         /// 应用跑步时的震动
         /// </summary>
-        /// <param name="speed">奔跑速度</param>
         public void ApplyRunShake()
         {
-            if (!enableShake)
+            if (!enableShake||isRunningShake)
             {
                 return;
             }
-            //100只是随便给的偏移量而已,与走路时的震动做区分
-            Vector3 noisePosition =
-                CalculateNoise(frequencyRun, amplitudePositionRun, 100);
-            Vector3 noiseRotation =
-                CalculateNoise(frequencyRun, amplitudeRotationRun, 100);
-
-            LerpPosAndRot(originCameraPosition + noisePosition,
-                originCameraRotation * Quaternion.Euler(noiseRotation));
-
+            isWalkingShake = false;
+            isRunningShake = true;
+            hasShake = true;
+            shakeEffect.SetNoise(amplitudeRun, frequencyRun);
         }
         /// <summary>
-        /// 取消震动
+        /// 停止震动
         /// </summary>
-        public void CancelShake()
+        public void StopShake()
         {
-            LerpPosAndRot(originCameraPosition, originCameraRotation);
-        }
-
-        /// <summary>
-        /// 计算噪声
-        /// </summary>
-        /// <param name="frequency">频率</param>
-        /// <param name="amplitude">各个方向的振幅</param>
-        /// <param name="offset">采样点偏移</param>
-        /// <returns>噪声</returns>
-        private Vector3 CalculateNoise(float frequency,Vector3 amplitude,float offset)
-        {
-            float time = Time.time * frequency + noiseSeed + offset;
-
-            // 计算噪声,( (*2f -1f)为了让返回值从-1到1变化 )
-            float x = (Mathf.PerlinNoise(time, 0f) * 2f - 1f) * amplitude.x;
-            float y = (Mathf.PerlinNoise(0f, time) * 2f - 1f) * amplitude.y;
-            float z = (Mathf.PerlinNoise(time, time) * 2f - 1f) * amplitude.z;
-
-            return new Vector3(x, y, z);
+            if (!hasShake)
+            {
+                return;
+            }
+            isWalkingShake = false;
+            isRunningShake = false;
+            hasShake = false;
+            shakeEffect.Mute();
         }
 
         /// <summary>
-        /// 平滑过渡 
+        /// 禁用旋转
         /// </summary>
-        /// <param name="targetPosition"></param>
-        /// <param name="targetRotation"></param>
-        private void LerpPosAndRot(Vector3 targetPosition,Quaternion targetRotation)
+        public void DisableShake()
         {
-            
-            sightCamera.transform.SetLocalPositionAndRotation(
-Vector3.Lerp(sightCamera.transform.localPosition,
-                targetPosition, Time.deltaTime * smoothSpeedPosition),
-Quaternion.Slerp(sightCamera.transform.localRotation,
-                targetRotation, Time.deltaTime * smoothSpeedRotation));
+            shakeEffect.Mute(true);
+            this.enableShake = false;    
+        }
+        /// <summary>
+        /// 开启旋转
+        /// </summary>
+        public void EnableShake()
+        {
+            this.enableShake = true;
         }
     }
 }

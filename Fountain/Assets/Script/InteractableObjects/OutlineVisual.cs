@@ -18,6 +18,11 @@ namespace Fountain.Common
         /// <param name="visible">显示或隐藏</param>
         public void SetOutline(bool visible)
         {
+            //糊上去的代码,最好不出现这个判断
+            if (outlineVisual==null)
+            {
+                return;
+            }
             this.outlineVisual.enabled = visible;
         }
     }

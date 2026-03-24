@@ -9,7 +9,8 @@ using UnityEngine;
 namespace Fountain.Player
 {
     /// <summary>
-    /// 玩家移动类,实现移动的功能,虽然实现的并不怎样,各个移动的功能没有分的很好
+    /// 玩家移动类,实现移动的功能,
+    /// 虽然实现的并不怎样,臃肿,目前不太清楚移动用什么框架写比较好
     /// </summary>
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMove : MonoBehaviour
@@ -76,7 +77,9 @@ namespace Fountain.Player
         {
             //移动和转向
             if (moveInput == null || sightInput == null) return;
+
             Move(moveInput.GetMove());
+
             if (moveInput.GetCrouch())
             {
                 SwitchCrouch();
@@ -89,6 +92,7 @@ namespace Fountain.Player
             {
                 SwitchToWalk();
             }
+
             Rotate(sightInput.GetSightMove(), this.sensitivity);    
             
             if (crouchTransitioning)
@@ -112,7 +116,7 @@ namespace Fountain.Player
             //应用相机震动
             if (inputDirection==Vector3.zero)
             {
-                sight.CancelShake();
+                sight.StopShake();
                 moving = false;
                 return;
             }
@@ -165,7 +169,7 @@ namespace Fountain.Player
         {
             if (crouching)
             {
-                //头顶上没有东西才能站起来
+                //蹲着的时候头顶上没有东西才能站起来
                 if (!HeadDetect())
                 {
                     crouchTransitioning = true;
@@ -173,7 +177,7 @@ namespace Fountain.Player
                     targetHeight = standingHeight; 
                 }
             }
-            else
+            else//没蹲着的时候
             {
                 crouchTransitioning = true;
                 crouching = true;
