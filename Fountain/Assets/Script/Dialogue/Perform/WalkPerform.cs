@@ -12,7 +12,7 @@ namespace Fountain.Dialogue
         private WalkData data;
         public override void Perform()
         {
-            data.npcMove.SetSpeed(data.speed);
+            data.npcMove.SetDuration(data.duration);
             data.npcMove.MoveToward(data.targetPosition);            
         }
 

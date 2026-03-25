@@ -3,27 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TalkToSelf : MonoBehaviour
+namespace Fountain.Player
 {
-    public DialogueSequence dialogue;
-    private void OnTriggerEnter(Collider other)
+    /// <summary>
+    /// 用于触发自言自语的效果的东西,不能算作可交互物体,只是顺手放在这个文件夹里罢了
+    /// </summary>
+    public class TalkToSelf : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        public DialogueSequence dialogue;
+        private void OnTriggerEnter(Collider other)
         {
-            DialogueManager.Instance.StartDialogue(dialogue, null);
-            Destroy(this.gameObject);
+            if (other.CompareTag("Player"))//唉,懒得改了
+            {
+                DialogueManager.Instance.StartDialogue(dialogue, null);
+                Destroy(this.gameObject);
+            }
+             
         }
-         
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

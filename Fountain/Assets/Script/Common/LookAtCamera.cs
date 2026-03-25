@@ -13,16 +13,15 @@ namespace Fountain.Common
         [Tooltip("要看向的相机")]
         [SerializeField]
         private Transform target;
-        [Tooltip("是否默认看向玩家相机?")]
+        [Tooltip("是否默认看向主相机?")]
         [SerializeField]
-        private bool isPlayerCamera;
+        private bool isMain=false;
         public Mode mode;
         private void Start()
         {
-            if (isPlayerCamera)
+            if (isMain)
             {
-                target = PlayerInstance.Instance.GetComponentInChildren<PlayerSight>().
-                    transform;
+                target = Camera.main.transform; 
             }
         }
         public enum Mode

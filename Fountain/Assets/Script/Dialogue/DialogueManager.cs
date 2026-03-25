@@ -100,6 +100,7 @@ namespace Fountain.Dialogue
             playerInteractor.Disable();
             playerMove.enabled = false;
             playerSight.enabled = false;
+            playerSight.StopShake();
             uiInput.enabled = false;
            // GameInputManager.Instance.DisableInteractInput();
            // GameInputManager.Instance.DisableMoveInput();

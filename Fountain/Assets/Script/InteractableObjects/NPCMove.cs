@@ -9,9 +9,9 @@ namespace Fountain.Player
     /// </summary>
     public class NPCMove : MonoBehaviour
     {
-        [Tooltip("移动速度")]
+        [Tooltip("移动总时间")]
         [SerializeField]
-        private float speed;
+        private float duration;
         private Vector3 targetPosition;
         
         //移动到指定地点
@@ -20,22 +20,34 @@ namespace Fountain.Player
             this.targetPosition = position;
             StartCoroutine(Move());
         }
-        public void SetSpeed(float speed)
+        public void SetDuration(float duration)
         {
-            this.speed = speed;
+            this.duration = duration;
         }
         private IEnumerator Move()
         {
+            float elapsed = 0;
+            Vector3 startPosition = this.transform.position;
+            while (elapsed<duration)
+            {
+                float t = elapsed / duration;
+                this.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+            /*
             float acceptableDelta = 0.01f;
             Vector3 startPosition = this.transform.position;
             float t = 0;
             while (Vector3.Distance(this.transform.position,targetPosition)>acceptableDelta)
             {
                 this.transform.LookAt(targetPosition);
-                t += Time.deltaTime * speed;
+                t += Time.deltaTime * duration;
                 this.transform.position = Vector3.Lerp(startPosition, targetPosition, t);
                 yield return null;
             }
+             
+             */
         }
     }
 }

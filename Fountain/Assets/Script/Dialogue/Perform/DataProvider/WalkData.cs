@@ -15,8 +15,8 @@ namespace Fountain.Dialogue
         public int dialogueNodeIndex;
         [Tooltip("要移动到的位置")]
         public Vector3 targetPosition;
-        [Tooltip("移动速度")]
-        public float speed;
+        [Tooltip("移动总时间")]
+        public float duration;
         public NPCMove npcMove;
         public int GetTargetIndex()
         {
