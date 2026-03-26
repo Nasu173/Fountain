@@ -70,17 +70,7 @@ namespace Fountain.Player
 
             if (currentTarget != null)
             {
-                // 原有的交互逻辑
                 currentTarget.InteractWith(this);
-
-                // 检查是否有 SimpleTaskInteractable
-                if (currentTarget is MonoBehaviour mono)
-                {
-                    if (mono.TryGetComponent<SimpleTaskInteractable>(out var simpleInteractable))
-                    {
-                        simpleInteractable.OnPlayerInteract();
-                    }
-                }
             }
         }
         /// <summary>

@@ -88,22 +88,22 @@ public class SimpleTaskTest : MonoBehaviour
 
             if (pressCount == 1)
             {
-                // 第一次按下：添加新任务
-                Debug.Log("Adding new task...");
-                TaskManager.Instance.AddTask(
-                    taskId,                    // 任务ID
-                    "Collect Gems",             // 任务名称
-                    5,                          // 目标数量
-                    "Collect 5 gems to complete the task", // 任务描述
-                    "1"                         // 任务编号
-                );
+                // 第一次按下：发布任务开始事件
+                Debug.Log("Publishing TaskStartEvent...");
+                GameEventBus.Publish(new TaskStartEvent
+                {
+                    TaskId = taskId,
+                    TaskName = "Collect Gems",
+                    TargetCount = 5,
+                    Description = "Collect 5 gems to complete the task",
+                    TaskNumber = "1"
+                });
             }
             else
             {
-                // 后续按下：更新任务进度
-                int amount = 1;
-                Debug.Log($"Updating task progress by {amount}...");
-                TaskManager.Instance.UpdateTaskProgress(taskId, amount);
+                // 后续按下：发布任务进度事件
+                Debug.Log("Publishing TaskProgressEvent...");
+                GameEventBus.Publish(new TaskProgressEvent { TaskId = taskId, Amount = 1 });
             }
         }
 

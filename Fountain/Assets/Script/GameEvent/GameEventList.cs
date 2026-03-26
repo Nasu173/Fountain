@@ -96,3 +96,21 @@ public class MonsterCatchEvent : IGameEvent { }
 
 [System.Serializable]
 public class ReviveEvent : IGameEvent { }
+
+// ==================== 任务系统事件 ====================
+[System.Serializable]
+public class TaskStartEvent : IGameEvent
+{
+    public string TaskId;
+    public string TaskName;
+    public string TaskNumber;
+    public int TargetCount;
+    public string Description;
+}
+
+[System.Serializable]
+public class TaskProgressEvent : IGameEvent
+{
+    public string TaskId;
+    public int Amount;
+}

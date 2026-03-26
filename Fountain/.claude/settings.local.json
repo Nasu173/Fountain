@@ -15,7 +15,11 @@
       "mcp__UnityMCP__manage_material",
       "mcp__UnityMCP__manage_camera",
       "Bash(openspec *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(find /d/GitHub/Fountain/Fountain/Assets -type f -name \"*.cs\" | xargs grep -li \"task\\\\|quest\\\\|任务\" 2>/dev/null | head -60)",
+      "Bash(cmd /c \"openspec --version\" 2>&1 || echo \"not found via cmd\")",
+      "Bash(grep -r \"SimpleTaskInteractable\\\\|InteractForTaskSimple\\\\|InteractionListener\" \"D:/GitHub/Fountain/Fountain/Assets\" --include=\"*.unity\" --include=\"*.prefab\" -l 2>/dev/null | head -20)",
+      "Bash(cmd /c \"move D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\openspec\\\\changes\\\\refactor-task-system D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\openspec\\\\changes\\\\archive\\\\2026-03-26-refactor-task-system\" 2>&1 && echo \"ok\")"
     ]
   }
 }
