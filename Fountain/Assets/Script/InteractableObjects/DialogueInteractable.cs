@@ -24,6 +24,9 @@ namespace Fountain.Player
         /// </summary>
         private List<IPerformDataProvider> dataProviders;
 
+        private bool canInteract=true;
+        public bool CanInteract
+        { get { return canInteract; } set { canInteract = value; } }
         private void Start()
         {
             dataProviders = this.GetComponents<IPerformDataProvider>().ToList();
@@ -35,7 +38,8 @@ namespace Fountain.Player
 
         public void InteractWith(PlayerInteractor player)
         {
-            DialogueManager.Instance.StartDialogue(this.dialogues,dataProviders);                
+            DialogueManager.Instance.StartDialogue(this.dialogues,dataProviders);
+            this.canInteract = false;
         }
 
         public void Select()

@@ -15,6 +15,9 @@ namespace Fountain.Dialogue
         public DialogueSequence dialogues;
         private OutlineVisual[] outlineVisuals;
         private List<IPerformDataProvider> dataProviders;
+        private bool canInteract=true;
+        public bool CanInteract 
+        { get { return canInteract; } set { canInteract = value; } } 
         private void Start()
         {
             outlineVisuals = this.GetComponents<OutlineVisual>();

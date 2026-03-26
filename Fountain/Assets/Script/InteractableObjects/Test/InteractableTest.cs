@@ -11,6 +11,9 @@ namespace Fountain.Player
     public class InteractableTest : MonoBehaviour, IInteractable
     {
         private OutlineVisual outlineVisual;
+        private bool canInteract;
+        public bool CanInteract 
+        { get { return canInteract; } set { canInteract = value; } } 
         private void Start()
         {
             outlineVisual = this.GetComponent<OutlineVisual>();

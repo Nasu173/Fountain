@@ -8,6 +8,10 @@ namespace Fountain.Player
     public interface IInteractable
     {
         /// <summary>
+        /// 每个可交互物体说明能否交互
+        /// </summary>
+        public bool CanInteract { get; set; }
+        /// <summary>
         /// 与玩家交互
         /// </summary>
         /// <param name="player"></param>

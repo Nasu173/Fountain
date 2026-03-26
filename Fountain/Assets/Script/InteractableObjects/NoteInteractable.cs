@@ -32,6 +32,10 @@ namespace Fountain.Player
         private PlayerMove playerMove;
         private PlayerSight playerSight;
         private PlayerInteractor playerInteractor;
+
+        private bool canInteract=true;
+        public bool CanInteract 
+        { get { return canInteract; } set { canInteract = value; } } 
         private void Start()
         {
             outlineVisuals = this.GetComponents<OutlineVisual>();
@@ -62,6 +66,7 @@ namespace Fountain.Player
             //显示鼠标
             sightInput.ShowCursor();
             //GameInputManager.Instance.ShowCursor();
+            this.canInteract = false;
         }
 
         public void Select()

@@ -22,6 +22,10 @@ public class TaskInteractable : MonoBehaviour, IInteractable, ITaskInteractable
 
     private bool hasInteracted = false;
 
+    private bool canInteract=true;
+    public bool CanInteract
+    { get { return canInteract; } set { canInteract = value; } }
+
     private void Awake()
     {
         if (outlineVisual == null)
@@ -64,7 +68,7 @@ public class TaskInteractable : MonoBehaviour, IInteractable, ITaskInteractable
         });
 
         hasInteracted = true;
-
+        canInteract = false;
         if (config.destroyOnInteract)
             Destroy(gameObject);
     }

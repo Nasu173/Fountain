@@ -54,6 +54,9 @@ namespace Fountain.MiniGame.RepairWaterValve
         /// </summary>
         private int decreaseDelay;//2只是随便给的一个大于1的数
 
+        private bool canInteract;
+        public bool CanInteract 
+        { get { return canInteract; } set { canInteract = value; } } 
         private void Start()
         {
             visual = this.GetComponent<WaterValveVisual>();
@@ -143,6 +146,7 @@ namespace Fountain.MiniGame.RepairWaterValve
                 repaired = true;
                 repairProgress = 1f;
                 RepairComplete?.Invoke();
+                this.canInteract = false;
             }
         }
     }

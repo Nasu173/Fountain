@@ -18,6 +18,10 @@ namespace Fountain.Player
         [Tooltip("描边效果,手动拖得了")]
         [SerializeField]
         private OutlineVisual[] outlineVisuals;
+
+        private bool canInteract=true;
+        public bool CanInteract 
+        { get { return canInteract; } set { canInteract = value; } } 
         public void Deselect()
         {
             SetOutline(false);
@@ -36,7 +40,7 @@ namespace Fountain.Player
                 Additive = true,
                 SceneToUnload = gameObject.scene.name
             });
-
+            this.canInteract = false;
         }
 
         private void SetOutline(bool visible)
