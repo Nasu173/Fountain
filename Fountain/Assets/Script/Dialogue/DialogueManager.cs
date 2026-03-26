@@ -147,6 +147,10 @@ namespace Fountain.Dialogue
             dialogueCompleted = true;
             dialoguePanel.SetVisible(false);
             GameEventBus.Publish<DialogueEndEvent>(null);
+            GameEventBus.Publish(new ScriptTriggerEvent
+            {
+                DialogueID = currentDialogues.id.ToString()
+            });
             //触发结束时的演出
             TriggerPerform(IPerformDataProvider.END_INDEX, currentDialogues.dialogueEndPerformName); 
             this.currentDialogues = null;

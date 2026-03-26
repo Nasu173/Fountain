@@ -12,6 +12,8 @@ namespace Fountain.Player
     /// </summary>
     public class DialogueInteractable : MonoBehaviour,IInteractable
     {
+        [SerializeField] private string taskID;
+
         [Tooltip("描边效果,手动拖得了")]
         [SerializeField]
         private OutlineVisual[] outlineVisuals;
@@ -24,7 +26,7 @@ namespace Fountain.Player
         /// </summary>
         private List<IPerformDataProvider> dataProviders;
 
-        private bool canInteract=true;
+        private bool canInteract=false;
         public bool CanInteract
         { get { return canInteract; } set { canInteract = value; } }
         private void Start()
@@ -55,5 +57,22 @@ namespace Fountain.Player
             }
         }
 
+        void OnEnable()
+        {
+            GameEventBus.Subscribe<TaskStartEvent>(EnableInteraction);
+        }
+
+        void OnDisable()
+        {
+            GameEventBus.Unsubscribe<TaskStartEvent>(EnableInteraction);
+        }
+
+        private void EnableInteraction(TaskStartEvent e)
+        {
+            if (e.TaskId == taskID)
+            {
+                canInteract = true;
+            }
+        }
     }
 }

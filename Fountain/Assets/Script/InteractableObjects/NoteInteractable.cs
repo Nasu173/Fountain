@@ -33,7 +33,7 @@ namespace Fountain.Player
         private PlayerSight playerSight;
         private PlayerInteractor playerInteractor;
 
-        private bool canInteract=true;
+        private bool canInteract=false;
         public bool CanInteract 
         { get { return canInteract; } set { canInteract = value; } } 
         private void Start()

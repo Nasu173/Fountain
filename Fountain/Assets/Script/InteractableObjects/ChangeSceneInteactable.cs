@@ -19,7 +19,9 @@ namespace Fountain.Player
         [SerializeField]
         private OutlineVisual[] outlineVisuals;
 
-        private bool canInteract=true;
+        [SerializeField] private string taskID;
+
+        private bool canInteract=false;
         public bool CanInteract 
         { get { return canInteract; } set { canInteract = value; } } 
         public void Deselect()
@@ -30,9 +32,38 @@ namespace Fountain.Player
         {
             SetOutline(true);
         }
+
+        void OnEnable()
+        {
+            GameEventBus.Subscribe<TaskStartEvent>(EnableInteraction);
+            GameEventBus.Subscribe<TaskCompleteEvent>(DisableInteraction);
+        }
+
+        void OnDisable()
+        {
+            GameEventBus.Unsubscribe<TaskStartEvent>(EnableInteraction);
+            GameEventBus.Unsubscribe<TaskCompleteEvent>(DisableInteraction);
+        }
+
+        private void EnableInteraction(TaskStartEvent e)
+        {
+            if (e.TaskId == taskID)
+            {
+                canInteract = true;
+            }
+        }
+
+        private void DisableInteraction(TaskCompleteEvent e)
+        {
+            if (e.TaskId == taskID)
+            {
+                canInteract = false;
+            }
+        }
       
         public void InteractWith(PlayerInteractor player)
         {
+            this.canInteract = false;
             //切换场景
             GameEventBus.Publish(new LoadSceneEvent
             {
@@ -40,7 +71,6 @@ namespace Fountain.Player
                 Additive = true,
                 SceneToUnload = gameObject.scene.name
             });
-            this.canInteract = false;
         }
 
         private void SetOutline(bool visible)

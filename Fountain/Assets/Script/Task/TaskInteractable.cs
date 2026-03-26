@@ -10,6 +10,7 @@ public class TaskInteractable : MonoBehaviour, IInteractable, ITaskInteractable
 {
     [Header("任务配置")]
     [SerializeField] private BaseTaskTrigger taskTrigger;
+    [SerializeField] private string taskID;
 
     [Header("交互设置")]
     [SerializeField] private InteractConfig config = new InteractConfig();
@@ -22,7 +23,7 @@ public class TaskInteractable : MonoBehaviour, IInteractable, ITaskInteractable
 
     private bool hasInteracted = false;
 
-    private bool canInteract=true;
+    private bool canInteract=false;
     public bool CanInteract
     { get { return canInteract; } set { canInteract = value; } }
 
@@ -33,6 +34,25 @@ public class TaskInteractable : MonoBehaviour, IInteractable, ITaskInteractable
 
         if (outlineVisual != null)
             outlineVisual.SetOutline(false);
+    }
+
+    void OnEnable()
+    {
+        GameEventBus.Subscribe<TaskStartEvent>(EnableInteraction);
+    }
+
+    void OnDisable()
+    {
+        GameEventBus.Unsubscribe<TaskStartEvent>(EnableInteraction);
+    }
+
+    private void EnableInteraction(TaskStartEvent e)
+    {
+        if (e.TaskId == taskID)
+        {
+            canInteract = true;
+            if (showDebug) Debug.Log($"[{gameObject.name}] 任务 {e.TaskName} 开始，允许交互");
+        }
     }
 
     public void InteractWith(PlayerInteractor player)

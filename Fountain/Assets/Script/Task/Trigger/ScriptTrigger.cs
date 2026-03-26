@@ -9,6 +9,8 @@ public class ScriptTrigger : BaseTaskTrigger
     [Header("脚本触发配置")]
     [Tooltip("触发器标识符，用于区分多个ScriptTrigger（留空则响应所有广播）")]
     [SerializeField] private string triggerId;
+    [Tooltip("可选：关联的对话ID，如果设置了则只有广播中DialogueID匹配时才触发")]
+    [SerializeField] private string dialogueId; 
 
     private int currentProgress = 0;
 
@@ -53,13 +55,15 @@ public class ScriptTrigger : BaseTaskTrigger
 
         // 如果设置了triggerId，只响应匹配的广播
         if (!string.IsNullOrEmpty(triggerId) && e.TriggerId != triggerId) return;
+        // 如果设置了dialogueId，只响应匹配的广播
+        if (!string.IsNullOrEmpty(dialogueId) && e.DialogueID != dialogueId) return;
 
         if (!taskStarted)
         {
             StartTask();
         }
 
-        UpdateTaskProgress();
+        //UpdateTaskProgress();
 
         if (currentProgress >= TargetCount)
         {

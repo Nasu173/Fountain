@@ -67,6 +67,7 @@ public class GameStartEvent : IGameEvent { }
 public class ScriptTriggerEvent : IGameEvent
 {
     public string TriggerId; // 目标触发器标识符（留空则触发所有ScriptTrigger）
+    public string DialogueID; // 可选：关联的对话ID（如果需要）
 }
 
 //下面几个是控制喷泉玩法需要的事件
@@ -113,4 +114,10 @@ public class TaskProgressEvent : IGameEvent
 {
     public string TaskId;
     public int Amount;
+}
+
+[System.Serializable]
+public class TaskCompleteEvent : IGameEvent
+{
+    public string TaskId;
 }

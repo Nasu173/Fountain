@@ -105,6 +105,8 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
 
     protected virtual void OnTaskCompleted()
     {
+        GameEventBus.Publish(new TaskCompleteEvent { TaskId = TaskId });
+
         taskCompleted = true;
         if (debugMode) Debug.Log($"[{GetType().Name}] Task completed: {taskName}");
 
