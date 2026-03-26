@@ -3,7 +3,10 @@ schema: spec-driven
 context: |
   项目名称: Fountain
   引擎: Unity (C#)
-  命名空间: Foutain (注意拼写，项目中统一使用 Foutain 而非 Fountain)
+  命名空间规则:
+    - 大多数系统使用 Fountain.* 命名空间（如 Fountain.Player, Fountain.Dialogue, Fountain.UI 等）
+    - Scene 相关文件使用 Foutain.Scene（注意拼写，历史遗留）
+    - 全局类（GameEventBus, GameEventList, TaskManager 等）无命名空间
   语言: C#，注释和文档使用中文
 
   架构模式:
@@ -11,24 +14,41 @@ context: |
   - 事件总线: GameEventBus.Publish<T>() 发布事件，事件类实现 IGameEvent 接口，定义在 GameEventList.cs
   - ScriptableObject (SO) 用于数据存储，如 DialogueSequence
   - 工厂模式用于创建 DialoguePerform 实现类
+  - MonoSingleton<T> 泛型基类用于单例 MonoBehaviour
 
   核心系统:
-  - 玩家系统: Assets/Script/Player/ — 移动(PlayerMove)、视野(PlayerSight)、交互(PlayerInteractor)、输入(GameInputManager)
-  - 对话系统: Assets/Script/Dialogue/ — DialogueManager 管理对话流程，DialoguePanel 负责 UI 显示，支持演出效果(Perform)
-  - 任务系统: Assets/Script/Task/ — TaskManager 管理任务生命周期，支持多种触发器(Trigger)
-  - 设置系统: Assets/Script/Settings/ — 音频、分辨率、帧率、鼠标灵敏度、VHS 效果等
+  - 玩家系统: Assets/Script/Player/ — 移动(PlayerMove)、视野(PlayerSight)、交互(PlayerInteractor)、输入(GameInputManager)、PlayerInstance 单例
+  - 对话系统: Assets/Script/Dialogue/ — DialogueManager 管理对话流程，DialoguePanel 负责 UI 显示，支持演出效果(Perform: LookAt/PlayAnimation/PlaySound/Walk)
+  - 任务系统: Assets/Script/Task/ — TaskManager 单例管理任务生命周期，BaseTaskTrigger 基类，支持触发器(InteractTaskTrigger/AreaEnterTrigger/CollectItemTrigger/ScriptTrigger)，InteractConfig 配置交互行为
+  - 设置系统: Assets/Script/Settings/ — 音频(AudioMixerController)、分辨率(ResolutionManager)、帧率(FrameRateManager)、鼠标灵敏度(MouseSensitivityManager)、VHS效果(VHSRetroFeatureManager/VHSGammaSlider)、窗口模式(WindowModeController)、相机震动(CameraShakeManager)
   - 本地化系统: Assets/Script/Localization/ — LocalizationManager，支持多语言切换
-  - UI 系统: Assets/Script/UI/ — PanelManager 管理面板，使用 TextMeshPro；MainMenuPanel 管理主菜单按钮（开始游戏/设置/退出）
+  - UI 系统: Assets/Script/UI/ — PanelManager 管理面板，使用 TextMeshPro；MainMenuPanel 管理主菜单按钮（开始游戏/设置/退出）；NotePanel/NoteContent 笔记面板；FadeEffect/TypeEffect/ProgressBar/InteractPrompt
   - 场景系统: Assets/Script/Scene/ — GameSceneManager 单例管理场景切换，SceneLoader 封装 Addressable 异步加载，SceneAddress 集中定义场景地址常量；LoadSceneEvent 支持 Additive 加载、单场景卸载(SceneToUnload)、全场景卸载(UnloadAll+ScenesToKeep)
-
   - 喷泉系统: Assets/Script/Fountain/ — FountainController 控制时序，FountainSteamEffect 封装白汽粒子，FountainWaterEffect 封装水柱粒子，FountainTestInput 用于测试（O键开启/P键关闭）
   - 怪物系统: Assets/Script/Monster/ — MonsterChase 使用 NavMeshAgent 追逐玩家，到达 executionDistance 后触发处决动画并发布 MonsterCatchEvent；RevivePanel 监听 MonsterCatchEvent 显示复活面板，点击复活发布 ReviveEvent
   - 光标管理: Assets/Script/Manager/CursorManager — MonoSingleton，统一管理鼠标显示/隐藏，通过 SetMainMenuEnabled/SetSettingPanelEnabled/SetPausePanelEnabled 控制各面板状态
+  - 小游戏系统:
+    - ControlFountain: Assets/Script/MiniGame/ControlFountain/ — GameFlowController(PrepareGame/StartGame/EndGame)、PedestrianSpawner、Pedestrian、WaterProjectile、CountdownTimer、PlayerController、ChangeSceneOnVictory；UI: ScoreUI/TimerUI/VictoryUI/ScreenBlack
+    - FixWaterValve: Assets/Script/MiniGame/FixWaterValve/ — WaterValveController、WaterValveUI、WaterValveVisual
+
+  可交互对象 (Assets/Script/InteractableObjects/):
+  - DialogueInteractable: 触发对话，监听 TaskStartEvent 激活
+  - NoteInteractable: 触发笔记面板
+  - TaskInteractable: 统一任务交互对象，关联 BaseTaskTrigger
+  - ChangeSceneInteactable: 触发场景切换
+  - NPCMove: NPC 移动
+  - OutlineVisual: 描边视觉效果
+  - TalkToSelf: 自言自语
 
   交互接口:
-  - IInteractable: 可交互对象接口
+  - IInteractable: 可交互对象接口 (Select/Deselect/InteractWith/CanInteract)
   - ITaskTrigger / ITaskInteractable: 任务触发相关接口
   - IPerformDataProvider: 对话演出数据提供接口
+
+  输入系统 (Assets/Script/Input/):
+  - GameInputManager: 单例，管理所有输入 Provider
+  - Provider: IInputProvider 接口，实现类: PlayerSightInputProvider/UIInputProvider/CharacterInputProvider/GunInputProvider
+  - 使用 Unity Input System (PlayerInputActions)
 
   代码规范:
   - 使用 [Header] 和 [Tooltip] 标注 Inspector 字段
@@ -41,4 +61,14 @@ rules:
     - 每个任务聚焦单一职责，不超过一个系统
     - 新增管理器类需实现单例模式
     - 新增事件类需在 GameEventList.cs 中定义并实现 IGameEvent
-  - 现有事件: MenuEvent, SettingEvent, ContinueEvent, GamePauseEvent, LocaleChangeEvent, DialogueBeginEvent, DialogueEndEvent, SettingBackEvent, GameStartEvent, ScriptTriggerEvent, MonsterCatchEvent, ReviveEvent
+  - 现有事件 (GameEventList.cs):
+      UI/流程: MenuEvent, SettingEvent, ContinueEvent, GamePauseEvent, GameStartEvent, SettingBackEvent
+      本地化: LocaleChangeEvent
+      对话: DialogueBeginEvent, DialogueEndEvent
+      脚本触发: ScriptTriggerEvent (TriggerId, DialogueID)
+      小游戏-控制喷泉: ControlFountainReadyEvent, ControlFountainStartEvent, ControlFountainEndEvent, ControlFountainHit
+      怪物: MonsterCatchEvent, ReviveEvent
+      任务: TaskStartEvent (TaskId/TaskName/TaskNumber/TargetCount/Description), TaskProgressEvent (TaskId/Amount), TaskCompleteEvent (TaskId)
+  - 现有事件 (SceneEventList.cs, namespace Foutain.Scene):
+      LoadSceneEvent (SceneAddress/Additive/SceneToUnload/UnloadAll/ScenesToKeep)
+      SceneLoadProgressEvent (Progress), SceneLoadedEvent (SceneAddress)
