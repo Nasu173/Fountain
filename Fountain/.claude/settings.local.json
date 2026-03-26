@@ -21,7 +21,8 @@
       "Bash(grep -r \"SimpleTaskInteractable\\\\|InteractForTaskSimple\\\\|InteractionListener\" \"D:/GitHub/Fountain/Fountain/Assets\" --include=\"*.unity\" --include=\"*.prefab\" -l 2>/dev/null | head -20)",
       "Bash(cmd /c \"move D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\openspec\\\\changes\\\\refactor-task-system D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\openspec\\\\changes\\\\archive\\\\2026-03-26-refactor-task-system\" 2>&1 && echo \"ok\")",
       "Bash(mkdir -p \"D:/GitHub/Fountain/Fountain/openspec/changes/task-area-enter\" && echo '{\"schema\":\"spec-driven\",\"created\":\"2026-03-26\"}' > \"D:/GitHub/Fountain/Fountain/openspec/changes/task-area-enter/.openspec.yaml\" && echo \"ok\")",
-      "Bash(cmd /c \"mkdir D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\openspec\\\\changes\\\\task-area-enter 2>nul & echo ok\")"
+      "Bash(cmd /c \"mkdir D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\openspec\\\\changes\\\\task-area-enter 2>nul & echo ok\")",
+      "Bash(cmd /c \"move D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\openspec\\\\changes\\\\task-area-enter D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\openspec\\\\changes\\\\archive\\\\2026-03-26-task-area-enter\" 2>&1 && echo \"ok\")"
     ]
   }
 }
