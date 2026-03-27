@@ -2082,6 +2082,7 @@ GameObject:
   - component: {fileID: 435622162}
   - component: {fileID: 435622166}
   - component: {fileID: 435622167}
+  - component: {fileID: 435622168}
   m_Layer: 7
   m_Name: Phone
   m_TagString: Untagged
@@ -2164,7 +2165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a56ff33c9dbd447af223482e8d026f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskID: 1
+  taskID:
+  - 1
+  - 5
   outlineVisuals:
   - {fileID: 435622163}
   - {fileID: 435622164}
@@ -2190,6 +2193,25 @@ MonoBehaviour:
     progressPerInteract: 1
   outlineVisual: {fileID: 435622163}
   showDebug: 1
+--- !u!114 &435622168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435622160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b3020c25e53974e837e25bbcb5b508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: {fileID: 435622166}
+  taskID:
+  - 1
+  - 5
+  dialogues:
+  - {fileID: 11400000, guid: 019e7ac73ddbd4140986e770e4284ccb, type: 2}
+  - {fileID: 11400000, guid: f2aabac3d788949468c3a5e7b72c4a35, type: 2}
 --- !u!4 &469258638 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3cb8af80b7005c444bbf59d4cc369a2a, type: 3}
@@ -5662,8 +5684,8 @@ MonoBehaviour:
   taskNumber: 4
   targetCount: 1
   description: "\u8D70\u5230\u81EA\u5DF1\u7684\u5EA7\u4F4D\uFF0C\u4E0E\u5EA7\u6905\u4EA4\u4E92"
-  nextTaskTrigger: {fileID: 0}
-  nextTaskDelay: 0.5
+  nextTaskTrigger: {fileID: 1827510301}
+  nextTaskDelay: 1.5
   debugMode: 1
   triggerId: 
   dialogueId: 3
@@ -6324,6 +6346,7 @@ Transform:
   - {fileID: 824968729}
   - {fileID: 1971057589}
   - {fileID: 1399122808}
+  - {fileID: 1827510300}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1534934045 stripped
@@ -7220,6 +7243,60 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.03, y: 0.030000007, z: 0.000000004887622}
   m_Center: {x: -0.015, y: -0.015000003, z: -0.000000002443811}
+--- !u!1 &1827510299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1827510300}
+  - component: {fileID: 1827510301}
+  m_Layer: 0
+  m_Name: Task5Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1827510300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827510299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1533000513}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1827510301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827510299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7f60f18e28ea604d956ac12a84d9cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskId: 5
+  taskName: "\u63A5\u7535\u8BDD"
+  taskNumber: 5
+  targetCount: 1
+  description: "\u4E0E\u5EA7\u673A\u7535\u8BDD\u4EA4\u4E92"
+  nextTaskTrigger: {fileID: 0}
+  nextTaskDelay: 0.5
+  debugMode: 1
+  triggerId: 
+  dialogueId: 
 --- !u!1001 &1840004401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7931,7 +8008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a56ff33c9dbd447af223482e8d026f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskID: 3
+  taskID:
+  - 3
   outlineVisuals:
   - {fileID: 2099570338}
   dialogues: {fileID: 11400000, guid: af3374456f8bf2249ad38f0cc84a43e0, type: 2}

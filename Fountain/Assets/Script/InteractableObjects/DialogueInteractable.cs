@@ -12,7 +12,7 @@ namespace Fountain.Player
     /// </summary>
     public class DialogueInteractable : MonoBehaviour,IInteractable
     {
-        [SerializeField] private string taskID;
+
 
         [Tooltip("描边效果,手动拖得了")]
         [SerializeField]
@@ -20,7 +20,7 @@ namespace Fountain.Player
 
         [Tooltip("对话SO")]
         [SerializeField]
-        private DialogueSequence dialogues;
+        public DialogueSequence dialogues;
         /// <summary>
         /// 对话数据
         /// </summary>
@@ -57,22 +57,5 @@ namespace Fountain.Player
             }
         }
 
-        void OnEnable()
-        {
-            GameEventBus.Subscribe<TaskStartEvent>(EnableInteraction);
-        }
-
-        void OnDisable()
-        {
-            GameEventBus.Unsubscribe<TaskStartEvent>(EnableInteraction);
-        }
-
-        private void EnableInteraction(TaskStartEvent e)
-        {
-            if (e.TaskId == taskID)
-            {
-                canInteract = true;
-            }
-        }
     }
 }

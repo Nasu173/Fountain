@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Fountain.UI
 {
@@ -11,7 +12,7 @@ namespace Fountain.UI
     public class FadeEffect : MonoBehaviour
     {
         private CanvasGroup canvasGroup;
-
+        public Image fadeImage;
         [Tooltip("过渡持续过程")]
         public float duration;
         private void Awake()
@@ -31,6 +32,10 @@ namespace Fountain.UI
         public void FadeOut()
         {
             StartCoroutine(Fade(1, 0));
+        }
+        public void SetFadeImage(Image img)
+        {
+            fadeImage = img;
         }
         /// <summary>
         /// 过渡的协程

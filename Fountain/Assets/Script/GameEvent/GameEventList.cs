@@ -2,6 +2,7 @@ using Fountain.Localization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // 事件接口（所有事件都要实现这个）
 public interface IGameEvent { }
@@ -121,3 +122,12 @@ public class TaskCompleteEvent : IGameEvent
 {
     public string TaskId;
 }
+
+public class FadeEvent:IGameEvent
+{
+    public float fadeInTime;
+    public float fadeOutTime;
+    public float duration;
+    public Image fadeImage;
+}
+
