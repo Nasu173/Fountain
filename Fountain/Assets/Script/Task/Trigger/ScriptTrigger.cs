@@ -68,11 +68,15 @@ public class ScriptTrigger : BaseTaskTrigger
         {
             StartTask();
         }
+        else
+        {
+            UpdateTaskProgress();
+        }
 
-        //UpdateTaskProgress();
 
         if (currentProgress >= TargetCount)
         {
+            Debug.LogWarningFormat("任务完成,triggerName={0}", this.gameObject.name);
             OnTaskCompleted();
         }
     }
