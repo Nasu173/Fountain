@@ -19,8 +19,6 @@ namespace Fountain.Player
         [SerializeField]
         private OutlineVisual[] outlineVisuals;
 
-        [SerializeField] private string taskID;
-
         private bool canInteract=false;
         public bool CanInteract 
         { get { return canInteract; } set { canInteract = value; } } 
@@ -33,33 +31,7 @@ namespace Fountain.Player
             SetOutline(true);
         }
 
-        void OnEnable()
-        {
-            GameEventBus.Subscribe<TaskStartEvent>(EnableInteraction);
-            GameEventBus.Subscribe<TaskCompleteEvent>(DisableInteraction);
-        }
 
-        void OnDisable()
-        {
-            GameEventBus.Unsubscribe<TaskStartEvent>(EnableInteraction);
-            GameEventBus.Unsubscribe<TaskCompleteEvent>(DisableInteraction);
-        }
-
-        private void EnableInteraction(TaskStartEvent e)
-        {
-            if (e.TaskId == taskID)
-            {
-                canInteract = true;
-            }
-        }
-
-        private void DisableInteraction(TaskCompleteEvent e)
-        {
-            if (e.TaskId == taskID)
-            {
-                canInteract = false;
-            }
-        }
       
         public void InteractWith(PlayerInteractor player)
         {

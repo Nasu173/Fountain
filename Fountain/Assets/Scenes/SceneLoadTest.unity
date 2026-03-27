@@ -8099,11 +8099,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 5000
-  field of view: 60
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60.000004
   orthographic: 0
-  orthographic size: 10
+  orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -8127,8 +8127,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065514930}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.007372065, y: 0.9994657, z: -0.0187674, w: 0.025723938}
-  m_LocalPosition: {x: 47.877968, y: 3.195699, z: 22.00037}
+  m_LocalRotation: {x: -0.27185622, y: 0.75461894, z: -0.3695844, w: -0.4690968}
+  m_LocalPosition: {x: 0.05, y: 8.52, z: 76.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8881,8 +8881,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1200457763}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &1205146682
 GameObject:

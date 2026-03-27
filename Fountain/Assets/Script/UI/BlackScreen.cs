@@ -17,9 +17,13 @@ namespace Fountain.UI
         public float fadeOutTime;
         public float duration;
         private float elapsed;
+        //是否正在做黑屏
+        private bool isBlacking;
+
         private void Start()
         {
             fade = this.GetComponent<FadeEffect>();
+            isBlacking = false;
         }
         private void OnEnable()
         {
@@ -31,11 +35,16 @@ namespace Fountain.UI
         }
         private void Update()
         {
+            if (!isBlacking)
+            {
+                return;
+            }
             elapsed += Time.deltaTime;
             if (elapsed>=duration)
             {
                 fade.duration = fadeOutTime;
-                fade.FadeOut(); 
+                fade.FadeOut();
+                isBlacking = false;
             }
         }
         public void Black(FadeEvent e)
@@ -48,6 +57,7 @@ namespace Fountain.UI
             fade.duration = fadeInTime;
             fade.FadeIn();
             elapsed = 0;
+            isBlacking = true;
         }
     }
 }

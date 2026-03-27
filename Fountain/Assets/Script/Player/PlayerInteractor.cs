@@ -162,9 +162,12 @@ namespace Fountain.Player
             }
             foreach (var item in targetInteractables)
             {
-                item.Select();
+                if (item.CanInteract)
+                {
+                    item.Select();
+                    SelectInteractable();
+                }
             }
-            SelectInteractable();
         }
     }
 }

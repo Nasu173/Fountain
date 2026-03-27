@@ -18,6 +18,11 @@ namespace Fountain.UI
         private void Awake()
         {
             canvasGroup = this.GetComponent<CanvasGroup>();
+            canvasGroup.alpha = 0;
+        }
+        private void Start()
+        {
+            canvasGroup.alpha = 0;
         }
         /// <summary>
         /// 淡入
