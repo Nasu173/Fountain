@@ -3492,7 +3492,7 @@ Transform:
   m_GameObject: {fileID: 259734379}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 50.3, y: 3.101, z: 34.8}
+  m_LocalPosition: {x: 47.68, y: 3.101, z: 23.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11624,7 +11624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueNodeIndex: -1
   targetPosition: {x: 49.893757, y: 1.6876297, z: 27.303654}
-  speed: 0.5
+  duration: 0
   npcMove: {fileID: 953573346}
 --- !u!114 &953573346
 MonoBehaviour:
@@ -11638,7 +11638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1bf00ec802e777468d305f1e7e53183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  duration: 0
 --- !u!114 &953573347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13272,7 +13272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 50.3
+      value: 47.68
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13280,7 +13280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 34.8
+      value: 23.94
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24654,7 +24654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1bf00ec802e777468d305f1e7e53183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  duration: 0
 --- !u!114 &2047190021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24682,7 +24682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueNodeIndex: -1
   targetPosition: {x: 49.893757, y: 1.6876297, z: 27.303654}
-  speed: 0.5
+  duration: 0
   npcMove: {fileID: 2047190020}
 --- !u!1 &2048024243 stripped
 GameObject:

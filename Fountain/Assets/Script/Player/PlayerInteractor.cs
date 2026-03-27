@@ -33,7 +33,12 @@ namespace Fountain.Player
         /// <summary>
         /// 当前检测到的物体
         /// </summary>
-        private IInteractable[] currentTargets;
+        private Transform target;
+        /// <summary>
+        /// 当前检测到的物体身上的所有可交互物体
+        /// </summary>
+        private IInteractable[] targetInteractables;
+
         private PlayerSight sight;
         /// <summary>
         /// 是否允许交互
@@ -68,14 +73,15 @@ namespace Fountain.Player
         /// </summary>
         public void Interact()
         {
-            if (currentTargets != null)
+            if (target == null&&targetInteractables==null)
             {
-                foreach (var item in currentTargets)
+                return;
+            }
+            foreach (var item in targetInteractables) 
+            {
+                if (item.CanInteract)
                 {
-                    if (item.CanInteract)
-                    {
-                        item.InteractWith(this);
-                    }
+                    item.InteractWith(this);
                 }
             }
         }
@@ -85,19 +91,7 @@ namespace Fountain.Player
         public void Disable()
         {
             this.enableInteract = false;
-            if (currentTargets != null) 
-            {
-                foreach (var item in currentTargets)
-                {
-                    if (item.CanInteract)
-                    {
-                        item.Deselect();
-                    }
-                }
-                //currentTarget.Deselect();
-                DeselectInteractable();
-                currentTargets = null;
-            }
+            Deselect();
         }
         /// <summary>
         /// 允许交互
@@ -116,16 +110,7 @@ namespace Fountain.Player
             bool detected = Physics.Raycast(sight.transform.position, sight.transform.forward, out RaycastHit hit, interactDistance, detectLayer);
             if (!detected)
             {
-                if (currentTargets != null)
-                {
-                      foreach (var item in currentTargets)
-                      {
-                          item.Deselect();
-                      }
-                     //    currentTarget.Deselect();
-                    DeselectInteractable();
-                }
-                currentTargets = null;
+                Deselect();
                 return;
             }
             // 从命中物体向上查找 IInteractable（支持挂载在任意层级）
@@ -133,45 +118,53 @@ namespace Fountain.Player
             //     hit.collider.GetComponentInParent<IInteractable>();
             IInteractable[] detectedInteractables =
                 hit.collider.GetComponentsInParent<IInteractable>();
-            bool hasInteractable = detectedInteractables != null;
+            Transform newTarget = hit.collider.transform.root;
+            bool hasInteractable = (detectedInteractables.Length != 0);
 
+           // Debug.LogWarningFormat("target:{0}, {1},{2}",
+           //     newTarget.name,hasInteractable,detectedInteractables?.Length);
             if (!hasInteractable)
             {
-                if (currentTargets!=null)
-                {
-                      foreach (var item in currentTargets)
-                      {
-                          item.Deselect();
-                      }
-                    DeselectInteractable();
-                }
-
-                currentTargets= null;
+                Deselect();
                 return;
             }
             // 检测到不同的可交互物体
-            if (currentTargets != detectedInteractables)
+            if (newTarget !=target)
             {
-                if (currentTargets!=null)
-                {
-                      foreach (var item in currentTargets)
-                      {
-                          item.Deselect();
-                      }
-                    DeselectInteractable();
-                }
+                //取消选中之前的可交互物体
+                Deselect();
 
-                currentTargets = detectedInteractables;
-                foreach (var item in currentTargets)
-                {
-                    if (item.CanInteract)
-                    {
-                        item.Select();
-                        SelectInteractable();
-                    }
-                }
+                target = newTarget;
+                targetInteractables = detectedInteractables;
+                Select();
             }
 
+        }
+        private void Deselect()
+        {
+            if (targetInteractables == null)
+            {
+                return;
+            }
+            foreach (var item in targetInteractables)
+            {
+                item.Deselect();
+            }
+            DeselectInteractable();
+            targetInteractables = null;
+            target = null;
+        }
+        private void Select()
+        {
+            if (targetInteractables == null)
+            {
+                return;
+            }
+            foreach (var item in targetInteractables)
+            {
+                item.Select();
+            }
+            SelectInteractable();
         }
     }
 }
