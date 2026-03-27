@@ -44,9 +44,10 @@ public class ScriptTrigger : BaseTaskTrigger
         GameEventBus.Subscribe<ScriptTriggerEvent>(OnScriptTriggerEvent);
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
         GameEventBus.Unsubscribe<ScriptTriggerEvent>(OnScriptTriggerEvent);
+        base.OnDestroy();
     }
 
     private void OnScriptTriggerEvent(ScriptTriggerEvent e)
@@ -54,9 +55,14 @@ public class ScriptTrigger : BaseTaskTrigger
         if (taskCompleted) return;
 
         // 如果设置了triggerId，只响应匹配的广播
-        if (!string.IsNullOrEmpty(triggerId) && e.TriggerId != triggerId) return;
-        // 如果设置了dialogueId，只响应匹配的广播
-        if (!string.IsNullOrEmpty(dialogueId) && e.DialogueID != dialogueId) return;
+        if (!string.IsNullOrEmpty(triggerId) && e.TriggerId != triggerId)
+        {
+            // 如果设置了dialogueId，只响应匹配的广播
+            if (!string.IsNullOrEmpty(dialogueId) && e.DialogueID != dialogueId)
+            {
+                return;
+            }
+        }
 
         if (!taskStarted)
         {

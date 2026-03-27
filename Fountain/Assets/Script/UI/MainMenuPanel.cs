@@ -9,6 +9,7 @@ namespace Foutain.UI
     {
         [SerializeField] private string _gameSceneAddress;
         private bool mainMenuEnabled;
+        private bool _waitingForScene = false;
         //输入来源
         private PlayerSightInputProvider sightInput;
         private UIInputProvider uiInput;
@@ -25,12 +26,14 @@ namespace Foutain.UI
             _ = GameInputManager.Instance;
             uiInput ??= GameInputManager.Instance.GetProvider<UIInputProvider>();
             if (uiInput != null) uiInput.enabled = false;
-            
+
+            GameEventBus.Subscribe<SceneLoadedEvent>(OnSceneLoaded);
             SetMainMenuState(true);
         }
 
         private void OnDisable()
         {
+            GameEventBus.Unsubscribe<SceneLoadedEvent>(OnSceneLoaded);
             SetMainMenuState(false);
         }
 
@@ -39,15 +42,21 @@ namespace Foutain.UI
             SetMainMenuState(false);
             if (uiInput != null) uiInput.enabled = true;
             //GameInputManager.Instance.EnablePausePanel();
-            
-            GameEventBus.Publish(new GameStartEvent());
 
+            _waitingForScene = true;
             GameEventBus.Publish(new LoadSceneEvent
             {
                 SceneAddress = _gameSceneAddress,
                 Additive = true,
                 SceneToUnload = gameObject.scene.name
             });
+        }
+
+        private void OnSceneLoaded(SceneLoadedEvent e)
+        {
+            if (!_waitingForScene) return;
+            _waitingForScene = false;
+            GameEventBus.Publish(new GameStartEvent());
         }
 
         public void OnSettingClicked()

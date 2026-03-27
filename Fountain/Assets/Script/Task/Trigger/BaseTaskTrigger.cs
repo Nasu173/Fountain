@@ -38,6 +38,7 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
 
     protected bool taskStarted = false;
     protected bool taskCompleted = false;
+    private bool _gameStarted = false;
 
     /// <summary>供外部判断任务是否已开始（避免重复发布 TaskStartEvent）</summary>
     public bool TaskStarted => taskStarted;
@@ -47,7 +48,15 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
         if (string.IsNullOrEmpty(taskId))
             taskId = System.Guid.NewGuid().ToString();
 
+        GameEventBus.Subscribe<GameStartEvent>(OnGameStarted);
         if (debugMode) Debug.Log($"[{GetType().Name}] Started: {taskName}, ID: {taskId}");
+    }
+
+    private void OnGameStarted(GameStartEvent e) => _gameStarted = true;
+
+    protected virtual void OnDestroy()
+    {
+        GameEventBus.Unsubscribe<GameStartEvent>(OnGameStarted);
     }
 
     protected abstract bool CheckTriggerCondition();
@@ -56,6 +65,7 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
 
     protected virtual void Update()
     {
+        if (!_gameStarted) return;
         if (!taskCompleted && CheckTriggerCondition())
         {
             if (!taskStarted)

@@ -3806,7 +3806,7 @@ MonoBehaviour:
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
-  triggerId: 
+  triggerId: -1
   dialogueId: 1
 --- !u!1 &857179298 stripped
 GameObject:
@@ -5720,7 +5720,7 @@ MonoBehaviour:
   nextTaskTrigger: {fileID: 1827510301}
   nextTaskDelay: 1.5
   debugMode: 1
-  triggerId: 
+  triggerId: -1
   dialogueId: 3
 --- !u!1001 &1418499101
 PrefabInstance:
@@ -7331,8 +7331,8 @@ MonoBehaviour:
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
-  triggerId: 
-  dialogueId: 
+  triggerId: -1
+  dialogueId: -1
 --- !u!1001 &1840004401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7638,7 +7638,7 @@ MonoBehaviour:
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
-  triggerId: 
+  triggerId: -1
   dialogueId: 2
 --- !u!1 &1973183325
 GameObject:
