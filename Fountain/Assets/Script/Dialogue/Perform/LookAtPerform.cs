@@ -18,6 +18,7 @@ namespace Fountain.Dialogue
                 return;
             }
             data.playerMove.LookAt(data.target.position, data.transitionSpeed);
+            data.cam.m_Lens.FieldOfView = data.targetFOV;
         }
 
         public override void ReceiveData(IPerformDataProvider data)
