@@ -18,12 +18,24 @@ namespace Fountain.Dialogue
                 return;
             }
             data.playerMove.LookAt(data.target.position, data.transitionSpeed);
-            data.cam.m_Lens.FieldOfView = data.targetFOV;
+            data.StartCoroutine(SetFOV(data.cam.m_Lens.FieldOfView, data.targetFOV));
+            //data.cam.m_Lens.FieldOfView = data.targetFOV;
         }
 
         public override void ReceiveData(IPerformDataProvider data)
         {
             this.data = data as LookData;
+        }
+        private IEnumerator SetFOV(float start, float end)
+        {
+            float elapsed = 0;
+            while (elapsed < data.duration)
+            {
+                elapsed += Time.deltaTime;
+                data.cam.m_Lens.FieldOfView = Mathf.Lerp(start, end, elapsed / data.duration);
+                yield return null;
+            }
+
         }
     }
 }
