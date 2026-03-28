@@ -312,7 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueNodeIndex: -1
   targetFOV: 60
-  duration: 1
+  duration: 0.5
   cam: {fileID: 0}
 --- !u!114 &157365742
 MonoBehaviour:
@@ -332,7 +332,7 @@ MonoBehaviour:
   playerMove: {fileID: 0}
   cam: {fileID: 0}
   targetFOV: 20
-  duration: 1
+  duration: 0.5
 --- !u!114 &157365743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2400,6 +2400,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b9f9dc5a78613334d8ed90776fa088d0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1204454468}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b9f9dc5a78613334d8ed90776fa088d0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1204454470}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b9f9dc5a78613334d8ed90776fa088d0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1204454471}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b9f9dc5a78613334d8ed90776fa088d0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1204454472}
     - targetCorrespondingSourceObject: {fileID: 3439890032706537640, guid: b9f9dc5a78613334d8ed90776fa088d0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1204454465}
@@ -2513,6 +2522,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineVisual: {fileID: 1204454468}
+--- !u!114 &1204454470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204454461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a56ff33c9dbd447af223482e8d026f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineVisuals:
+  - {fileID: 1204454469}
+  dialogues: {fileID: 11400000, guid: f3e41663f8a75554d9cfdc38fb28dd89, type: 2}
+--- !u!114 &1204454471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204454461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49cf38c0ccd7ccc4eaa5fb039f966540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueNodeIndex: 0
+  triggerName: Stand
+  anim: {fileID: 1204454462}
+--- !u!114 &1204454472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204454461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867ed17cb74cf4e4cae10b5e6f2c81da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskID:
+  - 7
 --- !u!1001 &1225698816
 PrefabInstance:
   m_ObjectHideFlags: 0

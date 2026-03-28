@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,8 @@ namespace Fountain.Player
         [SerializeField]
         private float duration;
         private Vector3 targetPosition;
-        
+        //npc到达指定地点调用
+        public event Action Arrived;
         //移动到指定地点
         public void MoveToward(Vector3 position)
         {
@@ -35,6 +37,7 @@ namespace Fountain.Player
                 elapsed += Time.deltaTime;
                 yield return null;
             }
+            Arrived?.Invoke();
             /*
             float acceptableDelta = 0.01f;
             Vector3 startPosition = this.transform.position;

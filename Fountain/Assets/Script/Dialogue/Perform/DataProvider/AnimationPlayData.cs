@@ -13,8 +13,9 @@ namespace Fountain.Dialogue
         [Tooltip("要演出的对话的节点在序列里的索引")]
         public int dialogueNodeIndex;
         //动画名称
-        public string animName;
-        //public Animator anim;
+        public string triggerName;
+        public Animator anim;
+
         public int GetTargetIndex()
         {
             return dialogueNodeIndex;

@@ -18,6 +18,9 @@ namespace Fountain.Dialogue
         [Tooltip("移动总时间")]
         public float duration;
         public NPCMove npcMove;
+        //动画名称
+        public string walkAnimName;
+        public Animator anim;
         public int GetTargetIndex()
         {
             return dialogueNodeIndex;

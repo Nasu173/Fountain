@@ -12,7 +12,7 @@ namespace Fountain.Dialogue
         public AnimationPlayData data;
         public override void Perform()
         {
-            Debug.LogFormat("播放动画{0}", data.animName);
+            data.anim.SetTrigger(data.triggerName);
         }
 
         public override void ReceiveData(IPerformDataProvider data)
