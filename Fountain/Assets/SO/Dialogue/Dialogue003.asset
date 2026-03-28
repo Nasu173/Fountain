@@ -33,5 +33,5 @@ MonoBehaviour:
     textEN: You got it. On my way.
     speakerZH: "\u5F92\u5F1F"
     textZH: "\u597D\u561E\uFF0C\u9A6C\u4E0A\u53BB\u3002"
-    performName: LookAtPerform
+    performName: 
   dialogueEndPerformName: WalkPerform

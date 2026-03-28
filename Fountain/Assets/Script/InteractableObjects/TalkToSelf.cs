@@ -1,6 +1,7 @@
 using Fountain.Dialogue;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Fountain.Player
@@ -11,12 +12,20 @@ namespace Fountain.Player
     public class TalkToSelf : MonoBehaviour
     {
         public DialogueSequence dialogue;
+        /// <summary>
+        /// 对话数据
+        /// </summary>
+        private List<IPerformDataProvider> dataProviders;
+        private void Start()
+        {
+            dataProviders = this.GetComponents<IPerformDataProvider>().ToList();
+        }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))//唉,懒得改了
             {
-                DialogueManager.Instance.StartDialogue(dialogue, null);
-                Destroy(this.gameObject);
+                DialogueManager.Instance.StartDialogue(dialogue, dataProviders);
+                this.GetComponent<BoxCollider>().enabled = false;
             }
              
         }

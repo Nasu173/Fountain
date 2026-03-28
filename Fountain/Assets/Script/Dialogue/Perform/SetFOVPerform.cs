@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Fountain.Dialogue
 {
-    public class RestoreFOVPerform : DialoguePerform
+    public class SetFOVPerform : DialoguePerform
     {
-        private RestoreFOVProvider data;
+        private SetFOVProvider data;
         public override void Perform()
         {
             data.StartCoroutine(Restore(data.cam.m_Lens.FieldOfView, data.targetFOV));    
@@ -14,7 +14,7 @@ namespace Fountain.Dialogue
 
         public override void ReceiveData(IPerformDataProvider data)
         {
-            this.data = data as RestoreFOVProvider;
+            this.data = data as SetFOVProvider;
         }
         private IEnumerator Restore(float start, float end)
         {

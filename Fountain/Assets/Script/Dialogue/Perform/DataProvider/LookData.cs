@@ -22,6 +22,8 @@ namespace Fountain.Dialogue
         public PlayerMove playerMove;
         public CinemachineVirtualCamera cam;
         public float targetFOV;
+        [Tooltip("设置FOV的持续时间")]
+        public float duration;
         private void Start()
         {
             playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
