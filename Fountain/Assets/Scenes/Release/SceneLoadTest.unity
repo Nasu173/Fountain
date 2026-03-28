@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1355142219}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.6876579
+  m_Size: 0.6873269
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8033,13 +8033,13 @@ MonoBehaviour:
   scanlineSpeed: 0.8
   scanlineCount: 480
   scanlineSharpness: 1.2
-  vignetteIntensity: 0.6
-  vignetteSoftness: 0.8
-  vignetteRoundness: 1.5
+  vignetteIntensity: 1.22
+  vignetteSoftness: 0.87
+  vignetteRoundness: 1.51
   glitchIntensity: 0.15
   glitchSpeed: 3
   glitchBlockSize: 0.015
-  contrast: 1.05
+  contrast: 1.008
   saturation: 1.08
   brightness: 0.02
   gamma: 1.035
