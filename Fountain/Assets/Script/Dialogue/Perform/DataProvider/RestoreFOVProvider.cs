@@ -1,3 +1,5 @@
+using Cinemachine;
+using Fountain.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +8,23 @@ namespace Fountain.Dialogue
 {
     public class RestoreFOVProvider : MonoBehaviour, IPerformDataProvider
     {
+        [Header("演出数据")]
+        [Tooltip("要演出的对话的节点在序列里的索引")]
+        public int dialogueNodeIndex;
+        [Tooltip("复原的速度")]
+        public float transitionSpeed;
+        [Tooltip("要恢复到的FOV")]
+        public float targetFOV;
+        [Tooltip("复原的持续时间")]
+        public float duration;
+        public CinemachineVirtualCamera cam;
+        private void Start()
+        {
+            cam = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera as CinemachineVirtualCamera;
+        }
         public int GetTargetIndex()
         {
-            throw new System.NotImplementedException();
+            return dialogueNodeIndex;
         }
     }
 }
