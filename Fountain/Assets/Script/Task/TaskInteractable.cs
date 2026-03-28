@@ -9,7 +9,7 @@ using Fountain.Common;
 public class TaskInteractable : MonoBehaviour, IInteractable, ITaskInteractable
 {
     [Header("任务配置")]
-    [SerializeField] private BaseTaskTrigger taskTrigger;
+    public BaseTaskTrigger taskTrigger;
     [SerializeField] private string taskID;
 
     [Header("交互设置")]

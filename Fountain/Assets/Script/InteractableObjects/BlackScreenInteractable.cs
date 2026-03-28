@@ -13,6 +13,8 @@ namespace Fountain.Player
         public float fadeOutTime;
         public float duration;
         public Image fadeImage;
+        public bool StartTask;
+        public string[] taskIds;
 
         private bool canInteract = false;
         public bool CanInteract
@@ -22,6 +24,7 @@ namespace Fountain.Player
         }
         public void InteractWith(PlayerInteractor player)
         {
+            StartCoroutine(TaskStart());
             GameEventBus.Publish<FadeEvent>(new FadeEvent()
             {
                 fadeInTime = this.fadeInTime,
@@ -33,6 +36,22 @@ namespace Fountain.Player
         }
         public void Select()
         {
+        }
+
+        private IEnumerator TaskStart()
+        {
+            yield return new WaitForSeconds(fadeInTime + duration + fadeOutTime);
+
+            if (StartTask)
+            {
+                for (int i = 0; i < taskIds.Length; i++)
+                {
+                    GameEventBus.Publish<ScriptTriggerEvent>(new ScriptTriggerEvent()
+                    {
+                        TriggerId = taskIds[i]
+                    });
+                }
+            }
         }
     }
 }

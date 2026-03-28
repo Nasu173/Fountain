@@ -2104,6 +2104,7 @@ GameObject:
   - component: {fileID: 435622167}
   - component: {fileID: 435622168}
   - component: {fileID: 435622169}
+  - component: {fileID: 435622170}
   m_Layer: 7
   m_Name: Phone
   m_TagString: Untagged
@@ -2245,6 +2246,25 @@ MonoBehaviour:
   taskID:
   - 1
   - 5
+--- !u!114 &435622170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435622160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107328339621e6f4e9768166ec1da790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: {fileID: 435622167}
+  taskID:
+  - 1
+  - 5
+  tasks:
+  - {fileID: 875238270}
+  - {fileID: 1827510301}
 --- !u!4 &469258638 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3cb8af80b7005c444bbf59d4cc369a2a, type: 3}
@@ -5717,8 +5737,8 @@ MonoBehaviour:
   taskNumber: 4
   targetCount: 1
   description: "\u8D70\u5230\u81EA\u5DF1\u7684\u5EA7\u4F4D\uFF0C\u4E0E\u5EA7\u6905\u4EA4\u4E92"
-  nextTaskTrigger: {fileID: 1827510301}
-  nextTaskDelay: 1.5
+  nextTaskTrigger: {fileID: 0}
+  nextTaskDelay: 0.5
   debugMode: 1
   triggerId: -1
   dialogueId: 3
@@ -7331,7 +7351,7 @@ MonoBehaviour:
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
-  triggerId: -1
+  triggerId: 5
   dialogueId: -1
 --- !u!1001 &1840004401
 PrefabInstance:
@@ -7510,8 +7530,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeInTime: 1
   fadeOutTime: 1
-  duration: 1
+  duration: 2
   fadeImage: {fileID: 0}
+  StartTask: 1
+  taskIds:
+  - 5
 --- !u!114 &1965329445
 MonoBehaviour:
   m_ObjectHideFlags: 0
