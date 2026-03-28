@@ -1,3 +1,4 @@
+using Cinemachine;
 using Fountain.Player;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,9 +20,12 @@ namespace Fountain.Dialogue
         public float transitionSpeed;
         [HideInInspector]
         public PlayerMove playerMove;
+        public CinemachineVirtualCamera cam;
+        public float targetFOV;
         private void Start()
         {
             playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
+            cam = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera as CinemachineVirtualCamera;
         }
         public int GetTargetIndex()
         {
