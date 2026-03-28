@@ -10,6 +10,7 @@ namespace Fountain.InputManagement
     public class UIInputProvider : MonoBehaviour,IInputProvider
     {
         private PlayerInputActions inputActions;
+        private bool isPaused;
         private void Awake()
         {
             this.inputActions = GameInputManager.Instance.GetInputAction(); 
@@ -29,6 +30,10 @@ namespace Fountain.InputManagement
         public bool GetPause()
         {
             return this.inputActions.PausePanel.Pause.WasPressedThisFrame(); 
+        }
+        void Update()
+        {
+            isPaused = GetPause();
         }
     }
 }

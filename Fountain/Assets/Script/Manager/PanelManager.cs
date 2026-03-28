@@ -38,7 +38,7 @@ public class PanelManager : MonoBehaviour
         settingPanelEnabled = settingPanel != null && settingPanel.activeSelf;
         CursorManager.Instance?.SetPausePanelEnabled(pausePanelEnabled);
         CursorManager.Instance?.SetSettingPanelEnabled(settingPanelEnabled);
-
+        isStarted = true;
     }
 
     private void OnEnable()
@@ -49,8 +49,6 @@ public class PanelManager : MonoBehaviour
         // 订阅事件
         GameEventBus.Subscribe<ContinueEvent>(GameContinue);
         GameEventBus.Subscribe<SettingEvent>(OpenSettingPanel);
-        GameEventBus.Subscribe<GameStartEvent>(OnGameStart);
-
         // 确保游戏开始时是运行状态
         if (!isPaused)
         {
@@ -69,21 +67,15 @@ public class PanelManager : MonoBehaviour
         // 取消订阅事件
         GameEventBus.Unsubscribe<ContinueEvent>(GameContinue);
         GameEventBus.Unsubscribe<SettingEvent>(OpenSettingPanel);
-        GameEventBus.Unsubscribe<GameStartEvent>(OnGameStart);
     }
 
     private void Update()
     {
         if (uiInput != null && uiInput.GetPause())
         {
-            Pause();
+            GameEventBus.Publish(new GamePauseEvent());
         }
     }
-    private void OnGameStart(GameStartEvent @event)
-    {
-        isStarted = true;
-    }
-
     private void OnPauseClicked(GamePauseEvent gamePauseEvent)
     {
         Pause();
@@ -111,9 +103,6 @@ public class PanelManager : MonoBehaviour
             playerInteractor.Disable();
             playerMove.enabled = false;
             playerSight.enabled = false;
-           // GameInputManager.Instance.DisableMoveInput();
-           // GameInputManager.Instance.DisableSightInput();
-           // GameInputManager.Instance.DisableInteractInput();
             pausePanelEnabled = true;
             CursorManager.Instance?.SetPausePanelEnabled(true);
         }
@@ -134,9 +123,6 @@ public class PanelManager : MonoBehaviour
         pausePanel.SetActive(false);
 
         if (uiInput != null) uiInput.enabled = false;
-        //GameInputManager.Instance.DisablePausePanel();
-
-        isStarted = false;
 
         GameEventBus.Publish(new LoadSceneEvent
         {

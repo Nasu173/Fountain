@@ -41,7 +41,6 @@ namespace Foutain.UI
         {
             SetMainMenuState(false);
             if (uiInput != null) uiInput.enabled = true;
-            //GameInputManager.Instance.EnablePausePanel();
 
             _waitingForScene = true;
             GameEventBus.Publish(new LoadSceneEvent

@@ -1222,31 +1222,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.025723938
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.007372065
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9994657
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0187674
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 2.128
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 177.035
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4144192776156277961, guid: 2aec3fc490cd7f1459cf858269627fe0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3868,7 +3868,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.75
+  m_fontSize: 42.35
   m_fontSizeBase: 33.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
