@@ -22,9 +22,9 @@ context: |
   - 任务系统: Assets/Script/Task/ — TaskManager 单例管理任务生命周期，BaseTaskTrigger 基类，支持触发器(InteractTaskTrigger/AreaEnterTrigger/CollectItemTrigger/ScriptTrigger)，InteractConfig 配置交互行为
   - 设置系统: Assets/Script/Settings/ — 音频(AudioMixerController)、分辨率(ResolutionManager)、帧率(FrameRateManager)、鼠标灵敏度(MouseSensitivityManager)、VHS效果(VHSRetroFeatureManager/VHSGammaSlider)、窗口模式(WindowModeController)、相机震动(CameraShakeManager)
   - 本地化系统: Assets/Script/Localization/ — LocalizationManager，支持多语言切换
-  - UI 系统: Assets/Script/UI/ — PanelManager 管理面板，使用 TextMeshPro；MainMenuPanel 管理主菜单按钮（开始游戏/设置/退出）；NotePanel/NoteContent 笔记面板；FadeEffect/TypeEffect/ProgressBar/InteractPrompt
+  - UI 系统: Assets/Script/UI/ — PanelManager 管理面板（isStarted 在 Start() 中设为 true，不依赖 GameStartEvent），使用 TextMeshPro；MainMenuPanel 管理主菜单按钮（开始游戏/设置/退出）；NotePanel/NoteContent 笔记面板；FadeEffect/TypeEffect/ProgressBar/InteractPrompt
   - 场景系统: Assets/Script/Scene/ — GameSceneManager 单例管理场景切换，SceneLoader 封装 Addressable 异步加载，SceneAddress 集中定义场景地址常量；LoadSceneEvent 支持 Additive 加载、单场景卸载(SceneToUnload)、全场景卸载(UnloadAll+ScenesToKeep)
-  - 喷泉系统: Assets/Script/Fountain/ — FountainController 控制时序，FountainSteamEffect 封装白汽粒子，FountainWaterEffect 封装水柱粒子，FountainTestInput 用于测试（O键开启/P键关闭）
+  - 喷泉系统: Assets/Script/Fountain/ — FountainController 控制时序，FountainSteamEffect 封装白汽粒子，FountainWaterEffect 封装水柱粒子，FountainCycleController 驱动随机等待/喷发循环（Inspector 可调上下限），FountainTestInput 用于测试（O键开启/P键关闭）
   - 怪物系统: Assets/Script/Monster/ — MonsterChase 使用 NavMeshAgent 追逐玩家，到达 executionDistance 后触发处决动画并发布 MonsterCatchEvent；RevivePanel 监听 MonsterCatchEvent 显示复活面板，点击复活发布 ReviveEvent
   - 光标管理: Assets/Script/Manager/CursorManager — MonoSingleton，统一管理鼠标显示/隐藏，通过 SetMainMenuEnabled/SetSettingPanelEnabled/SetPausePanelEnabled 控制各面板状态
   - 小游戏系统:
