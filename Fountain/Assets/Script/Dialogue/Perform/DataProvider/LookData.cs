@@ -20,6 +20,7 @@ namespace Fountain.Dialogue
         public float transitionSpeed;
         [HideInInspector]
         public PlayerMove playerMove;
+        [HideInInspector]
         public CinemachineVirtualCamera cam;
         public float targetFOV;
         [Tooltip("设置FOV的持续时间")]

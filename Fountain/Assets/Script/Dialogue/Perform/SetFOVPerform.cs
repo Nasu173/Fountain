@@ -4,9 +4,12 @@ using UnityEngine;
 
 namespace Fountain.Dialogue
 {
+    /// <summary>
+    /// 仅渐变视野大小的演出效果
+    /// </summary>
     public class SetFOVPerform : DialoguePerform
     {
-        private SetFOVProvider data;
+        private SetFOVData data;
         public override void Perform()
         {
             data.StartCoroutine(Restore(data.cam.m_Lens.FieldOfView, data.targetFOV));    
@@ -14,7 +17,7 @@ namespace Fountain.Dialogue
 
         public override void ReceiveData(IPerformDataProvider data)
         {
-            this.data = data as SetFOVProvider;
+            this.data = data as SetFOVData;
         }
         private IEnumerator Restore(float start, float end)
         {
@@ -25,7 +28,7 @@ namespace Fountain.Dialogue
                 data.cam.m_Lens.FieldOfView = Mathf.Lerp(start, end, elapsed / data.duration);
                 yield return null;
             }
-
+            data.cam.m_Lens.FieldOfView = data.targetFOV;
         }
 
     }

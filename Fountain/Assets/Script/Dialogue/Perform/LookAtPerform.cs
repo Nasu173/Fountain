@@ -35,7 +35,7 @@ namespace Fountain.Dialogue
                 data.cam.m_Lens.FieldOfView = Mathf.Lerp(start, end, elapsed / data.duration);
                 yield return null;
             }
-
+            data.cam.m_Lens.FieldOfView = data.targetFOV;
         }
     }
 }

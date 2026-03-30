@@ -9,21 +9,27 @@ namespace Fountain.Common
     /// </summary>
     public class OutlineVisual : MonoBehaviour
     {
-        [Tooltip("实现描边的插件,手动拖上去")]
+        [Tooltip("实现描边的插件,手动拖上去,一个模型所有的outline都放这里,外部就调用这个脚本就行了")]
         [SerializeField]
-        private Outline outlineVisual;
+        private Outline[] outlineVisuals;
         /// <summary>
         /// 设置描边的显隐
         /// </summary>
         /// <param name="visible">显示或隐藏</param>
         public void SetOutline(bool visible)
         {
-            //糊上去的代码,最好不出现这个判断
-            if (outlineVisual==null)
+            if (outlineVisuals==null)
             {
                 return;
             }
-            this.outlineVisual.enabled = visible;
+            foreach (var outline in outlineVisuals)
+            {
+                //糊上去的代码,最好不出现这个判断
+                if (outline!=null)
+                {
+                    outline.enabled = visible;
+                }
+            }
         }
     }
 }

@@ -12,7 +12,9 @@ namespace Fountain.Player
     /// </summary>
     public class NoteInteractable : MonoBehaviour, IInteractable
     {
-        private OutlineVisual[] outlineVisuals;
+        [Tooltip("描边效果,手动拖得了")]
+        [SerializeField]
+        private OutlineVisual outlineVisual;
         [Tooltip("笔记SO")]
         [SerializeField]
         private NoteContent note;
@@ -38,7 +40,7 @@ namespace Fountain.Player
         { get { return canInteract; } set { canInteract = value; } } 
         private void Start()
         {
-            outlineVisuals = this.GetComponents<OutlineVisual>();
+            //outlineVisual = this.GetComponent<OutlineVisual>();
             uiInput = GameInputManager.Instance.GetProvider<UIInputProvider>();
             sightInput = GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
 
@@ -48,7 +50,7 @@ namespace Fountain.Player
         }
         public void Deselect()
         {
-            SetOutline(false);
+            outlineVisual.SetOutline(false);
         }
 
         public void InteractWith(PlayerInteractor player)
@@ -71,15 +73,7 @@ namespace Fountain.Player
 
         public void Select()
         {
-            SetOutline(true);
-        }
-
-        private void SetOutline(bool visible)
-        {
-            foreach (var item in outlineVisuals)
-            {
-                item.SetOutline(visible);
-            }
+            outlineVisual.SetOutline(true);
         }
     }
 }

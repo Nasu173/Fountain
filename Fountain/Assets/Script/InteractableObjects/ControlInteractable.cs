@@ -10,7 +10,9 @@ namespace Fountain.Player
     public class ControlInteractable : MonoBehaviour
     {
         public IInteractable[] interactables;
-        [SerializeField] private string[] taskID;
+        [Tooltip("启用交互的任务id")]
+        [SerializeField]
+        private string[] taskID;
         private void Start()
         {
             interactables = this.GetComponentsInChildren<IInteractable>();
@@ -26,9 +28,16 @@ namespace Fountain.Player
                         //这个好像依赖于可交互物体交互一次后就禁止交互
                         item.CanInteract = true;
                     }
-                    break;
+                    return;
                 }
             }
+            //如果当前的任务id不启用交互,就禁止交互
+            foreach (var item in interactables) 
+            {
+                //这个好像依赖于可交互物体交互一次后就禁止交互
+                item.CanInteract = false;
+            }
+
         }
 
         void OnEnable()

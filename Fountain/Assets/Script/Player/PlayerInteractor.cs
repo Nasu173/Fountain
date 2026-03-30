@@ -114,10 +114,14 @@ namespace Fountain.Player
                 return;
             }
             // 从命中物体向上查找 IInteractable（支持挂载在任意层级）
-            // IInteractable detectedInteractable =
-            //     hit.collider.GetComponentInParent<IInteractable>();
             IInteractable[] detectedInteractables =
                 hit.collider.GetComponentsInParent<IInteractable>();
+            //如果没找到,去根物体查找,出于某些原因才这样写
+            if (detectedInteractables==null)
+            {
+                detectedInteractables = hit.collider.transform.root.
+                    GetComponents<IInteractable>();
+            }
             Transform newTarget = hit.collider.transform.root;
             bool hasInteractable = (detectedInteractables.Length != 0);
 

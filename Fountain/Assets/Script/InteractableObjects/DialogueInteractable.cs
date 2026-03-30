@@ -12,11 +12,9 @@ namespace Fountain.Player
     /// </summary>
     public class DialogueInteractable : MonoBehaviour,IInteractable
     {
-
-
         [Tooltip("描边效果,手动拖得了")]
         [SerializeField]
-        private OutlineVisual[] outlineVisuals;
+        private OutlineVisual outlineVisual;
 
         [Tooltip("对话SO")]
         [SerializeField]
@@ -35,7 +33,7 @@ namespace Fountain.Player
         }
         public void Deselect()
         {
-            SetOutline(false);
+            outlineVisual.SetOutline(false);
         }
 
         public void InteractWith(PlayerInteractor player)
@@ -46,15 +44,7 @@ namespace Fountain.Player
 
         public void Select()
         {
-            SetOutline(true);
-        }
-
-        private void SetOutline(bool visible)
-        {
-            foreach (var item in outlineVisuals)
-            {
-                item.SetOutline(visible);
-            }
+            outlineVisual.SetOutline(true);
         }
 
     }
