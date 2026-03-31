@@ -19,19 +19,18 @@ namespace Fountain.MiniGame.ControlFountain
         private void Start()
         {
             fadeEffect = this.GetComponent<FadeEffect>();
-            GameEventBus.Subscribe<ControlFountainEndEvent>((e) =>
-            {
-                fadeEffect.FadeIn();
-            });
-            /*
-            returnButton.onClick.AddListener(() =>
-            {
-
-                GameInputManager.Instance.GetProvider<PlayerSightInputProvider>().HideCursor();
-            });
-             
-             */
         }
-
+        private void OnEnable()
+        {
+            GameEventBus.Subscribe<ControlFountainEndEvent>(Show);
+        }
+        private void OnDisable()
+        {
+            GameEventBus.Unsubscribe<ControlFountainEndEvent>(Show);
+        }
+        private void Show(ControlFountainEndEvent e)
+        {
+            fadeEffect.FadeIn();
+        }
     }
 }

@@ -21,9 +21,18 @@ namespace Fountain.MiniGame.ControlFountain
         {
             // 随机初始移动方向
             direction = Random.Range(0, 2) >= 1 ? -1 : 1;
-            GameEventBus.Subscribe<ControlFountainEndEvent>(Stop);
         }
-    
+        private void OnEnable()
+        {
+            GameEventBus.Subscribe<ControlFountainEndEvent>(Stop);
+            GameEventBus.Subscribe<ControlFountainEndEvent>(DelayDie);
+        }
+        private void OnDisable()
+        {
+            GameEventBus.Unsubscribe<ControlFountainEndEvent>(Stop);
+            GameEventBus.Unsubscribe<ControlFountainEndEvent>(DelayDie);
+        }
+
         private void Update()
         {
             //if (GameManager.Instance != null && GameManager.Instance.isGameOver) return;
@@ -54,6 +63,7 @@ namespace Fountain.MiniGame.ControlFountain
 
             // 被击中后消失
             GameEventBus.Publish<ControlFountainHit>(null);
+            GameEventBus.Unsubscribe<ControlFountainEndEvent>(DelayDie);
             GameEventBus.Unsubscribe<ControlFountainEndEvent>(Stop);
 
             Destroy(gameObject);
@@ -61,6 +71,13 @@ namespace Fountain.MiniGame.ControlFountain
         private void Stop(ControlFountainEndEvent e)
         {
             this.enabled = false;
+        }
+        /// <summary>
+        /// 由于某些已知原因,不得不在场景切换的时候手动销毁这个物体
+        /// </summary>
+        private void DelayDie(ControlFountainEndEvent e)
+        {
+            Destroy(this.gameObject, 5f); //这个5只用比切回办公室的延迟长就行了
         }
     }
 }

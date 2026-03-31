@@ -35,15 +35,16 @@ namespace Fountain.MiniGame.ControlFountain
             firePoint = this.transform.FindChildByName(nameof(firePoint));
             gunInput.enabled = false;
             sightInput.HideCursor();
-            GameEventBus.Subscribe<ControlFountainStartEvent>((e) =>
-            {
-                this.gunInput.enabled = true;
-            });
-            GameEventBus.Subscribe<ControlFountainEndEvent>((e) =>
-            {
-                //sightInput.ShowCursor(); 
-                this.gunInput.enabled = false;
-            });
+        }
+        private void OnEnable()
+        {
+            GameEventBus.Subscribe<ControlFountainStartEvent>(EnableGun);
+            GameEventBus.Subscribe<ControlFountainEndEvent>(DisableGun);
+        }
+        private void OnDisable()
+        {
+            GameEventBus.Unsubscribe<ControlFountainStartEvent>(EnableGun);
+            GameEventBus.Unsubscribe<ControlFountainEndEvent>(DisableGun);
         }
 
         private void Update()
@@ -79,6 +80,15 @@ namespace Fountain.MiniGame.ControlFountain
             clampedPos.x = Mathf.Clamp(clampedPos.x, -screenLimitX, screenLimitX);
             transform.position = clampedPos;
             
+        }
+
+        private void EnableGun(ControlFountainStartEvent e)
+        {
+            this.gunInput.enabled = true;
+        }
+        private void DisableGun(ControlFountainEndEvent e)
+        {
+            this.gunInput.enabled = false;
         }
     }
 }

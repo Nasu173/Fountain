@@ -15,22 +15,34 @@ namespace Fountain.MiniGame.ControlFountain
         public GameFlowController gameFlowController;
         private void Start()
         {
-            StartCoroutine(StartPrepare()); 
-            GameEventBus.Subscribe<ControlFountainReadyEvent>((e) =>
-            {
-                startTimer.StartCountDown(timeBeforeStart);
-                startTimer.CountdownEnd += gameFlowController.StartGame;
-            });
-            GameEventBus.Subscribe<ControlFountainStartEvent>((e) =>
-            {
-                gameTimer.StartCountDown();
-                gameTimer.CountdownEnd += gameFlowController.EndGame;
-            });
+            StartCoroutine(StartPrepare());
+        }
+        private void OnEnable()
+        {
+            GameEventBus.Subscribe<ControlFountainReadyEvent>(GameReady);
+            GameEventBus.Subscribe<ControlFountainStartEvent>(GameStart);
+        }
+        private void OnDisable()
+        {
+            GameEventBus.Unsubscribe<ControlFountainReadyEvent>(GameReady);
+            GameEventBus.Unsubscribe<ControlFountainStartEvent>(GameStart);
         }
         private IEnumerator StartPrepare()
         {
             yield return null;//等待一帧让别的脚本初始化完成
             gameFlowController.PrepareGame();            
+        }
+        private void GameReady(ControlFountainReadyEvent e)
+        {
+            startTimer.StartCountDown(timeBeforeStart);
+            startTimer.CountdownEnd += gameFlowController.StartGame;
+
+        }
+        private void GameStart(ControlFountainStartEvent e)
+        {
+            gameTimer.StartCountDown();
+            gameTimer.CountdownEnd += gameFlowController.EndGame;
+
         }
     }
 }

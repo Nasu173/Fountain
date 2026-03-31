@@ -21,13 +21,14 @@ namespace Fountain.Localization
         [Tooltip("要本地化的多选框,手动赋值")]
         [SerializeField]
         private TMP_Dropdown dropdown;
-        private void Start()
+        private void OnEnable()
         {
-            GameEventBus.Subscribe<LocaleChangeEvent>
-                ((locale) =>
-                {
-                    SetOptionText();
-                });
+            GameEventBus.Subscribe<LocaleChangeEvent>(ChangeLocaleText);
+        }
+        private void OnDisable()
+        {
+            GameEventBus.Unsubscribe<LocaleChangeEvent>(ChangeLocaleText);
+            
         }
         /// <summary>
         /// 本地化选项文本
@@ -52,6 +53,10 @@ namespace Fountain.Localization
                 localizedOptions.Add(options[i].GetLocalizedString());
             }
             return localizedOptions;
+        }
+        private void ChangeLocaleText(LocaleChangeEvent e)
+        {
+            SetOptionText();
         }
     }
 }

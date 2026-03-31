@@ -115,6 +115,26 @@ MonoBehaviour:
     m_Key: pauseFrame
     m_Metadata:
       m_Items: []
+  - m_Id: 11975067666735104
+    m_Key: start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11975157601001472
+    m_Key: quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11975258985717760
+    m_Key: language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11975360177496064
+    m_Key: chSimple
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11975502490230784
+    m_Key: en
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

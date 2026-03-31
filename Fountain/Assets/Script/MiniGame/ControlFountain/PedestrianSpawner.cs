@@ -31,24 +31,29 @@ namespace Fountain.MiniGame.ControlFountain
         private CountdownTimer gameTimer;
 
         private float nextSpawnTime;
-        private void Start()
+        private bool enableSpawn;
+        private void Awake()
         {
-            this.enabled = false;
-            GameEventBus.Subscribe<ControlFountainStartEvent>((e) =>
-            {
-                this.enabled = true;
-            });
-            GameEventBus.Subscribe<ControlFountainEndEvent>((e) =>
-            {
-                this.enabled = false;
-            });
-                
+            this.enableSpawn = false;
+        }
+        private void OnEnable()
+        {
+            GameEventBus.Subscribe<ControlFountainStartEvent>(Enable);
+            GameEventBus.Subscribe<ControlFountainEndEvent>(Disable);
+        }
+        private void OnDisable()
+        {
+            GameEventBus.Unsubscribe<ControlFountainStartEvent>(Enable);
+            GameEventBus.Unsubscribe<ControlFountainEndEvent>(Disable);
         }
 
         private void Update()
         {
             //if (GameManager.Instance != null && GameManager.Instance.isGameOver) return;
-    
+            if (!enableSpawn)
+            {
+                return;
+            } 
             if (Time.time >= nextSpawnTime)
             {
                 Spawn();
@@ -71,6 +76,14 @@ namespace Fountain.MiniGame.ControlFountain
                 gameTimer.GetTotalTime();
             pedestrian.speed = this.baseSpeed +
                 this.baseSpeed * maxSpeedRate * rate;
+        }
+        private void Enable(ControlFountainStartEvent e)
+        {
+            this.enableSpawn = true;
+        }
+        private void Disable(ControlFountainEndEvent e)
+        {
+            this.enableSpawn = false;
         }
     }
     
