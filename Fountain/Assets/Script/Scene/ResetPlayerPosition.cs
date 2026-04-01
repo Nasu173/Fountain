@@ -13,6 +13,9 @@ namespace Fountain.Player
         [Tooltip("玩家一开始的位置")]
         [SerializeField]
         private Vector3 startPosition;
+        [Tooltip("加载到这个场景才重置玩家位置")]
+        [SerializeField]
+        private string targetSceneAddress;
         private void OnEnable()
         {
             GameEventBus.Subscribe<LoadSceneEvent>(SetPlayerPosition);
@@ -23,6 +26,10 @@ namespace Fountain.Player
         }
         private void SetPlayerPosition(LoadSceneEvent e)
         {
+            if (e.SceneAddress!=targetSceneAddress)
+            {
+                return;
+            }
             PlayerInstance.Instance.transform.position = startPosition;
         }
     }

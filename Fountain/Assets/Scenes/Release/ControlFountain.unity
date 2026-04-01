@@ -1738,6 +1738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3561d0e1fec0d0445a226ad0dc637e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeImage: {fileID: 0}
   duration: 0.1
 --- !u!114 &1283286695
 MonoBehaviour:
@@ -2318,6 +2319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3561d0e1fec0d0445a226ad0dc637e37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeImage: {fileID: 0}
   duration: 3
 --- !u!114 &1883311861
 MonoBehaviour:
@@ -2547,7 +2549,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &2128407474
 RectTransform:
@@ -2561,10 +2563,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 433572693}
+  - {fileID: 1883311858}
   - {fileID: 459041170}
   - {fileID: 510088650}
-  - {fileID: 1883311858}
-  - {fileID: 433572693}
   - {fileID: 1283286693}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
