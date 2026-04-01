@@ -24,14 +24,35 @@ namespace Fountain.UI
             localizeDropdown.SetOptionText();
             languageDropdown.onValueChanged.AddListener(SetLanguage);
         }
+        private void OnEnable()
+        {
+            GameEventBus.Subscribe<LocaleChangeEvent>(RefreshDropdown);
+        }
+        private void OnDisable()
+        {
+            GameEventBus.Unsubscribe<LocaleChangeEvent>(RefreshDropdown);
+        }
+
 
         private void SetLanguage(int option)
         {
+            if (option==(int)LocalizationManager.Instance.GetLocale())
+            {
+                return;
+            }
             //请务必保证UI里的语言顺序和LocalizationManager里的枚举顺序是一致的!!
             //以及文字显示也是一致的!!!
             LocalizationManager.Instance.SetLocale
                 ((LocalizationManager.LocaleID)option);
         }
-
+        private void RefreshDropdown(LocaleChangeEvent e)
+        {
+            if ((int)e.locale==languageDropdown.value)
+            {
+                return;
+            }
+            languageDropdown.value = (int)e.locale;
+            languageDropdown.RefreshShownValue();
+        }
     }
 }
