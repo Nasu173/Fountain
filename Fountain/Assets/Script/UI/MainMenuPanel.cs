@@ -28,6 +28,7 @@ namespace Foutain.UI
             if (uiInput != null) uiInput.enabled = false;
 
             GameEventBus.Subscribe<SceneLoadedEvent>(OnSceneLoaded);
+            GameEventBus.Publish(new MenuEvent());
             SetMainMenuState(true);
         }
 

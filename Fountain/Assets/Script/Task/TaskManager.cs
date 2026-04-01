@@ -37,12 +37,16 @@ public class TaskManager : MonoBehaviour
     {
         GameEventBus.Subscribe<TaskStartEvent>(OnTaskStart);
         GameEventBus.Subscribe<TaskProgressEvent>(OnTaskProgress);
+        GameEventBus.Subscribe<MenuEvent>(OnMenuEvent);
+        GameEventBus.Subscribe<GameStartEvent>(OnGameStart);
     }
 
     private void OnDisable()
     {
         GameEventBus.Unsubscribe<TaskStartEvent>(OnTaskStart);
         GameEventBus.Unsubscribe<TaskProgressEvent>(OnTaskProgress);
+        GameEventBus.Unsubscribe<MenuEvent>(OnMenuEvent);
+        GameEventBus.Unsubscribe<GameStartEvent>(OnGameStart);
     }
 
     private void OnTaskStart(TaskStartEvent e)
@@ -90,6 +94,7 @@ public class TaskManager : MonoBehaviour
     {
         if (taskUIPrefab == null || taskUIContainer == null) return;
 
+        taskUIContainer.gameObject.SetActive(true);
         GameObject uiObj = Instantiate(taskUIPrefab, taskUIContainer);
         uiObj.SetActive(true);
 
@@ -108,9 +113,12 @@ public class TaskManager : MonoBehaviour
 
         if (activeTaskUIs.TryGetValue(taskId, out TaskUI ui) && ui != null)
         {
-            ui.Hide();
-            yield return new WaitForSeconds(0.5f);
-            if (ui.gameObject != null) Destroy(ui.gameObject);
+            if (ui.gameObject.activeInHierarchy)
+            {
+                ui.Hide();
+                yield return new WaitForSeconds(0.5f);
+            }
+            if (ui != null) Destroy(ui.gameObject);
         }
         activeTaskUIs.Remove(taskId);
         activeTasks.Remove(taskId);
@@ -120,4 +128,22 @@ public class TaskManager : MonoBehaviour
 
     public Dictionary<string, TaskData> GetActiveTasks() => new Dictionary<string, TaskData>(activeTasks);
     public Dictionary<string, TaskUI> GetActiveTaskUIs() => new Dictionary<string, TaskUI>(activeTaskUIs);
+
+    private void OnMenuEvent(MenuEvent e)
+    {
+        foreach (var ui in activeTaskUIs.Values)
+            if (ui != null) Destroy(ui.gameObject);
+
+        activeTaskUIs.Clear();
+        activeTasks.Clear();
+
+        if (taskUIContainer != null)
+            taskUIContainer.gameObject.SetActive(false);
+    }
+
+    private void OnGameStart(GameStartEvent e)
+    {
+        if (taskUIContainer != null)
+            taskUIContainer.gameObject.SetActive(true);
+    }
 }
