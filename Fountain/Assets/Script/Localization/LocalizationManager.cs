@@ -66,7 +66,36 @@ namespace Fountain.Localization
         {
             return currentLocale;
         }
-            
+        /// <summary>
+        /// 获取语言名称
+        /// </summary>
+        /// <param name="locale"></param>
+        /// <returns></returns>
+        public string GetLocaleName(LocaleID locale)
+        {
+            //出于简单考虑,就不从stringTable里读取了,直接硬编码
+            switch (locale)
+            {
+                case LocaleID.zh:
+                    return "简体中文";
+                    //break;
+                case LocaleID.en:
+                    return "English";
+                    //break;
+                default:
+                    return string.Empty;
+                    //break;
+            }
+
+        }
+        /// <summary>
+        /// 获取当前的语言名称
+        /// </summary>
+        /// <returns></returns>
+        public string GetLocaleName()
+        {
+            return GetLocaleName(currentLocale); 
+        }
         private void OnLocaleChanged(Locale locale)
         {
             string localeCode = null;
@@ -99,7 +128,7 @@ namespace Fountain.Localization
                 //Debug.LogWarning("加载了存储的语言设置," + currentLocale.ToString());
                 return;
             }
-            // 第一次进入游戏,根据系统语言选则
+            // 第一次进入游戏,根据系统语言选择
             if (Application.systemLanguage == SystemLanguage.Chinese ||
                 Application.systemLanguage == SystemLanguage.ChineseSimplified ||
                 Application.systemLanguage == SystemLanguage.ChineseTraditional)

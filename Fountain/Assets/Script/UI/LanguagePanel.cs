@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using Fountain.Common;
 using Fountain.Localization;
+using UnityEngine.UI;
 
 namespace Fountain.UI
 {
@@ -13,46 +14,87 @@ namespace Fountain.UI
     /// </summary>
     public class LanguagePanel : MonoBehaviour
     {
-        private TMP_Dropdown languageDropdown;
-        //保证真实的选项和文本的一致
-        private LocalizeDropdown localizeDropdown;
+        //控制显隐
+        private Button showButton;
+        private Button returnButton;
+        private Transform setLanguagePanel;
+
+        private TextMeshProUGUI languageName;
+
         private void Awake()
         {
-            languageDropdown = this.transform.FindChildByName(nameof(languageDropdown)).
-             GetComponent<TMP_Dropdown>();
-            localizeDropdown = languageDropdown.GetComponent<LocalizeDropdown>();
-            localizeDropdown.SetOptionText();
-            languageDropdown.onValueChanged.AddListener(SetLanguage);
+            showButton = this.transform.FindChildByName(nameof(showButton)).
+                GetComponent<Button>();
+            returnButton = this.transform.FindChildByName(nameof(returnButton)).
+                GetComponent<Button>();
+            setLanguagePanel = this.transform.FindChildByName
+                (nameof(setLanguagePanel));
+            Hide();
+            showButton.onClick.AddListener(Show);
+            showButton.onClick.AddListener(UpdateLanguageName);
+            returnButton.onClick.AddListener(Hide);
+
+            languageName = this.transform.FindChildByName(nameof(languageName)).
+                GetComponent<TextMeshProUGUI>();
+
+            InitChangeLanguageButton();
         }
         private void OnEnable()
         {
-            GameEventBus.Subscribe<LocaleChangeEvent>(RefreshDropdown);
+            GameEventBus.Subscribe<LocaleChangeEvent>(UpdateLanguageName);
         }
         private void OnDisable()
         {
-            GameEventBus.Unsubscribe<LocaleChangeEvent>(RefreshDropdown);
+            GameEventBus.Subscribe<LocaleChangeEvent>(UpdateLanguageName);
         }
 
-
-        private void SetLanguage(int option)
+        private void Hide()
         {
-            if (option==(int)LocalizationManager.Instance.GetLocale())
-            {
-                return;
-            }
-            //请务必保证UI里的语言顺序和LocalizationManager里的枚举顺序是一致的!!
-            //以及文字显示也是一致的!!!
-            LocalizationManager.Instance.SetLocale
-                ((LocalizationManager.LocaleID)option);
+            setLanguagePanel.gameObject.SetActive(false);
         }
-        private void RefreshDropdown(LocaleChangeEvent e)
+        private void Show()
         {
-            if ((int)e.locale==languageDropdown.value)
+            setLanguagePanel.gameObject.SetActive(true);
+        }
+        private void InitChangeLanguageButton()
+        {
+            //这里要求按钮名字命名:"locale"+Button,比如"zhButton"
+            //方便注册事件
+            Button zhButton = this.transform.
+                FindChildByName(LocalizationManager.LocaleID.zh.ToString() + "Button").
+                GetComponent<Button>();
+            zhButton.onClick.AddListener(() =>
             {
-                return;
-            }
-            languageDropdown.value = (int)e.locale;
-            languageDropdown.RefreshShownValue();
+                LocalizationManager.Instance.SetLocale
+                (LocalizationManager.LocaleID.zh);
+            });
+
+            Button enButton = this.transform.
+                FindChildByName(LocalizationManager.LocaleID.en.ToString() + "Button").
+                GetComponent<Button>();
+            enButton.onClick.AddListener(() =>
+            {
+                LocalizationManager.Instance.SetLocale
+                (LocalizationManager.LocaleID.en);
+            });
+
+        }
+        /// <summary>
+        /// 更新当前选中的语言的提示
+        /// </summary>
+        /// <param name="locale"></param>
+        private void UpdateLanguageName(LocalizationManager.LocaleID locale)
+        {
+            languageName.text = LocalizationManager.Instance.GetLocaleName(locale);        
+        }
+        private void UpdateLanguageName()
+        {
+            UpdateLanguageName(LocalizationManager.Instance.GetLocale());
+        }
+        //用于注册事件的
+        private void UpdateLanguageName(LocaleChangeEvent e)
+        {
+            UpdateLanguageName(e.locale);
         }
     }
 }
