@@ -30,3 +30,4 @@ MonoBehaviour:
     textZH: "\u8D77\u5F00\uFF0C\u8BA9\u6211\u6765\u3002"
     performName: 
   dialogueEndPerformName: WalkPerform
+  unlockInput: 1

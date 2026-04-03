@@ -75,6 +75,7 @@ namespace Fountain.Dialogue
         public DialogueNode[] sequence;
         [Tooltip("对话结束后的演出设置")]
         public string dialogueEndPerformName;
+        public bool unlockInput=true;
         //可选:添加对话开始时的事件和对话结束时的事件,
         //对话不一定于策划案的划分一致,有些对话可能要拆成多个对话
     }

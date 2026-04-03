@@ -131,3 +131,8 @@ public class FadeEvent:IGameEvent
     public Image fadeImage;
 }
 
+
+public class ValveFixedEvent:IGameEvent
+{
+
+}

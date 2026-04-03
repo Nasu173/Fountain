@@ -535,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72876b09a0addbd4ebf4629c37a76869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeTotal: 3
+  timeTotal: 1
 --- !u!4 &326930553
 Transform:
   m_ObjectHideFlags: 0
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1f34e25be97404d820c96f2ce88937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBeforeStart: 3
+  timeBeforeStart: 1
   startTimer: {fileID: 1242416294}
   gameTimer: {fileID: 326930552}
   gameFlowController: {fileID: 1734954146}

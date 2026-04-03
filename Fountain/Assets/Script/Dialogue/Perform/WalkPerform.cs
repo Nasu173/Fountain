@@ -14,9 +14,7 @@ namespace Fountain.Dialogue
         {
             data.npcMove.SetDuration(data.duration);
             data.npcMove.MoveToward(data.targetPosition);            
-            data.anim.SetBool(data.walkAnimName,true);
-            data.npcMove.Arrived += () => 
-            { data.anim.SetBool(data.walkAnimName, false); };
+
         }
 
         public override void ReceiveData(IPerformDataProvider data)

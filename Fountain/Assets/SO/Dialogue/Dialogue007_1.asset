@@ -21,3 +21,4 @@ MonoBehaviour:
     textZH: "\u54E6\u4E0D\uFF0C\u8FD9\u55B7\u6CC9\u4E0D\u5BF9\u52B2\uFF0C\u6211\u5F97\u8D76\u7D27\u8DDF\u8001\u677F\u6C47\u62A5\u8FD9\u4EF6\u4E8B\u3002"
     performName: 
   dialogueEndPerformName: 
+  unlockInput: 1

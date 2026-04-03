@@ -25,3 +25,4 @@ MonoBehaviour:
     textZH: "\u8FD9\u6CA1\u7528\u7684\u5F92\u5F1F\u8E72\u90A3\u5E72\u561B\u5462"
     performName: LookAtPerform
   dialogueEndPerformName: SetFOVPerform
+  unlockInput: 1

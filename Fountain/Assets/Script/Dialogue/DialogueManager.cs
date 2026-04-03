@@ -146,25 +146,25 @@ namespace Fountain.Dialogue
         {
             dialogueCompleted = true;
             dialoguePanel.SetVisible(false);
-            GameEventBus.Publish<DialogueEndEvent>(null);
             GameEventBus.Publish(new ScriptTriggerEvent
             {
                 DialogueID = currentDialogues.id.ToString()
             });
             //触发结束时的演出
-            TriggerPerform(IPerformDataProvider.END_INDEX, currentDialogues.dialogueEndPerformName); 
-            this.currentDialogues = null;
-            this.performDatas = null;
+            TriggerPerform(IPerformDataProvider.END_INDEX, currentDialogues.dialogueEndPerformName);
 
             //恢复输入
-            playerInteractor.Enable();
-            playerMove.enabled = true;
-            playerSight.enabled = true;
-            uiInput.enabled = true;
-           // GameInputManager.Instance.EnableInteractInput();
-           // GameInputManager.Instance.EnableMoveInput();
-           // GameInputManager.Instance.EnableSightInput();
-           // GameInputManager.Instance.EnablePausePanel();
+            if (currentDialogues.unlockInput)
+            {
+                 playerInteractor.Enable();
+                 playerMove.enabled = true;
+                 playerSight.enabled = true;
+                 uiInput.enabled = true;
+            } 
+
+            GameEventBus.Publish<DialogueEndEvent>(null);
+            this.currentDialogues = null;
+            this.performDatas = null;
         }
         /// <summary>
         /// 实现演出效果
