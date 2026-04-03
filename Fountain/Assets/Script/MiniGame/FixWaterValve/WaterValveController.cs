@@ -146,6 +146,11 @@ namespace Fountain.MiniGame.RepairWaterValve
                 repaired = true;
                 repairProgress = 1f;
                 RepairComplete?.Invoke();
+                GameEventBus.Publish(new TaskProgressEvent
+                {
+                    TaskId = 8.ToString(),
+                    Amount = 1
+                });
                 this.canInteract = false;
             }
         }

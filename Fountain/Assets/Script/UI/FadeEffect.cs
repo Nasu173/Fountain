@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Fountain.InputManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +30,7 @@ namespace Fountain.UI
         /// </summary>
         public void FadeIn()
         {
+            GameInputManager.Instance.GetProvider<CharacterInputProvider>().enabled = false;
             StartCoroutine(Fade(0, 1));
         }
         /// <summary>
@@ -37,6 +39,7 @@ namespace Fountain.UI
         public void FadeOut()
         {
             StartCoroutine(Fade(1, 0));
+            GameInputManager.Instance.GetProvider<CharacterInputProvider>().enabled = true;
         }
         public void SetFadeImage(Image img)
         {
@@ -55,7 +58,7 @@ namespace Fountain.UI
                 canvasGroup.alpha = Mathf.Lerp(start, end, elapsed / duration);
                 yield return null;
             }
-            
+            canvasGroup.alpha = end;
         }
     }
 }
