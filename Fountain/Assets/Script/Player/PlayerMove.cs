@@ -202,29 +202,55 @@ namespace Fountain.Player
 
         }
 
+        /*
+        public void ForceMoveTo(Vector3 targetPos,float duration,Action arrived)
+        {
+            StartCoroutine(ForceMove(targetPos,duration, arrived)); 
+        } 
+        private IEnumerator ForceMove(Vector3 targetPos,float duration,Action arrived)
+        {
+            float elpased = 0;
+            Vector3 startPos = this.transform.position;
+            while (elpased<duration)
+            {
+                elpased += Time.deltaTime;
+                this.transform.position = Vector3.Lerp
+                    (startPos, targetPos, elpased / duration);
+                
+                sight.ApplyRunShake();
+                yield return null;
+            }
+            this.transform.position = targetPos;
+            arrived?.Invoke();
+        }
+
+         
+         */
+
+
         /// <summary>
         /// 强制朝向指定地点,只在禁止玩家输入的时候才调用这个方法!
         /// </summary>
         /// <param name="target">目标位置</param>
-        /// <param name="speed">转向速度</param>
-        public void LookAt(Vector3 target, float speed)
+        /// <param name="duration">转向速度</param>
+        public void LookAt(Vector3 target, float duration)
         {
-            StartCoroutine(LookAtTransition(target, speed));
+            StartCoroutine(LookAtTransition(target, duration));
         }
         /// <summary>
         /// 强制转向的协程
         /// </summary>
         /// <returns></returns>
-        private IEnumerator LookAtTransition(Vector3 target,float speed)
+        private IEnumerator LookAtTransition(Vector3 target,float duration)
         {
 
             float t = 0;
             Quaternion startBodyRot = this.transform.rotation;
             Quaternion startCamRot = sight.transform.localRotation;
 
-            while (t < 1f)//这个暂时硬编码一个持续时间1
+            while (t < duration)//这个暂时硬编码一个持续时间1
             {
-                t += Time.deltaTime * speed;
+                t += Time.deltaTime;
                 //要朝向的方向
                 Vector3 direction = (target - sight.transform.position).normalized;
                 
@@ -236,14 +262,14 @@ namespace Fountain.Player
                     //身体只转y轴
                     Quaternion targetBodyRot = Quaternion.Euler(0, euler.y, 0);
                         this.transform.rotation = Quaternion.Slerp
-                             (startBodyRot, targetBodyRot, t);
+                             (startBodyRot, targetBodyRot, t/duration);
 
                     //相机只转x轴
                     float targetX = euler.x;
                     Math.Clamp(targetX, sight.sightAngleMin, sight.sightAngleMax);
                     Quaternion targetCamRot = Quaternion.Euler(targetX, 0, 0);
                     Quaternion localRotation =
-                        Quaternion.Slerp(startCamRot, targetCamRot, t);
+                        Quaternion.Slerp(startCamRot, targetCamRot, t/duration);
                     //同步旋转
                     sight.Rotate(localRotation.eulerAngles.x);
                 }
@@ -252,6 +278,10 @@ namespace Fountain.Player
              }
 
         }
+
+
+
+
 
         /// <summary>
         /// 计算移动速度

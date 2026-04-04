@@ -17,7 +17,7 @@ namespace Fountain.Dialogue
         [Tooltip("要演出的对话的节点在序列里的索引")]
         public int dialogueNodeIndex;
         [Tooltip("看向目标的速度")]
-        public float transitionSpeed;
+        public float lookatDuration;
         [HideInInspector]
         public PlayerMove playerMove;
         [HideInInspector]

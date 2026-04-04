@@ -17,7 +17,7 @@ namespace Fountain.Dialogue
             {
                 return;
             }
-            data.playerMove.LookAt(data.target.position, data.transitionSpeed);
+            data.playerMove.LookAt(data.target.position, data.lookatDuration);
             data.StartCoroutine(SetFOV(data.cam.m_Lens.FieldOfView, data.targetFOV));
             //data.cam.m_Lens.FieldOfView = data.targetFOV;
         }

@@ -701,7 +701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1204454463}
   dialogueNodeIndex: 1
-  transitionSpeed: 5
+  lookatDuration: 0.5
   playerMove: {fileID: 0}
   cam: {fileID: 0}
   targetFOV: 20
@@ -720,7 +720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2110790248}
   dialogueNodeIndex: 0
-  transitionSpeed: 5
+  lookatDuration: 0.5
   playerMove: {fileID: 0}
   cam: {fileID: 0}
   targetFOV: 60
@@ -829,7 +829,7 @@ GameObject:
   m_Component:
   - component: {fileID: 257255623}
   - component: {fileID: 257255624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1132,6 +1132,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4949bd419ad30224496e0a73594ed25e, type: 3}
       propertyPath: m_Name
       value: Gate_light (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4949bd419ad30224496e0a73594ed25e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2090,10 +2094,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 9
-  taskName: "\u6253\u7535\u8BDD\u6C42\u52A9"
+  taskName: "\u8FD4\u56DE\u529E\u516C\u5BA4"
   taskNumber: 9
   targetCount: 1
-  description: "\u4E0E\u529E\u516C\u5BA4\u5185\u7684\u7535\u8BDD\u4EA4\u4E92"
+  description: "\u4E0E\u5927\u95E8\u4EA4\u4E92"
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -2720,6 +2724,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a1447f602424ed34c968325e068d200e, type: 3}
   m_PrefabInstance: {fileID: 839935259}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &855987074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 855987076}
+  - component: {fileID: 855987075}
+  m_Layer: 0
+  m_Name: ResetPlayerPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &855987075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855987074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f723d935769dd4044904b98a55933782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPosition: {x: 49.64, y: 1.5, z: 27.69}
+  targetSceneAddress: OF2
+--- !u!4 &855987076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855987074}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &857717392
 GameObject:
   m_ObjectHideFlags: 0
@@ -8333,7 +8383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1024555083}
   - component: {fileID: 1024555084}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10053,16 +10103,70 @@ PrefabInstance:
       propertyPath: m_Name
       value: gate
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 357324c3677876d4b925d86d2e361330, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 357324c3677876d4b925d86d2e361330, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1330430429}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 357324c3677876d4b925d86d2e361330, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1330430430}
   m_SourcePrefab: {fileID: 100100000, guid: 357324c3677876d4b925d86d2e361330, type: 3}
 --- !u!4 &1330430427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 357324c3677876d4b925d86d2e361330, type: 3}
   m_PrefabInstance: {fileID: 1330430426}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1330430428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 357324c3677876d4b925d86d2e361330, type: 3}
+  m_PrefabInstance: {fileID: 1330430426}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1330430429
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330430428}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.04311177, y: 0.008064793, z: 0.050877858}
+  m_Center: {x: 0, y: 0, z: 0.02543893}
+--- !u!114 &1330430430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330430428}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 6
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &1341293029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10469,7 +10573,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1456976093}
   - component: {fileID: 1456976094}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16280,6 +16384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate_light (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4949bd419ad30224496e0a73594ed25e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -16344,6 +16452,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4949bd419ad30224496e0a73594ed25e, type: 3}
       propertyPath: m_Name
       value: Gate_light
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4949bd419ad30224496e0a73594ed25e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16761,7 +16873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1429610911}
   dialogueNodeIndex: 1
-  transitionSpeed: 1
+  lookatDuration: 1
   playerMove: {fileID: 0}
   cam: {fileID: 0}
   targetFOV: 60
@@ -17184,6 +17296,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4949bd419ad30224496e0a73594ed25e, type: 3}
       propertyPath: m_Name
       value: Gate_light (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4949bd419ad30224496e0a73594ed25e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17912,7 +18028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2090001429}
   - component: {fileID: 2090001430}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18188,7 +18304,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2110790248}
-  m_Layer: 0
+  - component: {fileID: 2110790251}
+  - component: {fileID: 2110790250}
+  - component: {fileID: 2110790249}
+  m_Layer: 7
   m_Name: Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18218,6 +18337,49 @@ Transform:
   - {fileID: 1612689172}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110790249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110790247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867ed17cb74cf4e4cae10b5e6f2c81da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskID:
+  - 9
+--- !u!114 &2110790250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110790247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d4bd3b5260e244f84c7cddef8b619e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineVisuals:
+  - {fileID: 1330430430}
+--- !u!114 &2110790251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110790247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4b396dd3c24c64d8735a9bedd7f900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSceneAddress: OF2
+  outlineVisual: {fileID: 2110790250}
+  completeTaskId: 9
 --- !u!1001 &2124879096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18394,6 +18556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate_1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8fa9e47bbaec1b346be9326a3e2576f8, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18513,6 +18679,10 @@ PrefabInstance:
       propertyPath: taskID.Array.data[0]
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
+      propertyPath: repairTimeRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3965657065142013024, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_Name
       value: RepairableWaterValve
@@ -18526,6 +18696,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 855987076}
   - {fileID: 332734989}
   - {fileID: 2110790248}
   - {fileID: 1478860825}

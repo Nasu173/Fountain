@@ -18,7 +18,7 @@ namespace Fountain.Player
         [Tooltip("描边效果,手动拖得了")]
         [SerializeField]
         private OutlineVisual outlineVisual;
-
+        public string completeTaskId;
         private bool canInteract=false;
         public bool CanInteract 
         { get { return canInteract; } set { canInteract = value; } } 
@@ -43,6 +43,8 @@ namespace Fountain.Player
                 Additive = true,
                 SceneToUnload = gameObject.scene.name
             });
+            GameEventBus.Publish<TaskProgressEvent>(new TaskProgressEvent
+                (){ TaskId = this.completeTaskId, Amount = 1 });
         }
     }
 }
