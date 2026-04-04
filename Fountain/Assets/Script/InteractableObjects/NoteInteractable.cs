@@ -68,7 +68,7 @@ namespace Fountain.Player
             //显示鼠标
             sightInput.ShowCursor();
             //GameInputManager.Instance.ShowCursor();
-            this.canInteract = false;
+            //this.canInteract = false;
         }
 
         public void Select()

@@ -17340,7 +17340,8 @@ MonoBehaviour:
   doorDuration: 1
   doorXRotation: -226
   playerXRotation: -50
-  playerDuration: 1
+  playerDuration: 0.5
+  sceneAddress: Underground
   monsterDistance: 0.5
   monster: {fileID: 1051268246}
   data: {fileID: 1800743238}
@@ -17358,7 +17359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1885969310}
   dialogueNodeIndex: 0
-  lookatDuration: 0.5
+  lookatDuration: 0.3
   playerMove: {fileID: 0}
   cam: {fileID: 0}
   targetFOV: 60

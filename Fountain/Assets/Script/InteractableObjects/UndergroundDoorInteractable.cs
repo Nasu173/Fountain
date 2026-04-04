@@ -1,6 +1,7 @@
 using Fountain.Common;
 using Fountain.Dialogue;
 using Fountain.InputManagement;
+using Foutain.Scene;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Fountain.Player
         public float playerXRotation;
         public float playerDuration;
 
+        public string sceneAddress;
 
         public float monsterDistance=1f;//突脸的时候在玩家身后的距离
         public Transform monster;
@@ -87,10 +89,19 @@ namespace Fountain.Player
                 yield return null;
             }
             player.rotation = endRotation;
-            
-
-          //  PlayerInstance.Instance.GetComponent<PlayerMove>().ForceMoveTo
-          //      (targetPosition,pushDuration ,null);    
+            GameInputManager.Instance.GetProvider<CharacterInputProvider>()
+                .enabled = true;
+            GameInputManager.Instance.GetProvider<PlayerSightInputProvider>()
+                .enabled = true;
+            //切换场景
+            GameEventBus.Publish(new LoadSceneEvent
+            {
+                SceneAddress = sceneAddress,
+                Additive = true,
+                SceneToUnload = gameObject.scene.name
+            });
+            //  PlayerInstance.Instance.GetComponent<PlayerMove>().ForceMoveTo
+            //      (targetPosition,pushDuration ,null);    
         }
         private void ShowMonster()
         {
