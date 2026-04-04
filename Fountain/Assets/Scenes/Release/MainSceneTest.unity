@@ -11304,7 +11304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPosition: {x: 47.9, y: 1.597, z: 22.061}
-  targetSceneAddress: MainSceneTest
+  targetSceneAddress: OF_TestScene
 --- !u!4 &1481541037
 Transform:
   m_ObjectHideFlags: 0

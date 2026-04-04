@@ -1,4 +1,5 @@
 using Fountain.Common;
+using Fountain.InputManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,6 +44,9 @@ namespace Fountain.UI
             if (elapsed>=duration)
             {
                 fade.duration = fadeOutTime;
+
+                GameInputManager.Instance.
+                    GetProvider<CharacterInputProvider>().enabled = true;
                 fade.FadeOut();
                 isBlacking = false;
             }
@@ -58,6 +62,10 @@ namespace Fountain.UI
             fade.FadeIn();
             elapsed = 0;
             isBlacking = true;
+
+            //禁用输入
+            GameInputManager.Instance.
+                GetProvider<CharacterInputProvider>().enabled = false;
         }
     }
 }

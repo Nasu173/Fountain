@@ -18,10 +18,12 @@ namespace Fountain.MiniGame.RepairWaterValve
         [SerializeField]
         private float rotateSpeed;
         private Transform stem;//阀杆
-
+        private FadeEffect barFade;
+        private bool barShown;//是否显示了进度条
         private void Start()
         {
             bar = this.transform.FindChildByName(nameof(bar)).GetComponent<ProgressBar>();
+            barFade = bar.GetComponent<FadeEffect>();
             outline = this.transform.GetComponent<OutlineVisual>();
             valve = this.GetComponent<WaterValveController>();
             valve.ProgressIncrease += () =>
@@ -29,7 +31,7 @@ namespace Fountain.MiniGame.RepairWaterValve
                 float amount = valve.GetRepairedPercentage();
                 bar.SetFillAmount(amount);
                 RotateValve(1);
-                if (amount!=0)
+                if (amount!=0&&!barShown)
                 {
                     ShowBar();
                 }
@@ -41,10 +43,10 @@ namespace Fountain.MiniGame.RepairWaterValve
                 RotateValve(-1);
                 if (amount<=0)
                 {
-                    HideBar();
+                    ForceHideBar();
                 }
             };
-
+            valve.RepairComplete += ForceHideBar;
             HideBar();
             stem = this.transform.FindChildByName(nameof(stem));
         }
@@ -54,15 +56,33 @@ namespace Fountain.MiniGame.RepairWaterValve
         /// </summary>
         public void ShowBar()
         {
-            bar.gameObject.SetActive(true);
+            if (!barShown)
+            {
+                barFade.FadeIn();
+                barShown = true;
+            }
+            //bar.gameObject.SetActive(true);
         }
         /// <summary>
         /// 隐藏进度条
         /// </summary>
         public void HideBar()
         {
-            bar.gameObject.SetActive(false);
+            float progress = valve.GetRepairedPercentage();
+            //如果没有进度,不用动
+            if (progress==0||progress==1)
+            {
+                return;
+            }
+            barShown = false;
+            barFade.FadeOut();
         }
+        private void ForceHideBar()
+        {
+            barShown = false;
+            barFade.FadeOut();
+        }
+        
         /// <summary>
         /// 隐藏描边 
         /// </summary>
@@ -85,6 +105,10 @@ namespace Fountain.MiniGame.RepairWaterValve
         private void RotateValve(int direction)
         {
             stem.Rotate(this.transform.up, direction*Time.deltaTime * rotateSpeed, Space.World);
+        }
+        private void FadeOutBar()
+        {
+            barFade.FadeOut();
         }
     }
 }

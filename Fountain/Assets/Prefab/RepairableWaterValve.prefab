@@ -342,6 +342,8 @@ GameObject:
   - component: {fileID: 7842024641078413290}
   - component: {fileID: 7909968939977825478}
   - component: {fileID: 6693954289519384084}
+  - component: {fileID: 5029031797680747100}
+  - component: {fileID: 3977483334134465723}
   m_Layer: 0
   m_Name: bar
   m_TagString: Untagged
@@ -460,6 +462,33 @@ MonoBehaviour:
   target: {fileID: 0}
   isMain: 1
   mode: 1
+--- !u!225 &5029031797680747100
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848110604280353964}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &3977483334134465723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848110604280353964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3561d0e1fec0d0445a226ad0dc637e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeImage: {fileID: 0}
+  duration: 1
+  hiddenDefault: 1
 --- !u!1001 &4389990079471037783
 PrefabInstance:
   m_ObjectHideFlags: 0

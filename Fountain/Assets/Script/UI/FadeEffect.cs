@@ -10,36 +10,54 @@ namespace Fountain.UI
     /// <summary>
     /// 渐变效果
     /// </summary>
+    [RequireComponent(typeof(CanvasGroup))]
     public class FadeEffect : MonoBehaviour
     {
         private CanvasGroup canvasGroup;
         public Image fadeImage;
         [Tooltip("过渡持续过程")]
         public float duration;
+        [Tooltip("是否默认隐藏")]
+        [SerializeField]
+        private bool hiddenDefault=true;
+
+        private Coroutine fadeCoroutine;
         private void Awake()
         {
             canvasGroup = this.GetComponent<CanvasGroup>();
-            canvasGroup.alpha = 0;
         }
         private void Start()
         {
-            canvasGroup.alpha = 0;
+            if (hiddenDefault)
+            {
+                canvasGroup.alpha = 0;
+            }
+            else
+            {
+                canvasGroup.alpha = 1;
+            }
         }
         /// <summary>
         /// 淡入
         /// </summary>
         public void FadeIn()
         {
-            GameInputManager.Instance.GetProvider<CharacterInputProvider>().enabled = false;
-            StartCoroutine(Fade(0, 1));
+            if (fadeCoroutine!=null)
+            {
+                StopCoroutine(fadeCoroutine);
+            }
+            fadeCoroutine = StartCoroutine(Fade(0, 1));
         }
         /// <summary>
         /// 淡出
         /// </summary>
         public void FadeOut()
         {
-            StartCoroutine(Fade(1, 0));
-            GameInputManager.Instance.GetProvider<CharacterInputProvider>().enabled = true;
+            if (fadeCoroutine!=null)
+            {
+                StopCoroutine(fadeCoroutine);
+            }
+            fadeCoroutine = StartCoroutine(Fade(1, 0));
         }
         public void SetFadeImage(Image img)
         {
@@ -59,6 +77,7 @@ namespace Fountain.UI
                 yield return null;
             }
             canvasGroup.alpha = end;
+            fadeCoroutine = null;
         }
     }
 }

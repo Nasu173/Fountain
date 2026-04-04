@@ -85,12 +85,22 @@ namespace Fountain.Player
             this.transform.localRotation = Quaternion.Euler(new Vector3(cameraRotationAngle, 0, 0));
         }
         /// <summary>
-        /// 让相机旋转至指定角度
+        /// 让相机记录并旋转至指定角度
         /// </summary>
         /// <param name="angle"></param>
         public void Rotate(float angle)
         {
+            //因为转过一周的效果其实是一样的,还得
+            if (angle>=sightAngleMax)
+            {
+                angle -= 360;
+            }
+            else if(angle<=sightAngleMin)
+            {
+                angle += 360;
+            }
             cameraRotationAngle = angle;
+           //cameraRotationAngle = Mathf.Clamp(cameraRotationAngle, sightAngleMin, sightAngleMax);
             this.transform.localRotation = Quaternion.Euler(new Vector3(cameraRotationAngle, 0, 0));
             
         }

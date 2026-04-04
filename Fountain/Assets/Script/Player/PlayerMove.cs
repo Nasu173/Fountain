@@ -222,7 +222,7 @@ namespace Fountain.Player
             Quaternion startBodyRot = this.transform.rotation;
             Quaternion startCamRot = sight.transform.localRotation;
 
-            while (t < 1f)
+            while (t < 1f)//这个暂时硬编码一个持续时间1
             {
                 t += Time.deltaTime * speed;
                 //要朝向的方向

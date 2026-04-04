@@ -18,12 +18,12 @@ MonoBehaviour:
     textEN: Ha! See? Told you it was busted.
     speakerZH: "\u5F92\u5F1F"
     textZH: "\u54C8\uFF01\u6211\u5C31\u8BF4\u5F04\u4E0D\u597D\u5427\u3002"
-    performName: PlayAnimationPerform
+    performName: 
   - speakerEN: I
     textEN: Yeah... Looks like we need to check the underground pipes.
     speakerZH: "\u6211"
     textZH: "\u786E\u5B9E\uFF0C\u770B\u6765\u53EF\u80FD\u8981\u53BB\u68C0\u67E5\u4E00\u4E0B\u5730\u4E0B\u90E8\u5206\u7684\u8BBE\u5907\u4E86\u3002"
-    performName: 
+    performName: LookAtPerform
   - speakerEN: Apprentice
     textEN: 'I got this! You just chill here, Boss. I''ll have it fixed in a sec.
 
@@ -32,3 +32,4 @@ MonoBehaviour:
     textZH: "\u8FD9\u9898\u6211\u4F1A\uFF01\u4F60\u5C31\u6401\u8FD9\u7B49\u7740\u5427\uFF0C\u770B\u6211\u5206\u5206\u949F\u641E\u5B9A\u3002\n"
     performName: 
   dialogueEndPerformName: WalkPerform
+  unlockInput: 0
