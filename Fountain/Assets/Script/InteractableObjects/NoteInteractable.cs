@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Fountain.Player
 {
     /// <summary>
-    /// 笔记可交互物体,挂在笔记上
+    /// 笔记可交互物体,挂在笔记上,需要说明的的是,还没有暂停,待会再说吧!
     /// </summary>
     public class NoteInteractable : MonoBehaviour, IInteractable
     {

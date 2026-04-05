@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noiseProfile: {fileID: 11400000, guid: 3654b928024dea546b22f29b7f17cd43, type: 2}
-  duration: 1
+  duration: 0.5
 --- !u!114 &2919710473129660036
 MonoBehaviour:
   m_ObjectHideFlags: 0

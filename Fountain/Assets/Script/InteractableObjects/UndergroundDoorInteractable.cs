@@ -8,24 +8,45 @@ using UnityEngine;
 
 namespace Fountain.Player
 {
+    /// <summary>
+    /// 专门为地下室的门写的可交互脚本,事实上不应该这样写,
+    /// 交互系统设计的时候应该考虑多个可交互物体以及执行顺序的问题,
+    /// 因为一个可交互物体的效果是可以组合出来的,而不是想这样全写一起,
+    /// 此外,还要考虑延迟问题
+    /// </summary>
     public class UndergroundDoorInteractable : MonoBehaviour, IInteractable
     {
         [Tooltip("描边效果,手动拖得了")]
         [SerializeField]
         private OutlineVisual outlineVisual;
+
+        [Header("开门的演出的数据")]
         public float doorDuration;//开门总时间
         private Transform door;
         public float doorXRotation;
+
+        [Header("玩家的旋转演出所需数据")]
+        [Tooltip("旋转之前的延迟")]
+        public float delayBeforeRotate=1.5f;
         public float playerXRotation;
         public float playerDuration;
 
+        [Header("强制转向所需数据")]
+        [SerializeField]
+        private Transform lookTarget;
+        [SerializeField]
+        private float lookDuration;
+
+        public float monsterDistance = 1f;//突脸的时候在玩家身后的距离
+        public Transform monster;
+
+        //要切换到的场景
         public string sceneAddress;
 
-        public float monsterDistance=1f;//突脸的时候在玩家身后的距离
-        public Transform monster;
-        public LookData data;
-       // public Vector3 targetPosition;
+        //public LookData data;
+        // public Vector3 targetPosition;
         //public float pushDuration;
+
 
         private bool canInteract = false;
 
@@ -51,44 +72,24 @@ namespace Fountain.Player
             GameInputManager.Instance.GetProvider<PlayerSightInputProvider>()
                 .enabled = false;
 
-            StartCoroutine(Open());
+            StartCoroutine(Perform());
             this.canInteract = false;
         }
-        private IEnumerator Open()
+        private IEnumerator Perform()
         {
-            float elapsed = 0;
-            Quaternion startRotation = door.localRotation;
-            Quaternion endRotation = Quaternion.Euler(new Vector3(doorXRotation, 0, 0));
-            while (elapsed<doorDuration)
-            {
-                door.localRotation = Quaternion.Lerp
-                    (startRotation, endRotation, elapsed / doorDuration);
-                elapsed += Time.deltaTime;
-                yield return null;
-            }
-            door.localRotation = endRotation;
+            yield return StartCoroutine(RotateDoor());
             ShowMonster();
-            LookAtPerform perform = new LookAtPerform();
-            perform.ReceiveData(data);
-            perform.Perform();
-            yield return new WaitForSeconds(data.lookatDuration + 1);
+
+            // LookAtPerform perform = new LookAtPerform();
+            // perform.ReceiveData(data);
+            // perform.Perform();
+            ForcePlayerLook();
+            yield return new WaitForSeconds(delayBeforeRotate);
 
             StartCoroutine(HideMonster(0.3f));
-            Transform player = PlayerInstance.Instance.transform;
-            PlayerSight playerSight = player.GetComponentInChildren<PlayerSight>();
-            elapsed = 0;
-            startRotation = player.rotation;
-            endRotation = Quaternion.Euler
-                (player.eulerAngles+new Vector3(playerXRotation, 0, 0));
-            while (elapsed<playerDuration)
-            {
-                player.rotation = Quaternion.Lerp
-                    (startRotation, endRotation, elapsed / playerDuration);
-                elapsed += Time.deltaTime;
-                playerSight.ApplyRunShake();
-                yield return null;
-            }
-            player.rotation = endRotation;
+
+            yield return StartCoroutine(RotatePlayer());
+
             GameInputManager.Instance.GetProvider<CharacterInputProvider>()
                 .enabled = true;
             GameInputManager.Instance.GetProvider<PlayerSightInputProvider>()
@@ -116,5 +117,46 @@ namespace Fountain.Player
             yield return new WaitForSeconds(delay);
             monster.gameObject.SetActive(false);
         }
+        private IEnumerator RotateDoor()
+        {
+            float elapsed = 0;
+            Quaternion startRotation = door.localRotation;
+            Quaternion endRotation = Quaternion.Euler(new Vector3(doorXRotation, 0, 0));
+            while (elapsed < doorDuration)
+            {
+                door.localRotation = Quaternion.Lerp
+                    (startRotation, endRotation, elapsed / doorDuration);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+            door.localRotation = endRotation;
+        }
+        private IEnumerator RotatePlayer()
+        {
+            Transform player = PlayerInstance.Instance.transform;
+            PlayerSight playerSight = player.GetComponentInChildren<PlayerSight>();
+            float elapsed = 0;
+            Quaternion startRotation = player.rotation;
+            Quaternion endRotation = Quaternion.Euler
+                (player.eulerAngles + new Vector3(playerXRotation, 0, 0));
+            while (elapsed < playerDuration)
+            {
+                player.rotation = Quaternion.Lerp
+                    (startRotation, endRotation, elapsed / playerDuration);
+                elapsed += Time.deltaTime;
+                playerSight.ApplyRunShake();
+                yield return null;
+            }
+            player.rotation = endRotation;
+
+        }
+        private void ForcePlayerLook()
+        {
+            PlayerMove player = PlayerInstance.Instance.GetComponent<PlayerMove>(); 
+
+            player.LookAt(lookTarget.position, lookDuration);
+        }
+
+
     }
 }
