@@ -83,6 +83,16 @@ namespace Fountain.Player
             // LookAtPerform perform = new LookAtPerform();
             // perform.ReceiveData(data);
             // perform.Perform();
+            PlayerMove player = PlayerInstance.Instance.GetComponent<PlayerMove>();
+            if (player.IsCrouched())
+            {
+                 player.SwitchCrouch();
+                 while (player.IsCrouching())
+                 {
+                     yield return null; 
+                 }
+            }
+
             ForcePlayerLook();
             yield return new WaitForSeconds(delayBeforeRotate);
 
@@ -152,8 +162,7 @@ namespace Fountain.Player
         }
         private void ForcePlayerLook()
         {
-            PlayerMove player = PlayerInstance.Instance.GetComponent<PlayerMove>(); 
-
+            PlayerMove player = PlayerInstance.Instance.GetComponent<PlayerMove>();
             player.LookAt(lookTarget.position, lookDuration);
         }
 

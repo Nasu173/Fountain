@@ -201,7 +201,23 @@ namespace Fountain.Player
             this.transform.Rotate(Vector3.up * playerRotationAngle); 
 
         }
+        /// <summary>
+        /// 是否蹲下
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCrouched()
+        {
+            return this.crouching;
+        }
 
+        /// <summary>
+        /// 是否在蹲起的过渡过程
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCrouching()
+        {
+            return this.crouchTransitioning;
+        }
         /*
         public void ForceMoveTo(Vector3 targetPos,float duration,Action arrived)
         {
@@ -232,7 +248,7 @@ namespace Fountain.Player
         /// 强制朝向指定地点,只在禁止玩家输入的时候才调用这个方法!
         /// </summary>
         /// <param name="target">目标位置</param>
-        /// <param name="duration">转向速度</param>
+        /// <param name="duration">转向总时间</param>
         public void LookAt(Vector3 target, float duration)
         {
             StartCoroutine(LookAtTransition(target, duration));

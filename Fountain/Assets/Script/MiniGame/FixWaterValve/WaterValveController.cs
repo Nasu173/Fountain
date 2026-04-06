@@ -32,6 +32,10 @@ namespace Fountain.MiniGame.RepairWaterValve
         /// </summary>
         public event Action ProgressDecrease;
 
+        [Tooltip("水阀完成的任务id")]
+        public string taskID;
+
+
         /// <summary>
         /// 小规模的视觉效果就用不着太多事件,顶多用上面这两个
         /// </summary>
@@ -149,7 +153,7 @@ namespace Fountain.MiniGame.RepairWaterValve
                 GameEventBus.Publish<ValveFixedEvent>(null);
                 GameEventBus.Publish(new TaskProgressEvent
                 {
-                    TaskId = 8.ToString(),
+                    TaskId = taskID,
                     Amount = 1
                 });
                 this.canInteract = false;

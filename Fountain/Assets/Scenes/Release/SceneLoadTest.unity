@@ -8425,11 +8425,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60.000004
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -8453,8 +8453,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065514930}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.27185622, y: 0.75461894, z: -0.3695844, w: -0.4690968}
-  m_LocalPosition: {x: 0.05, y: 8.52, z: 76.77}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 47.9, y: 3.197, z: 22.061}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9198,6 +9198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 0}
   duration: 0
+  hiddenDefault: 1
 --- !u!225 &1200457767
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -12459,6 +12460,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1200457764}
   - {fileID: 2034850735}
   - {fileID: 604773206}
   - {fileID: 876851107}
@@ -12468,7 +12470,6 @@ RectTransform:
   - {fileID: 363728107}
   - {fileID: 1041956559}
   - {fileID: 681466516}
-  - {fileID: 1200457764}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

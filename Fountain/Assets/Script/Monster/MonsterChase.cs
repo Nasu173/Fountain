@@ -8,8 +8,9 @@ public class MonsterChase : MonoBehaviour
     [SerializeField] private bool debugMode = false;
     [SerializeField] private float chaseSpeed = 4f;
     [SerializeField] private float executionDistance = 1.2f;
-    [SerializeField] private string animSpeedParam = "Speed";
-    [SerializeField] private string animExecuteTrigger = "Execute";
+    //[SerializeField] private string animSpeedParam = "Speed";
+    [SerializeField] private string animRunParam = "Run";
+   // [SerializeField] private string animExecuteTrigger = "Execute";
     [SerializeField] private float executionAnimDuration = 3f;
 
     private enum State { Idle, Chasing, Executing, Done }
@@ -33,6 +34,7 @@ public class MonsterChase : MonoBehaviour
             _player = PlayerInstance.Instance.transform;
         _state = State.Chasing;
         _agent.isStopped = false;
+        _animator.SetBool(animRunParam, true);
     }
 
     public void StopChase()
@@ -40,7 +42,8 @@ public class MonsterChase : MonoBehaviour
         if (_state == State.Executing || _state == State.Done) return;
         _state = State.Idle;
         _agent.isStopped = true;
-        _animator.SetFloat(animSpeedParam, 0f);
+        _animator.SetBool(animRunParam, false);
+        //_animator.SetFloat(animSpeedParam, 0f);
     }
 
     private void Update()
@@ -54,7 +57,7 @@ public class MonsterChase : MonoBehaviour
         if (_state != State.Chasing) return;
 
         _agent.SetDestination(_player.position);
-        _animator.SetFloat(animSpeedParam, _agent.velocity.magnitude);
+        //_animator.SetFloat(animSpeedParam, _agent.velocity.magnitude);
 
         if (Vector3.Distance(transform.position, _player.position) <= executionDistance)
             StartCoroutine(ExecutePlayer());
@@ -64,7 +67,7 @@ public class MonsterChase : MonoBehaviour
     {
         _state = State.Executing;
         _agent.isStopped = true;
-        _animator.SetFloat(animSpeedParam, 0f);
+        //_animator.SetFloat(animSpeedParam, 0f);
 
         // 朝向玩家（仅 Y 轴）
         Vector3 dir = (_player.position - transform.position);
@@ -78,7 +81,7 @@ public class MonsterChase : MonoBehaviour
         if (playerMove != null) playerMove.enabled = false;
         if (playerSight != null) playerSight.enabled = false;
 
-        _animator.SetTrigger(animExecuteTrigger);
+        //_animator.SetTrigger(animExecuteTrigger);
         yield return new WaitForSeconds(executionAnimDuration);
 
         GameEventBus.Publish(new MonsterCatchEvent());

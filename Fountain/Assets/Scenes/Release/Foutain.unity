@@ -18680,6 +18680,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
+      propertyPath: taskID
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: repairTimeRequired
       value: 1
       objectReference: {fileID: 0}

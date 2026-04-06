@@ -28,11 +28,13 @@ namespace Fountain.UI
         }
         private void OnEnable()
         {
-            GameEventBus.Subscribe<FadeEvent>(Black);  
+            GameEventBus.Subscribe<FadeEvent>(BlackInOut);  
+           // GameEventBus.Subscribe<FadeEvent>(BlackIn);  
         }
         private void OnDisable()
         {
-            GameEventBus.Unsubscribe<FadeEvent>(Black);  
+            GameEventBus.Unsubscribe<FadeEvent>(BlackInOut);  
+            //GameEventBus.Unsubscribe<FadeEvent>(BlackIn);  
         }
         private void Update()
         {
@@ -51,7 +53,7 @@ namespace Fountain.UI
                 isBlacking = false;
             }
         }
-        public void Black(FadeEvent e)
+        public void BlackInOut(FadeEvent e)
         {
             fadeInTime = e.fadeInTime;
             fadeOutTime = e.fadeOutTime;
@@ -67,5 +69,25 @@ namespace Fountain.UI
             GameInputManager.Instance.
                 GetProvider<CharacterInputProvider>().enabled = false;
         }
+        /*
+        public void BlackIn(FadeEvent e)
+        {
+            fadeInTime = e.fadeInTime;
+            fade.SetFadeImage(e.fadeImage);
+
+            fade.duration = fadeInTime;
+            fade.FadeIn();
+            elapsed = 0;
+            //仅淡入就不用设置这个
+            //isBlacking = true;
+
+
+            //禁用输入
+            GameInputManager.Instance.
+                GetProvider<CharacterInputProvider>().enabled = false; }
+         
+         
+         */
+
     }
 }

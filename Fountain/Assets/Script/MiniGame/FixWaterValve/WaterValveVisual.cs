@@ -48,7 +48,7 @@ namespace Fountain.MiniGame.RepairWaterValve
             };
             valve.RepairComplete += ForceHideBar;
             HideBar();
-            stem = this.transform.FindChildByName(nameof(stem));
+            stem = this.transform.FindChildByName(nameof(stem)).GetChild(0);
         }
 
         /// <summary>
@@ -104,7 +104,11 @@ namespace Fountain.MiniGame.RepairWaterValve
         /// <param name="direction">方向+-1</param>
         private void RotateValve(int direction)
         {
-            stem.Rotate(this.transform.up, direction*Time.deltaTime * rotateSpeed, Space.World);
+            //stem.Rotate(this.transform.forward,
+            //direction*Time.deltaTime * rotateSpeed, Space.World);
+            Vector3 rot = stem.localEulerAngles;
+            rot.z += direction * Time.deltaTime * rotateSpeed;
+            stem.localEulerAngles = rot;
         }
         private void FadeOutBar()
         {

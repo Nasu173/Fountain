@@ -1,6 +1,7 @@
 using Fountain.Common;
 using Fountain.InputManagement;
 using Fountain.Player;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -28,6 +29,7 @@ namespace Fountain.UI
         private PlayerSight playerSight;
         private PlayerInteractor playerInteractor;
 
+        //private Action finishCallback;
         /*
         [Tooltip("暂停用")]
         [SerializeField]
@@ -56,12 +58,9 @@ namespace Fountain.UI
         }
 
 
-        /// <summary>
-        /// 显示笔记内容
-        /// </summary>
-        /// <param name="content"></param>
         public void ShowNote(NoteContent content)
         {
+            //finishCallback = finishReading;
             if (content==null)
             {
                 return;
@@ -90,8 +89,10 @@ namespace Fountain.UI
             // GameInputManager.Instance.EnablePausePanel();
             //隐藏鼠标
             sightInput.HideCursor();
-           // GameInputManager.Instance.HideCursor();
-
+            // GameInputManager.Instance.HideCursor();
+           // finishCallback?.Invoke();
+           // finishCallback = null;
+            //GameEventBus.Publish<NoteFinishReadEvent>(null);
         }
     }
 }

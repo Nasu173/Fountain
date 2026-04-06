@@ -16501,10 +16501,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 12
-  taskName: "\u7A7F\u8D8A\u55B7\u6CC9\u9635\u5217"
+  taskName: "\u8FDB\u5165\u5730\u4E0B\u5BA4"
   taskNumber: 12
   targetCount: 1
-  description: "\u7A7F\u8D8A\u55B7\u6CC9\u8D70\u5230\u4E2D\u5FC3"
+  description: "\u4E0E\u55B7\u6CC9\u573A\u666F\u4E2D\u5FC3\u7684\u95E8\u4EA4\u4E92\n"
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -17303,6 +17303,7 @@ GameObject:
   - component: {fileID: 1800743236}
   - component: {fileID: 1800743235}
   - component: {fileID: 1800743237}
+  - component: {fileID: 1800743238}
   m_Layer: 7
   m_Name: UndergroundDoor
   m_TagString: Untagged
@@ -17377,6 +17378,27 @@ MonoBehaviour:
   monsterDistance: 0.7
   monster: {fileID: 1051268246}
   sceneAddress: Underground
+--- !u!114 &1800743238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800743233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715f40e190290904d9af40c70460727f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskTrigger: {fileID: 1666556793}
+  taskID: 12
+  config:
+    canInteractMultipleTimes: 0
+    progressOnlyFirstTime: 1
+    destroyOnInteract: 0
+    progressPerInteract: 1
+  outlineVisual: {fileID: 1800743235}
+  showDebug: 1
 --- !u!1 &1808260796
 GameObject:
   m_ObjectHideFlags: 0

@@ -131,8 +131,19 @@ public class FadeEvent:IGameEvent
     public Image fadeImage;
 }
 
+//public class FadeInEvent:IGameEvent
+//{
+//    public float fadeInTime;
+//    public Image fadeImage;
+//}
 
 public class ValveFixedEvent:IGameEvent
 {
 
 }
+
+
+//public class  NoteFinishReadEvent:IGameEvent
+//{
+//
+//}

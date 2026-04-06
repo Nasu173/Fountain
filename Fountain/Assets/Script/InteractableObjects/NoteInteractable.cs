@@ -34,6 +34,9 @@ namespace Fountain.Player
         private PlayerMove playerMove;
         private PlayerSight playerSight;
         private PlayerInteractor playerInteractor;
+      //  private bool hasRead;
+      //  [SerializeField]
+      //  private string completeTaskId;
 
         private bool canInteract=false;
         public bool CanInteract 
@@ -41,6 +44,7 @@ namespace Fountain.Player
         private void Start()
         {
             //outlineVisual = this.GetComponent<OutlineVisual>();
+            //hasRead = false;
             uiInput = GameInputManager.Instance.GetProvider<UIInputProvider>();
             sightInput = GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
 
@@ -55,6 +59,19 @@ namespace Fountain.Player
 
         public void InteractWith(PlayerInteractor player)
         {
+            /*
+            NotePanel.Instance.ShowNote(note, () =>
+            {
+                if (!hasRead)
+                {
+                    GameEventBus.Publish(new TaskProgressEvent
+                    {
+                        TaskId = completeTaskId,
+                        Amount = 1
+                    });
+                }
+            });
+             j*/
             NotePanel.Instance.ShowNote(note);
             //禁用输入
             playerInteractor.Disable();
@@ -66,8 +83,14 @@ namespace Fountain.Player
            // GameInputManager.Instance.DisableInteractInput();
            // GameInputManager.Instance.DisablePausePanel();
             //显示鼠标
-            sightInput.ShowCursor();
-            //GameInputManager.Instance.ShowCursor();
+            sightInput.ShowCursor(); 
+
+           // GameEventBus.Publish(new TaskProgressEvent
+           // {
+           //     TaskId = taskID,
+           //     Amount = 1
+           // });
+           // //GameInputManager.Instance.ShowCursor();
             //this.canInteract = false;
         }
 
