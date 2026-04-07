@@ -144,7 +144,8 @@ namespace Fountain.Player
             }
 
         }
-        private void Deselect()
+        //并不想公开
+        public void Deselect()
         {
             if (targetInteractables == null)
             {

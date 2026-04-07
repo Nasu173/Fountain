@@ -1,3 +1,4 @@
+using Fountain.Common;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -15,12 +16,15 @@ namespace Fountain.Player
         public Image fadeImage;
         public bool StartTask;
         public string[] taskIds;
+        [SerializeField]
+        private OutlineVisual visual;
 
         private bool canInteract = false;
         public bool CanInteract
         { get { return canInteract; } set { canInteract = value; } }
         public void Deselect()
         {
+            visual.SetOutline(false);
         }
         public void InteractWith(PlayerInteractor player)
         {
@@ -33,9 +37,12 @@ namespace Fountain.Player
                 fadeOutTime = this.fadeOutTime
             });
             canInteract = false;
+            player.Deselect(); //设计的不足才导致要写这行代码
+           // visual.SetOutline(false);
         }
         public void Select()
         {
+            visual.SetOutline(true);
         }
 
         private IEnumerator TaskStart()

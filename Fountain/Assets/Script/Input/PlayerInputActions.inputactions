@@ -49,15 +49,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "ContinueDialogue",
-                    "type": "Button",
-                    "id": "ea0b7ed7-a108-472d-a67f-bb681fc40951",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -159,39 +150,26 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "538daad9-6ca5-4e77-ac36-35a74ed945f3",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ContinueDialogue",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0db5a82c-4e69-4b2c-939c-372389bbde11",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ContinueDialogue",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "PausePanel",
+            "name": "UI",
             "id": "be378622-f031-4f7b-ba3e-27f583cdfb66",
             "actions": [
                 {
                     "name": "Pause",
                     "type": "Button",
                     "id": "5d5e6f0d-a67f-4e40-ad27-6f920a4132f4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ContinueDialogue",
+                    "type": "Button",
+                    "id": "19239349-3c9f-45f2-94af-7ccdb52fcd99",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -207,6 +185,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "089c9509-0b67-4709-856f-814e2c7d2234",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ContinueDialogue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85e5e508-1419-47de-85a2-95297d91ca08",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ContinueDialogue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

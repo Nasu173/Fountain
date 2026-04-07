@@ -29,7 +29,7 @@ namespace Fountain.Player
          
         //输入来源
         private PlayerSightInputProvider sightInput;
-        private UIInputProvider uiInput;
+        private PauseInputProvider uiInput;
         //玩家相关脚本
         private PlayerMove playerMove;
         private PlayerSight playerSight;
@@ -45,7 +45,7 @@ namespace Fountain.Player
         {
             //outlineVisual = this.GetComponent<OutlineVisual>();
             //hasRead = false;
-            uiInput = GameInputManager.Instance.GetProvider<UIInputProvider>();
+            uiInput = GameInputManager.Instance.GetProvider<PauseInputProvider>();
             sightInput = GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
 
             playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();

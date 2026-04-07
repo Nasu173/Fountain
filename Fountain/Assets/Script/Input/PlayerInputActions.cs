@@ -73,15 +73,6 @@ namespace Fountain.InputManagement
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ContinueDialogue"",
-                    ""type"": ""Button"",
-                    ""id"": ""ea0b7ed7-a108-472d-a67f-bb681fc40951"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -183,39 +174,26 @@ namespace Fountain.InputManagement
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""538daad9-6ca5-4e77-ac36-35a74ed945f3"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ContinueDialogue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0db5a82c-4e69-4b2c-939c-372389bbde11"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ContinueDialogue"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""PausePanel"",
+            ""name"": ""UI"",
             ""id"": ""be378622-f031-4f7b-ba3e-27f583cdfb66"",
             ""actions"": [
                 {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""5d5e6f0d-a67f-4e40-ad27-6f920a4132f4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ContinueDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""19239349-3c9f-45f2-94af-7ccdb52fcd99"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -231,6 +209,28 @@ namespace Fountain.InputManagement
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""089c9509-0b67-4709-856f-814e2c7d2234"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ContinueDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85e5e508-1419-47de-85a2-95297d91ca08"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ContinueDialogue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -316,10 +316,10 @@ namespace Fountain.InputManagement
             m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-            m_Player_ContinueDialogue = m_Player.FindAction("ContinueDialogue", throwIfNotFound: true);
-            // PausePanel
-            m_PausePanel = asset.FindActionMap("PausePanel", throwIfNotFound: true);
-            m_PausePanel_Pause = m_PausePanel.FindAction("Pause", throwIfNotFound: true);
+            // UI
+            m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+            m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
+            m_UI_ContinueDialogue = m_UI.FindAction("ContinueDialogue", throwIfNotFound: true);
             // FountainGun
             m_FountainGun = asset.FindActionMap("FountainGun", throwIfNotFound: true);
             m_FountainGun_Move = m_FountainGun.FindAction("Move", throwIfNotFound: true);
@@ -329,7 +329,7 @@ namespace Fountain.InputManagement
         ~@PlayerInputActions()
         {
             UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, PlayerInputActions.Player.Disable() has not been called.");
-            UnityEngine.Debug.Assert(!m_PausePanel.enabled, "This will cause a leak and performance issues, PlayerInputActions.PausePanel.Disable() has not been called.");
+            UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInputActions.UI.Disable() has not been called.");
             UnityEngine.Debug.Assert(!m_FountainGun.enabled, "This will cause a leak and performance issues, PlayerInputActions.FountainGun.Disable() has not been called.");
         }
 
@@ -397,7 +397,6 @@ namespace Fountain.InputManagement
         private readonly InputAction m_Player_Crouch;
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Interact;
-        private readonly InputAction m_Player_ContinueDialogue;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -407,7 +406,6 @@ namespace Fountain.InputManagement
             public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
-            public InputAction @ContinueDialogue => m_Wrapper.m_Player_ContinueDialogue;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -432,9 +430,6 @@ namespace Fountain.InputManagement
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-                @ContinueDialogue.started += instance.OnContinueDialogue;
-                @ContinueDialogue.performed += instance.OnContinueDialogue;
-                @ContinueDialogue.canceled += instance.OnContinueDialogue;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -454,9 +449,6 @@ namespace Fountain.InputManagement
                 @Interact.started -= instance.OnInteract;
                 @Interact.performed -= instance.OnInteract;
                 @Interact.canceled -= instance.OnInteract;
-                @ContinueDialogue.started -= instance.OnContinueDialogue;
-                @ContinueDialogue.performed -= instance.OnContinueDialogue;
-                @ContinueDialogue.canceled -= instance.OnContinueDialogue;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -475,51 +467,59 @@ namespace Fountain.InputManagement
         }
         public PlayerActions @Player => new PlayerActions(this);
 
-        // PausePanel
-        private readonly InputActionMap m_PausePanel;
-        private List<IPausePanelActions> m_PausePanelActionsCallbackInterfaces = new List<IPausePanelActions>();
-        private readonly InputAction m_PausePanel_Pause;
-        public struct PausePanelActions
+        // UI
+        private readonly InputActionMap m_UI;
+        private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+        private readonly InputAction m_UI_Pause;
+        private readonly InputAction m_UI_ContinueDialogue;
+        public struct UIActions
         {
             private @PlayerInputActions m_Wrapper;
-            public PausePanelActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Pause => m_Wrapper.m_PausePanel_Pause;
-            public InputActionMap Get() { return m_Wrapper.m_PausePanel; }
+            public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Pause => m_Wrapper.m_UI_Pause;
+            public InputAction @ContinueDialogue => m_Wrapper.m_UI_ContinueDialogue;
+            public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(PausePanelActions set) { return set.Get(); }
-            public void AddCallbacks(IPausePanelActions instance)
+            public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+            public void AddCallbacks(IUIActions instance)
             {
-                if (instance == null || m_Wrapper.m_PausePanelActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_PausePanelActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @ContinueDialogue.started += instance.OnContinueDialogue;
+                @ContinueDialogue.performed += instance.OnContinueDialogue;
+                @ContinueDialogue.canceled += instance.OnContinueDialogue;
             }
 
-            private void UnregisterCallbacks(IPausePanelActions instance)
+            private void UnregisterCallbacks(IUIActions instance)
             {
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
+                @ContinueDialogue.started -= instance.OnContinueDialogue;
+                @ContinueDialogue.performed -= instance.OnContinueDialogue;
+                @ContinueDialogue.canceled -= instance.OnContinueDialogue;
             }
 
-            public void RemoveCallbacks(IPausePanelActions instance)
+            public void RemoveCallbacks(IUIActions instance)
             {
-                if (m_Wrapper.m_PausePanelActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IPausePanelActions instance)
+            public void SetCallbacks(IUIActions instance)
             {
-                foreach (var item in m_Wrapper.m_PausePanelActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_PausePanelActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public PausePanelActions @PausePanel => new PausePanelActions(this);
+        public UIActions @UI => new UIActions(this);
 
         // FountainGun
         private readonly InputActionMap m_FountainGun;
@@ -581,11 +581,11 @@ namespace Fountain.InputManagement
             void OnCrouch(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
-            void OnContinueDialogue(InputAction.CallbackContext context);
         }
-        public interface IPausePanelActions
+        public interface IUIActions
         {
             void OnPause(InputAction.CallbackContext context);
+            void OnContinueDialogue(InputAction.CallbackContext context);
         }
         public interface IFountainGunActions
         {

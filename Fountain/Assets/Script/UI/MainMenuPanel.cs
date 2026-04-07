@@ -12,11 +12,11 @@ namespace Foutain.UI
         private bool _waitingForScene = false;
         //输入来源
         private PlayerSightInputProvider sightInput;
-        private UIInputProvider uiInput;
+        private PauseInputProvider uiInput;
 
         private void Start()
         {
-            uiInput = GameInputManager.Instance.GetProvider<UIInputProvider>();
+            uiInput = GameInputManager.Instance.GetProvider<PauseInputProvider>();
             sightInput = GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
         }
 
@@ -24,7 +24,7 @@ namespace Foutain.UI
         {
             // 确保输入管理器已初始化，便于 CursorManager 正常工作
             _ = GameInputManager.Instance;
-            uiInput ??= GameInputManager.Instance.GetProvider<UIInputProvider>();
+            uiInput ??= GameInputManager.Instance.GetProvider<PauseInputProvider>();
             if (uiInput != null) uiInput.enabled = false;
 
             GameEventBus.Subscribe<SceneLoadedEvent>(OnSceneLoaded);

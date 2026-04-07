@@ -28,7 +28,11 @@ namespace Fountain.InputManagement
         }
         private void OnEnable()
         {
-            this.inputActions.Player.Enable();
+            //this.inputActions.Player.Enable();
+            this.inputActions.Player.Move.Enable();
+            this.inputActions.Player.Crouch.Enable();
+            this.inputActions.Player.Run.Enable();
+            this.inputActions.Player.Interact.Enable();
         }
         private void Update()
         {
@@ -40,7 +44,11 @@ namespace Fountain.InputManagement
         private void OnDisable()
         {
             this.isInteracting = false;
-            this.inputActions.Player.Disable();
+            //this.inputActions.Player.Disable();
+            this.inputActions.Player.Move.Disable();
+            this.inputActions.Player.Crouch.Disable();
+            this.inputActions.Player.Run.Disable();
+            this.inputActions.Player.Interact.Disable();
         }
 
         /// <summary>
@@ -80,15 +88,5 @@ namespace Fountain.InputManagement
         {
             return this.isInteracting;
         }
-        
-        /// <summary>
-        /// 获得对话输入
-        /// </summary>
-        /// <returns>是否按下对话键</returns>
-        public bool GetDialogueContinue()
-        {
-            return inputActions.Player.ContinueDialogue.WasPressedThisFrame();
-        }
-
     }
 }

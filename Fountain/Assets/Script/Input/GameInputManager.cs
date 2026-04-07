@@ -44,18 +44,7 @@ namespace Fountain.InputManagement
             DontDestroyOnLoad(this.gameObject);
             inputActions = new PlayerInputActions();
 
-            // 自动添加缺失的 Provider 组件
-            if (GetComponent<CharacterInputProvider>() == null)
-                gameObject.AddComponent<CharacterInputProvider>();
-            if (GetComponent<PlayerSightInputProvider>() == null)
-                gameObject.AddComponent<PlayerSightInputProvider>();
-            if (GetComponent<UIInputProvider>() == null)
-                gameObject.AddComponent<UIInputProvider>();
-            if (GetComponent<CursorManager>() == null)
-                gameObject.AddComponent<CursorManager>();
-
             inputProviders = this.GetComponents<IInputProvider>().ToList();
-            //inputActions.Enable();
         }
         private void OnDestroy()
         {
@@ -71,10 +60,14 @@ namespace Fountain.InputManagement
         {
             return this.inputActions;
         }
+        /// <summary>
+        /// 获取对应类型的输入
+        /// </summary>
+        /// <typeparam name="T">Provider对应的类型</typeparam>
+        /// <returns></returns>
         public T GetProvider<T>()where T : IInputProvider
         {
-            return 
-                (T)inputProviders.Find((arg) =>
+            return (T)inputProviders.Find((arg) =>
             {
                 return arg is T;
             });

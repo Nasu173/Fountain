@@ -44,8 +44,8 @@ namespace Fountain.Dialogue
         private DialoguePerformFactory performFactory;
 
         //输入来源
-        private CharacterInputProvider dialogueInput;
-        private UIInputProvider uiInput;
+        private DialogueInputProvider dialogueInput;
+        private PauseInputProvider uiInput;
         //玩家相关脚本
         private PlayerMove playerMove;
         private PlayerSight playerSight;
@@ -60,8 +60,9 @@ namespace Fountain.Dialogue
             dialoguePanel = DialoguePanel.Instance;
             performFactory = new DialoguePerformFactory();
 
-            uiInput = GameInputManager.Instance.GetProvider<UIInputProvider>();
-            dialogueInput = GameInputManager.Instance.GetProvider<CharacterInputProvider>();
+            uiInput = GameInputManager.Instance.GetProvider<PauseInputProvider>();
+            dialogueInput = GameInputManager.Instance.GetProvider
+                <DialogueInputProvider>();
 
             playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
             playerInteractor = PlayerInstance.Instance.GetComponent<PlayerInteractor>();

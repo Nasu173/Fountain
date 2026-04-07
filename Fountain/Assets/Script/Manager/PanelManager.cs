@@ -14,7 +14,7 @@ public class PanelManager : MonoBehaviour
 
     //输入来源
     private PlayerSightInputProvider sightInput;
-    private UIInputProvider uiInput;
+    private PauseInputProvider uiInput;
     //玩家相关脚本
     private PlayerMove playerMove;
     private PlayerSight playerSight;
@@ -27,7 +27,7 @@ public class PanelManager : MonoBehaviour
 
     private void Start()
     {
-        uiInput = GameInputManager.Instance.GetProvider<UIInputProvider>();
+        uiInput = GameInputManager.Instance.GetProvider<PauseInputProvider>();
         sightInput = GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
 
         playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>(); 

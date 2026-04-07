@@ -17,11 +17,11 @@ namespace Fountain.InputManagement
         }
         private void OnEnable()
         {
-            this.inputActions.Player.Enable();
+            this.inputActions.Player.Look.Enable();
         }
         private void OnDisable()
         {
-            this.inputActions.Player.Disable();
+            this.inputActions.Player.Look.Disable();
         }
 
         /// <summary>

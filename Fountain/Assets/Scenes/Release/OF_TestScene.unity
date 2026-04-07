@@ -3129,6 +3129,7 @@ MonoBehaviour:
   StartTask: 1
   taskIds:
   - 5
+  visual: {fileID: 555317561}
 --- !u!114 &555317564
 MonoBehaviour:
   m_ObjectHideFlags: 0
