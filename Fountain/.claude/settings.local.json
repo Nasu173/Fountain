@@ -26,7 +26,12 @@
       "Bash(openspec status:*)",
       "Bash(which openspec:*)",
       "Bash(find \"D:/GitHub/Fountain/Fountain/Assets\" -type f -name \"*.cs\" 2>/dev/null | sort)",
-      "mcp__UnityMCP__create_script"
+      "mcp__UnityMCP__create_script",
+      "Bash(find /d/GitHub/Fountain/Fountain -name \"*.cs\" | xargs grep -l \"IInteractable\\\\|iinteractable\" 2>/dev/null | head -20)",
+      "Read(//d/GitHub/Fountain/**)",
+      "Bash(cmd /c \"dir D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets /s /b | findstr /i InteractPlaySound\")",
+      "Bash(cmd /c \"dir D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets /s /b | findstr /i IInteractable\")",
+      "Bash(cmd /c \"dir D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets /s /b 2>&1 | head -30\")"
     ]
   }
 }

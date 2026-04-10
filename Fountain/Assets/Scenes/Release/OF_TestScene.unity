@@ -2317,6 +2317,7 @@ GameObject:
   - component: {fileID: 435622168}
   - component: {fileID: 435622169}
   - component: {fileID: 435622170}
+  - component: {fileID: 435622171}
   m_Layer: 7
   m_Name: Phone
   m_TagString: Untagged
@@ -2464,6 +2465,21 @@ MonoBehaviour:
   tasks:
   - {fileID: 875238270}
   - {fileID: 1827510301}
+--- !u!114 &435622171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435622160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b566373fe6e287644bcb4312b59f4198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 70dfdee95a00e2249a0171c48e9f0045, type: 3}
+  track: 3
+  outlineVisual: {fileID: 435622164}
 --- !u!1001 &440064263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4818,6 +4834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPosition: {x: 47.9, y: 1.597, z: 22.061}
+  startRotation: {x: 0, y: 0, z: 0}
   targetSceneAddress: MainSceneTest
 --- !u!4 &916099347
 Transform:
