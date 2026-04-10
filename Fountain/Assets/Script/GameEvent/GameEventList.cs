@@ -142,6 +142,16 @@ public class ValveFixedEvent:IGameEvent
 
 }
 
+// ==================== 音频系统事件 ====================
+public enum AudioTrack { BGM, PlayerFootstep, Fountain1, Other, MonsterFootstep, Fountain2 }
+
+[System.Serializable]
+public class PlaySoundEvent : IGameEvent
+{
+    public AudioClip Clip;
+    public AudioTrack Track;
+    public float Volume = 1f;
+}
 
 //public class  NoteFinishReadEvent:IGameEvent
 //{

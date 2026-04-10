@@ -12,7 +12,9 @@ namespace Fountain.Dialogue
         private SoundData data;
         public override void Perform()
         {
-            Debug.LogFormat("播放声音:{0}", data.soundStr);
+            var clip = Resources.Load<AudioClip>(data.soundStr);
+            if (clip == null) { Debug.LogWarning($"[PlaySoundPerform] 找不到音频: {data.soundStr}"); return; }
+            GameEventBus.Publish(new PlaySoundEvent { Clip = clip, Track = AudioTrack.Other });
         }
 
         public override void ReceiveData(IPerformDataProvider data)

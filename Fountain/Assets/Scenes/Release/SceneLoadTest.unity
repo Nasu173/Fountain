@@ -4192,7 +4192,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.35
+  m_fontSize: 39.75
   m_fontSizeBase: 33.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5132,6 +5132,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeSpeed: 50
+--- !u!1 &689021561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 689021562}
+  - component: {fileID: 689021563}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &689021562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689021561}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1659086432}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &689021563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689021561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8c1168ff73cba429e32a5d08b7986d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmGroup: {fileID: 7704199579885197955, guid: bdd5d76d2cb387e4e8acac8f1b772fa6, type: 2}
+  playerFootstepGroup: {fileID: 3048856135610236401, guid: bdd5d76d2cb387e4e8acac8f1b772fa6, type: 2}
+  fountain1Group: {fileID: 4136653679550620345, guid: bdd5d76d2cb387e4e8acac8f1b772fa6, type: 2}
+  otherGroup: {fileID: 5054132720726741150, guid: bdd5d76d2cb387e4e8acac8f1b772fa6, type: 2}
+  monsterFootstepGroup: {fileID: -1675566842385541878, guid: bdd5d76d2cb387e4e8acac8f1b772fa6, type: 2}
+  fountain2Group: {fileID: 2451489049132569890, guid: bdd5d76d2cb387e4e8acac8f1b772fa6, type: 2}
 --- !u!1 &694216160
 GameObject:
   m_ObjectHideFlags: 0
@@ -13849,6 +13899,7 @@ Transform:
   - {fileID: 1440825546}
   - {fileID: 1410539311}
   - {fileID: 117433454}
+  - {fileID: 689021562}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1663700942

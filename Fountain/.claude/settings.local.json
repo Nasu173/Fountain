@@ -25,7 +25,8 @@
       "Bash(cmd /c \"move D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\openspec\\\\changes\\\\task-area-enter D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\openspec\\\\changes\\\\archive\\\\2026-03-26-task-area-enter\" 2>&1 && echo \"ok\")",
       "Bash(openspec status:*)",
       "Bash(which openspec:*)",
-      "Bash(find \"D:/GitHub/Fountain/Fountain/Assets\" -type f -name \"*.cs\" 2>/dev/null | sort)"
+      "Bash(find \"D:/GitHub/Fountain/Fountain/Assets\" -type f -name \"*.cs\" 2>/dev/null | sort)",
+      "mcp__UnityMCP__create_script"
     ]
   }
 }
