@@ -130,7 +130,8 @@ public class PanelManager : MonoBehaviour
             Clip = audioClip,
             Track = AudioTrack.Other
         });
-
+        GameEventBus.Publish<PauseSoundEvent>(new PauseSoundEvent()
+        { Track = AudioTrack.BGM });
         Pause();
 
         pausePanel.SetActive(false);

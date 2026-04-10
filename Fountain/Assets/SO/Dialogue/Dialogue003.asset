@@ -34,5 +34,5 @@ MonoBehaviour:
     speakerZH: "\u5F92\u5F1F"
     textZH: "\u597D\u561E\uFF0C\u9A6C\u4E0A\u53BB\u3002"
     performName: 
-  dialogueEndPerformName: BlackScreenPerform
+  dialogueEndPerformName: ApprenticeLeavePerform
   unlockInput: 1
