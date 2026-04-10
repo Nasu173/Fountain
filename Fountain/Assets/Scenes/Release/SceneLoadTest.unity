@@ -4196,7 +4196,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.75
+  m_fontSize: 42.35
   m_fontSizeBase: 33.1
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5136,6 +5136,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeSpeed: 50
+  track: 5
+  typeClip: {fileID: 8300000, guid: feceba7b98979b34f948f159daa26a92, type: 3}
+  volume: 1
+  interval: 0.1
 --- !u!1 &689021561
 GameObject:
   m_ObjectHideFlags: 0

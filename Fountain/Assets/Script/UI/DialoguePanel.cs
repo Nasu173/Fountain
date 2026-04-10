@@ -26,6 +26,19 @@ namespace Fountain.UI
         [Tooltip("打字效果的速度,字符/秒")]
         [SerializeField]
         private float typeSpeed;
+        [Tooltip("音轨")]
+        [SerializeField]
+        private AudioTrack track;
+        [Tooltip("音频")]
+        [SerializeField]
+        private AudioClip typeClip;
+        [Tooltip("打字音量大小")]
+        [SerializeField]
+        private float volume=1f;
+        //[Tooltip("对话开始几秒后停止打字机音效")]
+        [SerializeField]
+        private float interval=0.1f;
+        private float elapsed;
 
         private void Awake()
         {
@@ -38,6 +51,20 @@ namespace Fountain.UI
             skipPrompt = this.transform.FindChildByName(nameof(skipPrompt));
             typeEffect = new TypeEffect(dialogueText, typeSpeed);
             typeEffect.TypeCompleted += this.ShowPrompt;
+            //typeEffect.TypeCompleted += StopTypeSound;
+        }
+        private void Update()
+        {
+            if (!typeEffect.IsTyping())
+            {
+                return;
+            }
+            elapsed += Time.deltaTime;
+            if (elapsed>interval)
+            {
+                PlayTypeSound();
+                elapsed = 0;
+            }
         }
 
         /// <summary>
@@ -61,6 +88,7 @@ namespace Fountain.UI
             HidePrompt();
             this.ShowSpeaker(dialogueNode);
             typeEffect.ShowText(dialogueNode.GetText());
+            PlayTypeSound();
         }
         /// <summary>
         /// 跳过文本的显示,直接显示所有文本
@@ -101,5 +129,26 @@ namespace Fountain.UI
         {
             speakerText.text = dialogueNode.GetSpeaker();    
         }
+
+        private void PlayTypeSound()
+        {
+            GameEventBus.Publish<PlaySoundEvent>(new PlaySoundEvent()
+            {
+                Clip = typeClip,
+                Volume = volume,
+                IsLoop = false,
+                Track=track
+            });
+        }
+        /*
+         
+        private void StopTypeSound()
+        {
+            GameEventBus.Publish<PauseSoundEvent>(new PauseSoundEvent()
+            {
+                Track = track
+            });
+        }
+         */
     }
 }
