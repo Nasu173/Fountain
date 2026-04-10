@@ -57,10 +57,7 @@ public class AudioMixerController : MonoBehaviour
         // 初始化Slider的范围和默认值
         InitializeSliders();
 
-        // 从PlayerPrefs加载保存的音量设置
-        LoadAllVolumes();
-
-        // 为每个Slider添加值改变监听器
+        // 先注册监听器，确保 LoadAllVolumes 赋值时能触发回调应用到 AudioMixer
         if (masterSlider != null)
             masterSlider.onValueChanged.AddListener(SetMasterVolume);
 
@@ -69,6 +66,9 @@ public class AudioMixerController : MonoBehaviour
 
         if (sfxSlider != null)
             sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+
+        // 从PlayerPrefs加载保存的音量设置
+        LoadAllVolumes();
     }
 
     /// <summary>

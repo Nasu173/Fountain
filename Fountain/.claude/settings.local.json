@@ -31,7 +31,8 @@
       "Read(//d/GitHub/Fountain/**)",
       "Bash(cmd /c \"dir D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets /s /b | findstr /i InteractPlaySound\")",
       "Bash(cmd /c \"dir D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets /s /b | findstr /i IInteractable\")",
-      "Bash(cmd /c \"dir D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets /s /b 2>&1 | head -30\")"
+      "Bash(cmd /c \"dir D:\\\\GitHub\\\\Fountain\\\\Fountain\\\\Assets /s /b 2>&1 | head -30\")",
+      "Bash(mv \"D:/GitHub/Fountain/Fountain/openspec/changes/audio-system-extension\" \"D:/GitHub/Fountain/Fountain/openspec/changes/archive/2026-04-10-audio-system-extension\" 2>&1; echo \"exit:$?\")"
     ]
   }
 }
