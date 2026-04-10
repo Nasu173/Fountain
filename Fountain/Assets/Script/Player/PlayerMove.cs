@@ -38,6 +38,12 @@ namespace Fountain.Player
         private bool moving;
         private bool running;
 
+        [Header("脚步音效")]
+        [SerializeField] private AudioClip footstepClip;
+        [SerializeField] private float runPitchMultiplier = 1.5f;
+        private bool _footstepPlaying;
+        private bool _wasRunning;
+
         private CharacterController characterController;
         [Header("下蹲设置")]
         [Tooltip("站立高度")]
@@ -117,6 +123,11 @@ namespace Fountain.Player
             if (inputDirection==Vector3.zero)
             {
                 sight.StopShake();
+                if (_footstepPlaying)
+                {
+                    GameEventBus.Publish(new PauseSoundEvent { Track = AudioTrack.PlayerFootstep });
+                    _footstepPlaying = false;
+                }
                 moving = false;
                 return;
             }
@@ -133,6 +144,19 @@ namespace Fountain.Player
             }
 
             moving = true;
+            bool nowRunning = running && !crouching;
+            if (!_footstepPlaying || nowRunning != _wasRunning)
+            {
+                GameEventBus.Publish(new PlaySoundEvent
+                {
+                    Clip = footstepClip,
+                    Track = AudioTrack.PlayerFootstep,
+                    IsLoop = true,
+                    Pitch = nowRunning ? runPitchMultiplier : 1f
+                });
+                _footstepPlaying = true;
+                _wasRunning = nowRunning;
+            }
             //计算方向和速度
             Vector3 direction =
                 this.transform.forward * inputDirection.z +

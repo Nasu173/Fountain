@@ -29,15 +29,35 @@ public class AudioManager : MonoBehaviour
         _sources[AudioTrack.Fountain2]       = CreateSource(fountain2Group);
 
         GameEventBus.Subscribe<PlaySoundEvent>(OnPlaySound);
+        GameEventBus.Subscribe<PauseSoundEvent>(OnPauseSound);
     }
 
-    private void OnDestroy() => GameEventBus.Unsubscribe<PlaySoundEvent>(OnPlaySound);
+    private void OnDestroy()
+    {
+        GameEventBus.Unsubscribe<PlaySoundEvent>(OnPlaySound);
+        GameEventBus.Unsubscribe<PauseSoundEvent>(OnPauseSound);
+    }
 
     private void OnPlaySound(PlaySoundEvent e)
     {
         if (e.Clip == null) return;
-        _sources[e.Track].PlayOneShot(e.Clip, e.Volume);
+        var src = _sources[e.Track];
+        if (e.IsLoop)
+        {
+            src.clip = e.Clip;
+            src.volume = e.Volume;
+            src.pitch = e.Pitch;
+            src.loop = true;
+            src.Play();
+        }
+        else
+        {
+            src.pitch = e.Pitch;
+            src.PlayOneShot(e.Clip, e.Volume);
+        }
     }
+
+    private void OnPauseSound(PauseSoundEvent e) => _sources[e.Track].Pause();
 
     private AudioSource CreateSource(AudioMixerGroup group)
     {

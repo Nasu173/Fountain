@@ -151,6 +151,8 @@ public class PlaySoundEvent : IGameEvent
     public AudioClip Clip;
     public AudioTrack Track;
     public float Volume = 1f;
+    public bool IsLoop = false;
+    public float Pitch = 1f;
 }
 
 //public class  NoteFinishReadEvent:IGameEvent
@@ -161,5 +163,11 @@ public class PlaySoundEvent : IGameEvent
 [System.Serializable]
 public class PlayDoorSoundEvent : IGameEvent
 {
-    
+
+}
+
+[System.Serializable]
+public class PauseSoundEvent : IGameEvent
+{
+    public AudioTrack Track;
 }
