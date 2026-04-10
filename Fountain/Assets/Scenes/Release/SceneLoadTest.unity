@@ -6574,6 +6574,7 @@ MonoBehaviour:
   _menuSceneAddress: MainSceneTest
   _scenesToKeep:
   - SceneLoadTest
+  audioClip: {fileID: 8300000, guid: feceba7b98979b34f948f159daa26a92, type: 3}
 --- !u!4 &828546543
 Transform:
   m_ObjectHideFlags: 0

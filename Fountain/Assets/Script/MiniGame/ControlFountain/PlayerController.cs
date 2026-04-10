@@ -9,6 +9,8 @@ namespace Fountain.MiniGame.ControlFountain
     /// </summary>
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private AudioClip shootClip;
+
         [Header("移动设置")]
         [Tooltip("枪移动速度")]
         public float moveSpeed = 5f;
@@ -62,6 +64,8 @@ namespace Fountain.MiniGame.ControlFountain
         {
             if (ProjectilePrefab != null && firePoint != null)
             {
+                GameEventBus.Publish(new PlaySoundEvent { Clip = shootClip, Track = AudioTrack.Other });
+
                 GameObject go = Instantiate
                         (ProjectilePrefab, firePoint.position, Quaternion.identity);
                 go.GetComponent<WaterProjectile>().direction = firePoint.up;

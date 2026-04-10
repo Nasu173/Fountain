@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class TriggerDeath : MonoBehaviour
 {
+    [SerializeField] private AudioClip audioClip; 
+
     public FountainController fountain;
     public float animDelay;//播放动画的延迟
     public Animator anim;
@@ -22,6 +24,11 @@ public class TriggerDeath : MonoBehaviour
         fountain.TurnOn();
         yield return new WaitForSeconds(animDelay);
         anim.SetTrigger("Die");
+        GameEventBus.Publish(new PlaySoundEvent
+        {
+            Clip = audioClip,
+            Track = AudioTrack.Other
+        });
         DialogueManager.Instance.StartDialogue(dialogue,null);
     }
 

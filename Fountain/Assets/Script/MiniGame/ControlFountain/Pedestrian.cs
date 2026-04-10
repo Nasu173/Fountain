@@ -7,6 +7,8 @@ namespace Fountain.MiniGame.ControlFountain
     /// </summary>
     public class Pedestrian : MonoBehaviour
     {
+        [SerializeField] private AudioClip hitClip;
+
         [Header("路人相关设置")]
         [Tooltip("速度数值")]
         public float speed;
@@ -55,6 +57,12 @@ namespace Fountain.MiniGame.ControlFountain
     
         public void GetHit()
         {
+            GameEventBus.Publish(new PlaySoundEvent
+            {
+                Clip = hitClip,
+                Track = AudioTrack.Other
+            });
+
             isHit = true;
             // if (GameManager.Instance != null)
             // {

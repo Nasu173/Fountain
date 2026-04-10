@@ -11,6 +11,7 @@ public class PanelManager : MonoBehaviour
     [SerializeField] private GameObject settingPanel;
     [SerializeField] private string _menuSceneAddress;
     [SerializeField] private string[] _scenesToKeep;
+    [SerializeField] private AudioClip audioClip;
 
     //输入来源
     private PlayerSightInputProvider sightInput;
@@ -30,10 +31,10 @@ public class PanelManager : MonoBehaviour
         uiInput = GameInputManager.Instance.GetProvider<PauseInputProvider>();
         sightInput = GameInputManager.Instance.GetProvider<PlayerSightInputProvider>();
 
-        playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>(); 
-        playerInteractor = PlayerInstance.Instance.GetComponent<PlayerInteractor>(); 
-        playerSight = PlayerInstance.Instance.GetComponentInChildren<PlayerSight>(); 
-        
+        playerMove = PlayerInstance.Instance.GetComponent<PlayerMove>();
+        playerInteractor = PlayerInstance.Instance.GetComponent<PlayerInteractor>();
+        playerSight = PlayerInstance.Instance.GetComponentInChildren<PlayerSight>();
+
         pausePanelEnabled = pausePanel != null && pausePanel.activeSelf;
         settingPanelEnabled = settingPanel != null && settingPanel.activeSelf;
         CursorManager.Instance?.SetPausePanelEnabled(pausePanelEnabled);
@@ -78,6 +79,12 @@ public class PanelManager : MonoBehaviour
     }
     private void OnPauseClicked(GamePauseEvent gamePauseEvent)
     {
+        GameEventBus.Publish(new PlaySoundEvent
+        {
+            Clip = audioClip,
+            Track = AudioTrack.Other
+        });
+
         Pause();
     }
 
@@ -118,6 +125,12 @@ public class PanelManager : MonoBehaviour
     /// </summary>
     public void OnMenuClicked()
     {
+        GameEventBus.Publish(new PlaySoundEvent
+        {
+            Clip = audioClip,
+            Track = AudioTrack.Other
+        });
+
         Pause();
 
         pausePanel.SetActive(false);
@@ -138,6 +151,12 @@ public class PanelManager : MonoBehaviour
     /// </summary>
     public void OnSettingClicked()
     {
+        GameEventBus.Publish(new PlaySoundEvent
+        {
+            Clip = audioClip,
+            Track = AudioTrack.Other
+        });
+
         var settingEvent = new SettingEvent();
         GameEventBus.Publish(settingEvent);
 
@@ -154,6 +173,12 @@ public class PanelManager : MonoBehaviour
     /// </summary>
     public void OnContinueClicked()
     {
+        GameEventBus.Publish(new PlaySoundEvent
+        {
+            Clip = audioClip,
+            Track = AudioTrack.Other
+        });
+
         var continueEvent = new ContinueEvent();
         GameEventBus.Publish(continueEvent);
     }
@@ -192,6 +217,12 @@ public class PanelManager : MonoBehaviour
 
     public void OnBackClicked()
     {
+        GameEventBus.Publish(new PlaySoundEvent
+        {
+            Clip = audioClip,
+            Track = AudioTrack.Other
+        });
+
         if (isStarted)
         {
             if (uiInput != null) uiInput.enabled = true;

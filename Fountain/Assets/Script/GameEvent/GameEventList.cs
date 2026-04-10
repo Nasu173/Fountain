@@ -157,3 +157,9 @@ public class PlaySoundEvent : IGameEvent
 //{
 //
 //}
+
+[System.Serializable]
+public class PlayDoorSoundEvent : IGameEvent
+{
+    
+}

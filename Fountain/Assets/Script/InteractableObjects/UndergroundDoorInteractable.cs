@@ -27,7 +27,7 @@ namespace Fountain.Player
 
         [Header("玩家的旋转演出所需数据")]
         [Tooltip("旋转之前的延迟")]
-        public float delayBeforeRotate=1.5f;
+        public float delayBeforeRotate = 1.5f;
         public float playerXRotation;
         public float playerDuration;
 
@@ -42,6 +42,8 @@ namespace Fountain.Player
 
         //要切换到的场景
         public string sceneAddress;
+
+        [SerializeField] private AudioClip audioClip;
 
         //public LookData data;
         // public Vector3 targetPosition;
@@ -86,11 +88,11 @@ namespace Fountain.Player
             PlayerMove player = PlayerInstance.Instance.GetComponent<PlayerMove>();
             if (player.IsCrouched())
             {
-                 player.SwitchCrouch();
-                 while (player.IsCrouching())
-                 {
-                     yield return null; 
-                 }
+                player.SwitchCrouch();
+                while (player.IsCrouching())
+                {
+                    yield return null;
+                }
             }
 
             ForcePlayerLook();
@@ -164,6 +166,11 @@ namespace Fountain.Player
         {
             PlayerMove player = PlayerInstance.Instance.GetComponent<PlayerMove>();
             player.LookAt(lookTarget.position, lookDuration);
+            GameEventBus.Publish(new PlaySoundEvent
+            {
+                Clip = audioClip,
+                Track = AudioTrack.Other
+            });
         }
 
 

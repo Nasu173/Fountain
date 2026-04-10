@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9790e14c21b4cb04a9c8a449be1520b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootClip: {fileID: 8300000, guid: 25983e79356f8ee44896e062f7ddb477, type: 3}
   moveSpeed: 5
   ProjectilePrefab: {fileID: 9150828355245354875, guid: 678a097339a5e7940a5c8ee8ae326188, type: 3}
   fireRate: 0.3

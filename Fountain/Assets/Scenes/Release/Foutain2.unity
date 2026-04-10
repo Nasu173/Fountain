@@ -17795,6 +17795,7 @@ MonoBehaviour:
   monsterDistance: 0.7
   monster: {fileID: 1051268246}
   sceneAddress: Underground
+  audioClip: {fileID: 8300000, guid: 95cefff9420767845ba6cfe7461cbbea, type: 3}
 --- !u!114 &1800743238
 MonoBehaviour:
   m_ObjectHideFlags: 0

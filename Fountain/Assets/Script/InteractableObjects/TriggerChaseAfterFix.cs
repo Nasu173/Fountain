@@ -15,6 +15,8 @@ public class TriggerChaseAfterFix : MonoBehaviour
     //场景物体
     public GameObject wall;
     public GameObject wallLight;
+
+    [SerializeField] private AudioClip audioClip;
     
 
 
@@ -57,6 +59,12 @@ public class TriggerChaseAfterFix : MonoBehaviour
         //先把墙消失,灯打开,视角看向那个洞,
         wallLight.SetActive(true);
         wall.SetActive(false);
+
+        GameEventBus.Publish(new PlaySoundEvent
+        {
+            Clip = audioClip,
+            Track = AudioTrack.Other
+        });
 
         player.LookAt(wall.transform.position, 1f);
 

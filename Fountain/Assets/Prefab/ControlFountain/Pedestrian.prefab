@@ -175,5 +175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66a0f5820637414680225c276ed40e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitClip: {fileID: 8300000, guid: 080064f1e6c9eae4cb3be03345b9eb7c, type: 3}
   speed: 3
   limitX: 13

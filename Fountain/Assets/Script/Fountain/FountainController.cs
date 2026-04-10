@@ -9,6 +9,7 @@ namespace Fountain.Fountain
         [SerializeField] FountainWaterEffect _water;
         [SerializeField] float _steamDuration = 2f;
         [SerializeField] float _waterDelay = 0.25f;
+        [SerializeField] bool hasSound = false;
 
         bool _isOn;
         Coroutine _sequence;
