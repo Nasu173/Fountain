@@ -17,6 +17,7 @@ public class EnterPlaySound : MonoBehaviour
         if (triggerOnce)
         {
             enabled = false; // 禁用此组件，不再检测
+            this.GetComponent<BoxCollider>().enabled = false;
         }
     }
 }

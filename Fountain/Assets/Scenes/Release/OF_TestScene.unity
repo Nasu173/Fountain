@@ -864,6 +864,9 @@ MonoBehaviour:
   gameSceneAddress: ControlFountain
   outlineVisual: {fileID: 155105013}
   completeTaskId: -1
+  duration: 1
+  fadeInTime: 1
+  fadeOutTime: 1
 --- !u!114 &155105016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2024,6 +2027,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSceneAddress: Foutain
+  duration: 1.5
+  fadeInTime: 1
+  fadeOutTime: 1
 --- !u!114 &362121490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3157,7 +3163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeInTime: 1
   fadeOutTime: 1
-  duration: 2
+  duration: 1
   fadeImage: {fileID: 0}
   StartTask: 1
   taskIds:
@@ -8963,6 +8969,7 @@ GameObject:
   - component: {fileID: 2047190020}
   - component: {fileID: 2047190019}
   - component: {fileID: 2047190018}
+  - component: {fileID: 2047190023}
   m_Layer: 7
   m_Name: NPC_Apprentice
   m_TagString: Untagged
@@ -9070,6 +9077,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.51370645, y: 1.8036566, z: 0.32144207}
   m_Center: {x: -0.017095685, y: 0.90700245, z: 0}
+--- !u!114 &2047190023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047190016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8832704482412648a5931f903429c90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueNodeIndex: -1
+  fadeInTime: 1
+  fadeOutTime: 1
+  duration: 1
+  fadeImage: {fileID: 0}
 --- !u!1 &2048024243 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0ccc005f3bef273419141e23f8f973e1, type: 3}

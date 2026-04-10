@@ -20,6 +20,11 @@ namespace Fountain.Player
         [SerializeField]
         private OutlineVisual outlineVisual;
         public string completeTaskId;
+
+        public float duration;
+        public float fadeInTime;
+        public float fadeOutTime;
+
         private bool canInteract=false;
         public bool CanInteract 
         { get { return canInteract; } set { canInteract = value; } } 
@@ -37,15 +42,27 @@ namespace Fountain.Player
         public void InteractWith(PlayerInteractor player)
         {
             this.canInteract = false;
+            GameEventBus.Publish<FadeEvent>(new FadeEvent()
+            {
+                fadeInTime = fadeInTime,
+                fadeOutTime = fadeOutTime,
+                duration = duration
+            });
+            StartCoroutine(DelayChangeScene());
             //切换场景
+            GameEventBus.Publish<TaskProgressEvent>(new TaskProgressEvent
+                (){ TaskId = this.completeTaskId, Amount = 1 });
+        }
+         private IEnumerator DelayChangeScene()
+         {
+            yield return new WaitForSeconds(fadeInTime);
             GameEventBus.Publish(new LoadSceneEvent
             {
                 SceneAddress = gameSceneAddress,
                 Additive = true,
                 SceneToUnload = gameObject.scene.name
             });
-            GameEventBus.Publish<TaskProgressEvent>(new TaskProgressEvent
-                (){ TaskId = this.completeTaskId, Amount = 1 });
-        }
+        
+         }
     }
 }

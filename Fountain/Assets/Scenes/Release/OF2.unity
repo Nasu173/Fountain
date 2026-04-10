@@ -1856,6 +1856,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSceneAddress: Foutain2
+  duration: 1.5
+  fadeInTime: 1
+  fadeOutTime: 1
 --- !u!114 &362121490
 MonoBehaviour:
   m_ObjectHideFlags: 0

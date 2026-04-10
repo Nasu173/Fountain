@@ -5776,6 +5776,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSceneAddress: Underground
+  duration: 0
+  fadeInTime: 0
+  fadeOutTime: 0
 --- !u!65 &605844221
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17795,6 +17798,9 @@ MonoBehaviour:
   monsterDistance: 0.7
   monster: {fileID: 1051268246}
   sceneAddress: Underground
+  duration: 1.5
+  fadeInTime: 1
+  fadeOutTime: 1
   audioClip: {fileID: 8300000, guid: 95cefff9420767845ba6cfe7461cbbea, type: 3}
 --- !u!114 &1800743238
 MonoBehaviour:

@@ -1,6 +1,7 @@
 using Fountain.InputManagement;
 using Fountain.Player;
 using Foutain.Scene;
+using System.Collections;
 using UnityEngine;
 
 namespace Foutain.UI
@@ -14,6 +15,9 @@ namespace Foutain.UI
         private PlayerSightInputProvider sightInput;
         private PauseInputProvider uiInput;
 
+        public float fadeInTime;
+        public float fadeOutTime;
+        public float duration;
         private void Start()
         {
             uiInput = GameInputManager.Instance.GetProvider<PauseInputProvider>();
@@ -42,8 +46,18 @@ namespace Foutain.UI
         {
             SetMainMenuState(false);
             if (uiInput != null) uiInput.enabled = true;
-
+            GameEventBus.Publish<FadeEvent>(new FadeEvent()
+            {
+                fadeInTime = fadeInTime,
+                fadeOutTime = fadeOutTime,
+                duration = duration
+            });
+            StartCoroutine(DelayLoadScene());
+        }
+        private IEnumerator DelayLoadScene()
+        {
             _waitingForScene = true;
+            yield return new WaitForSeconds(fadeInTime);
             GameEventBus.Publish(new LoadSceneEvent
             {
                 SceneAddress = _gameSceneAddress,
@@ -51,7 +65,6 @@ namespace Foutain.UI
                 SceneToUnload = gameObject.scene.name
             });
         }
-
         private void OnSceneLoaded(SceneLoadedEvent e)
         {
             if (!_waitingForScene) return;

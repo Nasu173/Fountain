@@ -15,6 +15,10 @@ public class TriggerChaseAfterFix : MonoBehaviour
     //场景物体
     public GameObject wall;
     public GameObject wallLight;
+    //怪物演出
+    public MonsterChase monster;
+    public Animator animMonster;
+    public Vector3 startPosition;
 
     [SerializeField] private AudioClip audioClip;
     
@@ -31,7 +35,8 @@ public class TriggerChaseAfterFix : MonoBehaviour
     }
 
     /*
-     修好水阀,
+修好水阀,玩家禁用输入
+先把墙消失,灯打开,视角看向那个洞,
 怪物走出来，玩家看怪物,
 怪物转向玩家,怪物播吼叫的动画，玩家启用移动
      */
@@ -78,5 +83,7 @@ public class TriggerChaseAfterFix : MonoBehaviour
         //玩家启用输入
         moveInput.enabled = true;
         sightInput.enabled = true;
+
+        //怪物走出来，玩家看怪物,
     }
 }

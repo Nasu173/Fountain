@@ -8086,6 +8086,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSceneAddress: OF_TestScene
+  fadeInTime: 0.5
+  fadeOutTime: 0.5
+  duration: 3
 --- !u!114 &1057086523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11304,6 +11307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPosition: {x: 47.9, y: 1.597, z: 22.061}
+  startRotation: {x: 0, y: 0, z: 0}
   targetSceneAddress: OF_TestScene
 --- !u!4 &1481541037
 Transform:

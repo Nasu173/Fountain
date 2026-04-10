@@ -1436,7 +1436,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 522.8, y: 166.73}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1116170343
 MonoBehaviour:
@@ -1740,6 +1740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 0}
   duration: 0.1
+  hiddenDefault: 1
 --- !u!114 &1283286695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1817,6 +1818,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1340426150}
   - component: {fileID: 1340426149}
+  - component: {fileID: 1340426151}
   m_Layer: 0
   m_Name: ChangeScene
   m_TagString: Untagged
@@ -1836,7 +1838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f303f2c205c13f74d8ace71d2bb47306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeDelay: 1
+  changeDelay: 0
   _gameSceneAddress: OF_TestScene
   xOffset: -1
 --- !u!4 &1340426150
@@ -1854,6 +1856,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1340426151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340426148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c3724342456e44bb5b2fb5e7fac3d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.2
 --- !u!1001 &1418319977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2266,15 +2281,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1883311858}
   - component: {fileID: 1883311859}
-  - component: {fileID: 1883311860}
-  - component: {fileID: 1883311861}
   m_Layer: 5
   m_Name: VictoryPrompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1883311858
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2307,34 +2320,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1883311860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883311857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3561d0e1fec0d0445a226ad0dc637e37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeImage: {fileID: 0}
-  duration: 3
---- !u!114 &1883311861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1883311857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ce6527f00c50214880302ed900a9343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameSceneAddress: OF_TestScene
-  returnButton: {fileID: 0}
 --- !u!1 &2002993588
 GameObject:
   m_ObjectHideFlags: 0

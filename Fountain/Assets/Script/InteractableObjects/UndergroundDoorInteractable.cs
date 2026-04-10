@@ -42,7 +42,10 @@ namespace Fountain.Player
 
         //要切换到的场景
         public string sceneAddress;
-
+        [Header("黑屏数据")]
+        public float duration;
+        public float fadeInTime;
+        public float fadeOutTime;
         [SerializeField] private AudioClip audioClip;
 
         //public LookData data;
@@ -106,6 +109,14 @@ namespace Fountain.Player
                 .enabled = true;
             GameInputManager.Instance.GetProvider<PlayerSightInputProvider>()
                 .enabled = true;
+
+            GameEventBus.Publish<FadeEvent>(new FadeEvent()
+            {
+                fadeInTime = fadeInTime,
+                fadeOutTime = fadeOutTime,
+                duration = duration
+            });
+            yield return new WaitForSeconds(fadeInTime);
             //切换场景
             GameEventBus.Publish(new LoadSceneEvent
             {

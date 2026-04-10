@@ -25,5 +25,6 @@ namespace Fountain.Dialogue
         {
             return dialogueNodeIndex;
         }
+
     }
 }

@@ -18402,6 +18402,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSceneAddress: Underground
+  duration: 0
+  fadeInTime: 0
+  fadeOutTime: 0
 --- !u!114 &2104084358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18561,6 +18564,9 @@ MonoBehaviour:
   gameSceneAddress: OF2
   outlineVisual: {fileID: 2110790250}
   completeTaskId: 9
+  duration: 1.5
+  fadeInTime: 1
+  fadeOutTime: 1
 --- !u!1001 &2124879096
 PrefabInstance:
   m_ObjectHideFlags: 0

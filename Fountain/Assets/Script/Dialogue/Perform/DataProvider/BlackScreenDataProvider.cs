@@ -1,25 +1,26 @@
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Fountain.Dialogue
 {
-    /// <summary>
-    /// 对话时播放声音的数据
-    /// </summary>
-    public class SoundData : MonoBehaviour, IPerformDataProvider
+    public class BlackScreenDataProvider :MonoBehaviour, IPerformDataProvider
     {
         [Header("演出数据")]
         [Tooltip("要演出的对话的节点在序列里的索引")]
         public int dialogueNodeIndex;
-        [Header("声音参数")]
-        public int volume;
-        public AudioTrack track;
-        public AudioClip clip;
-        public bool loop;
+        public float fadeInTime;
+        public float fadeOutTime;
+        public float duration;
+        public Image fadeImage;
         public int GetTargetIndex()
         {
             return dialogueNodeIndex;
         }
+        
     }
 }
