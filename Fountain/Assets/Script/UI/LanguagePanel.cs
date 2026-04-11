@@ -15,6 +15,7 @@ namespace Fountain.UI
     public class LanguagePanel : MonoBehaviour
     {
         //控制显隐
+        [SerializeField]//出于某些原因,这个放Editor拖上去
         private Button showButton;
         private Button returnButton;
         private Transform setLanguagePanel;
@@ -23,8 +24,8 @@ namespace Fountain.UI
 
         private void Awake()
         {
-            showButton = this.transform.FindChildByName(nameof(showButton)).
-                GetComponent<Button>();
+            //showButton = this.transform.FindChildByName(nameof(showButton)).
+            //   GetComponent<Button>();
             returnButton = this.transform.FindChildByName(nameof(returnButton)).
                 GetComponent<Button>();
             setLanguagePanel = this.transform.FindChildByName

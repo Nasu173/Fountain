@@ -5557,12 +5557,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1909790249}
-  m_Father: {fileID: 1702342663}
+  m_Father: {fileID: 1057086521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 173.00006, y: -300.94}
-  m_SizeDelta: {x: 258.0465, y: 83.886}
+  m_SizeDelta: {x: 346, y: 83.886}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &718933896
 MonoBehaviour:
@@ -8066,6 +8066,7 @@ RectTransform:
   - {fileID: 527206206}
   - {fileID: 1079724301}
   - {fileID: 1565002442}
+  - {fileID: 718933895}
   m_Father: {fileID: 1056142690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -12788,7 +12789,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 718933895}
   - {fileID: 1270410659}
   m_Father: {fileID: 1056142690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12809,6 +12809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04869a42679d81349b92e245402df657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showButton: {fileID: 718933896}
 --- !u!4 &1713768537 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7184336129360466827, guid: 17ccbfd3dc3c84b4a9417c4aa0cd6c77, type: 3}
