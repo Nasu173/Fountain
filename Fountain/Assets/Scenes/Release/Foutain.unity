@@ -2094,10 +2094,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 9
-  taskName: "\u8FD4\u56DE\u529E\u516C\u5BA4"
+  taskNameZH: "\u8FD4\u56DE\u529E\u516C\u5BA4 "
+  taskNameEN: 'Return to the office '
   taskNumber: 9
   targetCount: 1
-  description: "\u4E0E\u5927\u95E8\u4EA4\u4E92"
+  descriptionZH: "\u4E0E\u5927\u95E8\u4EA4\u4E92\n"
+  descriptionEN: Interact with the main gate
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -16230,10 +16232,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 8
-  taskName: "\u5C1D\u8BD5\u4FEE\u7406"
+  taskNameZH: "\u5C1D\u8BD5\u4FEE\u7406"
+  taskNameEN: 'Fix the Valves '
   taskNumber: 8
   targetCount: 1
-  description: "\u4E0E\u6C34\u9600\u4EA4\u4E92"
+  descriptionZH: "\u4E0E\u6C34\u9600\u4EA4\u4E92\n"
+  descriptionEN: Interact with the water valve
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -17041,10 +17045,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 7
-  taskName: "\u770B\u770B\u5F92\u5F1F\u5728\u6574\u4EC0\u4E48\u5E7A\u86FE\u5B50"
+  taskNameZH: "\u770B\u770B\u5F92\u5F1F\u5728\u6574\u4EC0\u4E48\u5E7A\u86FE\u5B50"
+  taskNameEN: Check on the Apprentice
   taskNumber: 7
   targetCount: 1
-  description: "\u4E0E\u5F92\u5F1F\u4EA4\u4E92"
+  descriptionZH: "\u4E0E\u5F92\u5F1F\u4EA4\u4E92\n"
+  descriptionEN: Interact with the apprentice
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1

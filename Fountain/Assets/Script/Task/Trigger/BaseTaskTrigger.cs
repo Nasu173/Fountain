@@ -1,3 +1,4 @@
+using Fountain.Localization;
 using UnityEngine;
 
 /// <summary>
@@ -7,10 +8,12 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
 {
     [Header("Task Configuration")]
     [SerializeField] protected string taskId;
-    [SerializeField] protected string taskName;
+    [SerializeField] protected string taskNameZH;
+    [SerializeField] protected string taskNameEN;
     [SerializeField] protected string taskNumber = "1";
     [SerializeField] protected int targetCount = 1;
-    [SerializeField][TextArea] protected string description;
+    [SerializeField][TextArea] protected string descriptionZH;
+    [SerializeField][TextArea] protected string descriptionEN;
 
     [Header("任务链配置")]
     [SerializeField] protected BaseTaskTrigger nextTaskTrigger;
@@ -29,10 +32,38 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
         }
     }
 
-    public virtual string TaskName => taskName;
+    public virtual string TaskName 
+    {
+        get
+        {
+            switch (LocalizationManager.Instance.GetLocale())
+            {
+                case LocalizationManager.LocaleID.zh:
+                    return this.taskNameZH;
+                case LocalizationManager.LocaleID.en:
+                    return this.taskNameEN;
+                default:
+                    return string.Empty;
+            }
+        } 
+    }
     public virtual string TaskNumber => taskNumber;
     public virtual int TargetCount => targetCount;
-    public virtual string Description => description;
+    public virtual string Description
+    {
+        get
+        {
+            switch (LocalizationManager.Instance.GetLocale())
+            {
+                case LocalizationManager.LocaleID.zh:
+                    return this.descriptionZH;
+                case LocalizationManager.LocaleID.en:
+                    return this.descriptionEN;
+                default:
+                    return string.Empty;
+            }
+        } 
+    }
 
     protected virtual int CurrentProgress { get; set; }
 
@@ -49,7 +80,7 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
             taskId = System.Guid.NewGuid().ToString();
 
         GameEventBus.Subscribe<GameStartEvent>(OnGameStarted);
-        if (debugMode) Debug.Log($"[{GetType().Name}] Started: {taskName}, ID: {taskId}");
+        if (debugMode) Debug.Log($"[{GetType().Name}] Started: {taskNameZH}, ID: {taskId}");
     }
 
     private void OnGameStarted(GameStartEvent e) => _gameStarted = true;
@@ -87,7 +118,7 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
             TargetCount = TargetCount,
             Description = Description
         });
-        if (debugMode) Debug.Log($"[{GetType().Name}] Task started: {taskName}");
+        if (debugMode) Debug.Log($"[{GetType().Name}] Task started: {taskNameZH}");
     }
 
     /// <summary>供外部和任务链调用，替代反射</summary>
@@ -118,7 +149,7 @@ public abstract class BaseTaskTrigger : MonoBehaviour, ITaskTrigger
         GameEventBus.Publish(new TaskCompleteEvent { TaskId = TaskId });
 
         taskCompleted = true;
-        if (debugMode) Debug.Log($"[{GetType().Name}] Task completed: {taskName}");
+        if (debugMode) Debug.Log($"[{GetType().Name}] Task completed: {taskNameZH}");
 
         if (nextTaskTrigger != null)
         {

@@ -2389,10 +2389,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 15
-  taskName: "\u79BB\u5F00\u8FD9\u4E2A\u623F\u95F4"
+  taskNameZH: "\u79BB\u5F00\u8FD9\u4E2A\u623F\u95F4"
+  taskNameEN: 'Escape the Room '
   taskNumber: 15
   targetCount: 1
-  description: "\u8DD1\u5411\u88AB\u5F00\u51FA\u7684\u6D1E"
+  descriptionZH: "\u8DD1\u5411\u88AB\u5F00\u51FA\u7684\u6D1E\n"
+  descriptionEN: Run toward the broken hole
   nextTaskTrigger: {fileID: 2057656609}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -3112,10 +3114,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 13
-  taskName: "\u5C1D\u8BD5\u8054\u7CFB\u5916\u754C"
+  taskNameZH: "\u5C1D\u8BD5\u8054\u7CFB\u5916\u754C"
+  taskNameEN: 'Call for Help '
   taskNumber: 13
   targetCount: 1
-  description: "\u4E0E\u5899\u4E0A\u7684\u5BF9\u8BB2\u673A\u4EA4\u4E92\n"
+  descriptionZH: "\u4E0E\u5899\u4E0A\u7684\u5BF9\u8BB2\u673A\u4EA4\u4E92\n"
+  descriptionEN: Interact with the walkie-talkie on the wall
   nextTaskTrigger: {fileID: 561650686}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -4260,10 +4264,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 14
-  taskName: "\u4FEE\u7406\u6C34\u9600"
+  taskNameZH: "\u4FEE\u7406\u6C34\u9600"
+  taskNameEN: 'Fix the Valves '
   taskNumber: 14
   targetCount: 4
-  description: "\u4E0E\u6C34\u9600\u4EA4\u4E92\n"
+  descriptionZH: "\u4E0E\u6C34\u9600\u4EA4\u4E92\n"
+  descriptionEN: Interact with the water valve
   nextTaskTrigger: {fileID: 334683442}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -6610,10 +6616,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 17
-  taskName: "\u8DD1\uFF01"
+  taskNameZH: "\u8DD1\uFF01 "
+  taskNameEN: 'RUN! '
   taskNumber: 17
   targetCount: 1
-  description: "\u5F80\u51FA\u53E3\u8DD1"
+  descriptionZH: "\u5F80\u51FA\u53E3\u8DD1\n"
+  descriptionEN: Run toward the exit
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -16228,10 +16236,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 16
-  taskName: "\u8C03\u67E5\u623F\u95F4 "
+  taskNameZH: "\u8C03\u67E5\u623F\u95F4 "
+  taskNameEN: 'Investigate the Room '
   taskNumber: 16
   targetCount: 4
-  description: "\u4E0E\u623F\u95F4\u5185\u7684\u7B14\u8BB0\u4EA4\u4E92"
+  descriptionZH: "\u4E0E\u623F\u95F4\u5185\u7684\u7B14\u8BB0\u4EA4\u4E92\n"
+  descriptionEN: Interact with the note inside the room
   nextTaskTrigger: {fileID: 878407217}
   nextTaskDelay: 0.5
   debugMode: 1

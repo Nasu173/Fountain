@@ -4610,10 +4610,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 2
-  taskName: "\u7EF4\u6301\u55B7\u6CC9\u4F53\u9A8C\u6B63\u5E38"
+  taskNameZH: "\u7EF4\u6301\u55B7\u6CC9\u4F53\u9A8C\u6B63\u5E38"
+  taskNameEN: Stabilize the Fountain
   taskNumber: 2
   targetCount: 1
-  description: "\u4E0E\u63A7\u5236\u53F0\u4E0A\u4EA4\u4E92"
+  descriptionZH: "\u4E0E\u63A7\u5236\u53F0\u4E0A\u4EA4\u4E92"
+  descriptionEN: Interact with the console
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -4796,10 +4798,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 1
-  taskName: "\u63A5\u7535\u8BDD "
+  taskNameZH: "\u63A5\u7535\u8BDD"
+  taskNameEN: Answer the Phone
   taskNumber: 1
   targetCount: 1
-  description: "\u4E0E\u5EA7\u673A\u7535\u8BDD\u4EA4\u4E92"
+  descriptionZH: "\u4E0E\u5EA7\u673A\u7535\u8BDD\u4EA4\u4E92"
+  descriptionEN: Interact with the phone
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -6723,10 +6727,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 4
-  taskName: "\u7EE7\u7EED\u8FC7\u60A0\u95F2\u7684\u4E00\u5929"
+  taskNameZH: "\u7EE7\u7EED\u8FC7\u60A0\u95F2\u7684\u4E00\u5929 "
+  taskNameEN: Resume Your Break
   taskNumber: 4
   targetCount: 1
-  description: "\u8D70\u5230\u81EA\u5DF1\u7684\u5EA7\u4F4D\uFF0C\u4E0E\u5EA7\u6905\u4EA4\u4E92"
+  descriptionZH: "\u8D70\u5230\u81EA\u5DF1\u7684\u5EA7\u4F4D\uFF0C\u4E0E\u5EA7\u6905\u4EA4\u4E92"
+  descriptionEN: "Walk to your own seat and \ninteract with the chair"
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -8455,10 +8461,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 5
-  taskName: "\u63A5\u7535\u8BDD"
+  taskNameZH: "\u63A5\u7535\u8BDD"
+  taskNameEN: 'Answer the Phone '
   taskNumber: 5
   targetCount: 1
-  description: "\u4E0E\u5EA7\u673A\u7535\u8BDD\u4EA4\u4E92"
+  descriptionZH: "\u4E0E\u5EA7\u673A\u7535\u8BDD\u4EA4\u4E92"
+  descriptionEN: Interact with the phone
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -8631,10 +8639,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 6
-  taskName: "\u4EB2\u81EA\u524D\u5F80"
+  taskNameZH: "\u4EB2\u81EA\u524D\u5F80"
+  taskNameEN: 'Head to the Site '
   taskNumber: 6
   targetCount: 1
-  description: "\u4E0E\u529E\u516C\u5BA4\u7684\u95E8\u4EA4\u4E92"
+  descriptionZH: "\u4E0E\u529E\u516C\u5BA4\u7684\u95E8\u4EA4\u4E92\n"
+  descriptionEN: Interact with the office door
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
@@ -8773,10 +8783,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 3
-  taskName: "\u627E\u5230\u5F92\u5F1F"
+  taskNameZH: "\u627E\u5230\u5F92\u5F1F"
+  taskNameEN: Find the Apprentice
   taskNumber: 3
   targetCount: 1
-  description: "\u627E\u5230\u6B63\u5728\u6478\u9C7C\u7684\u5F92\u5F1F\uFF0C\u4E0E\u5176\u4EA4\u4E92"
+  descriptionZH: "\u627E\u5230\u6B63\u5728\u6478\u9C7C\u7684\u5F92\u5F1F\uFF0C\u4E0E\u5176\u4EA4\u4E92\n"
+  descriptionEN: "Find the apprentice slacking off\n and interact with them"
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1

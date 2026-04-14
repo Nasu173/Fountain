@@ -16921,10 +16921,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskId: 12
-  taskName: "\u8FDB\u5165\u5730\u4E0B\u5BA4"
+  taskNameZH: "\u8FDB\u5165\u5730\u4E0B\u5BA4 "
+  taskNameEN: 'Enter the Basement '
   taskNumber: 12
   targetCount: 1
-  description: "\u4E0E\u55B7\u6CC9\u573A\u666F\u4E2D\u5FC3\u7684\u95E8\u4EA4\u4E92\n"
+  descriptionZH: "\u4E0E\u55B7\u6CC9\u573A\u666F\u4E2D\u5FC3\u7684\u95E8\u4EA4\u4E92\n"
+  descriptionEN: "Interact with the door at the center \nof the fountain scene"
   nextTaskTrigger: {fileID: 0}
   nextTaskDelay: 0.5
   debugMode: 1
