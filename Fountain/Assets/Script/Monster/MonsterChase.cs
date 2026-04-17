@@ -10,7 +10,7 @@ public class MonsterChase : MonoBehaviour
     [SerializeField] private float executionDistance = 1.2f;
     //[SerializeField] private string animSpeedParam = "Speed";
     [SerializeField] private string animRunParam = "Run";
-   // [SerializeField] private string animExecuteTrigger = "Execute";
+    [SerializeField] private string animExecuteTrigger = "Execute";
     [SerializeField] private float executionAnimDuration = 3f;
 
     private enum State { Idle, Chasing, Executing, Done }
@@ -81,7 +81,7 @@ public class MonsterChase : MonoBehaviour
         if (playerMove != null) playerMove.enabled = false;
         if (playerSight != null) playerSight.enabled = false;
 
-        //_animator.SetTrigger(animExecuteTrigger);
+        _animator.SetTrigger(animExecuteTrigger);
         yield return new WaitForSeconds(executionAnimDuration);
 
         GameEventBus.Publish(new MonsterCatchEvent());

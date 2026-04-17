@@ -27,6 +27,9 @@ public class TriggerChaseAfterFix : MonoBehaviour
 
     public float moveDuration=1f;
     public float rotationDuration = 1f;
+
+    //怪物追逐
+    [SerializeField] private MonsterChase monsterChase;
     
 
 
@@ -95,10 +98,13 @@ public class TriggerChaseAfterFix : MonoBehaviour
         yield return StartCoroutine(RotateMonster());
         animMonster.SetTrigger(yeildAnimName);
 
-        //yield return new WaitForSeconds(1f);//随便给的1秒
+        yield return new WaitForSeconds(1f);//随便给的1秒
         //玩家启用输入
         moveInput.enabled = true;
         sightInput.enabled = true;
+
+        //怪物追逐
+        monsterChase.StartChase();
 
     }
         private IEnumerator MoveMonster()

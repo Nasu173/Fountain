@@ -2630,6 +2630,7 @@ MonoBehaviour:
   chaseSpeed: 2
   executionDistance: 1.2
   animRunParam: Run
+  animExecuteTrigger: Execute
   executionAnimDuration: 3
 --- !u!195 &258760133
 NavMeshAgent:
@@ -11944,6 +11945,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3930a55813bd38948b8f7f67b8727cfb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1241509226}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3930a55813bd38948b8f7f67b8727cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1241509227}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3930a55813bd38948b8f7f67b8727cfb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1241509228}
   m_SourcePrefab: {fileID: 100100000, guid: 3930a55813bd38948b8f7f67b8727cfb, type: 3}
 --- !u!4 &1241509224 stripped
 Transform:
@@ -11976,6 +11983,46 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1241509227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241509225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebc586cd057ec064a939bc6eb069c79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugMode: 1
+  chaseSpeed: 2
+  executionDistance: 1.2
+  animRunParam: Run
+  animExecuteTrigger: Execute
+  executionAnimDuration: 3
+--- !u!195 &1241509228
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241509225}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &1246795269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14920,6 +14967,7 @@ MonoBehaviour:
   endPosition: {x: 17.73, y: 1.2647226, z: 24.563}
   moveDuration: 1
   rotationDuration: 1
+  monsterChase: {fileID: 1241509227}
 --- !u!4 &1621752028
 Transform:
   m_ObjectHideFlags: 0
