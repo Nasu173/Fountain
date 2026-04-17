@@ -232,7 +232,7 @@ public class TaskUI : MonoBehaviour
     {
         if (debugMode) Debug.Log("Complete() called");
         StopAllCoroutines();
-        StartCoroutine(PlayCompleteAnimation());
+        //StartCoroutine(PlayCompleteAnimation());
     }
 
     /// <summary>
