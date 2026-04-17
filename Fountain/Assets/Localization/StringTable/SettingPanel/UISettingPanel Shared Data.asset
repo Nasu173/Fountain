@@ -139,6 +139,10 @@ MonoBehaviour:
     m_Key: selectedLanguage
     m_Metadata:
       m_Items: []
+  - m_Id: 18228946305802240
+    m_Key: respawn
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

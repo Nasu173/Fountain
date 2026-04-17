@@ -42,6 +42,10 @@ namespace Fountain.Common
         }
         private void LateUpdate()
         {
+            if (target==null)
+            {
+                return;
+            }
             switch (mode)
             {
                 case Mode.LookAt:

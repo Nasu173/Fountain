@@ -13,7 +13,7 @@ namespace Fountain.InputManagement
         private bool mainMenuEnabled;
         private bool settingPanelEnabled;
         private bool pausePanelEnabled;
-
+        private bool respawnPanelEnabled;
         protected override void Init()
         {
             base.Init();
@@ -49,7 +49,11 @@ namespace Fountain.InputManagement
             pausePanelEnabled = enabled;
             UpdateCursorVisibility();
         }
-
+        public void SetRespawnPanelEnabled(bool enabled)
+        {
+            respawnPanelEnabled= enabled;
+            UpdateCursorVisibility();
+        }
         private void UpdateCursorVisibility()
         {
             if (Instance != this) return;
@@ -59,7 +63,7 @@ namespace Fountain.InputManagement
                 sightInput = GameInputManager.Instance?.GetProvider<PlayerSightInputProvider>();
             }
 
-            bool shouldShowCursor = mainMenuEnabled || settingPanelEnabled || pausePanelEnabled;
+            bool shouldShowCursor = mainMenuEnabled || settingPanelEnabled || pausePanelEnabled || respawnPanelEnabled;
             if (shouldShowCursor)
             {
                 if (sightInput != null) sightInput.ShowCursor();

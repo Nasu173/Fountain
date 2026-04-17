@@ -20,6 +20,7 @@ namespace Fountain.Player
         public void InteractWith(PlayerInteractor player)
         {
             StartCoroutine(DelaySound());
+            this.canInteract = false; 
         }
 
         public void Select()

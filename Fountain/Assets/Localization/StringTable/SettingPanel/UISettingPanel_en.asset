@@ -144,6 +144,12 @@ MonoBehaviour:
     m_Localized: 'Selected:'
     m_Metadata:
       m_Items: []
+  - m_Id: 18228946305802240
+    m_Localized: 'Respawn
+
+'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -130,7 +130,13 @@ public class FadeEvent:IGameEvent
     public float duration;
     public Image fadeImage;
 }
-
+public class RespawnEvent:IGameEvent
+{
+    public float fadeInTime;
+    public Color textColor;
+    public Color backgroundColor;
+    public string sceneToLoad;
+}
 //public class FadeInEvent:IGameEvent
 //{
 //    public float fadeInTime;
