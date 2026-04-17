@@ -57,7 +57,8 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void OnPauseSound(PauseSoundEvent e) => _sources[e.Track].Pause();
+    //private void OnPauseSound(PauseSoundEvent e) => _sources[e.Track].Pause();
+    private void OnPauseSound(PauseSoundEvent e) => _sources[e.Track].Stop();
 
     private AudioSource CreateSource(AudioMixerGroup group)
     {
