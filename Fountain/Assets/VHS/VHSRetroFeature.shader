@@ -283,8 +283,10 @@ Shader "Hidden/VHSRetroFeature"
                 }
                 if (_GrainAmount > 0.001)
                 {
-                    float grain = fbm(uv * _GrainSize * 50.0 + time);
-                    color += (grain - 0.5) * _GrainAmount;
+                    float2 pixelCoord = floor(uv * _ScreenParams.xy / max(_GrainSize, 0.5));
+                    float grain = hash(pixelCoord + floor(time * 30.0));
+                    float grainMask = step(1.0 - saturate(_GrainAmount * 0.5), grain);
+                    color += (grain * 2.0 - 1.0) * grainMask * _GrainAmount * 0.8;
                 }
                 if (_TapeNoise > 0.001)
                 {
