@@ -18,7 +18,7 @@ MonoBehaviour:
     textEN: Hey Boss, what's up?
     speakerZH: "\u6211"
     textZH: "\u5582\uFF0C\u9886\u5BFC\uFF0C\u627E\u6211\u5565\u4E8B\u554A\uFF1F"
-    performName: 
+    performName: MuteSoundPerform
   - speakerEN: Telephone
     textEN: You have the nerve to ask?! It's just a small fountain, why isn't it
       fixed yet?
@@ -46,3 +46,4 @@ MonoBehaviour:
     textZH: "\u8FD9\u81ED\u5C0F\u5B50\u4E00\u70B9\u4E5F\u9760\u4E0D\u4F4F\uFF0C\u8FD8\u5F97\u6211\u4EB2\u81EA\u8DD1\u4E00\u8D9F\u3002"
     performName: 
   dialogueEndPerformName: 
+  unlockInput: 1

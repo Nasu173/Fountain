@@ -58,6 +58,15 @@ namespace Fountain.MiniGame.RepairWaterValve
         /// </summary>
         private int decreaseDelay;//2只是随便给的一个大于1的数
 
+
+        [Header("音效资源")]
+        public AudioClip fixSFX;
+        public AudioTrack track;
+        /// <summary>
+        /// 是否在播放维修音效
+        /// </summary>
+        private bool playingSound;
+
         private bool canInteract;
         public bool CanInteract 
         { get { return canInteract; } set { canInteract = value; } } 
@@ -68,6 +77,7 @@ namespace Fountain.MiniGame.RepairWaterValve
             repaired = false;
             repairing = false;
             decreaseDelay = DELAY_MAX;
+            playingSound = false;
         }
         private void Update()
         {
@@ -82,6 +92,12 @@ namespace Fountain.MiniGame.RepairWaterValve
             //Debug.LogFormat("FixUpdate :progress:{0},repairing:{1}", repairProgress, repairing);
             if (!repairing&&!repaired)
             {
+                if (playingSound)
+                {
+                    GameEventBus.Publish<PauseSoundEvent>(new PauseSoundEvent()
+                    { Track = this.track });
+                    this.playingSound = false;
+                }
                 DecreaseProgress();
             }
         }
@@ -89,8 +105,13 @@ namespace Fountain.MiniGame.RepairWaterValve
         public void InteractWith(PlayerInteractor player)
         {
             if (repaired) return;
+            if (!playingSound&&!repaired)
+            {
+                GameEventBus.Publish<PlaySoundEvent>(new PlaySoundEvent()
+                { Clip = this.fixSFX, Track = this.track, IsLoop = true });
+                this.playingSound = true;
+            }
             IncreaseProgress();
-            //Debug.LogWarningFormat("Interact :progress:{0},repairing:{1}", repairProgress, repairing);
         }
 
         //这两个视觉效果就不用事件了
@@ -157,6 +178,9 @@ namespace Fountain.MiniGame.RepairWaterValve
                     Amount = 1
                 });
                 this.canInteract = false;
+                GameEventBus.Publish<PauseSoundEvent>(new PauseSoundEvent()
+                { Track = this.track });
+                this.playingSound = false;
             }
         }
     }

@@ -10273,6 +10273,77 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.48125762, y: 0.9202683, z: 0}
   m_Center: {x: -0.24702124, y: -0.000000038146972, z: -0.002470294}
+--- !u!1 &1267059782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1267059785}
+  - component: {fileID: 1267059784}
+  - component: {fileID: 1267059783}
+  m_Layer: 0
+  m_Name: BGMTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1267059783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267059782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7956bb9062e8da54c9438028b682577b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: f193bf8526becd14e8b496768b092f6e, type: 3}
+  track: 0
+  targetTag: Player
+  triggerOnce: 1
+  loop: 1
+--- !u!65 &1267059784
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267059782}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15.078336, y: 1, z: 19.85067}
+  m_Center: {x: 0.9356322, y: 0, z: 0}
+--- !u!4 &1267059785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267059782}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 48.44, y: 1.732, z: 28.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1284826931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10965,9 +11036,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e19d0be41c541498e7de27f0084a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 8702fa73999dca542b11bfb1536e3671, type: 3}
+  deathSound: {fileID: 8300000, guid: 8702fa73999dca542b11bfb1536e3671, type: 3}
+  fountainSound: {fileID: 8300000, guid: 46edf4852efe4664db8db159ab95101f, type: 3}
   fountain: {fileID: 1900778664}
   animDelay: 2.5
+  turnOffDelay: 6
   anim: {fileID: 1204454462}
   dialogue: {fileID: 11400000, guid: 54c3828a33ffb4343a6abc4ea5efb28d, type: 2}
   npc: {fileID: 1607096600}
@@ -19824,12 +19897,20 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
+      propertyPath: track
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
+      propertyPath: fixSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f056b93f1677dc41ad7adf69e3dc9ee, type: 3}
+    - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: taskID
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: repairTimeRequired
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3965657065142013024, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_Name
@@ -19873,6 +19954,7 @@ SceneRoots:
   - {fileID: 2146778990}
   - {fileID: 1607096593}
   - {fileID: 157365739}
+  - {fileID: 1267059785}
   - {fileID: 1820068619}
   - {fileID: 942592065}
   - {fileID: 1761548292}
