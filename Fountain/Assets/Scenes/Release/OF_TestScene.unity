@@ -2465,6 +2465,7 @@ GameObject:
   - component: {fileID: 435622169}
   - component: {fileID: 435622170}
   - component: {fileID: 435622171}
+  - component: {fileID: 435622172}
   m_Layer: 7
   m_Name: Phone
   m_TagString: Untagged
@@ -2627,6 +2628,20 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: 70dfdee95a00e2249a0171c48e9f0045, type: 3}
   track: 3
   outlineVisual: {fileID: 435622164}
+--- !u!114 &435622172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435622160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05e63e78ba4a4b4dad1e51a9a1401fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueNodeIndex: 0
+  track: 3
 --- !u!1001 &440064263
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4862,6 +4877,77 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &899916922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 899916925}
+  - component: {fileID: 899916924}
+  - component: {fileID: 899916923}
+  m_Layer: 0
+  m_Name: PhoneRingTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &899916923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899916922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7956bb9062e8da54c9438028b682577b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 6b0f598449fd0ce42a847aff71027742, type: 3}
+  track: 3
+  targetTag: Player
+  triggerOnce: 1
+  loop: 1
+--- !u!65 &899916924
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899916922}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.44833228, y: 1, z: 0.35735977}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &899916925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899916922}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 47.80963, y: 2.1631222, z: 22.029633}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &905877691 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0ccc005f3bef273419141e23f8f973e1, type: 3}
@@ -5082,7 +5168,7 @@ GameObject:
   - component: {fileID: 941358259}
   - component: {fileID: 941358261}
   m_Layer: 0
-  m_Name: PhoneSoundTrigger
+  m_Name: BGMTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9963,6 +10049,7 @@ SceneRoots:
   - {fileID: 356219660}
   - {fileID: 867122701}
   - {fileID: 2019515411}
+  - {fileID: 899916925}
   - {fileID: 1533000513}
   - {fileID: 1561068053}
   - {fileID: 333061287}

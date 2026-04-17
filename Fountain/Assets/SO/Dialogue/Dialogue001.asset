@@ -19,7 +19,7 @@ MonoBehaviour:
       stopped working again? If you don't wanna work, then get the hell out!
     speakerZH: "\u7535\u8BDD\u90A3\u5934"
     textZH: "\u6C49\u514B\uFF01\u6211\u96C7\u4F60\u6765\u5403\u5E72\u996D\u7684\u5417\uFF1F\u55B7\u6CC9\u600E\u4E48\u53C8\u4E0D\u52A8\u4E86\uFF1F\u8FD9\u73ED\u4F60\u4E0D\u60F3\u4E0A\u522B\u4E0A\uFF01\uFF01"
-    performName: PlaySoundPerform
+    performName: MuteSoundPerform
   - speakerEN: I
     textEN: Alright, alright... I'm on it..
     speakerZH: "\u6211"
