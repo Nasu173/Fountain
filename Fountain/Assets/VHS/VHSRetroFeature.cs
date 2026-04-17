@@ -23,9 +23,9 @@ public class VHSRetroFeature : MonoBehaviour
     [Range(0, 1f)] public float pixelScanlines = 0.6f;
     
     [Header("NOISE & GRAIN SETTINGS")]
-    [Range(0, 0.5f)] public float grainAmount = 0.15f;
-    [Range(0.5f, 3f)] public float grainSize = 1.2f;
-    [Range(0, 0.3f)] public float noiseIntensity = 0.08f;
+    [Range(0, 2.0f)] public float grainAmount = 0.15f;
+    [Range(0.5f, 8f)] public float grainSize = 1.2f;
+    [Range(0, 1.0f)] public float noiseIntensity = 0.08f;
     
     [Header("SCANLINE SETTINGS")]
     [Range(0, 1f)] public float scanlineIntensity = 0.45f;
@@ -50,7 +50,7 @@ public class VHSRetroFeature : MonoBehaviour
     [Range(0.8f, 1.2f)] public float gamma = 1.05f;
     
     [Header("TAPE EFFECTS SETTINGS")]
-    [Range(0, 0.2f)] public float tapeNoise = 0.06f;
+    [Range(0, 0.8f)] public float tapeNoise = 0.06f;
     [Range(0, 5f)] public float tapeSpeed = 0.5f;
     public float tapeWobble = 0f;
     

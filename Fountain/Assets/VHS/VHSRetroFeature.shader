@@ -8,9 +8,9 @@ Shader "Hidden/VHSRetroFeature"
         _RGBShiftCurve ("RGB Shift Curve", Range(0.1, 3)) = 1.2
         _PixelSize ("Pixel Size", Range(1, 15)) = 4.0
         _PixelScanlines ("Pixel Scanlines", Range(0, 1)) = 0.6
-        _GrainAmount ("Grain Amount", Range(0, 0.5)) = 0.15
-        _GrainSize ("Grain Size", Range(0.5, 3)) = 1.2
-        _NoiseIntensity ("Noise Intensity", Range(0, 0.3)) = 0.08
+        _GrainAmount ("Grain Amount", Range(0, 2.0)) = 0.15
+        _GrainSize ("Grain Size", Range(0.5, 8)) = 1.2
+        _NoiseIntensity ("Noise Intensity", Range(0, 1.0)) = 0.08
         _ScanlineIntensity ("Scanline Intensity", Range(0, 1)) = 0.45
         _ScanlineSpeed ("Scanline Speed", Range(0, 5)) = 0.8
         _ScanlineCount ("Scanline Count", Range(200, 800)) = 480
@@ -25,7 +25,7 @@ Shader "Hidden/VHSRetroFeature"
         _Saturation ("Saturation", Range(0.8, 1.4)) = 1.12
         _Brightness ("Brightness", Range(-0.2, 0.2)) = 0.02
         _Gamma ("Gamma", Range(0.8, 1.2)) = 1.05
-        _TapeNoise ("Tape Noise", Range(0, 0.2)) = 0.06
+        _TapeNoise ("Tape Noise", Range(0, 0.8)) = 0.06
         _TapeSpeed ("Tape Speed", Range(0, 5)) = 0.5
         _TapeWobble ("Tape Wobble", Range(0, 0.02)) = 0.0
         _TrackingNoise ("Tracking Noise", Range(0, 0.1)) = 0.03
@@ -283,13 +283,13 @@ Shader "Hidden/VHSRetroFeature"
                 }
                 if (_GrainAmount > 0.001)
                 {
-                    float grain = fbm(uv * _GrainSize * 50.0 + time) * _GrainAmount;
-                    color += (grain - 0.5) * 0.02;
+                    float grain = fbm(uv * _GrainSize * 50.0 + time);
+                    color += (grain - 0.5) * _GrainAmount;
                 }
                 if (_TapeNoise > 0.001)
                 {
-                    float tapeNoise = noise(uv * 3.0 + time * _TapeSpeed) * _TapeNoise;
-                    color += (tapeNoise - 0.5) * 0.01;
+                    float tapeNoise = noise(uv * 3.0 + time * _TapeSpeed);
+                    color += (tapeNoise - 0.5) * _TapeNoise;
                 }
                 float dropout = applyDropout(uv, time);
                 color *= dropout;
