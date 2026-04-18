@@ -73,6 +73,11 @@ public class MonsterChase : MonoBehaviour
         _agent.isStopped = true;
         //_animator.SetFloat(animSpeedParam, 0f);
 
+        GameEventBus.Publish(new PauseSoundEvent
+        {
+            Track = AudioTrack.Fountain1,
+        });
+
         // 朝向玩家（仅 Y 轴）
         Vector3 dir = (_player.position - transform.position);
         dir.y = 0;
