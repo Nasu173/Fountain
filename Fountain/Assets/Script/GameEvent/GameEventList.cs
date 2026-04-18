@@ -177,3 +177,17 @@ public class PauseSoundEvent : IGameEvent
 {
     public AudioTrack Track;
 }
+
+[System.Serializable]
+public class FountainOnEvent : IGameEvent
+{
+    
+}
+
+[System.Serializable]
+public class FountainOffEvent : IGameEvent
+{
+    
+}
+
+

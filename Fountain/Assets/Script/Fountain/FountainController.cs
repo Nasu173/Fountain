@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,6 +14,34 @@ namespace Fountain.Fountain
 
         bool _isOn;
         Coroutine _sequence;
+
+        void OnEnable()
+        {
+            GameEventBus.Subscribe<FountainOnEvent>(TurnOn);
+            GameEventBus.Subscribe<FountainOffEvent>(TurnOff);
+        }
+
+        void OnDisable()
+        {
+            GameEventBus.Unsubscribe<FountainOnEvent>(TurnOn);
+            GameEventBus.Unsubscribe<FountainOffEvent>(TurnOff);
+        }
+
+        private void TurnOff(FountainOffEvent @event)
+        {
+            if (!_isOn) return;
+            _isOn = false;
+            if (_sequence != null) StopCoroutine(_sequence);
+            _steam.StopImmediate();
+            _water.Stop();
+        }
+
+        private void TurnOn(FountainOnEvent @event)
+        {
+            if (_isOn) return;
+            _isOn = true;
+            _sequence = StartCoroutine(Sequence());
+        }
 
         public void TurnOn()
         {
