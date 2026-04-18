@@ -8686,8 +8686,8 @@ MonoBehaviour:
   saturation: 1.08
   brightness: 0.02
   gamma: 1.035
-  tapeNoise: 0.04
-  tapeSpeed: 0.5
+  tapeNoise: 0
+  tapeSpeed: 0
   tapeWobble: 0
   trackingNoise: 0.03
   trackingSpeed: 1.2
