@@ -53,6 +53,14 @@ namespace Foutain.UI
                 duration = duration
             });
             StartCoroutine(DelayLoadScene());
+            GameInputManager.Instance.GetProvider<CharacterInputProvider>().
+                enabled = true;
+            GameInputManager.Instance.GetProvider<PlayerSightInputProvider>().
+                enabled = true;
+            PlayerMove move = PlayerInstance.Instance.GetComponent<PlayerMove>();
+            move.enabled = true;
+            move.GetComponentInChildren<PlayerSight>().enabled = true;
+            move.GetComponent<PlayerInteractor>().Enable();
         }
         private IEnumerator DelayLoadScene()
         {

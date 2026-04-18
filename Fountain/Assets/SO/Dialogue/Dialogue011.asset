@@ -40,5 +40,5 @@ MonoBehaviour:
     speakerZH: "\u7A7F\u7740\u9632\u62A4\u670D\u7684\u4EBA"
     textZH: "\u2026\u5509\uFF0C\u53EA\u662F\u53EF\u60DC\u4E86\uFF0C\u88AB\u6D4B\u5B9E\u4F53\u90FD\u6CA1\u4E86\u2026\u2026"
     performName: 
-  dialogueEndPerformName: 
+  dialogueEndPerformName: ChangeScenePerform
   unlockInput: 0
