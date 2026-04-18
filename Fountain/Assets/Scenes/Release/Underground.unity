@@ -15593,6 +15593,7 @@ MonoBehaviour:
   moveDuration: 1
   rotationDuration: 1
   monsterChase: {fileID: 1241509227}
+  chaseClip: {fileID: 8300000, guid: e88d7f18ddcc62445aeab8c51f40d54a, type: 3}
 --- !u!4 &1621752028
 Transform:
   m_ObjectHideFlags: 0

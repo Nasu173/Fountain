@@ -30,6 +30,7 @@ public class TriggerChaseAfterFix : MonoBehaviour
 
     //怪物追逐
     [SerializeField] private MonsterChase monsterChase;
+    [SerializeField] private AudioClip chaseClip;
     
 
 
@@ -105,6 +106,13 @@ public class TriggerChaseAfterFix : MonoBehaviour
 
         //怪物追逐
         monsterChase.StartChase();
+
+        GameEventBus.Publish(new PlaySoundEvent
+        {
+            Clip = chaseClip,
+            Track = AudioTrack.Fountain1,
+            IsLoop = true
+        });
 
     }
         private IEnumerator MoveMonster()
