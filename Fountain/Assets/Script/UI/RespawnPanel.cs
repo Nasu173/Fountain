@@ -84,6 +84,7 @@ namespace Fountain.UI
             player.enabled = true;
             PlayerSight playerSight = PlayerInstance.Instance.GetComponentInChildren<PlayerSight>();
             if (playerSight != null) playerSight.enabled = true;
+            GameInputManager.Instance.GetProvider<PauseInputProvider>().enabled = true;
             respawnButton.onClick.RemoveListener(ChangeScene);//移了一下才能复活
 
         }
