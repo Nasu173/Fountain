@@ -6,8 +6,32 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/LocalizationTest.unity
-    guid: 8758d51a360d82f4cb84f543089ab6a9
+    path: Assets/Scenes/Release/MainSceneTest.unity
+    guid: 79d45e7b154353449a7478f98a8f1ad5
+  - enabled: 1
+    path: Assets/Scenes/Release/SceneLoadTest.unity
+    guid: c128bcb8183b4fe43a81fa8edc8324d6
+  - enabled: 1
+    path: Assets/Scenes/Release/OF_TestScene.unity
+    guid: 5a8d1559f1bbe9f43804a9d1567f80ec
+  - enabled: 1
+    path: Assets/Scenes/Release/Foutain.unity
+    guid: 402cc9f006614044691da0e24c6c3cd2
+  - enabled: 1
+    path: Assets/Scenes/Release/OF2.unity
+    guid: fa435c82d5f5fa348935ac4061c6e742
+  - enabled: 1
+    path: Assets/Scenes/Release/Foutain2.unity
+    guid: 4be631b749516a64dab52cafd2d156bf
+  - enabled: 1
+    path: Assets/Scenes/Release/Foutain2 1.unity
+    guid: 09b9a93c99b108a4a8e399fa863601c4
+  - enabled: 1
+    path: Assets/Scenes/Release/Underground.unity
+    guid: 4766ef72627db104581ecf060286997d
+  - enabled: 1
+    path: Assets/Scenes/Release/Underground 1.unity
+    guid: 4898f9bf92354724a82afa5f7450e673
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 6de3c0d20302a504e81d40d4bc3f69cb, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 54cf030d7249ec84d8061584714006cb, type: 3}

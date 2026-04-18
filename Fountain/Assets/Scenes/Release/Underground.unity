@@ -573,7 +573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: repairTimeRequired
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3965657065142013024, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_Name
@@ -2553,7 +2553,7 @@ Transform:
   m_GameObject: {fileID: 239795618}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 34.637, y: 3.153, z: 31.587}
+  m_LocalPosition: {x: 34.637, y: 2.65, z: 31.587}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2998,8 +2998,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 34.77, y: 2.68, z: 33.265}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 673239446}
   - {fileID: 8343262}
@@ -5974,7 +5974,7 @@ MonoBehaviour:
   lookDuration: 1
   monster: {fileID: 286775559}
   monsterDistance: 1
-  monsterPos: {x: 34.832, y: 3.153, z: 31.587}
+  monsterPos: {x: 34.832, y: 2.65, z: 31.587}
   delayBeforeBlack: 1
   fadeInTime: 1
   fadeOutTime: 1
@@ -9658,7 +9658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: repairTimeRequired
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3965657065142013024, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_Name
@@ -10975,7 +10975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: repairTimeRequired
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3965657065142013024, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_Name
@@ -13079,7 +13079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebc586cd057ec064a939bc6eb069c79e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 1
+  debugMode: 0
   chaseSpeed: 2
   executionDistance: 1.2
   animRunParam: Run
@@ -15510,23 +15510,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d669d3d8de791734e8952653dc892b00, type: 3}
       propertyPath: m_LocalScale.x
-      value: 200.00009
+      value: 224.74011
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d669d3d8de791734e8952653dc892b00, type: 3}
       propertyPath: m_LocalScale.y
-      value: 200
+      value: 224.74
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d669d3d8de791734e8952653dc892b00, type: 3}
       propertyPath: m_LocalScale.z
-      value: 120.00003
+      value: 123.01956
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d669d3d8de791734e8952653dc892b00, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.19449574
+      value: -0.272
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d669d3d8de791734e8952653dc892b00, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.009276956
+      value: -0.010802
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d669d3d8de791734e8952653dc892b00, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19406,7 +19406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: repairTimeRequired
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3965657065142013024, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_Name
@@ -19808,8 +19808,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.67970395, z: -0, w: 0.7334867}
   m_LocalPosition: {x: 17.73, y: 1.2647226, z: 24.563}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1241509224}
   m_Father: {fileID: 0}

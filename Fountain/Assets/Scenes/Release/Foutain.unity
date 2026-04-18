@@ -18044,6 +18044,7 @@ MonoBehaviour:
   spawnPos: {x: 50.66, y: 1.358, z: 28.28}
   spawnEuler: {x: 0, y: -90, z: 0}
   enableInputDelay: 1
+  enableInput: 1
 --- !u!4 &1820068619
 Transform:
   m_ObjectHideFlags: 0
@@ -18579,6 +18580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _steam: {fileID: 978859417}
   _water: {fileID: 1508723444}
+  _fountainSound: {fileID: 0}
   _steamDuration: 2
   _waterDelay: 0.25
   hasSound: 0
@@ -19854,15 +19856,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 622897269847501406, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.726768
+      value: 23.684
       objectReference: {fileID: 0}
     - target: {fileID: 622897269847501406, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3397758
+      value: 1.182
       objectReference: {fileID: 0}
     - target: {fileID: 622897269847501406, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.230043
+      value: 27.273
       objectReference: {fileID: 0}
     - target: {fileID: 622897269847501406, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19910,7 +19912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3885342839983109547, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: repairTimeRequired
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3965657065142013024, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_Name

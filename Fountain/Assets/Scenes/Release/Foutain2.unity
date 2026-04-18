@@ -278,6 +278,7 @@ MonoBehaviour:
   spawnPos: {x: 50.66, y: 2, z: 28.28}
   spawnEuler: {x: 0, y: -90, z: 0}
   enableInputDelay: 1
+  enableInput: 1
 --- !u!4 &11152573
 Transform:
   m_ObjectHideFlags: 0
@@ -17860,15 +17861,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 622897269847501406, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.726768
+      value: 23.647
       objectReference: {fileID: 0}
     - target: {fileID: 622897269847501406, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3397758
+      value: 1.132
       objectReference: {fileID: 0}
     - target: {fileID: 622897269847501406, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.230043
+      value: 27.328
       objectReference: {fileID: 0}
     - target: {fileID: 622897269847501406, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
       propertyPath: m_LocalRotation.w
