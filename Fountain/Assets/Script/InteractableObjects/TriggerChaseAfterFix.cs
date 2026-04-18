@@ -31,7 +31,8 @@ public class TriggerChaseAfterFix : MonoBehaviour
     //怪物追逐
     [SerializeField] private MonsterChase monsterChase;
     [SerializeField] private AudioClip chaseClip;
-    
+    [SerializeField] private AudioClip monsterStepClip;
+
 
 
     //GameEventBus.Publish(new TaskCompleteEvent { TaskId = TaskId
@@ -112,6 +113,12 @@ public class TriggerChaseAfterFix : MonoBehaviour
             Clip = chaseClip,
             Track = AudioTrack.Fountain1,
             IsLoop = true
+        });
+
+        GameEventBus.Publish(new PlaySoundEvent
+        {
+            Clip = monsterStepClip,
+            Track = AudioTrack.MonsterFootstep
         });
 
     }

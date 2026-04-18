@@ -16,6 +16,16 @@ public class PlaceCollider : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _collider.SetActive(true);
+
+            GameEventBus.Publish<PauseSoundEvent>(new PauseSoundEvent()
+            {
+                Track = AudioTrack.Fountain1
+            });
+
+            GameEventBus.Publish<PauseSoundEvent>(new PauseSoundEvent()
+            {
+                Track = AudioTrack.MonsterFootstep
+            });
         } 
         
     }

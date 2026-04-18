@@ -75,7 +75,12 @@ public class MonsterChase : MonoBehaviour
 
         GameEventBus.Publish(new PauseSoundEvent
         {
-            Track = AudioTrack.Fountain1,
+            Track = AudioTrack.Fountain1
+        });
+
+        GameEventBus.Publish(new PauseSoundEvent
+        {
+            Track = AudioTrack.MonsterFootstep
         });
 
         // 朝向玩家（仅 Y 轴）
