@@ -12527,8 +12527,8 @@ MonoBehaviour:
   animRunParam: Run
   animExecuteTrigger: Execute
   executionAnimDuration: 2
-  sceneAddress: Underground 1
-  sceneToUnload: Underground
+  sceneAddress: Underground
+  sceneToUnload: Underground 1
   headPos: {fileID: 1989728076}
 --- !u!195 &1241509228
 NavMeshAgent:

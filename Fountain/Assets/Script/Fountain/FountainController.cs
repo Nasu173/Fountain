@@ -8,6 +8,7 @@ namespace Fountain.Fountain
     {
         [SerializeField] FountainSteamEffect _steam;
         [SerializeField] FountainWaterEffect _water;
+        [SerializeField] private AudioClip _fountainSound;
         [SerializeField] float _steamDuration = 2f;
         [SerializeField] float _waterDelay = 0.25f;
         [SerializeField] bool hasSound = false;
@@ -17,30 +18,42 @@ namespace Fountain.Fountain
 
         void OnEnable()
         {
-            GameEventBus.Subscribe<FountainOnEvent>(TurnOn);
-            GameEventBus.Subscribe<FountainOffEvent>(TurnOff);
+            GameEventBus.Subscribe<TaskStartEvent>(TurnOn);
+            GameEventBus.Subscribe<TaskProgressEvent>(StopSFX);
         }
 
         void OnDisable()
         {
-            GameEventBus.Unsubscribe<FountainOnEvent>(TurnOn);
-            GameEventBus.Unsubscribe<FountainOffEvent>(TurnOff);
+            GameEventBus.Unsubscribe<TaskStartEvent>(TurnOn);
+            GameEventBus.Unsubscribe<TaskProgressEvent>(StopSFX);
         }
 
-        private void TurnOff(FountainOffEvent @event)
+        private void StopSFX(TaskProgressEvent @event)
         {
-            if (!_isOn) return;
-            _isOn = false;
-            if (_sequence != null) StopCoroutine(_sequence);
-            _steam.StopImmediate();
-            _water.Stop();
+            if (@event.TaskId != 12.ToString()) return;
+            if (!hasSound) return;
+            GameEventBus.Publish<PauseSoundEvent>(new PauseSoundEvent()
+            {
+                Track = AudioTrack.Fountain1,
+            });
         }
 
-        private void TurnOn(FountainOnEvent @event)
+        private void TurnOn(TaskStartEvent @event)
         {
+            if (@event.TaskId != 12.ToString()) return;
             if (_isOn) return;
             _isOn = true;
             _sequence = StartCoroutine(Sequence());
+
+            if (hasSound)
+            {
+                GameEventBus.Publish<PlaySoundEvent>(new PlaySoundEvent()
+                {
+                    Clip = _fountainSound,
+                    Track = AudioTrack.Fountain1,
+                    IsLoop = true,
+                });
+            }
         }
 
         public void TurnOn()

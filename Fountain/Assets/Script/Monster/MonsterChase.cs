@@ -14,6 +14,7 @@ public class MonsterChase : MonoBehaviour
     [SerializeField] private string animExecuteTrigger = "Execute";
     [SerializeField] private float executionAnimDuration = 3f;
     [SerializeField] private string sceneAddress = "Underground";
+    [SerializeField] private string sceneToUnload;
 
     private enum State { Idle, Chasing, Executing, Done }
     private State _state = State.Idle;
@@ -101,7 +102,8 @@ public class MonsterChase : MonoBehaviour
             backgroundColor = Color.black,
             textColor = Color.red,
             fadeInTime = 1f,
-            sceneToLoad = this.sceneAddress
+            sceneToLoad = this.sceneAddress,
+            sceneToUnload = this.sceneToUnload
         });
         GameEventBus.Publish(new MonsterCatchEvent());
         _state = State.Done;

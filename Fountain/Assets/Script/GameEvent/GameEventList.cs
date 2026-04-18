@@ -136,6 +136,7 @@ public class RespawnEvent:IGameEvent
     public Color textColor;
     public Color backgroundColor;
     public string sceneToLoad;
+    public string sceneToUnload;
 }
 //public class FadeInEvent:IGameEvent
 //{

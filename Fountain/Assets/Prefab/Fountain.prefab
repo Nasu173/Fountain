@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5901059418292729958}
   - component: {fileID: 7672435742233979971}
+  - component: {fileID: 7283878330610741614}
+  - component: {fileID: -6599447266969752199}
   m_Layer: 0
   m_Name: Fountain
   m_TagString: Untagged
@@ -48,8 +50,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _steam: {fileID: 715702483824743239}
   _water: {fileID: 7585654426010052545}
+  _fountainSound: {fileID: 8300000, guid: 46edf4852efe4664db8db159ab95101f, type: 3}
   _steamDuration: 2
   _waterDelay: 0.8
+  hasSound: 0
+--- !u!136 &7283878330610741614
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328456484587463085}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.44346476
+  m_Height: 4.1099567
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5549784, z: 0}
+--- !u!114 &-6599447266969752199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328456484587463085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9b01518913ec647b011fe9ddcc1321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneAddress: Foutain2 1
+  sceneToUnload: Foutain2
 --- !u!1 &3926229341965666025
 GameObject:
   m_ObjectHideFlags: 0
@@ -6226,7 +6267,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.6431373, g: 0, b: 0, a: 1}
+        key0: {r: 0.6431373, g: 0, b: 0, a: 0.5882353}
         key1: {r: 0.6431373, g: 0, b: 0, a: 0.60784316}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}

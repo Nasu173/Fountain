@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 88d28b5262b1bab4282d5d0e27c2a692
   m_SerializeEntries:
+  - m_GUID: 09b9a93c99b108a4a8e399fa863601c4
+    m_Address: Foutain2 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2de2ee95d2868bf40a01e78ab10ecaef
     m_Address: ControlFountain
     m_ReadOnly: 0
@@ -29,6 +34,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4766ef72627db104581ecf060286997d
     m_Address: Underground
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4898f9bf92354724a82afa5f7450e673
+    m_Address: Underground 1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
