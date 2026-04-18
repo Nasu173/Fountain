@@ -861,7 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4b396dd3c24c64d8735a9bedd7f900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSceneAddress: ControlFountain
+  gameSceneAddress: ReleaseControlFountain
   outlineVisual: {fileID: 155105013}
   completeTaskId: -1
   duration: 1
@@ -5225,7 +5225,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 5.4115715, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &941358261
 MonoBehaviour:

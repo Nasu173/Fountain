@@ -10,7 +10,8 @@ namespace Fountain.MiniGame.ControlFountain
     /// </summary>
     public class ScreenBlack : MonoBehaviour
     {
-        private FadeEffect fadeEffect;
+        //private FadeEffect fadeEffect;
+        private CanvasGroup canvasGroup;
         [Tooltip("游戏过程倒计时器")]
         [SerializeField]
         private CountdownTimer gameTimer;
@@ -18,22 +19,38 @@ namespace Fountain.MiniGame.ControlFountain
         public float[] blackTimes;
         [Tooltip("黑屏持续时间")]
         public float blackDuration;
+        public AudioClip blackSFX;
+        public AudioTrack track;
         private void Start()
         {
-            fadeEffect = this.GetComponent<FadeEffect>();
+            //fadeEffect = this.GetComponent<FadeEffect>();
+            canvasGroup = this.GetComponent<CanvasGroup>();
             for (int i = 0; i < blackTimes.Length; i++)
             {
                 gameTimer.AddEvent(new CountdownTimer.CountDownEvent()
                 {
                     invokeTime = blackTimes[i],
-                    action = () => { fadeEffect.FadeIn(); }
+                    action=Show
+                    //action = () => { fadeEffect.FadeIn(); }
                 });
                 gameTimer.AddEvent(new CountdownTimer.CountDownEvent()
                 {
-                    invokeTime = blackTimes[i]-fadeEffect.duration-blackDuration,
-                    action = () => { fadeEffect.FadeOut(); }
+                    //invokeTime = blackTimes[i]-fadeEffect.duration-blackDuration,
+                    invokeTime = blackTimes[i]-blackDuration,
+                    action=Hide
+                   // action = () => { fadeEffect.FadeOut(); }
                 });
             }
+        }
+        private void Hide()
+        {
+            this.canvasGroup.alpha = 0;
+        }
+        private void Show()
+        {
+            this.canvasGroup.alpha = 1;
+            GameEventBus.Publish<PlaySoundEvent>(new PlaySoundEvent()
+            { Clip = blackSFX, Track = this.track, IsLoop = false });
         }
     }
 }

@@ -23,7 +23,6 @@ namespace Fountain.UI
         {
             fadeEffect = this.GetComponent<FadeEffect>();
             respawnButton = this.GetComponentInChildren<Button>();
-            // respawnButton.onClick.AddListener(ChangeScene);
             background = this.transform.FindChildByName(nameof(background)).
                 GetComponent<Image>();
             respawnText = this.transform.FindChildByName(nameof(respawnText)).
@@ -85,12 +84,15 @@ namespace Fountain.UI
             player.enabled = true;
             PlayerSight playerSight = PlayerInstance.Instance.GetComponentInChildren<PlayerSight>();
             if (playerSight != null) playerSight.enabled = true;
+            respawnButton.onClick.RemoveListener(ChangeScene);//移了一下才能复活
+
         }
 
         private IEnumerator Move()
         {
             yield return new WaitForSeconds(1f);
             PlayerInstance.Instance.transform.position = Vector3.zero;
+            respawnButton.onClick.AddListener(ChangeScene);//移了一下才能复活
         }
     }
 }
