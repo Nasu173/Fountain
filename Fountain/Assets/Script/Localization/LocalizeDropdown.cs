@@ -21,11 +21,11 @@ namespace Fountain.Localization
         [Tooltip("要本地化的多选框,手动赋值")]
         [SerializeField]
         private TMP_Dropdown dropdown;
-        private void OnEnable()
+        private void Awake()
         {
             GameEventBus.Subscribe<LocaleChangeEvent>(ChangeLocaleText);
         }
-        private void OnDisable()
+        private void OnDestroy()
         {
             GameEventBus.Unsubscribe<LocaleChangeEvent>(ChangeLocaleText);
             
