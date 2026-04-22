@@ -19,23 +19,23 @@ namespace Fountain.Player
         }
         private void EnableInteraction(TaskStartEvent e)
         {
+            if (this.gameObject.name== "NPC_Apprentice")
+            {
+                Debug.Log(this.gameObject.name);
+            }
+            bool canInteract = false;
             for (int i = 0; i < taskID.Length; i++)
             {
                 if (e.TaskId == taskID[i])
                 {
-                    foreach (var item in interactables)
-                    {
-                        //这个好像依赖于可交互物体交互一次后就禁止交互
-                        item.CanInteract = true;
-                    }
-                    return;
+                    canInteract = true;
+                    break;
                 }
             }
-            //如果当前的任务id不启用交互,就禁止交互
-            foreach (var item in interactables) 
+            foreach (var item in interactables)
             {
                 //这个好像依赖于可交互物体交互一次后就禁止交互
-                item.CanInteract = false;
+                item.CanInteract = canInteract;
             }
 
         }

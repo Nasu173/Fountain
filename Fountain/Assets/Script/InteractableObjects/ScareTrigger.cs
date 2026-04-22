@@ -75,7 +75,8 @@ public class ScareTrigger : MonoBehaviour
         {
             fadeInTime = 0,
             duration = 0.5f,//硬编码
-            fadeOutTime =0
+            fadeOutTime =0,
+            unlockInput=false
         });
         ShowMonster();
 
@@ -86,7 +87,8 @@ public class ScareTrigger : MonoBehaviour
             fadeInTime = this.fadeInTime,
             fadeImage = this.fadeImage,
             duration = this.duration,
-            fadeOutTime = this.fadeOutTime
+            fadeOutTime = this.fadeOutTime,
+            unlockInput=false
         });
 
         yield return new WaitForSeconds(delayAfterBlack);

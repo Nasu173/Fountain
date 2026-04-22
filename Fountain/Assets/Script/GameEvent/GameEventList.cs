@@ -129,6 +129,7 @@ public class FadeEvent:IGameEvent
     public float fadeOutTime;
     public float duration;
     public Image fadeImage;
+    public bool unlockInput=true;//胶水代码,不考虑长期维护了
 }
 public class RespawnEvent:IGameEvent
 {

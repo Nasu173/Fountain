@@ -2663,7 +2663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2129238725
 Transform:
   m_ObjectHideFlags: 0
@@ -2691,8 +2691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa617338bcaa7eb46a6f24586e243306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPos: {x: 46.30796, y: 1.5799998, z: 22.239645}
-  spawnEuler: {x: 0, y: 0, z: 0}
+  spawnPos: {x: 46.281506, y: 1.4999998, z: 22.623652}
+  spawnEuler: {x: 0, y: 180, z: 0}
   enableInputDelay: 1
   enableInput: 0
 --- !u!1660057539 &9223372036854775807

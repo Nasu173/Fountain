@@ -20,7 +20,8 @@ namespace Fountain.UI
         private float elapsed;
         //是否正在做黑屏
         private bool isBlacking;
-
+        private bool unlockInput;
+        
         private void Start()
         {
             fade = this.GetComponent<FadeEffect>();
@@ -47,8 +48,10 @@ namespace Fountain.UI
             {
                 fade.duration = fadeOutTime;
 
-                GameInputManager.Instance.
-                    GetProvider<CharacterInputProvider>().enabled = true;
+                if (unlockInput)
+                {
+                    GameInputManager.Instance.
+                        GetProvider<CharacterInputProvider>().enabled = true; }
                 fade.FadeOut();
                 isBlacking = false;
             }
@@ -60,6 +63,7 @@ namespace Fountain.UI
             duration = e.duration;
             fade.SetFadeImage(e.fadeImage);
 
+            this.unlockInput = e.unlockInput;
             fade.duration = fadeInTime;
             fade.FadeIn();
             elapsed = 0;
