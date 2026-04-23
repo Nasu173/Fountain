@@ -79,6 +79,19 @@ namespace Fountain.Player
             targetHeight = standingHeight;
             InitHeight();
         }
+
+        private void OnDisable()
+        {
+            //依旧胶水代码,不用状态机控制真的不行,以及,
+            //需要提供一个公开的Enable()和Disable(),不许擅自修改enabled属性
+            if (_footstepPlaying)
+            {
+                GameEventBus.Publish(new PauseSoundEvent { Track = AudioTrack.PlayerFootstep });
+                _footstepPlaying = false;
+            }
+            sight.StopShake();
+
+        }
         private void Update()
         {
             //移动和转向

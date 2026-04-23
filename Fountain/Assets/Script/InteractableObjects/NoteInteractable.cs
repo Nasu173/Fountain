@@ -73,7 +73,7 @@ namespace Fountain.Player
             });
              j*/
             NotePanel.Instance.ShowNote(note);
-            //禁用输入
+            //禁用输入,由于没有做多个perform,这个写在这里还是太烂
             playerInteractor.Disable();
             playerMove.enabled = false;
             playerSight.enabled = false;
