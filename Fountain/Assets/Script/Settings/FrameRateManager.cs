@@ -28,7 +28,7 @@ public class FrameRateManager : MonoBehaviour
 
     [Header("帧率选项")]
     [Tooltip("可选的帧率列表（0表示不限制）")]
-    public List<int> frameRateOptions = new() { 30, 60, 90, 120, 144, 0 }; // 0表示不限制
+    public List<int> frameRateOptions = new() { 30, 60, 90, 120, 144 }; // 0表示不限制
 
     [Header("显示设置")]
     [Tooltip("是否显示当前FPS")]
@@ -225,18 +225,18 @@ public class FrameRateManager : MonoBehaviour
         // 关闭垂直同步（因为VSync会覆盖targetFrameRate设置）
         QualitySettings.vSyncCount = 0;
 
-        if (targetFPS == 0)
-        {
+        //if (targetFPS == 0)
+        //{
             // 0表示不限制帧率
             Application.targetFrameRate = -1;
             Debug.Log("帧率限制已关闭");
-        }
-        else
-        {
+        //}
+        //else
+        //{
             // 设置目标帧率
             Application.targetFrameRate = targetFPS;
             Debug.Log("帧率限制为: " + targetFPS + " FPS");
-        }
+        //}
 
         // 保存设置到PlayerPrefs
         if (saveSettings)
@@ -291,9 +291,9 @@ public class FrameRateManager : MonoBehaviour
     public string GetCurrentFrameRateDescription()
     {
         int currentFPS = Application.targetFrameRate;
-        if (currentFPS == -1)
-            return "No limit";
-        else
+        // if (currentFPS == -1)
+        //     return "No limit";
+        // else
             return currentFPS + " FPS";
     }
 }

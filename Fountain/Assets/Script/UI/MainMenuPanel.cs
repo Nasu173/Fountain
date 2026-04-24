@@ -9,6 +9,7 @@ namespace Foutain.UI
     public class MainMenuPanel : MonoBehaviour
     {
         [SerializeField] private string _gameSceneAddress;
+        [SerializeField] private AudioClip audioClip;
         private bool mainMenuEnabled;
         private bool _waitingForScene = false;
         //输入来源
@@ -44,6 +45,12 @@ namespace Foutain.UI
 
         public void OnStartClicked()
         {
+            GameEventBus.Publish(new PlaySoundEvent
+            {
+                Clip = audioClip,
+                Track = AudioTrack.Other
+            });
+
             SetMainMenuState(false);
             if (uiInput != null) uiInput.enabled = true;
             GameEventBus.Publish<FadeEvent>(new FadeEvent()
@@ -82,6 +89,12 @@ namespace Foutain.UI
 
         public void OnSettingClicked()
         {
+            GameEventBus.Publish(new PlaySoundEvent
+            {
+                Clip = audioClip,
+                Track = AudioTrack.Other
+            });
+
             SetMainMenuState(false);
             GameEventBus.Publish(new SettingEvent());
             gameObject.SetActive(false);
@@ -89,6 +102,12 @@ namespace Foutain.UI
 
         public void OnQuitClicked()
         {
+            GameEventBus.Publish(new PlaySoundEvent
+            {
+                Clip = audioClip,
+                Track = AudioTrack.Other
+            });
+
             Application.Quit();
         }
 

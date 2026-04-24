@@ -10091,7 +10091,7 @@ MonoBehaviour:
   fpsLableText: {fileID: 1902152306}
   fpsDisplayText: {fileID: 1708676034}
   fpsPauseText: {fileID: 720925811}
-  frameRateOptions: 1e0000003c0000005a000000780000009000000000000000
+  frameRateOptions: 1e0000003c0000005a0000007800000090000000
   showCurrentFPS: 1
   saveSettings: 1
 --- !u!1 &1255299427
@@ -10641,14 +10641,6 @@ MonoBehaviour:
       m_TableCollectionName: GUID:84cd55a9bb434844782bb11c04510985
     m_TableEntryReference:
       m_KeyId: 773421424721920
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  - m_TableReference:
-      m_TableCollectionName: GUID:84cd55a9bb434844782bb11c04510985
-    m_TableEntryReference:
-      m_KeyId: 773659032043520
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
