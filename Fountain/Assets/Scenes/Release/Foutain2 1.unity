@@ -18435,6 +18435,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: RepairableWaterValve
       objectReference: {fileID: 0}
+    - target: {fileID: 4441065059565781996, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
+      propertyPath: outlineWidth
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441065059565781996, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
+      propertyPath: outlineColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441065059565781996, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
+      propertyPath: outlineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4441065059565781996, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
+      propertyPath: outlineColor.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3362870600947998392, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}
     - {fileID: 3191835568945394694, guid: ab2b218f4a375fa4080e8379f3c20369, type: 3}

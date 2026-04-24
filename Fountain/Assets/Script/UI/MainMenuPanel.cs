@@ -51,8 +51,8 @@ namespace Foutain.UI
                 Track = AudioTrack.Other
             });
 
+            StartCoroutine(DelayEnableInput(fadeInTime-0.1f));
             SetMainMenuState(false);
-            if (uiInput != null) uiInput.enabled = true;
             GameEventBus.Publish<FadeEvent>(new FadeEvent()
             {
                 fadeInTime = fadeInTime,
@@ -68,6 +68,12 @@ namespace Foutain.UI
             move.enabled = true;
             move.GetComponentInChildren<PlayerSight>().enabled = true;
             move.GetComponent<PlayerInteractor>().Enable();
+        }
+        private IEnumerator DelayEnableInput(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            if (uiInput != null) uiInput.enabled = true;
+
         }
         private IEnumerator DelayLoadScene()
         {
