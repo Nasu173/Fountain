@@ -16,11 +16,13 @@ public class ScareTrigger : MonoBehaviour
     private Transform lookTarget;
     [SerializeField]
     private float lookDuration;
+    [SerializeField]
+    private float scareDistance;
 
     public Transform monster;
     [SerializeField]
     private float monsterDistance;
-    public Vector3 monsterPos;
+    public Transform monsterPos;
     [SerializeField]
     private float delayBeforeBlack;
     
@@ -35,6 +37,21 @@ public class ScareTrigger : MonoBehaviour
     private bool triggered=false;
 
     public AudioTrack stopTrack;
+    private void OnTriggerStay(Collider other)
+    {
+        
+        if (other.CompareTag("Player")&&!triggered)
+        {
+            Vector3 disVec = monster.transform.position - other.transform.position;
+            disVec.y = 0;
+            if (disVec.magnitude>scareDistance)
+            {
+                StartCoroutine(Scare());
+                triggered = true;
+            }
+        }
+    }
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")&&!triggered)
@@ -43,6 +60,8 @@ public class ScareTrigger : MonoBehaviour
             triggered = true;
         }
     }
+     
+     */
     private IEnumerator Scare()//突脸
     {
         GameEventBus.Publish<TaskProgressEvent>(new TaskProgressEvent() 
@@ -101,6 +120,6 @@ public class ScareTrigger : MonoBehaviour
         Transform player = PlayerInstance.Instance.transform;
         monster.forward = -player.forward;
         //monster.position = player.position + (-1 * player.forward * monsterDistance);
-        monster.transform.position = monsterPos;
+        monster.transform.position = monsterPos.position;
     }
 }
