@@ -88,5 +88,17 @@ namespace Fountain.InputManagement
         {
             return this.isInteracting;
         }
+        public void DisableMove()
+        {
+            inputActions.Player.Move.Disable();
+            inputActions.Player.Crouch.Disable();
+            inputActions.Player.Run.Disable();
+        }
+        public void EnableMove()
+        {
+            inputActions.Player.Move.Enable();
+            inputActions.Player.Crouch.Enable();
+            inputActions.Player.Run.Enable();
+        }
     }
 }
