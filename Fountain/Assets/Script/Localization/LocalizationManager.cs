@@ -1,7 +1,9 @@
+using Fountain.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization;
@@ -35,28 +37,29 @@ namespace Fountain.Localization
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
 
+            //不用延迟的事件触发
+            //LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
             //等待本地化插件初始化完成(插件是异步初始化的)
             if (LocalizationSettings.InitializationOperation.IsDone)
             {
-                //Debug.LogWarning("初始化完了吗?");
                 LoadLocale();
             }
             else
             {
-                //Debug.LogWarning("没那么快初始化");
                 LocalizationSettings.InitializationOperation.Completed 
                     += LoadLocale;
             }
-
-            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
-            //Debug.LogWarning("所有的Locale"+LocalizationSettings.AvailableLocales.Locales.Count);
-
         }
         public void SetLocale(LocaleID id)
         {
             //修改本地化设置并发布事件
             LocalizationSettings.SelectedLocale =
                 LocalizationSettings.AvailableLocales.Locales[(int)id];
+            //直接发布事件,防止某些延迟导致Locale和setting里的不一致
+            this.currentLocale = id;
+            GameEventBus.Publish<LocaleChangeEvent>
+                (new LocaleChangeEvent { locale = this.currentLocale });
         }
         /// <summary>
         /// 获取当前的语言
@@ -96,6 +99,7 @@ namespace Fountain.Localization
         {
             return GetLocaleName(currentLocale); 
         }
+        /*
         private void OnLocaleChanged(Locale locale)
         {
             string localeCode = null;
@@ -103,11 +107,8 @@ namespace Fountain.Localization
             Match match= Regex.Match(locale.LocaleName, @"^.+\((.+)\)$");
             localeCode = match.Groups[1].Value;
             LocaleID localeID = Enum.Parse<LocaleID>(localeCode);
-            this.currentLocale = localeID;
-
-            GameEventBus.Publish<LocaleChangeEvent>
-                (new LocaleChangeEvent { locale = this.currentLocale });
         }
+         */
 
 
 
@@ -125,7 +126,6 @@ namespace Fountain.Localization
             {
                 savedLocale = PlayerPrefs.GetInt(LanguagePrefKey);
                 SetLocale((LocaleID)savedLocale);
-                //Debug.LogWarning("加载了存储的语言设置," + currentLocale.ToString());
                 return;
             }
             // 第一次进入游戏,根据系统语言选择

@@ -38,15 +38,12 @@ namespace Fountain.UI
             languageName = this.transform.FindChildByName(nameof(languageName)).
                 GetComponent<TextMeshProUGUI>();
 
+            GameEventBus.Subscribe<LocaleChangeEvent>(UpdateLanguageName);
             InitChangeLanguageButton();
         }
-        private void OnEnable()
+        private void OnDestroy()
         {
-            GameEventBus.Subscribe<LocaleChangeEvent>(UpdateLanguageName);
-        }
-        private void OnDisable()
-        {
-            GameEventBus.Subscribe<LocaleChangeEvent>(UpdateLanguageName);
+            GameEventBus.Unsubscribe<LocaleChangeEvent>(UpdateLanguageName);
         }
 
         private void Hide()
